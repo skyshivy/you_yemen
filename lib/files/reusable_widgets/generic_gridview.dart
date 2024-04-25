@@ -11,12 +11,14 @@ class GenericGridView extends StatelessWidget {
     required this.list,
     this.scroll,
     this.scrollDirection = Axis.vertical,
+    this.physics,
   });
   final Widget? child;
   final List<TuneInfo> list;
   final ScrollController? scroll;
   final Function()? onTap;
   final Axis scrollDirection;
+  final ScrollPhysics? physics;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class GenericGridView extends StatelessWidget {
 
   GridView gridBuilder() {
     return GridView.builder(
+      physics: physics,
       padding: const EdgeInsets.all(12),
       itemCount: list.length,
       scrollDirection: scrollDirection,

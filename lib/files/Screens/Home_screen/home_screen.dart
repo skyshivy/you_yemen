@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:you_yemen/files/Screens/Home_screen/recomended_view/recomended_tab_view.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/generic_gridview.dart';
@@ -22,7 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
+      child: ListView(
+        shrinkWrap: true,
         children: [
           const SizedBox(height: 100),
           SizedBox(
@@ -40,10 +42,17 @@ class _HomeScreenState extends State<HomeScreen> {
               child: UMsisdnTextField(textEditingController: msisdnTextCont)),
           const SizedBox(height: 10),
           RecomendedTabView(),
-          GenericGridView(
-            list: [
-              TuneInfo(),
-            ],
+          Expanded(
+            child: GenericGridView(
+              physics: NeverScrollableScrollPhysics(),
+              list: [
+                TuneInfo(),
+                TuneInfo(),
+                TuneInfo(),
+                TuneInfo(),
+                TuneInfo(),
+              ],
+            ),
           ),
         ],
       ),
