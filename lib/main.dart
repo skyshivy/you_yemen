@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:you_yemen/files/Screens/Home_screen/home_screen.dart';
+import 'package:you_yemen/files/controllers/recomended_controller.dart';
 
 void main() {
+  _initController();
   runApp(const MyApp());
+}
+
+_initController() {
+  Get.lazyPut(() => RecomendedController());
 }
 
 class MyApp extends StatelessWidget {

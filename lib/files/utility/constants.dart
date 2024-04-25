@@ -16,3 +16,4 @@ const double contanerCornerRadius = 8;
 String securityBaseUrl = '';
 String selfcareBaseUrl = '';
 String baseUrl = '';
+const String countryCode = '+27';
