@@ -18,17 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
       child: GenericGridView(
         list: [
           TuneInfo(),
-          TuneInfo(),
-          TuneInfo(),
-          TuneInfo(),
-          TuneInfo(),
-          TuneInfo(),
-          TuneInfo(),
-          TuneInfo(),
-          TuneInfo(),
-          TuneInfo(),
-          TuneInfo(),
-          TuneInfo(),
         ],
       ),
     );
