@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:you_yemen/files/Screens/Home_screen/recomended_view/recomended_list_view.dart';
 import 'package:you_yemen/files/Screens/Home_screen/recomended_view/recomended_tab_view.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/generic_gridview.dart';
@@ -22,40 +23,40 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController passwordTextCont = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ListView(
-        shrinkWrap: true,
-        children: [
-          const SizedBox(height: 100),
-          SizedBox(
-            width: 300,
-            child: UPasswordTextField(textEditingController: passwordTextCont),
-          ),
-          const SizedBox(height: 10),
-          SizedBox(
-            width: 300,
-            child: UTextField(textEditingController: textCont),
-          ),
-          const SizedBox(height: 10),
-          SizedBox(
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        const SizedBox(height: 100),
+        Row(
+          children: [
+            SizedBox(
               width: 300,
-              child: UMsisdnTextField(textEditingController: msisdnTextCont)),
-          const SizedBox(height: 10),
-          RecomendedTabView(),
-          Expanded(
-            child: GenericGridView(
-              physics: NeverScrollableScrollPhysics(),
-              list: [
-                TuneInfo(),
-                TuneInfo(),
-                TuneInfo(),
-                TuneInfo(),
-                TuneInfo(),
-              ],
+              child:
+                  UPasswordTextField(textEditingController: passwordTextCont),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            SizedBox(
+              width: 300,
+              child: UTextField(textEditingController: textCont),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        Row(
+          children: [
+            SizedBox(
+                width: 300,
+                child: UMsisdnTextField(textEditingController: msisdnTextCont)),
+          ],
+        ),
+        const SizedBox(height: 10),
+        RecomendedTabView(),
+        RecomendedListView()
+      ],
     );
   }
 }
