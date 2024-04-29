@@ -5,13 +5,18 @@ import 'package:you_yemen/files/reusable_widgets/tune_card.dart';
 
 class GenericGridView extends StatelessWidget {
   const GenericGridView({
-    super.key,
+    Key? key,required this.context,
+
+
+
+   // super.key,
     this.child,
     this.onTap,
     required this.list,
     this.scroll,
     this.scrollDirection = Axis.vertical,
-  });
+  }) : super(key: key);
+  final BuildContext context;
   final Widget? child;
   final List<TuneInfo> list;
   final ScrollController? scroll;
@@ -32,7 +37,7 @@ class GenericGridView extends StatelessWidget {
   }
 
   Widget wrapBuilder() {
-    return _alignedGridView(list.length, (index) => child ?? const TuneCard());
+    return _alignedGridView(list.length, (index) => TuneCard(context: context));
   }
 
   GridView gridBuilder() {
@@ -48,7 +53,7 @@ class GenericGridView extends StatelessWidget {
           maxCrossAxisExtent: 280,
           childAspectRatio: 0.9),
       itemBuilder: (context, index) {
-        return child ?? const TuneCard();
+        return  TuneCard(context: context,);
       },
     );
   }

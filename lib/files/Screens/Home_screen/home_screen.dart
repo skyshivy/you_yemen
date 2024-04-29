@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
         list: [
           TuneInfo(),
         ],
+        context: context, /////bhavya
       ),
     );
   }
