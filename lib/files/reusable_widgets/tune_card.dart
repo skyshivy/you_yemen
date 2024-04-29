@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:you_yemen/files/common/buy_popup/buy_popup.dart';
 import 'package:you_yemen/files/enums/enums.dart';
+import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/buy_button.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/card_more_button.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/play_button.dart';
@@ -16,9 +17,9 @@ import 'package:you_yemen/files/utility/colors.dart';
 
 
 class TuneCard extends StatelessWidget {
-   final BuildContext context;
+  final TuneInfo? info;
+  const TuneCard({super.key, this.info});
 
-  const TuneCard({required this.context, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class TuneCard extends StatelessWidget {
     return Stack(
       alignment: Alignment.topRight,
       children: [
-        uImage(),
+        uImage(url: info?.toneIdpreviewImageUrl ?? ''),
         moreButton(),
       ],
     );
@@ -56,12 +57,12 @@ class TuneCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           UText(
-            title: "Tune name here",
+            title: info?.toneName ?? '',
             enfontName: FontName.helveticaBold,
             arfontName: FontName.acMunaBlack,
           ),
           UText(
-            title: "Artist name here",
+            title: info?.artist ?? '',
             textColor: grey,
           ),
           SizedBox(height: 8),

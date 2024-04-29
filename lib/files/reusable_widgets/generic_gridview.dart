@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/state_manager.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/tune_card.dart';
 
@@ -15,13 +16,18 @@ class GenericGridView extends StatelessWidget {
     required this.list,
     this.scroll,
     this.scrollDirection = Axis.vertical,
-  }) : super(key: key);
-  final BuildContext context;
+
+    this.physics,
+    this.maxDisplay,
+  });
+
   final Widget? child;
-  final List<TuneInfo> list;
+  final int? maxDisplay;
+  final RxList<TuneInfo> list;
   final ScrollController? scroll;
   final Function()? onTap;
   final Axis scrollDirection;
+  final ScrollPhysics? physics;
 
   @override
   Widget build(BuildContext context) {
@@ -30,20 +36,27 @@ class GenericGridView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Flexible(
-          child: list.length < 20 ? wrapBuilder() : gridBuilder(),
+          child: Obx(() {
+            return (maxDisplay != null) ? wrapBuilder() : gridBuilder();
+          }),
         ),
       ],
     );
   }
 
   Widget wrapBuilder() {
-    return _alignedGridView(list.length, (index) => TuneCard(context: context));
+    return _alignedGridView(
+        maxDisplay ?? list.length,
+        (index) =>
+            child ?? (list.isEmpty ? SizedBox() : TuneCard(info: list[index])));
+
   }
 
   GridView gridBuilder() {
     return GridView.builder(
+      physics: physics,
       padding: const EdgeInsets.all(12),
-      itemCount: list.length,
+      itemCount: maxDisplay ?? list.length,
       scrollDirection: scrollDirection,
       controller: scroll,
       shrinkWrap: true,
@@ -53,7 +66,11 @@ class GenericGridView extends StatelessWidget {
           maxCrossAxisExtent: 280,
           childAspectRatio: 0.9),
       itemBuilder: (context, index) {
-        return  TuneCard(context: context,);
+        return child ??
+            TuneCard(
+              info: list[index],
+            );
+
       },
     );
   }
