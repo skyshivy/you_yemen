@@ -23,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController passwordTextCont = TextEditingController();
   @override
   Widget build(BuildContext context) {
+
     return ListView(
       shrinkWrap: true,
       children: [
@@ -57,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
         RecomendedTabView(),
         RecomendedListView()
       ],
+
     );
   }
 }
