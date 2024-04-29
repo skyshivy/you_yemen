@@ -11,7 +11,7 @@ class UText extends StatelessWidget {
     this.enfontSize,
     this.arfontSize,
     this.textColor = black,
-    this.maxLine = 1,
+    this.maxLine,
     this.alignment = TextAlign.start,
     required this.title,
   });
@@ -21,7 +21,7 @@ class UText extends StatelessWidget {
   final double? enfontSize;
   final double? arfontSize;
   final Color? textColor;
-  final int maxLine;
+  final int? maxLine;
   final TextAlign alignment;
   @override
   Widget build(BuildContext context) {

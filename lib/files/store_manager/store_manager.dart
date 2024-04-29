@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:you_yemen/files/models/app_setting_model.dart';
+import 'package:you_yemen/files/models/password_validation_model.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/main.dart';
 
@@ -172,5 +175,28 @@ class StoreManager {
     } on Exception catch (e) {
       print("Error saving refreshToken = ${e.toString()}");
     }
+  }
+
+  Future<void> setLoginDetails(String detail) async {
+//    convertedToString  ==========
+
+    prefs.setString('LoginDetails', detail);
+    Map<String, dynamic> valueMap = json.decode(detail);
+    PasswordValidationModel detail1 =
+        PasswordValidationModel.fromJson(valueMap);
+    //loginDetails = detail1;
+    accessToken = detail1.responseMap?.accessToken ?? '';
+    deviceId = detail1.responseMap?.deviceId ?? '';
+    msisdn = detail1.responseMap?.msisdn ?? '';
+    setMsisdn(msisdn);
+    setAccessToken(accessToken);
+    setDeviceId(deviceId);
+    refreshToken = detail1.responseMap?.refreshToken ?? '';
+    setRefreshToken(detail1.responseMap?.refreshToken ?? '');
+    print("Login details is refreshToken ${detail1.responseMap?.refreshToken}");
+    print("Login details is accessToken ${detail1.responseMap?.accessToken}");
+    print("Login details is refreshToken ${detail1.responseMap?.refreshToken}");
+    print(
+        "Login details is  aboutAppurlBurmese ${detail1.responseMap?.settings?.others?.aboutAppurlBurmese?.attribute}");
   }
 }

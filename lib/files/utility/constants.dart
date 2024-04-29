@@ -6,8 +6,10 @@ const double popupWidth = 500;
 String deviceId = '';
 const String versionCode = '7.0';
 const String appVersion = '1.0.6';
-const String appId = "com.sixdee.mpt_rbt_portal";
+const String appId = "com.sixdee.oml_rbt_portal"; //"com.sixdee.mpt_rbt_portal";
 const String os = "ios";
+const String hardCodePassword = "Oem@L#@1";
+
 const int msisdnLength = 10;
 const int otpLength = 6;
 const double buttonCornerRadius = 8;
@@ -17,7 +19,7 @@ const double contanerCornerRadius = 8;
 String securityBaseUrl = '';
 String selfcareBaseUrl = '';
 String baseUrl =
-    "https://ringtune.mpt.com.mm/apigw/Middleware/api/adapter/v1/crbt/";
+    "https://funtone.ooredoo.com.mm/apigw/Middleware/api/adapter/v1/crbt/";
 String baseUrlSecurity =
-    'https://ringtune.mpt.com.mm/security/Middleware/api/adapter/v1/crbt/';
+    'https://funtone.ooredoo.com.mm/security/Middleware/api/adapter/v1/crbt/';
 const String countryCode = '+27';
