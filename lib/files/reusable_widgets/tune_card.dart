@@ -15,11 +15,9 @@ import 'package:you_yemen/files/utility/colors.dart';
 // class TuneCard extends StatelessWidget {
 //   const TuneCard({super.key});
 
-
 class TuneCard extends StatelessWidget {
   final TuneInfo? info;
   const TuneCard({super.key, this.info});
-
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +69,7 @@ class TuneCard extends StatelessWidget {
             children: [
               Expanded(child: playButton(() => null)),
               const SizedBox(width: 20),
-              Expanded(child: buyButton(context,() => null)),
-              
+              Expanded(child: buyButton(() => null)),
             ],
           )
         ],
