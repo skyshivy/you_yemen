@@ -45,6 +45,7 @@ class UMsisdnTextField extends StatelessWidget {
           Expanded(
             child: Center(
               child: TextField(
+                maxLength: msisdnLength,
                 onChanged: (value) {
                   _hideCloseButton.value = value.isEmpty;
                   if (onChanged != null) {

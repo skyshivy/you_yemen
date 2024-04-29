@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/auth_view/login_popup_view.dart';
 import 'package:you_yemen/files/common/buy_popup/buy_popup.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
@@ -48,11 +49,7 @@ Widget buyButton(Function()? onTap) {
       return GestureDetector(
         onTap: onTap != null
             ? () => Get.dialog(Center(
-                  child: Container(
-                    height: 100,
-                    width: 200,
-                    color: white,
-                  ),
+                  child: LoginPopupView(),
                 ))
             : null,
         child: Container(

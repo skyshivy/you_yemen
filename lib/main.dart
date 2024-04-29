@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:you_yemen/files/Screens/Home_screen/home_screen.dart';
+import 'package:you_yemen/files/screens/home_screen/home_screen.dart';
 import 'package:you_yemen/files/api_calls/setting_api.dart';
 import 'package:you_yemen/files/controllers/recomended_controller.dart';
+import 'package:you_yemen/files/router/app_router.dart';
 
 late SharedPreferences prefs;
 void main() {
@@ -26,13 +27,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: Material(child: const HomeScreen()),
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      title: 'You Yemen',
+      routerConfig: router,
     );
   }
 }

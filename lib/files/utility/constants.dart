@@ -1,5 +1,6 @@
 const int pagePerCount = 20;
 const int otpCountDown = 70;
+const double webNavHeight = 60;
 String channelId = '4';
 const double popupWidth = 500;
 String deviceId = '';
