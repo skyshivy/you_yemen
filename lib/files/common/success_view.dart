@@ -6,8 +6,8 @@ import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 
-class LoginSuccessView extends StatelessWidget {
-  const LoginSuccessView({super.key, required this.message});
+class SuccessView extends StatelessWidget {
+  const SuccessView({super.key, required this.message});
   final String message;
   @override
   Widget build(BuildContext context) {

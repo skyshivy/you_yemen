@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/request/request.dart';
 
 import 'package:you_yemen/files/common/web_navigation_view/widgets/logo_widget.dart';
 import 'package:you_yemen/files/controllers/auth_controller/login_popup_controller.dart';
 import 'package:you_yemen/files/controllers/auth_controller/otp_controller.dart';
+import 'package:you_yemen/files/models/tune_info_model.dart';
 
 import 'package:you_yemen/files/reusable_widgets/buttons/close_popup_button.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/generic_button.dart';
@@ -18,25 +20,36 @@ import 'package:you_yemen/files/utility/colors.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 
 class LoginOtpView extends StatefulWidget {
-  const LoginOtpView({super.key});
-
+  LoginOtpView({
+    super.key,
+    required this.msisdn,
+    this.isBuyTune = false,
+    this.info,
+    required this.onSuccess,
+  });
+  final String msisdn;
+  final isBuyTune;
+  final Function(String message) onSuccess;
+  final TuneInfo? info;
   @override
   State<LoginOtpView> createState() => _LoginOtpViewState();
 }
 
 class _LoginOtpViewState extends State<LoginOtpView> {
   late OtpController otpCont;
-  late LoginPopupController loginPopupCont;
+
   @override
   void initState() {
     otpCont = Get.put(OtpController());
-    loginPopupCont = Get.find();
+    otpCont.msisdn = widget.msisdn;
+    otpCont.isBuyTune = widget.isBuyTune;
+    otpCont.onSuccess = widget.onSuccess;
+    otpCont.info = widget.info;
     super.initState();
   }
 
   @override
   void dispose() {
-    Get.delete<LoginPopupController>();
     Get.delete<OtpController>();
     super.dispose();
   }
@@ -74,7 +87,7 @@ class _LoginOtpViewState extends State<LoginOtpView> {
                         children: [
                           UText(
                             title: oneTimePasswordHasBeenSendToStr +
-                                "\n${loginPopupCont.msisdn}",
+                                "\n${widget.msisdn}",
                             alignment: TextAlign.center,
                           ),
                         ],

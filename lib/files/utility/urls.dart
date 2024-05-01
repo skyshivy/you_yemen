@@ -9,3 +9,5 @@ String generateOtpUrl = "${baseUrl}generate-otp";
 String confirmOtpExistingUrl = "${baseUrl}confirm-otp";
 String getSecurityTokenUrl = "${baseUrl}security-token";
 String passwordValidationUrl = "${baseUrl}password-validation";
+String getTonePriceUrl = "${baseUrlSecurity}get-tone-price";
+String buyTuneUrl = "${baseUrlSecurity}set-tone";

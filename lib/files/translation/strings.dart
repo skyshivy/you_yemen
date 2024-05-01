@@ -11,6 +11,7 @@ const String enterValidOtpStr = "Enter a valid OTP";
 const String tunezStr = "Tunez";
 const String faqStr = "FAQ";
 const String loginStr = "Login";
+const String myAccountStr = "My Account";
 const String buyTuneStr = "Buy Tune";
 const String signInToYourAccountStr = "Sign in to your account";
 const String pleaseEnterMobileNoToAuthStr =
@@ -24,3 +25,9 @@ const String verifyOtpStr = "Verify OTP";
 const String resendStr = "Resend";
 const String okStr = "OK";
 const String someThingWentWrongStr = "Some thing went wrong";
+const String tuneChargeStr = 'Tune charges';
+
+const String myProfileStr = 'My Profile';
+const String myTunezStr = 'My Tunez';
+const String myWishListStr = 'My Wishlist';
+const String logoutStr = 'Logout';

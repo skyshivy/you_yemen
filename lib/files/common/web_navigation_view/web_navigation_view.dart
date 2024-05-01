@@ -12,7 +12,7 @@ import 'package:you_yemen/files/utility/constants.dart';
 
 class WebNavigationView extends StatelessWidget {
   WebNavigationView({super.key});
-  TextEditingController textEditingController = TextEditingController();
+  final TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(

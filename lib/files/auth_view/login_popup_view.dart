@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:you_yemen/files/auth_view/login_otp_view.dart';
-import 'package:you_yemen/files/auth_view/login_success_view.dart';
+import 'package:you_yemen/files/common/success_view.dart';
 import 'package:you_yemen/files/common/web_navigation_view/widgets/logo_widget.dart';
 import 'package:you_yemen/files/controllers/auth_controller/login_popup_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
@@ -48,10 +48,14 @@ class _LoginPopupViewState extends State<LoginPopupView> {
       return UAnimatedSwitcher(
         popupView(),
         UAnimatedSwitcher(
-            LoginOtpView(),
-            LoginSuccessView(
-              message:
-                  "7zxEihvAVr620Qeyo94Ax/0EvgpreviewImageUrlhttps://ringtune.mpt.com.mm/stream-media/get-preview-image?fileIdu003dad2y1Ryf3IBCxRb0p+sZ6FrBP4H2mRuQeaE4oHyZYNO89s/n/G+lA7w/rG5orrNQx71e4+pze9pWVD+RhmsSov8QdcOE5",
+            LoginOtpView(
+              msisdn: con.msisdn,
+              onSuccess: (message) {
+                con.authTypes.value = AuthTypes.showSuccessScreen;
+              },
+            ),
+            SuccessView(
+              message: "display success message here",
             ),
             con.authTypes.value == AuthTypes.showOtpScreen),
         con.authTypes.value == AuthTypes.showLoginPopup,

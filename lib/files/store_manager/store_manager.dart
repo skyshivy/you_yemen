@@ -42,7 +42,7 @@ class StoreManager {
     password = prefs.getString('password') ?? 'Oem@L#@1';
     languageCode = isEnglish ? "0" : "1";
     language = isEnglish ? "English" : "Burmese";
-
+    appCont.isLoggedIn.value = isLoggedIn;
     return;
   }
 
@@ -147,7 +147,7 @@ class StoreManager {
 
   setLoggedIn(bool value) async {
     isLoggedIn = value;
-
+    appCont.isLoggedIn.value = value;
     try {
       prefs.setBool('isLoggedIn', value);
     } on Exception catch (e) {
@@ -179,6 +179,7 @@ class StoreManager {
 
   Future<void> setLoginDetails(String detail) async {
 //    convertedToString  ==========
+    setLoggedIn(true);
 
     prefs.setString('LoginDetails', detail);
     Map<String, dynamic> valueMap = json.decode(detail);

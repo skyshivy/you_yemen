@@ -58,10 +58,12 @@ class TuneCard extends StatelessWidget {
             title: info?.toneName ?? '',
             enfontName: FontName.helveticaBold,
             arfontName: FontName.acMunaBlack,
+            maxLine: 1,
           ),
           UText(
             title: info?.artist ?? '',
             textColor: grey,
+            maxLine: 1,
           ),
           SizedBox(height: 8),
           Row(
@@ -69,7 +71,7 @@ class TuneCard extends StatelessWidget {
             children: [
               Expanded(child: playButton(() => null)),
               const SizedBox(width: 20),
-              Expanded(child: buyButton(() => null)),
+              Expanded(child: buyButton(info ?? TuneInfo(), () => null)),
             ],
           )
         ],
