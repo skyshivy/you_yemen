@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:you_yemen/files/router/route_name.dart';
 import 'package:you_yemen/files/utility/images.dart';
 
 class LogoWidget extends StatelessWidget {
@@ -6,13 +8,18 @@ class LogoWidget extends StatelessWidget {
   final double? height;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Image.asset(
-          youLogoPng,
-          height: height,
-        ),
-      ],
+    return InkWell(
+      onTap: () {
+        GoRouter.of(context).replace(homeRoute);
+      },
+      child: Row(
+        children: [
+          Image.asset(
+            youLogoPng,
+            height: height,
+          ),
+        ],
+      ),
     );
   }
 }

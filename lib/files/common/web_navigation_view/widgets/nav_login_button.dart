@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:popover/popover.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/auth_view/login_otp_view.dart';
@@ -9,6 +10,7 @@ import 'package:you_yemen/files/common/custom_hover.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
+import 'package:you_yemen/files/router/route_name.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
@@ -81,7 +83,22 @@ _popoverMyAccountMenu(
           shrinkWrap: true,
           itemCount: titleList.length,
           itemBuilder: (context, index) {
-            return _listCell(index, imageList, titleList);
+            return InkWell(
+              onTap: () {
+                Navigator.of(context).pop();
+                if (index == 0) {
+                  context.goNamed(profileRoute);
+                } else if (index == 1) {
+                  context.goNamed(myTunezRoute);
+                } else if (index == 2) {
+                  context.goNamed(wishlistRoute);
+                } else {
+                  StoreManager().logout();
+                  GoRouter.of(context).replace(homeRoute);
+                }
+              },
+              child: _listCell(index, imageList, titleList),
+            );
           },
         ),
       );
