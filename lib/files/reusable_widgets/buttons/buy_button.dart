@@ -69,7 +69,7 @@ Widget buyButton(TuneInfo info, Function()? onTap) {
                 children: [
                   Icon(
                     Icons.card_travel,
-                    size: 20,
+                    size: 16,
                   ),
                   SizedBox(width: 4),
                   UText(

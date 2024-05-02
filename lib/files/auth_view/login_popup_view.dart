@@ -78,7 +78,7 @@ class _LoginPopupViewState extends State<LoginPopupView> {
   Container mainBuilder() {
     return Container(
       clipBehavior: Clip.hardEdge,
-      width: popupWidth - 100,
+      width: popupWidth,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(contanerCornerRadius),
         color: white,

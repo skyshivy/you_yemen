@@ -10,7 +10,7 @@ class LogoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        GoRouter.of(context).replace(homeRoute);
+        GoRouter.of(context).go(homeRoute); //replace(homeRoute);
       },
       child: Row(
         children: [

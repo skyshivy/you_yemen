@@ -94,7 +94,7 @@ _popoverMyAccountMenu(
                   context.goNamed(wishlistRoute);
                 } else {
                   StoreManager().logout();
-                  GoRouter.of(context).replace(homeRoute);
+                  GoRouter.of(context).go(homeRoute);
                 }
               },
               child: _listCell(index, imageList, titleList),

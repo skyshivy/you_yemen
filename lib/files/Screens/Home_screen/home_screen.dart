@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:you_yemen/files/screens/category_screen/category_popup_list.dart';
 import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_list_view.dart';
 import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_tab_view.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
@@ -26,32 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return ListView(
       shrinkWrap: true,
       children: [
-        // Row(
-        //   children: [
-        //     SizedBox(
-        //       width: 300,
-        //       child:
-        //           UPasswordTextField(textEditingController: passwordTextCont),
-        //     ),
-        //   ],
-        // ),
-        // const SizedBox(height: 10),
-        // Row(
-        //   children: [
-        //     SizedBox(
-        //       width: 300,
-        //       child: UTextField(textEditingController: textCont),
-        //     ),
-        //   ],
-        // ),
-        // const SizedBox(height: 10),
-        // Row(
-        //   children: [
-        //     SizedBox(
-        //         width: 300,
-        //         child: UMsisdnTextField(textEditingController: msisdnTextCont)),
-        //   ],
-        // ),
         const SizedBox(height: 10),
         RecomendedTabView(),
         RecomendedListView()

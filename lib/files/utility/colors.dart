@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const Color black = Colors.black;
+Color gredientBlack = Colors.black.withOpacity(0.3);
 Color shadowColor = Colors.black.withOpacity(0.2);
 const Color white = Colors.white;
 const Color grey = Colors.grey;

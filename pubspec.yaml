@@ -40,6 +40,7 @@ dependencies:
   popover: ^0.3.0
   responsive_builder: ^0.7.0
   get: ^4.6.6
+  just_audio: ^0.9.34
   encrypt: ^5.0.1
   basic_utils: ^4.4.3
   universal_io: ^2.2.2

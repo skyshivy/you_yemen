@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/common/web_navigation_view/web_navigation_view.dart';
+import 'package:you_yemen/files/controllers/category_controller.dart';
+import 'package:you_yemen/files/controllers/u_search_controller.dart';
+import 'package:you_yemen/files/models/category_detail_model.dart';
+import 'package:you_yemen/files/screens/category_screen/category_detail_screen.dart';
 import 'package:you_yemen/files/screens/home_screen/home_screen.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/router/route_name.dart';
+import 'package:you_yemen/files/screens/search_screen/search_screen.dart';
+import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -23,6 +30,9 @@ final router = GoRouter(
         _profileScreen(),
         _myTunezScreen(),
         _wishlistScreen(),
+        _catDetailScreen(),
+        _searchScreen(),
+        _faqScreen(),
       ],
     ),
   ],
@@ -80,6 +90,24 @@ StatefulShellBranch _wishlistScreen() {
   );
 }
 
+StatefulShellBranch _catDetailScreen() {
+  CategoryController con = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+          path: catDetailRoute,
+          name: catDetailRoute,
+          builder: (context, state) {
+            String categoryId = state.uri.queryParameters['categoryId'] ?? '';
+            String categoryName =
+                state.uri.queryParameters['categoryName'] ?? '';
+            con.getCategoryDetail(categoryName, categoryId);
+            return CategoryDetailScreen();
+          }),
+    ],
+  );
+}
+
 StatefulShellBranch _myTunezScreen() {
   return StatefulShellBranch(
     routes: <RouteBase>[
@@ -88,6 +116,38 @@ StatefulShellBranch _myTunezScreen() {
           name: myTunezRoute,
           builder: (context, state) {
             return UText(title: "myTunez screen here");
+          }),
+    ],
+  );
+}
+
+StatefulShellBranch _searchScreen() {
+  USearchController cont = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+          path: searchRoute,
+          name: searchRoute,
+          builder: (context, state) {
+            String searchKey = state.uri.queryParameters['searchKey'] ?? '';
+            //cont.searchText(searchKey);
+            return SearchScreen();
+          }),
+    ],
+  );
+}
+
+StatefulShellBranch _faqScreen() {
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+          path: faqRoute,
+          name: faqRoute,
+          builder: (context, state) {
+            return Center(
+                child: UText(
+              title: "FAQ Screen here",
+            ));
           }),
     ],
   );

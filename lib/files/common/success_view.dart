@@ -18,7 +18,7 @@ class SuccessView extends StatelessWidget {
           color: transparent,
           child: Container(
             clipBehavior: Clip.hardEdge,
-            width: popupWidth - 100,
+            width: popupWidth,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(contanerCornerRadius),
               color: white,

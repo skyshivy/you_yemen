@@ -31,3 +31,4 @@ const String myProfileStr = 'My Profile';
 const String myTunezStr = 'My Tunez';
 const String myWishListStr = 'My Wishlist';
 const String logoutStr = 'Logout';
+const String emptyToneListStr = 'No Result found';

@@ -5,6 +5,9 @@ import 'package:you_yemen/files/controllers/app_controller.dart';
 import 'package:you_yemen/files/controllers/auth_controller/login_popup_controller.dart';
 import 'package:you_yemen/files/controllers/auth_controller/otp_controller.dart';
 import 'package:you_yemen/files/controllers/buy_controller.dart';
+import 'package:you_yemen/files/controllers/category_controller.dart';
+import 'package:you_yemen/files/controllers/player_controller.dart';
+import 'package:you_yemen/files/controllers/u_search_controller.dart';
 import 'package:you_yemen/files/screens/home_screen/home_screen.dart';
 import 'package:you_yemen/files/api_calls/setting_api.dart';
 import 'package:you_yemen/files/controllers/recomended_controller.dart';
@@ -26,6 +29,9 @@ initialLoads() async {
 _initController() async {
   prefs = await SharedPreferences.getInstance();
   appCont = Get.put(AppController());
+  CategoryController catCont = Get.put(CategoryController());
+  USearchController searchCont = Get.put(USearchController());
+  PlayerController playCont = Get.put(PlayerController());
   StoreManager().initStoreManager();
   Get.lazyPut(() => RecomendedController());
   Get.lazyPut(() => LoginPopupController());

@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:you_yemen/files/controllers/player_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
+import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
-Widget playButton(Function()? onTap) {
+Widget playButton(TuneInfo info, Function()? onTap) {
+  PlayerController cont = Get.find();
   return InkWell(
-    onTap: onTap,
+    onTap: () {
+      cont.playUrl(info, 0);
+      if (onTap != null) {
+        onTap();
+      }
+    },
     child: Container(
         height: 40,
         decoration: BoxDecoration(

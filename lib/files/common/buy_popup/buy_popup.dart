@@ -165,6 +165,7 @@ class _BuyPopupViewState extends State<BuyPopupView> {
     return SizedBox(
       height: 200,
       child: uImage(
+        url: widget.info.toneIdpreviewImageUrl ?? '',
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(contanerCornerRadius),
           topRight: Radius.circular(contanerCornerRadius),
@@ -180,11 +181,11 @@ class _BuyPopupViewState extends State<BuyPopupView> {
           si.isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
         UText(
-          title: "Tune name",
+          title: widget.info.toneName ?? '',
           enfontName: FontName.helveticaBold,
           enfontSize: 18,
         ),
-        UText(title: "Artist name", textColor: grey)
+        UText(title: widget.info.artistName ?? '', textColor: grey)
       ],
     );
   }
