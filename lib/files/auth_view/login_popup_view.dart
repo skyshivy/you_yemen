@@ -55,7 +55,7 @@ class _LoginPopupViewState extends State<LoginPopupView> {
               },
             ),
             SuccessView(
-              message: "display success message here",
+              message: loggedInSuccessStr,
             ),
             con.authTypes.value == AuthTypes.showOtpScreen),
         con.authTypes.value == AuthTypes.showLoginPopup,

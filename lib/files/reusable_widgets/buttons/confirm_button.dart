@@ -9,7 +9,7 @@ Widget confirmButton(Function()? onTap) {
     child: Container(
         height: 40,
         decoration: BoxDecoration(
-          color: yellow,
+          color: black,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: transparent),
         ),
@@ -18,6 +18,7 @@ Widget confirmButton(Function()? onTap) {
           child: Center(
             child: UText(
               title: confirmStr,
+              textColor: white,
             ),
           ),
         )),

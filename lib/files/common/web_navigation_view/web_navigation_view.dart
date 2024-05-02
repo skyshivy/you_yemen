@@ -73,6 +73,7 @@ class WebNavigationView extends StatelessWidget {
     return SizedBox(
       width: 300,
       child: UTextField(
+        hideSearchIcon: false,
         textEditingController: textEditingController,
         onChanged: (p0) {
           cont.updateSearchedText(p0);
