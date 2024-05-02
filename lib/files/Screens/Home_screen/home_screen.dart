@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:you_yemen/files/Screens/Home_screen/recomended_view/recomended_list_view.dart';
 import 'package:you_yemen/files/Screens/Home_screen/recomended_view/recomended_tab_view.dart';
 import 'package:you_yemen/files/Screens/profile_screen/profile_screen.dart';
@@ -12,6 +13,7 @@ import 'package:you_yemen/files/reusable_widgets/u_text_field/u_msisdn_textfield
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text_field/u_password_textfield.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text_field/u_textfield.dart';
+import 'package:you_yemen/files/router/route_name.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,15 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
         RecomendedListView(),
         ElevatedButton(
           onPressed: () {
-           
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfileScreen()),
-            );
+            context.goNamed(profileRoute);
           },
           child: Text('Go to Profile'),
         ),
-      
       ],
     );
   }
