@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/cancel_button.dart';
+import 'package:you_yemen/files/reusable_widgets/image/UImage.dart';
+import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
@@ -150,7 +153,17 @@ import 'package:flutter/services.dart';
 //   ));
 // }
 
-class ProfileScreen extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+
+
+class ProfileScreen extends StatefulWidget {
+  @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   final List<String> imagePaths = [
     'assets/png/77.png',
     'assets/png/77.png',
@@ -161,6 +174,9 @@ class ProfileScreen extends StatelessWidget {
     'assets/png/77.png',
   ];
   final List<String> texts = ['hj', 'jbn', 'bmm', 'nbn', 'jhg', 'gvh', 'hgf'];
+
+  bool isEditing = false;
+  List<bool> selectedItems = List<bool>.generate(7, (index) => false);
 
   @override
   Widget build(BuildContext context) {
@@ -196,12 +212,17 @@ class ProfileScreen extends StatelessWidget {
                   _buildContactNumberField(constraints),
                   SizedBox(height: 20),
                   _buildPreferencesGrid(constraints),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   Row(
                     children: [
-                      _buildSaveChangesButton(),
-                      SizedBox(width: 10),
-                      _buildCancelButton(),
+                      isEditing
+                          ? _buildSaveChangesButton()
+                          : _buildEditButton(),
+                      SizedBox(
+                        width: 10,
+                        height: 20,
+                      ),
+                      isEditing ? _buildCancelButton() : SizedBox(),
                     ],
                   ),
                 ],
@@ -228,9 +249,9 @@ class ProfileScreen extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildSaveChangesButton(),
+              isEditing ? _buildSaveChangesButton() : _buildEditButton(),
               SizedBox(height: 10),
-              _buildCancelButton(),
+              isEditing ? _buildCancelButton() : SizedBox(),
             ],
           ),
           SizedBox(height: 20),
@@ -253,9 +274,9 @@ class ProfileScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        UText(
-          title: 'Contact Number',
-          enfontName: FontName.helvetica,
+        Text(
+          'Contact Number',
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 10),
         Container(
@@ -288,10 +309,9 @@ class ProfileScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          UText(
-            title: 'Preferences',
-            enfontName: FontName.helvetica,
-            arfontSize: 10,
+          Text(
+            'Preferences',
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 10),
           Padding(
@@ -308,23 +328,47 @@ class ProfileScreen extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               itemCount: itemCount,
               itemBuilder: (context, index) {
-                return Container(
-                  height: 100,
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          height: 70,
-                          child: Image.asset(
-                            imagePaths[index],
-                            fit: BoxFit.cover,
-                          ),
+                return GestureDetector(
+                  onTap: () {
+                    if (isEditing) {
+                      setState(() {
+                        selectedItems[index] = !selectedItems[index];
+                      });
+                    }
+                  },
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Stack(
+                      alignment: Alignment.topLeft,
+                      children: [
+                        Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                height: 70,
+                                child: Image.asset(
+                                  imagePaths[index],
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 3),
+                            Text(texts[index]),
+                          ],
                         ),
-                      ),
-                      SizedBox(height: 3),
-                      Text(texts[index]),
-                    ],
+                        if (selectedItems[index])
+                          Container(
+                            margin: EdgeInsets.all(5),
+                            width: 10,
+                            height: 10,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.yellow,
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
                 );
               },
@@ -335,32 +379,84 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSaveChangesButton() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10.0),
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
-        ),
-        child: UText(
-          title: 'Save Changes',
-          enfontName: FontName.helveticaBold,
-          textColor: Colors.black,
-        ),
-      ),
+  Widget _buildEditButton() {
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          isEditing = true;
+        });
+      },
+      child: Text('Edit'),
     );
   }
 
+  
+
+  Widget _buildSaveChangesButton() {
+  return Padding(
+    padding: const EdgeInsets.only(left: 10.0),
+    child: ElevatedButton(
+      onPressed: () {
+        _saveChanges();
+      },
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
+      ),
+      child: Text(
+        'Save Changes',
+        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+      ),
+    ),
+  );
+}
+
+Future<void> _saveChanges() async {
+  final url = 'https://callertunez.mtn.co.za/security/Middleware/api/adapter/v1/crbt/edit-profile';
+
+  
+  final Map<String, dynamic> body = {
+    "clientTxnId": "773237680",
+    "identifier": "UpdateUserName",
+    "aPartyMsisdn": "0832120732",
+    "servType": "UPDATE_USER_NAME",
+    "language": "English",
+    "name": "0832120732",
+  };
+
+  try {
+    final response = await http.post(
+      Uri.parse(url),
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      // Handle success response
+      // You can access response data using response.body
+      print('API call successful: ${response.body}');
+    } else {
+      // Handle error response
+      print('Error: ${response.statusCode}');
+    }
+  } catch (e) {
+    // Handle network errors
+    print('Network error: $e');
+  }
+}
+
   Widget _buildCancelButton() {
     return ElevatedButton(
-      onPressed: () {},
-      child: UText(
-        title: 'Cancel',
-        enfontName: FontName.helveticaBold,
+      onPressed: () {
+        setState(() {
+          isEditing = false;
+          // Clear selection
+          selectedItems = List<bool>.generate(7, (index) => false);
+        });
+      },
+      child: Text(
+        'Cancel',
+        style: TextStyle(fontWeight: FontWeight.bold),
       ),
     );
-    
   }
 }
 
