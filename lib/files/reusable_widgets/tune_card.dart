@@ -57,6 +57,7 @@ class TuneCard extends StatelessWidget {
           UText(
             title: info?.toneName ?? '',
             enfontName: FontName.helveticaBold,
+
             arfontName: FontName.acMunaBlack,
             maxLine: 1,
           ),

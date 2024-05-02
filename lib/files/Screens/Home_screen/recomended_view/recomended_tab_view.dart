@@ -68,7 +68,7 @@ class RecomendedTabView extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Center(child: UText(title: con.tabTitleList[index])),
+              child: Center(child: UText(title: con.tabTitleList[index], )),
             ),
           );
         }),
