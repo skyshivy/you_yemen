@@ -19,7 +19,13 @@ class _SearchScreenState extends State<SearchScreen> {
     return Obx(() {
       return cont.isloading.value
           ? loadingIndicator(radius: 18)
-          : GenericGridView(list: cont.toneList);
+          : GenericGridView(
+              list: cont.toneList,
+              isLoadingMore: cont.isLoadingMore.value,
+              loadMore: () {
+                cont.loadingMoreData();
+              },
+            );
     });
   }
 }
