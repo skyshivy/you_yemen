@@ -5,3 +5,9 @@ enum FontName {
   helveticaLight,
   helvetica,
 }
+
+enum AuthTypes {
+  showLoginPopup,
+  showOtpScreen,
+  showSuccessScreen,
+}

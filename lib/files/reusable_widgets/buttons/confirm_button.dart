@@ -15,8 +15,10 @@ Widget confirmButton(Function()? onTap) {
         ),
         child: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-          child: UText(
-            title: confirmStr,
+          child: Center(
+            child: UText(
+              title: confirmStr,
+            ),
           ),
         )),
   );
