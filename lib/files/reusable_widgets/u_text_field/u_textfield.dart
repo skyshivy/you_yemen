@@ -19,11 +19,13 @@ class UTextField extends StatelessWidget {
     this.onChanged,
     this.onSubmitted,
     this.leftChild,
+    this.hideSearchIcon = true,
   });
   final TextEditingController textEditingController;
   final RxBool _hideCloseButton = true.obs;
   final String? hintText;
   final Widget? leftChild;
+  final bool hideSearchIcon;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
   @override
@@ -66,9 +68,12 @@ class UTextField extends StatelessWidget {
             ),
           ),
           _closeButton(),
-          searchButton(() {
+          uVisibility(searchButton(() {
+            if (onSubmitted != null) {
+              onSubmitted!(textEditingController.text);
+            }
             print("searchButton action");
-          }),
+          }), hideSearchIcon),
         ],
       ),
     );
