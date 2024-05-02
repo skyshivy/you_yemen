@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/auth_view/login_popup_view.dart';
 import 'package:you_yemen/files/common/buy_popup/buy_popup.dart';
 import 'package:you_yemen/files/enums/enums.dart';
+import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
@@ -42,17 +44,13 @@ import 'package:you_yemen/files/utility/colors.dart';
 //   );
 // }
 
-Widget buyButton(Function()? onTap) {
+Widget buyButton(TuneInfo info, Function()? onTap) {
   return ResponsiveBuilder(
     builder: (context, sizingInformation) {
       return GestureDetector(
         onTap: onTap != null
             ? () => Get.dialog(Center(
-                  child: Container(
-                    height: 100,
-                    width: 200,
-                    color: white,
-                  ),
+                  child: BuyPopupView(info: info),
                 ))
             : null,
         child: Container(
@@ -71,7 +69,7 @@ Widget buyButton(Function()? onTap) {
                 children: [
                   Icon(
                     Icons.card_travel,
-                    size: 20,
+                    size: 16,
                   ),
                   SizedBox(width: 4),
                 

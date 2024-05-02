@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -17,10 +19,12 @@ class UMsisdnTextField extends StatelessWidget {
     this.hintText,
     this.onChanged,
     this.onSubmitted,
+    this.enabled,
   });
   final TextEditingController textEditingController;
   final RxBool _hideCloseButton = true.obs;
   final String? hintText;
+  final bool? enabled;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
   @override
@@ -45,6 +49,13 @@ class UMsisdnTextField extends StatelessWidget {
           Expanded(
             child: Center(
               child: TextField(
+                enabled: enabled,
+                maxLength: msisdnLength,
+                onTap: () {
+                  if (textEditingController.text.isNotEmpty) {
+                    _hideCloseButton.value = false;
+                  }
+                },
                 onChanged: (value) {
                   _hideCloseButton.value = value.isEmpty;
                   if (onChanged != null) {
@@ -94,6 +105,9 @@ class UMsisdnTextField extends StatelessWidget {
           onTap: () {
             textEditingController.text = '';
             _hideCloseButton.value = true;
+            if (onChanged != null) {
+              onChanged!('');
+            }
           },
           child: const SizedBox(
             height: 40,

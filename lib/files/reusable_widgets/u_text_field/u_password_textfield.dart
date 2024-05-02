@@ -17,10 +17,12 @@ class UPasswordTextField extends StatelessWidget {
     this.hintText,
     this.onChanged,
     this.onSubmitted,
+    this.enabled,
   });
   final TextEditingController textEditingController;
   final RxBool _hideCloseButton = true.obs;
   final String? hintText;
+  final bool? enabled;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
   @override
@@ -40,7 +42,14 @@ class UPasswordTextField extends StatelessWidget {
           Expanded(
             child: Center(
               child: TextField(
+                maxLength: otpLength,
+                enabled: enabled,
                 textAlign: TextAlign.center,
+                onTap: () {
+                  if (textEditingController.text.isNotEmpty) {
+                    _hideCloseButton.value = false;
+                  }
+                },
                 onChanged: (value) {
                   _hideCloseButton.value = value.isEmpty;
                   if (onChanged != null) {
@@ -91,6 +100,9 @@ class UPasswordTextField extends StatelessWidget {
           onTap: () {
             textEditingController.text = '';
             _hideCloseButton.value = true;
+            if (onChanged != null) {
+              onChanged!('');
+            }
           },
           child: const SizedBox(
             height: 40,

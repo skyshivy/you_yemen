@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/state_manager.dart';
+import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/tune_card.dart';
+import 'package:you_yemen/files/reusable_widgets/u_text.dart';
+import 'package:you_yemen/files/translation/strings.dart';
 
 class GenericGridView extends StatelessWidget {
   const GenericGridView({
@@ -25,6 +28,7 @@ class GenericGridView extends StatelessWidget {
   final Function()? onTap;
   final Axis scrollDirection;
   final ScrollPhysics? physics;
+  final String emptyListMessage = emptyToneListStr;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,16 @@ class GenericGridView extends StatelessWidget {
       children: [
         Flexible(
           child: Obx(() {
-            return (maxDisplay != null) ? wrapBuilder() : gridBuilder();
+            return (maxDisplay != null)
+                ? wrapBuilder()
+                : (list.length < 20)
+                    ? list.isEmpty
+                        ? UText(
+                            title: emptyListMessage,
+                            enfontName: FontName.helveticaBold,
+                          )
+                        : wrapBuilder()
+                    : gridBuilder();
           }),
         ),
       ],

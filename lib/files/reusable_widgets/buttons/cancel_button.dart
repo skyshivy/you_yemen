@@ -15,8 +15,10 @@ Widget cancelButton(Function()? onTap) {
         ),
         child: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-          child: UText(
-            title: cancelStr,
+          child: Center(
+            child: UText(
+              title: cancelStr,
+            ),
           ),
         )),
   );
