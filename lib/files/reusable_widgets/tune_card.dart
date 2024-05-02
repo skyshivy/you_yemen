@@ -57,7 +57,7 @@ class TuneCard extends StatelessWidget {
           UText(
             title: info?.toneName ?? '',
             enfontName: FontName.helveticaBold,
-            arfontName: FontName.acMunaBlack,
+            arfontName: FontName.acMunaBlack, 
           ),
           UText(
             title: info?.artist ?? '',
@@ -78,68 +78,3 @@ class TuneCard extends StatelessWidget {
   }
 }
 
-// class TuneCard extends StatelessWidget {
-//   final BuildContext context;
-
-//   const TuneCard({required this.context, Key? key}) : super(key: key);
-
-//   const TuneCard({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       clipBehavior: Clip.hardEdge,
-//       decoration: cardDecoration(),
-//       child: Column(
-//         children: [
-//           Expanded(child: imageBuilder()),
-//           infoBuilder(),
-//         ],
-//       ),
-//     );
-//   }
-
-//   Widget imageBuilder() {
-//     return Stack(
-//       alignment: Alignment.topRight,
-//       children: [
-//         uImage(),
-//         moreButton(),
-//       ],
-//     );
-//   }
-
-//   Widget moreButton() {
-//     return cardMoreButton();
-//   }
-
-//   Widget infoBuilder() {
-//     return Padding(
-//       padding: const EdgeInsets.all(8.0),
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.start,
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           UText(
-//             title: "Tune name here",
-//             enfontName: FontName.helveticaBold,
-//             arfontName: FontName.acMunaBlack,
-//           ),
-//           UText(
-//             title: "Artist name here",
-//             textColor: grey,
-//           ),
-//           SizedBox(height: 8),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//             children: [
-//               Expanded(child: playButton(() => null)),
-//               const SizedBox(width: 20),
-//               Expanded(child: buyButton(() => showBuyPopup(context))),
-//             ],
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }

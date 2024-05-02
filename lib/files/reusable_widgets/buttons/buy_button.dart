@@ -74,6 +74,7 @@ Widget buyButton(Function()? onTap) {
                     size: 20,
                   ),
                   SizedBox(width: 4),
+                
                   UText(
                     title: buyStr,
                     enfontName: FontName.helveticaBold,
