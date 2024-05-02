@@ -14,7 +14,13 @@ class CategoryDetailScreen extends StatelessWidget {
     return Obx(() {
       return cont.isLoading.value
           ? loadingIndicator(radius: 18)
-          : GenericGridView(list: cont.toneList);
+          : GenericGridView(
+              list: cont.toneList,
+              isLoadingMore: cont.isLoadingMore.value,
+              loadMore: () {
+                cont.loadingMoreData();
+              },
+            );
     });
   }
 }
