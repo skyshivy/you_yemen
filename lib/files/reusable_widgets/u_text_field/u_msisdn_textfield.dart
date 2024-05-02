@@ -41,7 +41,7 @@ class UMsisdnTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(width: 8),
-          const Center(child: UText(title: countryCode)),
+          const Center(child: UText(title: countryCode, )),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             child: Container(width: 1.5, color: grey),

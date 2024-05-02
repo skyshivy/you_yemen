@@ -13,7 +13,7 @@ class UText extends StatelessWidget {
     this.textColor = black,
     this.maxLine,
     this.alignment = TextAlign.start,
-    required this.title,
+    required this.title, 
   });
   final String title;
   final FontName enfontName;

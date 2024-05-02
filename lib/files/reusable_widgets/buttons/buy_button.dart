@@ -38,6 +38,7 @@ Widget buyButton(TuneInfo info, Function()? onTap) {
                     color: white,
                   ),
                   SizedBox(width: 4),
+                
                   UText(
                     textColor: white,
                     title: buyStr,
