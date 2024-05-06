@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ElevatedButton(
           onPressed: () async {
             getProfileDetailsApi();
+
             context.goNamed(profileRoute);
           },
           child: Text('Go to Profile'),

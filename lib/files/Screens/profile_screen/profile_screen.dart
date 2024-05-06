@@ -1,14 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/api_calls/edit_profile_screen_api.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/model/edit_modal.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/cancel_button.dart';
+import 'package:you_yemen/files/reusable_widgets/generic_gridview.dart';
 import 'package:you_yemen/files/reusable_widgets/image/UImage.dart';
 import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
+import 'package:you_yemen/files/reusable_widgets/u_text_field/u_msisdn_textfield.dart';
+import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
 import 'package:flutter/services.dart';
@@ -159,6 +163,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:you_yemen/files/utility/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -166,6 +171,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  TextEditingController textEditingController = TextEditingController();
   final List<String> imagePaths = [
     'assets/png/77.png',
     'assets/png/77.png',
@@ -183,25 +189,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body:ResponsiveBuilder(context,si){
-        return si.isMobile ? _buildResponsiveLayout():_buildDefaultLayout(constraints)
-      }
-      
-      //  LayoutBuilder(
-
-      //   builder: (context, constraints) {
-      //     if (constraints.maxWidth < 600) {
-      //       return _buildResponsiveLayout();
-      //     } else {
-      //       return _buildDefaultLayout(constraints);
-      //     }
-      //   },
-      // ),
-    );
+        appBar: AppBar(),
+        body: ResponsiveBuilder(
+          builder: (context, si) {
+            return si.isMobile
+                ? _buildResponsiveLayout()
+                : _buildDefaultLayout();
+          },
+        )
+        // LayoutBuilder(
+        //   builder:
+        //   (context, constraints) {
+        //     if (constraints.maxWidth < 600) {
+        //       return _buildResponsiveLayout();
+        //     } else {
+        //       return _buildDefaultLayout();
+        //     }
+        //   },
+        // ),
+        );
   }
 
-  Widget _buildDefaultLayout(BoxConstraints constraints) {
+  Widget _buildDefaultLayout() {
     return Padding(
       padding: const EdgeInsets.only(
         left: 20,
@@ -211,16 +220,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildCircleAvatar(),
-          SizedBox(width: constraints.maxWidth * 0.04),
+          //  SizedBox(width: constraints.maxWidth * 0.04),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 40.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildContactNumberField(constraints),
+                  _buildContactNumberField(),
                   SizedBox(height: 2),
-                  _buildPreferencesGrid(constraints),
+                  _buildPreferencesGrid(),
                   SizedBox(height: 2),
                   Row(
                     children: [
@@ -251,9 +260,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           _buildCircleAvatar(),
           SizedBox(height: 20),
-          _buildContactNumberField(null),
+          _buildContactNumberField(),
           SizedBox(height: 20),
-          _buildPreferencesGrid(null),
+          _buildPreferencesGrid(),
           SizedBox(height: 20),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -279,39 +288,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildContactNumberField(BoxConstraints? constraints) {
+  Widget _buildContactNumberField() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          'Contact Number',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 5),
-        Container(
-          width: constraints != null ? constraints.maxWidth * 0.6 : null,
-          height: 30,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-            border: Border.all(color: Colors.black),
-          ),
-          child: TextField(
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-              LengthLimitingTextInputFormatter(10),
-            ],
-            decoration: InputDecoration(
-              hintText: "",
-              border: InputBorder.none,
+        UText(title: contactNumberStr),
+        Row(
+          children: [
+            Flexible(
+              child: SizedBox(
+                  width: 300,
+                  child: UMsisdnTextField(
+                      textEditingController: textEditingController)),
             ),
-          ),
-        ),
+          ],
+        )
       ],
     );
+    // Column(
+    //   crossAxisAlignment: CrossAxisAlignment.start,
+    //   children: [
+    //     Text(
+    //       'Contact Number',
+    //       style: TextStyle(fontWeight: FontWeight.bold),
+    //     ),
+    //     SizedBox(height: 5),
+    //     Container(
+    //       //width: constraints != null ? constraints.maxWidth * 0.6 : null,
+    //       height: 30,
+    //       decoration: BoxDecoration(
+    //         borderRadius: BorderRadius.circular(50),
+    //         border: Border.all(color: Colors.black),
+    //       ),
+    //       child: TextField(
+    //         keyboardType: TextInputType.number,
+    //         inputFormatters: <TextInputFormatter>[
+    //           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+    //           LengthLimitingTextInputFormatter(10),
+    //         ],
+    //         decoration: InputDecoration(
+    //           hintText: "",
+    //           border: InputBorder.none,
+    //         ),
+    //       ),
+    //     ),
+    //   ],
+    // );
   }
 
-  Widget _buildPreferencesGrid(BoxConstraints? constraints) {
+  Widget _buildPreferencesGrid() {
     int itemCount = imagePaths.length;
 
     return Expanded(
@@ -352,18 +377,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         Column(
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                height: 70,
-                                child:
-                                //  uImage()
-                                Image.asset(
-                                  imagePaths[index],
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
+                            uImage(
+                                url: imagePaths[index],
+                                borderRadius:
+                                    BorderRadius.circular(cellCornerRadius)),
                             SizedBox(height: 3),
                             Text(texts[index]),
                           ],
@@ -374,9 +391,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             width: 10,
                             height: 10,
                             decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.yellow
-                            ), child: Icon(Icons.check, size: 10, color: Colors.white),
+                                shape: BoxShape.circle, color: Colors.yellow),
+                            child: Icon(Icons.check,
+                                size: 10, color: Colors.white),
                           ),
                       ],
                     ),
@@ -401,14 +418,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  
   Widget _buildCancelButton() {
+    return UText(title: 'title');
     // return cancelButton
     // //  ElevatedButton(
     //   onPressed: () {
     //     // setState(() {
     //     //   isEditing = false;
-          
+
     //     //   selectedItems = List<bool>.generate(7, (index) => false);
     //     // });
     //   },
@@ -416,11 +433,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     //     'Cancel',
     //     style: TextStyle(fontWeight: FontWeight.bold),
     //   ),
-    
-  // }
-}
+  }
 
-Widget _buildSaveChangesButton() {
+  Widget _buildSaveChangesButton() {
     return Padding(
       padding: const EdgeInsets.only(left: 10.0),
       child: ElevatedButton(
@@ -437,10 +452,4 @@ Widget _buildSaveChangesButton() {
       ),
     );
   }
-
-
-void main() {
-  runApp(MaterialApp(
-    home: ProfileScreen(),
-  ));
 }
