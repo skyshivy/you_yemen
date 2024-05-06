@@ -173,4 +173,6 @@ class NetworkManager {
     Map<String, dynamic> valueMap = json.decode(stringData);
     return valueMap;
   }
+
+  postrequest(String url, formData) {}
 }

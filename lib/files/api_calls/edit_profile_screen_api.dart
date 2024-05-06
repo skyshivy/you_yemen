@@ -3,8 +3,8 @@ import 'package:you_yemen/files/model/edit_modal.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
 
 
-Future<Editmodal> _saveChanges() async{
-  final url='https://callertunez.mtn.co.za/security/Middleware/api/adapter/v1/crbt/edit-profile';
+Future<Editmodal> saveChanges() async{
+  final url='https://funtone.ooredoo.com.mm/security/Middleware/api/adapter/v1/crbt/edit-profile';
 
 
  Map<String, dynamic> jsonData = {"clientTxnId": "773237680",
@@ -13,9 +13,16 @@ Future<Editmodal> _saveChanges() async{
     "servType": "UPDATE_USER_NAME",
     "language": "English",
     "name": "0832120732",};
+     
+  var parts = [];
+  jsonData.forEach((key, value) {
+    parts.add('${Uri.encodeQueryComponent(key)}='
+        '${Uri.encodeQueryComponent(value)}');
+  });
+  var formData = parts.join('&');
   await Future.delayed(Duration(seconds: 3));
   Map<String, dynamic> jsonMap =
-      await NetworkManager().postResquest(url, jsonData);
+      await NetworkManager().post(url, formData);
   Editmodal modal = Editmodal.fromJson(jsonMap);
   print("modal =${modal.message}");
  
