@@ -7,7 +7,7 @@ import 'package:you_yemen/files/utility/urls.dart';
 Future<SearchModel> searchToneApi(String searchKey, {int pageNo = 0}) async {
   String url = searchToneUrl +
       "language=${StoreManager().language}&sortBy=Order_By&perPageCount=$pagePerCount&searchLanguage=${StoreManager().language}&searchKey=$searchKey&pageNo=$pageNo";
-  Map<String, dynamic> map = await NetworkManager().get(url,jsonData);
+  Map<String, dynamic> map = await NetworkManager().get(url);
   SearchModel model = SearchModel.fromJson(map);
   return model;
 }

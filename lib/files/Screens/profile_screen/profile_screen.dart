@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:you_yemen/files/api_calls/edit_profile_screen_api.dart';
 import 'package:you_yemen/files/enums/enums.dart';
+import 'package:you_yemen/files/model/edit_modal.dart';
+import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/cancel_button.dart';
 import 'package:you_yemen/files/reusable_widgets/image/UImage.dart';
 import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
@@ -157,7 +160,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
-
 class ProfileScreen extends StatefulWidget {
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -182,21 +184,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          if (constraints.maxWidth < 600) {
-            return _buildResponsiveLayout();
-          } else {
-            return _buildDefaultLayout(constraints);
-          }
-        },
-      ),
+      body:ResponsiveBuilder(context,si){
+        return si.isMobile ? _buildResponsiveLayout():_buildDefaultLayout(constraints)
+      }
+      
+      //  LayoutBuilder(
+
+      //   builder: (context, constraints) {
+      //     if (constraints.maxWidth < 600) {
+      //       return _buildResponsiveLayout();
+      //     } else {
+      //       return _buildDefaultLayout(constraints);
+      //     }
+      //   },
+      // ),
     );
   }
 
   Widget _buildDefaultLayout(BoxConstraints constraints) {
     return Padding(
-      padding: const EdgeInsets.only(left: 200.0),
+      padding: const EdgeInsets.only(
+        left: 20,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,14 +214,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SizedBox(width: constraints.maxWidth * 0.04),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(left: 400.0),
+              padding: const EdgeInsets.only(left: 40.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildContactNumberField(constraints),
-                  SizedBox(height: 20),
+                  SizedBox(height: 2),
                   _buildPreferencesGrid(constraints),
-                  SizedBox(height: 10),
+                  SizedBox(height: 2),
                   Row(
                     children: [
                       isEditing
@@ -220,7 +229,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           : _buildEditButton(),
                       SizedBox(
                         width: 10,
-                        height: 20,
+                        height: 3,
                       ),
                       isEditing ? _buildCancelButton() : SizedBox(),
                     ],
@@ -254,7 +263,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               isEditing ? _buildCancelButton() : SizedBox(),
             ],
           ),
-          SizedBox(height: 20),
+          SizedBox(height: 10),
         ],
       ),
     );
@@ -278,10 +287,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           'Contact Number',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 5),
         Container(
           width: constraints != null ? constraints.maxWidth * 0.6 : null,
-          height: 35,
+          height: 30,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50),
             border: Border.all(color: Colors.black),
@@ -313,9 +322,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             'Preferences',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 1),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(left: 8, right: 8, bottom: 0),
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3, // Fixed to 3 columns
@@ -347,7 +356,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               borderRadius: BorderRadius.circular(20),
                               child: Container(
                                 height: 70,
-                                child: Image.asset(
+                                child:
+                                //  uImage()
+                                Image.asset(
                                   imagePaths[index],
                                   fit: BoxFit.cover,
                                 ),
@@ -364,8 +375,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             height: 10,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Colors.yellow,
-                            ),
+                              color: Colors.yellow
+                            ), child: Icon(Icons.check, size: 10, color: Colors.white),
                           ),
                       ],
                     ),
@@ -391,74 +402,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   
-
-  Widget _buildSaveChangesButton() {
-  return Padding(
-    padding: const EdgeInsets.only(left: 10.0),
-    child: ElevatedButton(
-      onPressed: () {
-        _saveChanges();
-      },
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
-      ),
-      child: Text(
-        'Save Changes',
-        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-      ),
-    ),
-  );
-}
-
-Future<void> _saveChanges() async {
-  final url = 'https://callertunez.mtn.co.za/security/Middleware/api/adapter/v1/crbt/edit-profile';
-
-  
-  final Map<String, dynamic> body = {
-    "clientTxnId": "773237680",
-    "identifier": "UpdateUserName",
-    "aPartyMsisdn": "0832120732",
-    "servType": "UPDATE_USER_NAME",
-    "language": "English",
-    "name": "0832120732",
-  };
-
-  try {
-    final response = await http.post(
-      Uri.parse(url),
-      body: body,
-    );
-
-    if (response.statusCode == 200) {
-      // Handle success response
-      // You can access response data using response.body
-      print('API call successful: ${response.body}');
-    } else {
-      // Handle error response
-      print('Error: ${response.statusCode}');
-    }
-  } catch (e) {
-    // Handle network errors
-    print('Network error: $e');
-  }
-}
-
   Widget _buildCancelButton() {
-    return ElevatedButton(
-      onPressed: () {
-        setState(() {
-          isEditing = false;
-          // Clear selection
-          selectedItems = List<bool>.generate(7, (index) => false);
-        });
-      },
-      child: Text(
-        'Cancel',
-        style: TextStyle(fontWeight: FontWeight.bold),
+    // return cancelButton
+    // //  ElevatedButton(
+    //   onPressed: () {
+    //     // setState(() {
+    //     //   isEditing = false;
+          
+    //     //   selectedItems = List<bool>.generate(7, (index) => false);
+    //     // });
+    //   },
+    //   child: Text(
+    //     'Cancel',
+    //     style: TextStyle(fontWeight: FontWeight.bold),
+    //   ),
+    
+  // }
+}
+
+Widget _buildSaveChangesButton() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10.0),
+      child: ElevatedButton(
+        onPressed: () {
+          saveChanges();
+        },
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
+        ),
+        child: Text(
+          'Save Changes',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
       ),
     );
   }
-}
+
 
 void main() {
   runApp(MaterialApp(
