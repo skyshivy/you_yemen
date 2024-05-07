@@ -11,6 +11,9 @@ String getSecurityTokenUrl = "${baseUrl}security-token";
 String passwordValidationUrl = "${baseUrl}password-validation";
 String getTonePriceUrl = "${baseUrlSecurity}get-tone-price";
 String buyTuneUrl = "${baseUrlSecurity}set-tone";
-String getCategoryUrl = '${baseUrl}categories?';
+String getCategoryUrl = '${baseUrlSecurity}categories?';
 String getCategoryDetailUrl = "${baseUrl}search-tone?";
 String searchToneUrl = "${baseUrl}specific-search-tones?";
+
+
+

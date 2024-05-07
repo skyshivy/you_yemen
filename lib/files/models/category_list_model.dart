@@ -82,6 +82,12 @@ class Category {
         language: json["language"],
       );
 
+  int? get id => null;
+
+  String? get searchKey => null;
+
+  String? get name => null;
+
   Map<String, dynamic> toJson() => {
         "categoryId": categoryId,
         "categoryName": categoryName,
