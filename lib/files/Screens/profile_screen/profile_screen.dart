@@ -14,6 +14,7 @@ import 'package:you_yemen/files/reusable_widgets/image/UImage.dart';
 import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text_field/u_msisdn_textfield.dart';
+import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
@@ -319,7 +320,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController textEditingController = TextEditingController();
-   final List<String> imagePaths = [
+  final List<String> imagePaths = [
     'https://funtone.ooredoo.com.mm/stream-media/get-category-menu-image?menuId=11',
     'https://funtone.ooredoo.com.mm/stream-media/get-category-menu-image?menuId=22',
     'https://funtone.ooredoo.com.mm/stream-media/get-category-menu-image?menuId=96',
@@ -348,74 +349,77 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildDefaultLayout() {
-  return Padding(
-    padding: const EdgeInsets.only(left: 20),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween, // Align items to start and end of the row
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildCircleAvatar(),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 40.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildContactNumberField(),
-                SizedBox(height: 2),
-                _buildPreferencesGrid(),
-                SizedBox(height: 2),
-                SizedBox(height: 220,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center, // Align items to center
-                    children: [
-                      isEditing
-                          ? _buildSaveChangesButton()
-                          : _buildEditButton(),
-                      SizedBox(width: 10),
-                      isEditing ? _buildCancelButton() : SizedBox(),
-                    ],
+    return Padding(
+      padding: const EdgeInsets.only(left: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment
+            .spaceBetween, // Align items to start and end of the row
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildCircleAvatar(),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 40.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildContactNumberField(),
+                  SizedBox(height: 2),
+                  _buildPreferencesGrid(),
+                  SizedBox(height: 2),
+                  SizedBox(
+                    height: 220,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment:
+                          CrossAxisAlignment.center, // Align items to center
+                      children: [
+                        isEditing
+                            ? _buildSaveChangesButton()
+                            : _buildEditButton(),
+                        SizedBox(width: 10),
+                        isEditing ? _buildCancelButton() : SizedBox(),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-        SizedBox(width: 16), // Add space between avatar and buttons
-      ],
-    ),
-  );
-}
+          SizedBox(width: 16), // Add space between avatar and buttons
+        ],
+      ),
+    );
+  }
 
   Widget _buildResponsiveLayout() {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        _buildCircleAvatar(),
-        SizedBox(height: 20),
-        _buildContactNumberField(),
-        SizedBox(height: 20),
-        Flexible( // Add Flexible widget with Expanded
-          child: _buildPreferencesGrid(),
-        ),
-        SizedBox(height: 20),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            isEditing ? _buildSaveChangesButton() : _buildEditButton(),
-            SizedBox(height: 10),
-            isEditing ? _buildCancelButton() : SizedBox(),
-          ],
-        ),
-        SizedBox(height: 10),
-      ],
-    ),
-  );
-}
-
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _buildCircleAvatar(),
+          SizedBox(height: 20),
+          _buildContactNumberField(),
+          SizedBox(height: 20),
+          Flexible(
+            // Add Flexible widget with Expanded
+            child: _buildPreferencesGrid(),
+          ),
+          SizedBox(height: 20),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              isEditing ? _buildSaveChangesButton() : _buildEditButton(),
+              SizedBox(height: 10),
+              isEditing ? _buildCancelButton() : SizedBox(),
+            ],
+          ),
+          SizedBox(height: 10),
+        ],
+      ),
+    );
+  }
 
   Widget _buildCircleAvatar() {
     return Padding(
@@ -431,6 +435,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildContactNumberField() {
+    textEditingController.text = StoreManager().msisdn;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -442,6 +447,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: SizedBox(
                   width: 300,
                   child: UMsisdnTextField(
+                      enabled: false,
                       textEditingController: textEditingController)),
             )
           ],
@@ -495,7 +501,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 //                         children: [
 //                           ClipRRect(
 //                             borderRadius: BorderRadius.circular(10),
-//                             child: 
+//                             child:
 //                             Image.
 //                             network(
 //                               imagePaths[index],
@@ -531,125 +537,132 @@ class _ProfileScreenState extends State<ProfileScreen> {
 //   );
 // }
 
+  Widget _buildPreferencesGrid() {
+    // Check if the screen width is less than a certain threshold
+    bool isScreenMinimized =
+        MediaQuery.of(context).size.width < 600; // Adjust threshold as needed
 
-Widget _buildPreferencesGrid() {
-  // Check if the screen width is less than a certain threshold
-  bool isScreenMinimized = MediaQuery.of(context).size.width < 600; // Adjust threshold as needed
-
-  // If the screen is minimized, show texts with yellow background separately
-  if (isScreenMinimized) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal, // Allow horizontal scrolling
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: texts.map((text) {
-            int index = texts.indexOf(text);
-            return Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: GestureDetector(
-                onTap: () {
-                  if (isEditing) {
-                    setState(() {
-                      selectedItems[index] = !selectedItems[index];
-                    });
-                  }
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: selectedItems[index] ? Colors.orange : Colors.grey,
-                    borderRadius: BorderRadius.circular(20), // Apply circular border if selected
-                  ),
-                  padding: EdgeInsets.all(10),
-                  child: UText(title: text,enfontName: FontName.helvetica,),
-                ),
-              ),
-            );
-          }).toList(),
-        ),
-      ),
-    );
-  }
-
-  // If the screen is not minimized, show the grid view with images and texts
-  int itemCount = imagePaths.length;
-  double screenWidth = MediaQuery.of(context).size.width;
-  int crossAxisCount = (screenWidth / 120).floor(); // Adjust the value 120 as needed
-
-  return Expanded(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Preference',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              mainAxisExtent: 100,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 40,
-              childAspectRatio: 1,
-              crossAxisCount: crossAxisCount,
-            ),
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: itemCount,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  if (isEditing) {
-                    setState(() {
-                      selectedItems[index] = !selectedItems[index];
-                    });
-                  }
-                },
-                child: Container(
-                  color: Colors.transparent,
-                  child: Stack(
-                    alignment: Alignment.topLeft,
-                    children: [
-                      Column(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network(
-                              imagePaths[index],
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          SizedBox(height: 3),
-                          Text(
-                            texts[index],
-                          ),
-                        ],
-                      ),
-                      if (selectedItems[index])
-                        Container(
-                          margin: EdgeInsets.all(5),
-                          width: 20, // Increase width to make the circle larger
-                          height: 20, // Increase height to make the circle larger
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.yellow,
-                          ),
-                          child: Icon(Icons.check, size: 14, color: Colors.white),
-                        ),
-                    ],
+    // If the screen is minimized, show texts with yellow background separately
+    if (isScreenMinimized) {
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal, // Allow horizontal scrolling
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: texts.map((text) {
+              int index = texts.indexOf(text);
+              return Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: GestureDetector(
+                  onTap: () {
+                    if (isEditing) {
+                      setState(() {
+                        selectedItems[index] = !selectedItems[index];
+                      });
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: selectedItems[index] ? Colors.orange : Colors.grey,
+                      borderRadius: BorderRadius.circular(
+                          20), // Apply circular border if selected
+                    ),
+                    padding: EdgeInsets.all(10),
+                    child: UText(
+                      title: text,
+                      enfontName: FontName.helvetica,
+                    ),
                   ),
                 ),
               );
-            },
+            }).toList(),
           ),
         ),
-      ],
-    ),
-  );
-}
+      );
+    }
 
+    // If the screen is not minimized, show the grid view with images and texts
+    int itemCount = imagePaths.length;
+    double screenWidth = MediaQuery.of(context).size.width;
+    int crossAxisCount =
+        (screenWidth / 120).floor(); // Adjust the value 120 as needed
+
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Preference',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                mainAxisExtent: 100,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 40,
+                childAspectRatio: 1,
+                crossAxisCount: crossAxisCount,
+              ),
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: itemCount,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    if (isEditing) {
+                      setState(() {
+                        selectedItems[index] = !selectedItems[index];
+                      });
+                    }
+                  },
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Stack(
+                      alignment: Alignment.topLeft,
+                      children: [
+                        Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                imagePaths[index],
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            SizedBox(height: 3),
+                            Text(
+                              texts[index],
+                            ),
+                          ],
+                        ),
+                        if (selectedItems[index])
+                          Container(
+                            margin: EdgeInsets.all(5),
+                            width:
+                                20, // Increase width to make the circle larger
+                            height:
+                                20, // Increase height to make the circle larger
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.yellow,
+                            ),
+                            child: Icon(Icons.check,
+                                size: 14, color: Colors.white),
+                          ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _buildEditButton() {
     return ElevatedButton(
