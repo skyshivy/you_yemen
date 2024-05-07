@@ -181,7 +181,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     'assets/png/77.png',
     'assets/png/77.png',
   ];
-  final List<String> texts = ['hj', 'jbn', 'bmm', 'nbn', 'jhg', 'gvh', 'hgf'];
+  final List<String> texts = ['hjnn', 'jbn', 'bmm', 'nbn', 'jhg', 'gvh', 'hgf'];
 
   bool isEditing = false;
   List<bool> selectedItems = List<bool>.generate(7, (index) => false);
