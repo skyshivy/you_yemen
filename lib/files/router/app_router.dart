@@ -18,8 +18,6 @@ import 'package:you_yemen/files/screens/search_screen/search_screen.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 
-
-
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -68,8 +66,6 @@ StatefulShellBranch _homeScreen() {
   );
 }
 
-
-
 StatefulShellBranch _profileScreen() {
   ProfileController profileController = ProfileController();
   return StatefulShellBranch(
@@ -78,17 +74,12 @@ StatefulShellBranch _profileScreen() {
         path: profileRoute,
         name: profileRoute,
         builder: (context, state) {
-          return ProfileScreen(
-           // controller:ProfileController
-            );
+          return ProfileScreen();
         },
       ),
     ],
   );
 }
-
-
-
 
 // StatefulShellBranch _profileScreen() {
 //   return StatefulShellBranch(
