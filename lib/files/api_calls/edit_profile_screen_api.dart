@@ -44,21 +44,8 @@ Future<List<String>> fetchCategoryIds(String language) async {
 }
 
 Future<EditProfileModal> editProfileAfterSelecting(
-    List<bool> selectedItems) async {
+    List<String> selectedCatIds) async {
   final url = editProfileUrl;
-
-  // Fetch the category IDs from the API
-  final categoryIds = await fetchCategoryIds('English');
-
-  // Create a list to store selected category IDs
-  final List<String> selectedCategoryIds = [];
-
-  // Iterate through selectedItems to find selected category IDs
-  for (int i = 0; i < selectedItems.length; i++) {
-    if (selectedItems[i]) {
-      selectedCategoryIds.add(categoryIds[i]);
-    }
-  }
 
   // Use selected category IDs in the API request
   Map<String, dynamic> jsonData = {
@@ -66,8 +53,8 @@ Future<EditProfileModal> editProfileAfterSelecting(
     "identifier": "UpdateCategories",
     "aPartyMsisdn": StoreManager().msisdn, //"9923964719",
     "servType": "UPDATE_CATAGORIES",
-    "language": "English",
-    "categoryId": selectedCategoryIds.join(','),
+    "language": StoreManager().language,
+    "categoryId": selectedCatIds.join(','),
   };
 
   // var payload = '';

@@ -232,22 +232,22 @@ class _BuyPopupViewState extends State<BuyPopupView> {
     return si.isMobile
         ? Column(
             children: [
-              confirmButton(() {
+              confirmButton(onTap: () {
                 con.onConfirmButtonAction();
               }),
               const SizedBox(height: 10),
-              cancelButton(() {
+              cancelButton(onTap: () {
                 Navigator.of(context).pop();
               })
             ],
           )
         : Row(
             children: [
-              Expanded(child: confirmButton(() {
+              Expanded(child: confirmButton(onTap: () {
                 con.onConfirmButtonAction();
               })),
               const SizedBox(width: 20),
-              Expanded(child: cancelButton(() {
+              Expanded(child: cancelButton(onTap: () {
                 Navigator.of(context).pop();
               })),
             ],

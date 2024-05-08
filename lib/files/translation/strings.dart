@@ -34,3 +34,5 @@ const String logoutStr = 'Logout';
 const String loggedInSuccessStr = "You are successfully logged in";
 const String emptyToneListStr = 'No Result found';
 const String contactNumberStr = "Contact Number";
+const String saveChangeStr = "Save Change";
+const String editStr = "Edit";

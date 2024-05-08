@@ -1,108 +1,88 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:you_yemen/files/api_calls/edit_profile_screen_api.dart';
+import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
+import 'package:you_yemen/files/api_calls/profile_api.dart';
+import 'package:you_yemen/files/model/profile_modal.dart';
+import 'package:you_yemen/files/models/category_list_model.dart';
+import 'package:you_yemen/files/translation/strings.dart';
 
 class ProfileController {
   TextEditingController textEditingController = TextEditingController();
-  
-  final List<String> imagePaths = [
-    'https://funtone.ooredoo.com.mm/stream-media/get-category-menu-image?menuId=11',
-    'https://funtone.ooredoo.com.mm/stream-media/get-category-menu-image?menuId=22',
-    'https://funtone.ooredoo.com.mm/stream-media/get-category-menu-image?menuId=96',
-    'https://funtone.ooredoo.com.mm/stream-media/get-category-menu-image?menuId=101',
-  ];
-  final List<String> texts = [
-    'Myanmar Rock',
-    'Myanmar',
-    'Myanmar Dance',
-    'Rnb Music'
-  ];
-  bool isEditing = false;
-  List<bool> selectedItems = List<bool>.generate(7, (index) => false);
+  RxBool isloading = false.obs;
+  RxBool savingEdit = false.obs;
+  RxString editButtonTitle = editStr.obs;
+  RxBool editEnable = false.obs;
+  RxList<Category> categories = <Category>[].obs;
+  List<String> selectedCatIds = [];
+  ProfileModal? profileModel;
+  getCatgeoryList() async {}
 
   void saveChanges() {
-    isEditing = false;
+    selectedCatIds = [];
+    for (var catIds in categories) {
+      if (catIds.isSelected.value) {
+        selectedCatIds.add(catIds.categoryId ?? '');
+      }
+    }
+    editEnable.value = false;
+    editButtonTitle.value = editStr;
+    print("selected category id  = ${selectedCatIds}");
+    _editProfileAfterSelecting();
   }
+
   Future<void> editProfile() async {
-    isEditing = false;
+    editEnable.value = true;
+    editButtonTitle.value = saveChangeStr;
+
     //  final response = await editProfile();
   }
 
- 
-   Future<void> editProfileAfterSelecting(List<bool> selectedItems) async {
-    isEditing = false;
-    //  final response = await editProfileAfterSelecting(selectedItems);
+  getProfileDetail() async {
+    isloading.value = true;
+    CategoryListModel catModel = await getCategoryListApi();
+    categories.value = catModel.responseMap?.categories ?? [];
+
+    profileModel = await getProfileDetailsApi();
+    if (profileModel?.statusCode == 'SC0000') {
+      List<String> categoryIdList =
+          (profileModel?.responseMap?.getProfileDetails?.categories ?? "")
+              .split(',');
+      for (var cats in categories) {
+        if (categoryIdList.contains(cats.categoryId)) {
+          cats.isSelected.value = true;
+        } else {
+          cats.isSelected.value = false;
+        }
+      }
+
+      isloading.value = false;
+    }
   }
 
+  Future<void> _editProfileAfterSelecting() async {
+    //isEditing = false;
+    savingEdit.value = true;
+    final response = await editProfileAfterSelecting(selectedCatIds);
+    savingEdit.value = false;
+  }
 
   void cancelEditing() {
-    isEditing = false;
-    selectedItems = List<bool>.generate(7, (index) => false);
+    editEnable.value = false;
+    editButtonTitle.value = editStr;
+    List<String> categoryIdList =
+        (profileModel?.responseMap?.getProfileDetails?.categories ?? "")
+            .split(',');
+    for (var cats in categories) {
+      if (categoryIdList.contains(cats.categoryId)) {
+        cats.isSelected.value = true;
+      } else {
+        cats.isSelected.value = false;
+      }
+    }
   }
-
-
-
-
-
-
-
-
-//   import 'package:network_manager/network_manager.dart';
-
-// class ProfileController {
-//   TextEditingController textEditingController = TextEditingController();
-//   List<String> imagePaths = [];
-//   List<String> texts = [];
-//   bool isEditing = false;
-//   List<bool> selectedItems = List<bool>.generate(7, (index) => false);
-
-//   Future<void> fetchDataFromApi() async {
-//     try {
-
-//       NetworkManager networkManager = NetworkManager();
-      
-
-//       Response response = await networkManager.getRequest(
-//         url: 'YOUR_API_ENDPOINT',
-//       );
-
-
-//       if (response.statusCode == 200) {
-
-//         dynamic data = response.data;
-        
-
-//         List<dynamic> apiImagePaths = data['imagePaths'];
-//         List<dynamic> apiTexts = data['texts'];
-
-//         // Convert dynamic lists to string lists
-//         imagePaths = apiImagePaths.cast<String>();
-//         texts = apiTexts.cast<String>();
-//       } else {
-//         // Handle error if the request was not successful
-//         print('Failed to fetch data from the API: ${response.statusCode}');
-//       }
-//     } catch (error) {
-//       // Handle any errors that occurred during the HTTP request
-//       print('Error fetching data from the API: $error');
-//     }
-//   }
-
-//   void saveChanges() {
-//     isEditing = false;
-//   }
-
-//   void editProfile() {
-//     isEditing = true;
-//   }
-
-//   void cancelEditing() {
-//     isEditing = false;
-//     selectedItems = List<bool>.generate(7, (index) => false);
-//   }
-// }
-
-
-
-
 }

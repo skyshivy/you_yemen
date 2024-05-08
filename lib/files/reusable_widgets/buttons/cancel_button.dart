@@ -3,8 +3,12 @@ import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
-Widget cancelButton(Function()? onTap) {
+Widget cancelButton({double titlePadding = 12, Function()? onTap}) {
   return InkWell(
+    focusColor: transparent,
+    hoverColor: transparent,
+    splashColor: transparent,
+    highlightColor: transparent,
     onTap: onTap,
     child: Container(
         height: 40,
@@ -13,8 +17,8 @@ Widget cancelButton(Function()? onTap) {
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: buttonBorderColor),
         ),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: titlePadding, vertical: 4),
           child: Center(
             child: UText(
               title: cancelStr,

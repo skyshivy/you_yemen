@@ -1,15 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:you_yemen/files/api_calls/Profile_api.dart';
+import 'package:you_yemen/files/api_calls/profile_api.dart';
 import 'package:you_yemen/files/api_calls/catrgory_api.dart';
 import 'package:you_yemen/files/api_calls/edit_profile_screen_api.dart';
 import 'package:you_yemen/files/controllers/profile_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/model/edit_modal.dart';
+import 'package:you_yemen/files/models/category_list_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/cancel_button.dart';
+import 'package:you_yemen/files/reusable_widgets/buttons/confirm_button.dart';
 import 'package:you_yemen/files/reusable_widgets/generic_gridview.dart';
 import 'package:you_yemen/files/reusable_widgets/image/UImage.dart';
 import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
@@ -23,308 +27,11 @@ import 'package:flutter/services.dart';
 
 import 'package:you_yemen/files/utility/constants.dart';
 
-
-
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
 
-
 import 'package:flutter/material.dart';
-
-// class ProfileScreen extends StatefulWidget {
-//   final ProfileController controller;
-
-//   ProfileScreen({required this.controller});
-//  TextEditingController textEditingController = TextEditingController();
-
-
-//   @override
-//   _ProfileScreenState createState() => _ProfileScreenState();
-// }
-
-// class _ProfileScreenState extends State<ProfileScreen> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(),
-//       body: ResponsiveBuilder(
-//         builder: (context, si) {
-//           return si.isMobile ? _buildResponsiveLayout() : _buildDefaultLayout();
-//         },
-//       ),
-//     );
-//   }
-
-//   Widget _buildDefaultLayout() {
-//     return Padding(
-//       padding: const EdgeInsets.only(left: 20),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           _buildCircleAvatar(),
-//           Expanded(
-//             child: Padding(
-//               padding: const EdgeInsets.only(left: 40.0),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   _buildContactNumberField(),
-//                   SizedBox(height: 2),
-//                   _buildPreferencesGrid(),
-//                   SizedBox(height: 2),
-//                   SizedBox(
-//                     height: 220,
-//                     child: Row(
-//                       mainAxisAlignment: MainAxisAlignment.center,
-//                       crossAxisAlignment: CrossAxisAlignment.center,
-//                       children: [
-//                         widget.controller.isEditing
-//                             ? _buildSaveChangesButton()
-//                             : _buildEditButton(),
-//                         SizedBox(width: 10),
-//                         widget.controller.isEditing ? _buildCancelButton() : SizedBox(),
-//                       ],
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ),
-//           SizedBox(width: 16), 
-//         ],
-//       ),
-//     );
-//   }
-
-//   Widget _buildResponsiveLayout() {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 20.0),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         children: [
-//           _buildCircleAvatar(),
-//           SizedBox(height: 20),
-//           _buildContactNumberField(),
-//           SizedBox(height: 20),
-//           Flexible(
-//             child: _buildPreferencesGrid(),
-//           ),
-//           SizedBox(height: 20),
-//           Column(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               widget.controller.isEditing ? _buildSaveChangesButton() : _buildEditButton(),
-//               SizedBox(height: 10),
-//               widget.controller.isEditing ? _buildCancelButton() : SizedBox(),
-//             ],
-//           ),
-//           SizedBox(height: 10),
-//         ],
-//       ),
-//     );
-//   }
-
-//   Widget _buildCircleAvatar() {
-//     return Padding(
-//       padding: const EdgeInsets.all(8.0),
-//       child: Container(
-//         decoration: BoxDecoration(
-//           shape: BoxShape.circle,
-//           border: Border.all(color: Colors.pink),
-//         ),
-//         child: Icon(Icons.person, size: 95),
-//       ),
-//     );
-//   }
-
-//   Widget _buildContactNumberField() {
-//     widget.controller.textEditingController.text = StoreManager().msisdn;
-//     return Column(
-//       mainAxisAlignment: MainAxisAlignment.start,
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         Text('Contact Number:'),
-//         Row(
-//           children: [
-//             Flexible(
-//               child: SizedBox(
-//                   width: 300,
-//                   child: UMsisdnTextField( 
-//                       enabled: false,hintText: StoreManager().msisdn,
-//                       textEditingController: widget.controller.textEditingController)),
-//             )
-//           ],
-//         )
-//       ],
-//     );
-//   }
-
-//   Widget _buildPreferencesGrid() {
-//     bool isScreenMinimized = MediaQuery.of(context).size.width < 600; 
-    
-//     if (isScreenMinimized) {
-//       return SingleChildScrollView(
-//         scrollDirection: Axis.horizontal, 
-//         child: Padding(
-//           padding: const EdgeInsets.all(10),
-//           child: Row(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: widget.controller.texts.map((text) {
-//               int index = widget.controller.texts.indexOf(text);
-//               return Padding(
-//                 padding: const EdgeInsets.only(right: 10),
-//                 child: GestureDetector(
-//                   onTap: () {
-//                     if (widget.controller.isEditing) {
-//                       setState(() {
-//                         widget.controller.selectedItems[index] = !widget.controller.selectedItems[index];
-//                       });
-//                     }
-//                   },
-//                   child: Container(
-//                     decoration: BoxDecoration(
-//                       color: widget.controller.selectedItems[index] ? Colors.orange : Colors.grey,
-//                       borderRadius: BorderRadius.circular(20), 
-//                     ),
-//                     padding: EdgeInsets.all(10),
-//                     child: UText(
-//                       title: text,
-//                       enfontName: FontName.helvetica,
-//                     ),
-//                   ),
-//                 ),
-//               );
-//             }).toList(),
-//           ),
-//         ),
-//       );
-//     }
-
-//     int itemCount = widget.controller.imagePaths.length;
-//     double screenWidth = MediaQuery.of(context).size.width;
-//     int crossAxisCount = (screenWidth / 120).floor(); 
-
-//     return Expanded(
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(
-//             'Preference',
-//             style: TextStyle(fontWeight: FontWeight.bold),
-//           ),
-//           Padding(
-//             padding: const EdgeInsets.symmetric(horizontal: 10),
-//             child: Expanded(
-//               child: GridView.builder(
-//                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//                   mainAxisExtent: 100,
-//                   mainAxisSpacing: 10,
-//                   crossAxisSpacing: 40,
-//                   childAspectRatio: 1,
-//                   crossAxisCount: crossAxisCount,
-//                 ),
-//                 shrinkWrap: true,
-//                 physics: NeverScrollableScrollPhysics(),
-//                 itemCount: itemCount,
-//                 itemBuilder: (context, index) {
-//                   return GestureDetector(
-//                     onTap: () {
-//                       if (widget.controller.isEditing) {
-//                         setState(() {
-//                           widget.controller.selectedItems[index] = !widget.controller.selectedItems[index];
-//                         });
-//                       }
-//                     },
-//                     child: Container(
-//                       color: Colors.transparent,
-//                       child: Stack(
-//                         alignment: Alignment.topLeft,
-//                         children: [
-//                           Column(
-//                             children: [
-//                               ClipRRect(
-//                                 borderRadius: BorderRadius.circular(10),
-//                                 child: Image.network(
-//                                   widget.controller.imagePaths[index],
-//                                   fit: BoxFit.cover,
-//                                 ),
-//                               ),
-//                               SizedBox(height: 3),
-//                               Text(
-//                                 widget.controller.texts[index],
-//                               ),
-//                             ],
-//                           ),
-//                           if (widget.controller.selectedItems[index])
-//                             Container(
-//                               margin: EdgeInsets.all(5),
-//                               width: 20, 
-//                               height: 20, 
-//                               decoration: BoxDecoration(
-//                                 shape: BoxShape.circle,
-//                                 color: Colors.yellow,
-//                               ),
-//                               child: Icon(Icons.check, size: 14, color: Colors.white),
-//                             ),
-//                         ],
-//                       ),
-//                     ),
-//                   );
-//                 },
-//               ),
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-
-//   Widget _buildEditButton() {
-//     return ElevatedButton(
-//       onPressed: () {
-//         widget.controller.isEditing = true;
-//       },
-//       child: Text('Edit'),
-//     );
-//   }
-
-//   Widget _buildSaveChangesButton() {
-//     return Padding(
-//       padding: const EdgeInsets.only(left: 10.0),
-//       child: ElevatedButton(
-//         onPressed: () {
-//           // widget.controller.editProfile();
-//           // widget.controller.saveChanges();
-//           // widget.controller.getProfileDetailsApi();
-//           // widget.controller.editProfileAfterSelecting(widget.controller.selectedItems);
-//         },
-//         style: ButtonStyle(
-//           backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
-//         ),
-//         child: Text(
-//           'Save Changes',
-//           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-//         ),
-//       ),
-//     );
-//   }
-
-//   Widget _buildCancelButton() {
-//     return ElevatedButton(
-//       onPressed: () {
-//         widget.controller.cancelEditing();
-//       },
-//       child: Text('Cancel'),
-//     );
-//   }
-// }
-
-
-
-
-
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -333,37 +40,29 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController textEditingController = TextEditingController();
-  final List<String> imagePaths = [
-    'https://funtone.ooredoo.com.mm/stream-media/get-category-menu-image?menuId=11',
-    'https://funtone.ooredoo.com.mm/stream-media/get-category-menu-image?menuId=22',
-    'https://funtone.ooredoo.com.mm/stream-media/get-category-menu-image?menuId=96',
-    'https://funtone.ooredoo.com.mm/stream-media/get-category-menu-image?menuId=101',
-  ];
-  final List<String> texts = [
-    'Myanmar Rock',
-    'Myanmar',
-    'Myanmar Dance',
-    'Rnb Music'
-  ];
+  @override
+  void initState() {
+    cont.getCatgeoryList();
+    cont.getProfileDetail();
+    super.initState();
+  }
 
-
-
-
-
-
-
-  bool isEditing = false;
-  List<bool> selectedItems = List<bool>.generate(7, (index) => false);
-
+  ProfileController cont = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: ResponsiveBuilder(
-        builder: (context, si) {
-          return si.isMobile ? _buildResponsiveLayout() : _buildDefaultLayout();
-        },
-      ),
+      body: Obx(() {
+        return cont.isloading.value
+            ? loadingIndicator(radius: 20)
+            : ResponsiveBuilder(
+                builder: (context, si) {
+                  return si.isMobile
+                      ? _buildResponsiveLayout()
+                      : _buildDefaultLayout();
+                },
+              );
+      }),
     );
   }
 
@@ -405,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
           ),
-          SizedBox(width: 16), 
+          SizedBox(width: 16),
         ],
       ),
     );
@@ -422,7 +121,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _buildContactNumberField(),
           SizedBox(height: 20),
           Flexible(
-           
             child: _buildPreferencesGrid(),
           ),
           SizedBox(height: 20),
@@ -465,8 +163,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Flexible(
               child: SizedBox(
                   width: 300,
-                  child: UMsisdnTextField( 
-                      enabled: false,hintText: StoreManager().msisdn,
+                  child: UMsisdnTextField(
+                      enabled: false,
+                      hintText: StoreManager().msisdn,
                       textEditingController: textEditingController)),
             )
           ],
@@ -475,184 +174,174 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
+  _buildPreferencesGrid() {
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Obx(() {
+          return si.isMobile
+              ? gridTitleWidget()
+              : GridView.builder(
+                  shrinkWrap: true,
+                  itemCount: cont.categories.length,
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 180, mainAxisExtent: 120),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                        padding: const EdgeInsets.only(left: 8, bottom: 8),
+                        child: gridCellWIthImage(index)
+                        // si.isMobile
+                        //     ?
+                        //     : ,
+                        );
+                  },
+                );
+        });
+      },
+    );
+  }
 
-  Widget _buildPreferencesGrid() {
-  bool isScreenMinimized = MediaQuery.of(context).size.width < 600;
-
-  if (isScreenMinimized) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: texts.map((text) {
-            int index = texts.indexOf(text);
-            return Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: GestureDetector(
-                onTap: () {
-                  if (isEditing) {
-                    setState(() {
-                      selectedItems[index] = !selectedItems[index];
-                    });
-                  }
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: selectedItems[index] ? Colors.orange : Colors.grey,
-                    borderRadius: BorderRadius.circular(20),
+  Widget gridCellWIthImage(int index) {
+    return Stack(
+      alignment: Alignment.topLeft,
+      children: [
+        Obx(() {
+          return InkWell(
+            onTap: !cont.editEnable.value
+                ? null
+                : () {
+                    cont.categories[index].isSelected.value =
+                        !cont.categories[index].isSelected.value;
+                  },
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(contanerCornerRadius),
+                  color: white),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Flexible(
+                    child: uImage(
+                        url: cont.categories[index].menuImagePath ?? '',
+                        borderRadius:
+                            BorderRadius.circular(contanerCornerRadius)),
                   ),
-                  padding: EdgeInsets.all(10),
-                  child: UText(
-                    title: text,
-                    enfontName: FontName.helvetica,
+                  UText(
+                    title: cont.categories[index].categoryName ?? '',
+                    enfontSize: 14,
                   ),
-                ),
+                ],
               ),
-            );
-          }).toList(),
+            ),
+          );
+        }),
+        Obx(() {
+          return Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Icon(
+              cont.categories[index].isSelected.value
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_unchecked,
+              color: yellow,
+            ),
+          );
+        })
+      ],
+    );
+  }
+
+  Widget gridTitleWidget() {
+    return Container(
+      child: Wrap(
+        spacing: 8, // space between items
+        children: cont.categories.map((e) => prefTitleCell(e)).toList(),
+      ),
+    );
+  }
+
+  Widget prefTitleCell(Category e) {
+    return InkWell(
+      focusColor: transparent,
+      hoverColor: transparent,
+      splashColor: transparent,
+      highlightColor: transparent,
+      onTap: !cont.editEnable.value
+          ? null
+          : () {
+              e.isSelected.value = !e.isSelected.value;
+              print("SKY======${e.isSelected.value}");
+            },
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(contanerCornerRadius),
+            color: (e.isSelected.value) ? yellow : lightGrey,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: UText(
+              title: e.categoryName ?? '',
+            ),
+          ),
         ),
       ),
     );
   }
 
-  int itemCount = imagePaths.length;
-  double screenWidth = MediaQuery.of(context).size.width;
-  int crossAxisCount = (screenWidth / 120).floor();
-
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        'Preference',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            mainAxisExtent: 100,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 40,
-            childAspectRatio: 1,
-            crossAxisCount: crossAxisCount,
-          ),
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: itemCount,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                if (isEditing) {
-                  setState(() {
-                    selectedItems[index] = !selectedItems[index];
-                  });
-                }
-              },
-              child: Container(
-                color: Colors.transparent,
-                child: Stack(
-                  alignment: Alignment.topLeft,
-                  children: [
-                    Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            imagePaths[index],
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Flexible(
-                          child: Text(
-                            texts[index],overflow: TextOverflow.visible,
-                          ),
-                        ),
-                      ],
-                    ),
-                    if (selectedItems[index])
-                      Container(
-                        margin: EdgeInsets.all(5),
-                        width: 20,
-                        height: 20,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.yellow,
-                        ),
-                        child: Icon(Icons.check, size: 14, color: Colors.white),
-                      ),
-                  ],
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    ],
-  );
-}
-
-
   Widget _buildEditButton() {
-    return ElevatedButton(
-      onPressed: () {
-        setState(() {
-          isEditing = true;
-        });
-      },
-      child: Text('Edit'),
-    );
+    return Obx(() {
+      return cont.savingEdit.value
+          ? loadingIndicator()
+          : Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Obx(() {
+                  return confirmButton(
+                    titlePadding: 32,
+                    title: cont.editButtonTitle.value,
+                    onTap: () {
+                      if (cont.editEnable.value) {
+                        cont.saveChanges();
+                      } else {
+                        cont.editProfile();
+                      }
+                    },
+                  );
+                }),
+                Obx(() {
+                  return cont.editEnable.value
+                      ? _buildCancelButton()
+                      : SizedBox();
+                })
+              ],
+            );
+    });
   }
 
   Widget _buildSaveChangesButton() {
     return Padding(
-      padding: const EdgeInsets.only(left: 10.0),
-      child: ElevatedButton(
-        onPressed: () {
-          editProfile();
-          saveChanges();
-          getProfileDetailsApi();
-          editProfileAfterSelecting(selectedItems);
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
-        ),
-        child: Text(
-          'Save Changes',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-      ),
-    );
+        padding: const EdgeInsets.only(left: 10.0),
+        child: confirmButton(
+            title: saveChangeStr,
+            onTap: () {
+              cont.saveChanges();
+              // editProfile();
+
+              // getProfileDetailsApi();
+              // editProfileAfterSelecting(selectedItems);
+            }));
   }
 
   Widget _buildCancelButton() {
-    return ElevatedButton(
-      onPressed: () {
-        setState(() {
-          isEditing = false;
-          selectedItems = List<bool>.generate(7, (index) => false);
-        });
-      },
-      child: Text('Cancel'),
+    return Padding(
+      padding: const EdgeInsets.only(left: 20),
+      child: cancelButton(onTap: () {
+        cont.cancelEditing();
+      }),
     );
   }
-
-  void saveChanges() {
-    setState(() {
-      isEditing = false;
-    });
-  }
 }
-
-
-
-
-
-
-
-
 
 ////////////////////////////usingggggggggggg imahges
 //   List<String> imagePaths = [];
@@ -661,7 +350,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 //   @override
 //   void initState() {
 //     super.initState();
-  
+
 //     fetchImagesAndTexts();
 //   }
 

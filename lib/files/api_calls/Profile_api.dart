@@ -9,10 +9,8 @@ import 'package:you_yemen/files/model/profile_modal.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
 
-Future<Profilemodal> getProfileDetailsApi() async {
+Future<ProfileModal> getProfileDetailsApi() async {
   await getCategoryListApi();
-
-  
 
   final url =
       'https://funtone.ooredoo.com.mm/security/Middleware/api/adapter/v1/crbt/get-profile-details';
@@ -29,10 +27,9 @@ Future<Profilemodal> getProfileDetailsApi() async {
   });
   var formData = parts.join('&');
 
-  await Future.delayed(Duration(seconds: 3));
   Map<String, dynamic> jsonMap = await NetworkManager().post(url, formData);
 
-  Profilemodal modal = Profilemodal.fromJson(jsonMap);
+  ProfileModal modal = ProfileModal.fromJson(jsonMap);
   print("modal =${modal.message}");
 
   return modal;
