@@ -333,6 +333,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
     'Rnb Music'
   ];
 
+
+
+//   List<String> imagePaths = [];
+//   List<String> texts = [];
+
+//   @override
+//   void initState() {
+//     super.initState();
+  
+//     fetchImagesAndTexts();
+//   }
+
+//   Future<void> fetchImagesAndTexts() async {
+//     try {
+//       final url = 'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/categories?language=English';
+//       final response = await NetworkManager().get(url);
+
+//       if (response.containsKey('statusCode') && response['statusCode'] == 200) {
+//         final List<dynamic> categories = response['responseMap']['categories'];
+//         setState(() {
+//   imagePaths = categories.map<String>((category) => category['menuImagePath']).toList();
+//   texts = categories.map<String>((category) => category['categoryName']).toList();
+//   print('Fetched Image Paths: $imagePaths');
+//   print('Fetched Texts: $texts');
+// });
+
+//       } else {
+//         print('Failed to fetch images or texts. Response: $response');
+//       }
+//     } catch (error) {
+//       print('Error fetching data: $error');
+//     }
+//   }
+
+
+
   bool isEditing = false;
   List<bool> selectedItems = List<bool>.generate(7, (index) => false);
 
@@ -386,7 +422,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
           ),
-          SizedBox(width: 16), // Add space between avatar and buttons
+          SizedBox(width: 16), 
         ],
       ),
     );
@@ -403,7 +439,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           _buildContactNumberField(),
           SizedBox(height: 20),
           Flexible(
-            // Add Flexible widget with Expanded
+           
             child: _buildPreferencesGrid(),
           ),
           SizedBox(height: 20),
@@ -446,8 +482,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Flexible(
               child: SizedBox(
                   width: 300,
-                  child: UMsisdnTextField(
-                      enabled: false,
+                  child: UMsisdnTextField( 
+                      enabled: false,hintText: StoreManager().msisdn,
                       textEditingController: textEditingController)),
             )
           ],
@@ -455,6 +491,191 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ],
     );
   }
+
+
+  Widget _buildPreferencesGrid() {
+    
+    bool isScreenMinimized =
+        MediaQuery.of(context).size.width < 600; 
+   
+    if (isScreenMinimized) {
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal, 
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: texts.map((text) {
+              int index = texts.indexOf(text);
+              return Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: GestureDetector(
+                  onTap: () {
+                    if (isEditing) {
+                      setState(() {
+                        selectedItems[index] = !selectedItems[index];
+                      });
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: selectedItems[index] ? Colors.orange : Colors.grey,
+                      borderRadius: BorderRadius.circular(
+                          20), 
+                    ),
+                    padding: EdgeInsets.all(10),
+                    child: UText(
+                      title: text,
+                      enfontName: FontName.helvetica,
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      );
+    }
+
+   
+    int itemCount = imagePaths.length;
+    double screenWidth = MediaQuery.of(context).size.width;
+    int crossAxisCount =
+        (screenWidth / 120).floor(); 
+
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Preference',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Expanded(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  mainAxisExtent: 100,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 40,
+                  childAspectRatio: 1,
+                  crossAxisCount: crossAxisCount,
+                ),
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: itemCount,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      if (isEditing) {
+                        setState(() {
+                          selectedItems[index] = !selectedItems[index];
+                        });
+                      }
+                    },
+                    child: Container(
+                      color: Colors.transparent,
+                      child: Stack(
+                        alignment: Alignment.topLeft,
+                        children: [
+                          Column(
+                            children: [
+                              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  imagePaths[index],
+                  fit: BoxFit.cover,
+                 
+                
+                ),
+              ),
+              
+                              SizedBox(height: 3),
+                              Text(
+                                texts[index],
+                              ),
+                            ],
+                          ),
+                          if (selectedItems[index])
+                            Container(
+                              margin: EdgeInsets.all(5),
+                              width:
+                                  20, // Increase width to make the circle larger
+                              height:
+                                  20, // Increase height to make the circle larger
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.yellow,
+                              ),
+                              child: Icon(Icons.check,
+                                  size: 14, color: Colors.white),
+                            ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildEditButton() {
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          isEditing = true;
+        });
+      },
+      child: Text('Edit'),
+    );
+  }
+
+  Widget _buildSaveChangesButton() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10.0),
+      child: ElevatedButton(
+        onPressed: () {
+          editProfile();
+          saveChanges();
+          getProfileDetailsApi();
+          editProfileAfterSelecting(selectedItems);
+        },
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
+        ),
+        child: Text(
+          'Save Changes',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCancelButton() {
+    return ElevatedButton(
+      onPressed: () {
+        setState(() {
+          isEditing = false;
+          selectedItems = List<bool>.generate(7, (index) => false);
+        });
+      },
+      child: Text('Cancel'),
+    );
+  }
+
+  void saveChanges() {
+    setState(() {
+      isEditing = false;
+    });
+  }
+}
+
+
 
 //  Widget _buildPreferencesGrid() {
 //   int itemCount = imagePaths.length;
@@ -536,181 +757,3 @@ class _ProfileScreenState extends State<ProfileScreen> {
 //     ),
 //   );
 // }
-
-  Widget _buildPreferencesGrid() {
-    // Check if the screen width is less than a certain threshold
-    bool isScreenMinimized =
-        MediaQuery.of(context).size.width < 600; // Adjust threshold as needed
-
-    // If the screen is minimized, show texts with yellow background separately
-    if (isScreenMinimized) {
-      return SingleChildScrollView(
-        scrollDirection: Axis.horizontal, // Allow horizontal scrolling
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: texts.map((text) {
-              int index = texts.indexOf(text);
-              return Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: GestureDetector(
-                  onTap: () {
-                    if (isEditing) {
-                      setState(() {
-                        selectedItems[index] = !selectedItems[index];
-                      });
-                    }
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: selectedItems[index] ? Colors.orange : Colors.grey,
-                      borderRadius: BorderRadius.circular(
-                          20), // Apply circular border if selected
-                    ),
-                    padding: EdgeInsets.all(10),
-                    child: UText(
-                      title: text,
-                      enfontName: FontName.helvetica,
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-        ),
-      );
-    }
-
-    // If the screen is not minimized, show the grid view with images and texts
-    int itemCount = imagePaths.length;
-    double screenWidth = MediaQuery.of(context).size.width;
-    int crossAxisCount =
-        (screenWidth / 120).floor(); // Adjust the value 120 as needed
-
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Preference',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisExtent: 100,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 40,
-                childAspectRatio: 1,
-                crossAxisCount: crossAxisCount,
-              ),
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: itemCount,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    if (isEditing) {
-                      setState(() {
-                        selectedItems[index] = !selectedItems[index];
-                      });
-                    }
-                  },
-                  child: Container(
-                    color: Colors.transparent,
-                    child: Stack(
-                      alignment: Alignment.topLeft,
-                      children: [
-                        Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                imagePaths[index],
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            SizedBox(height: 3),
-                            Text(
-                              texts[index],
-                            ),
-                          ],
-                        ),
-                        if (selectedItems[index])
-                          Container(
-                            margin: EdgeInsets.all(5),
-                            width:
-                                20, // Increase width to make the circle larger
-                            height:
-                                20, // Increase height to make the circle larger
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.yellow,
-                            ),
-                            child: Icon(Icons.check,
-                                size: 14, color: Colors.white),
-                          ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildEditButton() {
-    return ElevatedButton(
-      onPressed: () {
-        setState(() {
-          isEditing = true;
-        });
-      },
-      child: Text('Edit'),
-    );
-  }
-
-  Widget _buildSaveChangesButton() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10.0),
-      child: ElevatedButton(
-        onPressed: () {
-          editProfile();
-          saveChanges();
-          getProfileDetailsApi();
-          editProfileAfterSelecting(selectedItems);
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
-        ),
-        child: Text(
-          'Save Changes',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCancelButton() {
-    return ElevatedButton(
-      onPressed: () {
-        setState(() {
-          isEditing = false;
-          selectedItems = List<bool>.generate(7, (index) => false);
-        });
-      },
-      child: Text('Cancel'),
-    );
-  }
-
-  void saveChanges() {
-    setState(() {
-      isEditing = false;
-    });
-  }
-}

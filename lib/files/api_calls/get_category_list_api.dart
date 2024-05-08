@@ -10,3 +10,4 @@ Future<CategoryListModel> getCategoryListApi() async {
 
   return model;
 }
+
