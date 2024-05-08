@@ -45,7 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         ElevatedButton(
           onPressed: () {
-           
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => FaqScreen()),
@@ -55,8 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         ElevatedButton(
           onPressed: () {
-            WishlistDetailsApi();
-           
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => WishlistScreen()),
