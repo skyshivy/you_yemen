@@ -3,7 +3,10 @@ import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:you_yemen/files/Screens/faq_screen/faq_screen.dart';
+import 'package:you_yemen/files/Screens/wishlist_screen/wishlist_screen.dart';
 import 'package:you_yemen/files/api_calls/Profile_api.dart';
+import 'package:you_yemen/files/api_calls/wishlist_api.dart';
 
 import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_list_view.dart';
 import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_tab_view.dart';
@@ -39,6 +42,27 @@ class _HomeScreenState extends State<HomeScreen> {
             context.goNamed(profileRoute);
           },
           child: Text('Go to Profile'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+           
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FaqScreen()),
+            );
+          },
+          child: Text('Go to FAQS'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            WishlistDetailsApi();
+           
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => WishlistScreen()),
+            );
+          },
+          child: Text('Go to Wishlist'),
         ),
       ],
     );
