@@ -1,30 +1,20 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
+import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
 import 'package:you_yemen/files/model/edit_modal.dart';
+import 'package:you_yemen/files/models/category_list_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
+import 'package:you_yemen/files/store_manager/store_manager.dart';
+import 'package:you_yemen/files/utility/urls.dart';
 
 bool isEditing = false;
 List<bool> selectedItems = List<bool>.generate(7, (index) => false);
 
-
-
-
-
-
-
-
-
-
-
-Future<Editmodal> editProfile() async {
-  final url =
-      'https://funtone.ooredoo.com.mm/security/Middleware/api/adapter/v1/crbt/edit-profile';
+Future<EditProfileModal> editProfile() async {
+  final url = editProfileUrl;
 
   Map<String, dynamic> jsonData = {
     "clientTxnId": "773237680",
     "identifier": "UpdateUserName",
-    "aPartyMsisdn": "0832120732",
+    "aPartyMsisdn": StoreManager().msisdn, //"9923964719",
     "servType": "UPDATE_USER_NAME",
     "language": "English",
     "name": "0832120732",
@@ -38,29 +28,24 @@ Future<Editmodal> editProfile() async {
   var formData = parts.join('&');
   await Future.delayed(Duration(seconds: 3));
   Map<String, dynamic> jsonMap = await NetworkManager().post(url, formData);
-  Editmodal modal = Editmodal.fromJson(jsonMap);
+  EditProfileModal modal = EditProfileModal.fromJson(jsonMap);
   print("modal =${modal.message}");
 
   return modal;
 }
 
-
 Future<List<String>> fetchCategoryIds(String language) async {
-  final apiUrl = 'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/categories?language=$language';
-  final response = await http.get(Uri.parse(apiUrl));
+  CategoryListModel model = await getCategoryListApi();
+  final categoryIds = model.responseMap!.categories!
+      .map((category) => category.categoryId.toString())
+      .toList();
 
-  if (response.statusCode == 200) {
-    final jsonResponse = json.decode(response.body);
-    final categoryList = jsonResponse['responseMap']['categories'] as List<dynamic>;
-    final categoryIds = categoryList.map((category) => category['categoryId'].toString()).toList();
-    return categoryIds;
-  } else {
-    throw Exception('Failed to fetch category IDs');
-  }
+  return categoryIds;
 }
 
-Future<Editmodal> editProfileAfterSelecting(List<bool> selectedItems) async {
-  final url = 'https://funtone.ooredoo.com.mm/security/Middleware/api/adapter/v1/crbt/edit-profile';
+Future<EditProfileModal> editProfileAfterSelecting(
+    List<bool> selectedItems) async {
+  final url = editProfileUrl;
 
   // Fetch the category IDs from the API
   final categoryIds = await fetchCategoryIds('English');
@@ -79,48 +64,35 @@ Future<Editmodal> editProfileAfterSelecting(List<bool> selectedItems) async {
   Map<String, dynamic> jsonData = {
     "clientTxnId": "886484139",
     "identifier": "UpdateCategories",
-    "aPartyMsisdn": "9923964719",
+    "aPartyMsisdn": StoreManager().msisdn, //"9923964719",
     "servType": "UPDATE_CATAGORIES",
-    "language": "English"
-   // "categoryId": selectedCategoryIds.join(','),
+    "language": "English",
+    "categoryId": selectedCategoryIds.join(','),
   };
 
+  // var payload = '';
+  // jsonData.forEach((key, value) {
+  //   if (payload.isNotEmpty) {
+  //     payload += ',';
+  //   }
+  //   payload += '$key=$value';
+  // });
 
-  var payload = '';
-  jsonData.forEach((key, value) {
-    if (payload.isNotEmpty) {
-      payload += ',';
-    }
-    payload += '$key=$value';
-  });
-
-var parts = [];
+  var parts = [];
   jsonData.forEach((key, value) {
     parts.add('${Uri.encodeQueryComponent(key)}='
         '${Uri.encodeQueryComponent(value)}');
   });
   var formData = parts.join('&');
-
-  final response = await http.post(Uri.parse(url), body: formData);
-
-  if (response.statusCode == 200) {
-    // Parse the response data
-    final jsonMap = json.decode(response.body);
-    final modal = Editmodal.fromJson(jsonMap);
-    print("modal = ${modal.message}");
-    return modal;
-  } else {
-    throw Exception('Failed to update profile');
-  }
+  Map<String, dynamic> map = await NetworkManager().post(url, formData);
+  EditProfileModal model = EditProfileModal.fromJson(map);
+  return model;
 }
-
-
 
 String getSelectedCategoryIds(List<bool> selectedItems) {
   List<int> selectedIndices = [];
   for (int i = 0; i < selectedItems.length; i++) {
     if (selectedItems[i]) {
-      
       selectedIndices.add(i + 1);
     }
   }

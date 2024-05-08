@@ -14,6 +14,4 @@ String buyTuneUrl = "${baseUrlSecurity}set-tone";
 String getCategoryUrl = '${baseUrl}categories?';
 String getCategoryDetailUrl = "${baseUrl}search-tone?";
 String searchToneUrl = "${baseUrl}specific-search-tones?";
-
-
-
+String editProfileUrl = '${baseUrlSecurity}edit-profile';
