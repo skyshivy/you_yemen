@@ -4,6 +4,7 @@ const String buyStr = 'Buy';
 const String playStr = 'Play';
 const String wishlistStr = "WishList";
 const String enterMobileNumberStr = "Enter mobile number";
+const String enterFriendMobileNumberStr = "Enter Friend mobile number";
 const String enterValidMobileNumberStr = "Please Enter a Valid mobile number";
 const String searchHintStr = "Search for more tunes";
 const String enterOtpStr = "Enter OTP";
@@ -36,3 +37,6 @@ const String emptyToneListStr = 'No Result found';
 const String contactNumberStr = "Contact Number";
 const String saveChangeStr = "Save Change";
 const String editStr = "Edit";
+const String tellFriendDescriptionStr =
+    'Ask Your Friend to replace standard ring back tone with their favourite tune.';
+const String tellFriendStr = 'Tell a Friend';

@@ -1,17 +1,11 @@
-import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:you_yemen/files/Screens/Home_screen/popup.dart';
+
 import 'package:you_yemen/files/Screens/Home_screen/success_popup.dart';
 import 'package:you_yemen/files/api_calls/profile_api.dart';
+import 'package:you_yemen/files/common/tell_friend_popup/popup.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
-import 'package:you_yemen/files/reusable_widgets/buttons/confirm_button.dart';
-import 'package:you_yemen/files/reusable_widgets/u_text_field/u_msisdn_textfield.dart';
 
 import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_list_view.dart';
 import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_tab_view.dart';
@@ -19,8 +13,6 @@ import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_t
 import 'package:go_router/go_router.dart';
 
 import 'package:you_yemen/files/router/route_name.dart';
-import 'package:you_yemen/files/store_manager/store_manager.dart';
-import 'package:you_yemen/files/translation/strings.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -54,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ElevatedButton(
           onPressed: () {
             Get.dialog(
-              CustomPopupView(
+              TellFriendPopupView(
                 msisdn: '12345',
                 info: TuneInfo(),
               ),
@@ -63,12 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           child: Text('Show Dialog'),
         ),
-       ElevatedButton(
+        ElevatedButton(
           onPressed: () {
             Get.dialog(
-              SuccessPopupView(
-                
-              ),
+              SuccessPopupView(),
               barrierDismissible: false,
             );
           },

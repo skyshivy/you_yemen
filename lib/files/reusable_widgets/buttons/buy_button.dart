@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:you_yemen/files/Screens/Home_screen/popup.dart';
-import 'package:you_yemen/files/auth_view/login_popup_view.dart';
-import 'package:you_yemen/files/common/buy_popup/buy_popup.dart';
+
+import 'package:you_yemen/files/common/tell_friend_popup/popup.dart';
 import 'package:you_yemen/files/controllers/tell_a_friend_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
+import 'package:you_yemen/files/screens/home_screen/success_popup.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
+
 CustomPopupController cont = Get.put(CustomPopupController());
 Widget buyButton(TuneInfo info, Function()? onTap) {
   return ResponsiveBuilder(
     builder: (context, sizingInformation) {
       return GestureDetector(
         onTap: onTap != null
-            ? () =>   Get.dialog(
-      CustomPopupView(
-        msisdn: StoreManager().msisdn,
-    info:info,
-      ),
-      barrierDismissible: false, 
-    ):
+            ? () => Get.dialog(
+                  Obx(() {
+                    return cont.isSuccess.value
+                        ? SuccessPopupView()
+                        : TellFriendPopupView(
+                            msisdn: StoreManager().msisdn,
+                            info: info,
+                          );
+                  }),
+                  barrierDismissible: false,
+                )
+            :
             // Get.dialog(Center(
             //       child: BuyPopupView(info: info),
             //     ))
-             null,
+            null,
         child: Container(
             height: 40,
             decoration: BoxDecoration(
@@ -48,7 +54,6 @@ Widget buyButton(TuneInfo info, Function()? onTap) {
                     color: white,
                   ),
                   SizedBox(width: 4),
-                
                   UText(
                     textColor: white,
                     title: buyStr,
