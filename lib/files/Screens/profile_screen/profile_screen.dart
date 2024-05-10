@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
+
 import 'package:responsive_builder/responsive_builder.dart';
-import 'package:you_yemen/files/api_calls/profile_api.dart';
-import 'package:you_yemen/files/api_calls/catrgory_api.dart';
+
 import 'package:you_yemen/files/api_calls/edit_profile_screen_api.dart';
 import 'package:you_yemen/files/controllers/profile_controller.dart';
-import 'package:you_yemen/files/enums/enums.dart';
-import 'package:you_yemen/files/model/edit_modal.dart';
+
 import 'package:you_yemen/files/models/category_list_model.dart';
-import 'package:you_yemen/files/network_manager/network_manager.dart';
+
 import 'package:you_yemen/files/reusable_widgets/buttons/cancel_button.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/confirm_button.dart';
-import 'package:you_yemen/files/reusable_widgets/generic_gridview.dart';
+
 import 'package:you_yemen/files/reusable_widgets/image/UImage.dart';
 import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
@@ -22,15 +20,11 @@ import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
-import 'package:flutter/services.dart';
+
 
 import 'package:you_yemen/files/utility/constants.dart';
 
-import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -239,6 +233,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             padding: const EdgeInsets.all(4.0),
             child: Icon(
               cont.categories[index].isSelected.value
+
+              // ? Icons.circle :Icons.fork_right,
+
+
                   ? Icons.radio_button_checked
                   : Icons.radio_button_unchecked,
               color: yellow,
@@ -252,7 +250,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget gridTitleWidget() {
     return Container(
       child: Wrap(
-        spacing: 8, // space between items
+        spacing: 8, 
         children: cont.categories.map((e) => prefTitleCell(e)).toList(),
       ),
     );
