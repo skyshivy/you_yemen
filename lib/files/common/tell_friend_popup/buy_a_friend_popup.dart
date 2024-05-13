@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:you_yemen/files/controllers/buy_a_friend_controller.dart';
@@ -79,17 +80,19 @@ class Buy_a_friend_PopupView extends StatelessWidget {
   Widget errorBuilder() {
     return Row(
       children: [
-        Obx(() {
-          return uVisibility(
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: UText(
-                  title: cont.errorMessage.value,
-                  textColor: red,
+        Expanded(
+          child: Obx(() {
+            return uVisibility(
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
+                  child: UText(
+                    title: cont.errorMessage.value,
+                    textColor: red,
+                  ),
                 ),
-              ),
-              cont.errorMessage.isEmpty);
-        }),
+                cont.errorMessage.isEmpty);
+          }),
+        ),
       ],
     );
   }
