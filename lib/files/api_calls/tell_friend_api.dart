@@ -16,16 +16,6 @@ Future<TellFreindModel> tellFriendApi(
     "toneId": info.toneId ?? '',
   };
 
-  // Map<String, dynamic> body = {
-  //   'aPartyMsisdn': StoreManager().msisdn,
-  //   'toneId': info.toneId,
-  //   'toneName': info.toneName,
-  //   'packName': packName,
-  //   'language': StoreManager().languageCode,
-  //   'customerContent': 'customerContent_temp',
-  //   'msisdnList': [map1],
-  // };
-
   Map<String, dynamic> body = {
     'aPartyMsisdn': StoreManager().msisdn,
     'toneId': info.toneId,
@@ -35,6 +25,7 @@ Future<TellFreindModel> tellFriendApi(
     'customerContent': 'customerContent_temp',
     'msisdnList': [map1],
   };
+
 
   var parts = [];
   body.forEach((key, value) {

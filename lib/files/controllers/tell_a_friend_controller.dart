@@ -32,8 +32,12 @@ class CustomPopupController extends GetxController {
 
   getTonePrice(TuneInfo info) async {
     isSuccess.value = false;
+    if (msisdn.isEmpty) {
+      errorMessage.value = 'Please enter a mobile number';
+      return;
+    }
     errorMessage.value = '';
-    isLoading.value = true; // Set loading state to true
+    isLoading.value = true; 
     TonePriceModel model = await getTonePriceApi(msisdn, info);
     if (model.statusCode == 'SC0000') {
       String packName =
@@ -61,6 +65,6 @@ class CustomPopupController extends GetxController {
       errorMessage.value = model.message ?? someThingWentWrongStr;
       isLoading.value = false;
     }
-    // Set loading state to false after API call
+  
   }
 }

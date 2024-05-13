@@ -40,3 +40,4 @@ const String editStr = "Edit";
 const String tellFriendDescriptionStr =
     'Ask Your Friend to replace standard ring back tone with their favourite tune.';
 const String tellFriendStr = 'Tell a Friend';
+const String giftFriendStr = 'Gift a Friend';

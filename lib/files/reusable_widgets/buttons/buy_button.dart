@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/common/tell_friend_popup/buy_a_friend_popup.dart';
 
 import 'package:you_yemen/files/common/tell_friend_popup/popup.dart';
+
 import 'package:you_yemen/files/controllers/tell_a_friend_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
@@ -19,14 +21,29 @@ Widget buyButton(TuneInfo info, Function()? onTap) {
       return GestureDetector(
         onTap: onTap != null
             ? () => Get.dialog(
+
+/////////////////           for buy/gift
+
                   Obx(() {
                     return cont.isSuccess.value
                         ? SuccessPopupView()
-                        : TellFriendPopupView(
+                        : Buy_a_friend_PopupView(
                             msisdn: StoreManager().msisdn,
                             info: info,
                           );
                   }),
+                  
+///////////////          for tell a friend
+
+                  // Obx(() {
+                  //   return cont.isSuccess.value
+                  //       ? SuccessPopupView()
+                  //       : TellFriendPopupView(
+                  //           msisdn: StoreManager().msisdn,
+                  //           info: info,
+                  //         );
+                  // }),
+
                   barrierDismissible: false,
                 )
             :
