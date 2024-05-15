@@ -10,7 +10,7 @@ import 'package:you_yemen/files/translation/strings.dart';
 class CustomPopupController extends GetxController {
   final TextEditingController umsisdnTextController = TextEditingController();
 
-  final isLoading = false.obs; // Example observable variable
+  final isLoading = false.obs; 
   String msisdn = '';
   String successMessage = '';
   RxBool isSuccess = false.obs;
