@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 import 'package:you_yemen/files/Screens/Home_screen/success_popup.dart';
-import 'package:you_yemen/files/Screens/profile_screen/transition_screen.dart';
+
 import 'package:you_yemen/files/api_calls/profile_api.dart';
 import 'package:you_yemen/files/api_calls/transition_api.dart';
 import 'package:you_yemen/files/common/tell_friend_popup/popup.dart';
@@ -70,10 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ElevatedButton(
           onPressed: () {
             makeAPICall(context);
-           Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => TransitionScreen()),
-    );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TransactionScreen()),
+            );
           },
           child: Text('Transition Screen'),
         ),
