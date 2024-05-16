@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/api_calls/transition_api.dart';
+import 'package:you_yemen/files/common/u_date_formate.dart';
 import 'package:you_yemen/files/controllers/transition_controller.dart';
 import 'package:you_yemen/files/models/transition_history_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
@@ -254,10 +255,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
     );
   }
 
-
-
   Widget mobileCardBuilder(TransactionDetailsList info) {
-
+/*
     Widget mobileCardBuilder(TransactionDetailsList info) {
 
    return Container(
@@ -323,15 +322,13 @@ class _TransactionScreenState extends State<TransactionScreen> {
     ),
   );
 }
+*/
 
-    
-    
     return Container(
       color: white,
       padding: EdgeInsets.all(16),
       margin: EdgeInsets.symmetric(vertical: 8),
       child: Column(
-        
         children: [
           Row(
             children: [
@@ -341,11 +338,11 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
-             
               Expanded(
                 flex: 3,
-                child: Row(crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
                       'SubscriptionDate',
@@ -368,10 +365,11 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 ),
               ),
-             
               Expanded(
                 flex: 2,
-                child: Row(mainAxisAlignment: MainAxisAlignment.end,crossAxisAlignment: CrossAxisAlignment.end,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
                       'subscriptionTime',
@@ -386,22 +384,19 @@ class _TransactionScreenState extends State<TransactionScreen> {
             ],
           ),
           Row(
-           
-          
             children: [
               Expanded(
                 child: Row(
-                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
                       'Transaction Type',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
               ),
-             
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -409,7 +404,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   children: [
                     Text(
                       'Channel',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -417,13 +413,11 @@ class _TransactionScreenState extends State<TransactionScreen> {
             ],
           ),
           Row(
-           
             children: [
               Expanded(
                 flex: 3,
-                child: Row( 
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          
                   children: [
                     Text(
                       '${info.transactionType}',
@@ -440,8 +434,6 @@ class _TransactionScreenState extends State<TransactionScreen> {
                   ],
                 ),
               ),
-             
-             
               Expanded(
                 flex: 2,
                 child: Row(
@@ -469,13 +461,11 @@ class _TransactionScreenState extends State<TransactionScreen> {
 class ApiResponseContainer extends StatelessWidget {
   final TransactionDetailsList info;
 
-  const ApiResponseContainer({Key? key, required this.info}) : super(key: key);
-
+  ApiResponseContainer({Key? key, required this.info}) : super(key: key);
+  TransitionScreenController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < 600;
-
-   
 
     return Container(
       margin: EdgeInsets.symmetric(vertical: 8),
@@ -554,7 +544,8 @@ class ApiResponseContainer extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Text(
-                  'subscriptionTime',
+                  //uDateFormat(info.subscriptionDate ?? ''),
+                  uTimeFormat(info.subscriptionDate ?? ''),
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

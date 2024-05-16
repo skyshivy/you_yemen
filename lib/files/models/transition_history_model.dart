@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 HistoryModel historyModelFromJson(String str) =>
     HistoryModel.fromJson(json.decode(str));
@@ -62,11 +63,11 @@ class TransactionDetailsList {
     this.englishToneName,
   });
 
-  DateTime? subscriptionDate;
+  String? subscriptionDate;
   String? aParty;
   String? bParty;
   String? callCharge;
-  DateTime? nextBillingDate;
+  String? nextBillingDate;
   String? channel;
   String? toneType;
   String? transactionType;
@@ -74,11 +75,11 @@ class TransactionDetailsList {
 
   factory TransactionDetailsList.fromJson(Map<String, dynamic> json) =>
       TransactionDetailsList(
-        subscriptionDate: DateTime.parse(json["subscriptionDate"]),
+        subscriptionDate: json["subscriptionDate"],
         aParty: json["aParty"],
         bParty: json["bParty"],
         callCharge: json["callCharge"],
-        nextBillingDate: DateTime.parse(json["nextBillingDate"]),
+        nextBillingDate: json["nextBillingDate"],
         channel: json["channel"],
         toneType: json["toneType"],
         transactionType: json["transactionType"],
@@ -86,11 +87,11 @@ class TransactionDetailsList {
       );
 
   Map<String, dynamic> toJson() => {
-        "subscriptionDate": subscriptionDate?.toIso8601String(),
+        "subscriptionDate": subscriptionDate,
         "aParty": aParty,
         "bParty": bParty,
         "callCharge": callCharge,
-        "nextBillingDate": nextBillingDate?.toIso8601String(),
+        "nextBillingDate": nextBillingDate,
         "channel": channel,
         "toneType": toneType,
         "transactionType": transactionType,
