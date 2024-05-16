@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 import 'package:you_yemen/files/Screens/Home_screen/success_popup.dart';
+import 'package:you_yemen/files/Screens/profile_screen/transition_screen.dart';
 
 import 'package:you_yemen/files/api_calls/profile_api.dart';
 import 'package:you_yemen/files/api_calls/transition_api.dart';
+
 import 'package:you_yemen/files/common/tell_friend_popup/popup.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
 
@@ -15,7 +17,6 @@ import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_t
 import 'package:go_router/go_router.dart';
 
 import 'package:you_yemen/files/router/route_name.dart';
-import 'package:you_yemen/files/screens/profile_screen/transition_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -81,3 +82,14 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+
+
+
+
+
+
+
+                          
+
+
