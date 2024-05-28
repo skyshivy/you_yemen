@@ -16,5 +16,6 @@ String getCategoryDetailUrl = "${baseUrl}search-tone?";
 String searchToneUrl = "${baseUrl}specific-search-tones?";
 String editProfileUrl = '${baseUrlSecurity}edit-profile';
 String tellFriendUrl = "${baseUrlSecurity}referral";
-String transactionUrl ="${baseUrlSecurity}view-transactions-scm";
+String transactionUrl = "${baseUrlSecurity}view-transactions-scm";
+String mytunesUrl = "${baseUrlSecurity}list-tones";
 

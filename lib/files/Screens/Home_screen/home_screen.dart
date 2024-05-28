@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 import 'package:you_yemen/files/Screens/Home_screen/success_popup.dart';
-import 'package:you_yemen/files/Screens/profile_screen/transition_screen.dart';
+import 'package:you_yemen/files/Screens/profile_screen/advanced_setting_screen.dart';
+import 'package:you_yemen/files/Screens/profile_screen/my_tunes_screen.dart';
+import 'package:you_yemen/files/api_calls/mytunes_api.dart';
 
 import 'package:you_yemen/files/api_calls/profile_api.dart';
 import 'package:you_yemen/files/api_calls/transition_api.dart';
@@ -17,6 +19,7 @@ import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_t
 import 'package:go_router/go_router.dart';
 
 import 'package:you_yemen/files/router/route_name.dart';
+// import 'package:you_yemen/files/screens/profile_screen/transition_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -68,28 +71,41 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           child: Text('Show Dialog'),
         ),
+        // ElevatedButton(
+        //   onPressed: () {
+        //     makeAPICall(context);
+        //     Navigator.push(
+        //       context,
+        //       MaterialPageRoute(builder: (context) => TransactionScreen()),
+        //     );
+        //   },
+        //   child: Text('Transition Screen'),
+        // ),
         ElevatedButton(
           onPressed: () {
-            makeAPICall(context);
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => TransactionScreen()),
+              MaterialPageRoute(builder: (context) => AdvancedSettingScreen()),
             );
           },
-          child: Text('Transition Screen'),
+          child: Text('Advanced Setting Screen'),
+        ),
+        ElevatedButton(
+          onPressed: () async {
+            MyTunesScreenApi();
+            MyTunesScreenApi1();
+            // MyTunesScreenApi1();
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MyTuneScreen(),
+              ),
+            );
+          },
+          child: Text('MYTunesScreen'),
         ),
       ],
     );
   }
 }
-
-
-
-
-
-
-
-
-                          
-
-
