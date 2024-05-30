@@ -11,6 +11,7 @@ import 'package:you_yemen/files/api_calls/profile_api.dart';
 import 'package:you_yemen/files/api_calls/transition_api.dart';
 
 import 'package:you_yemen/files/common/tell_friend_popup/popup.dart';
+import 'package:you_yemen/files/controllers/my_tunes_controller.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
 
 import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_list_view.dart';
@@ -33,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController textCont = TextEditingController();
   TextEditingController passwordTextCont = TextEditingController();
   TextEditingController umsisdnTextController = TextEditingController();
+  MyTunesController myTunesController = Get.find();
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -92,9 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         ElevatedButton(
           onPressed: () async {
-            MyTunesScreenApi();
-            MyTunesScreenApi1();
-           Navigator.push(
+            myTunesController.fetchTunes();
+
+            Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => MyTuneScreen(),

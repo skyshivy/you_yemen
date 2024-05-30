@@ -1,5 +1,4 @@
-
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:you_yemen/files/Screens/profile_screen/advanced_setting_screen.dart';
@@ -10,213 +9,205 @@ import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
 class MyTuneScreen extends StatelessWidget {
-  final MyTunesController myTunesController = Get.put(MyTunesController());
+  final MyTunesController myTunesController = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() {
+        body: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            playingTuneSection(),
+            SizedBox(height: 10),
+            myTuneSection(),
+          ],
+        ),
+      ),
+    ));
+  }
 
-        if (myTunesController.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
-        } 
-        else if (myTunesController.myTunesModel.value.responseMap?.listToneApk ==null) {
-          print("object");
-          final myTunesModel = myTunesController.myTunesModel.value;
-          final toneDetails =
-              myTunesModel.responseMap?.listToneApk?[0].toneDetails;
+  Row playingTuneSection() {
+    return Row(children: [
+      Flexible(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            UText(
+              title: "Currently Playing To My Callers",
+              textColor: black,
+              enfontName: FontName.helvetica,
+              enfontSize: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: playingGridViewBuilder(),
+            ),
+          ],
+        ),
+      ),
+    ]);
+  }
 
-          if (toneDetails != null && toneDetails.isNotEmpty) {
-            final toneDetail = toneDetails[0];
-            final toneName = toneDetail.toneName ?? 'Unknown Tone';
-            final albumName = toneDetail.albumName ?? 'Unknown Album';
-
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+  Widget playingGridViewBuilder() {
+    return Obx(() {
+      return GridView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: myTunesController.playingList.length,
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          mainAxisExtent: 500,
+          crossAxisSpacing: 2,
+          mainAxisSpacing: 2,
+          childAspectRatio: 1,
+          maxCrossAxisExtent: 250,
+        ),
+        itemBuilder: (context, index) {
+          return Container(
+            decoration: BoxDecoration(
+                border: Border(
+                    right:
+                        BorderSide(color: Colors.transparent.withOpacity(0.4)),
+                    bottom: BorderSide(
+                      color: Colors.transparent.withOpacity(0.2),
+                    ))),
+            child: Column(
+              children: [
+                Image.asset('assets/png/77.png'),
+                Row(
                   children: [
-                    Row(children: [
-                      Flexible(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            UText(
-                              title: "Currently Playing To My Callers",
-                              textColor: black,
-                              enfontName: FontName.helvetica,
-                              enfontSize: 20,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: GridView.builder(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: 1,
-                                gridDelegate:
-                                    SliverGridDelegateWithMaxCrossAxisExtent(
-                                  mainAxisExtent: 500,
-                                  crossAxisSpacing: 2,
-                                  mainAxisSpacing: 2,
-                                  childAspectRatio: 1,
-                                  maxCrossAxisExtent: 250,
-                                ),
-                                itemBuilder: (context, index) {
-                                  return Container(
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            right: BorderSide(
-                                                color: Colors.transparent
-                                                    .withOpacity(0.4)),
-                                            bottom: BorderSide(
-                                              color: Colors.transparent
-                                                  .withOpacity(0.2),
-                                            ))),
-                                    child: Column(
-                                      children: [
-                                        Image.asset('assets/png/77.png'),
-                                        Row(
-                                          children: [
-                                            Column(
-                                              children: [
-                                                UText(
-                                                  title: toneName,
-                                                  enfontName:
-                                                      FontName.helveticaLight,
-                                                  textColor: black,
-                                                ),
-                                                UText(
-                                                  title: albumName,
-                                                  enfontName:
-                                                      FontName.helveticaLight,
-                                                  textColor: grey,
-                                                )
-                                              ],
-                                            ),
-                                            SizedBox(width: 80),
-                                            Icon(Icons.play_arrow),
-                                            SizedBox(width: 5),
-                                            GestureDetector(
-                                              onTap: () =>
-                                                  _showDeletePopup(context),
-                                              child: Icon(Icons.delete),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Divider(),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
+                    Column(
+                      children: [
+                        UText(
+                          title: "toneName",
+                          enfontName: FontName.helveticaLight,
+                          textColor: black,
                         ),
-                      ),
-                    ]),
-                    SizedBox(height: 10),
-                    Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          UText(
-                            title: "My Tunes",
-                            textColor: black,
-                            enfontName: FontName.helvetica,
-                            enfontSize: 20,
-                          ),
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: 1,
-                            gridDelegate:
-                                SliverGridDelegateWithMaxCrossAxisExtent(
-                              mainAxisExtent: 500,
-                              crossAxisSpacing: 10,
-                              mainAxisSpacing: 10,
-                              childAspectRatio: 2,
-                              maxCrossAxisExtent: 300,
-                            ),
-                            itemBuilder: (context, index) {
-                              return Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.asset('assets/png/3.png'),
-                                  SizedBox(height: 8),
-                                  UText(
-                                    title: toneName,
-                                    textColor: Colors.black,
-                                  ),
-                                  SizedBox(height: 2),
-                                  UText(
-                                    title: albumName,
-                                    textColor: Colors.grey,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.gif_box_outlined,
-                                        color: lightGrey,
-                                      ),
-                                      SizedBox(width: 5),
-                                      UText(
-                                        title: "Gift",
-                                        enfontName: FontName.helvetica,
-                                        textColor: black,
-                                      ),
-                                      SizedBox(width: 100),
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AdvancedSettingScreen(),
-                                            ),
-                                          );
-                                        },
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.settings,
-                                              color: lightGrey,
-                                            ),
-                                            SizedBox(width: 5),
-                                            UText(
-                                              title: "Settings",
-                                              enfontName: FontName.helvetica,
-                                              textColor: black,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-                        ],
-                      ),
+                        UText(
+                          title: "albumName",
+                          enfontName: FontName.helveticaLight,
+                          textColor: grey,
+                        )
+                      ],
+                    ),
+                    SizedBox(width: 80),
+                    Icon(Icons.play_arrow),
+                    SizedBox(width: 5),
+                    GestureDetector(
+                      onTap: () => _showDeletePopup(context),
+                      child: Icon(Icons.delete),
                     ),
                   ],
                 ),
-              ),
-            );
-          } else {
-            return Center(child: Text('No tone details available'));
-          }
-        } else {
-          return Center(child: Text('No data available'));
-        }
-      }),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Divider(),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    });
+  }
+
+  Center myTuneSection() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          UText(
+            title: "My Tunes",
+            textColor: black,
+            enfontName: FontName.helvetica,
+            enfontSize: 20,
+          ),
+          myTuneGridView(),
+        ],
+      ),
     );
+  }
+
+  Widget myTuneGridView() {
+    return Obx(() {
+      return GridView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: myTunesController.myTuneList.length,
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          mainAxisExtent: 500,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          childAspectRatio: 2,
+          maxCrossAxisExtent: 300,
+        ),
+        itemBuilder: (context, index) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset('assets/png/3.png'),
+              SizedBox(height: 8),
+              UText(
+                title: myTunesController
+                        .myTuneList.first.toneDetails?[index].toneName ??
+                    '',
+                textColor: Colors.black,
+              ),
+              SizedBox(height: 2),
+              UText(
+                title: myTunesController
+                        .myTuneList.first.toneDetails?[index].artistName ??
+                    '',
+                textColor: Colors.grey,
+              ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.gif_box_outlined,
+                    color: lightGrey,
+                  ),
+                  SizedBox(width: 5),
+                  UText(
+                    title: "Gift",
+                    enfontName: FontName.helvetica,
+                    textColor: black,
+                  ),
+                  SizedBox(width: 100),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AdvancedSettingScreen(),
+                        ),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.settings,
+                          color: lightGrey,
+                        ),
+                        SizedBox(width: 5),
+                        UText(
+                          title: "Settings",
+                          enfontName: FontName.helvetica,
+                          textColor: black,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          );
+        },
+      );
+    });
   }
 
   void _showDeletePopup(BuildContext context) {

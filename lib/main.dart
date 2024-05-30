@@ -6,6 +6,7 @@ import 'package:you_yemen/files/controllers/auth_controller/login_popup_controll
 import 'package:you_yemen/files/controllers/auth_controller/otp_controller.dart';
 import 'package:you_yemen/files/controllers/buy_controller.dart';
 import 'package:you_yemen/files/controllers/category_controller.dart';
+import 'package:you_yemen/files/controllers/my_tunes_controller.dart';
 import 'package:you_yemen/files/controllers/player_controller.dart';
 import 'package:you_yemen/files/controllers/u_search_controller.dart';
 import 'package:you_yemen/files/screens/home_screen/home_screen.dart';
@@ -37,6 +38,7 @@ _initController() async {
   Get.lazyPut(() => LoginPopupController());
   Get.lazyPut(() => OtpController());
   Get.lazyPut(() => BuyController());
+  MyTunesController myTunesController = Get.put(MyTunesController());
 }
 
 class MyApp extends StatelessWidget {
@@ -45,9 +47,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp.router(
-      
       debugShowCheckedModeBanner: false,
       title: 'You Yemen',
       routerConfig: router,
