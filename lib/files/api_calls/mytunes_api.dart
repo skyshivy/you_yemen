@@ -6,11 +6,7 @@ import 'package:you_yemen/files/utility/urls.dart';
 
 Future<MyTunesModel> MyTunesScreenApi() async {
 
-  final baseUrl = mytunesUrl;
-
-
-  
-  final msisdn = StoreManager().msisdn;
+  final baseUrl = mytunesUrl; final msisdn = StoreManager().msisdn;
 
   if (msisdn == null || msisdn.isEmpty) {
     throw Exception("msisdn is null or empty");

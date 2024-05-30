@@ -94,9 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () async {
             MyTunesScreenApi();
             MyTunesScreenApi1();
-            // MyTunesScreenApi1();
-
-            Navigator.push(
+           Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => MyTuneScreen(),

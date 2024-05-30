@@ -1,13 +1,12 @@
 
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'package:intl/intl.dart';
-import 'package:you_yemen/files/controllers/advanced_setting_controller.dart';
+import 'package:you_yemen/files/controllers/advanced_setting_api.dart';
 import 'package:you_yemen/files/controllers/mobile_controller.dart';
+
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/cancel_button.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/confirm_button.dart';
@@ -33,7 +32,7 @@ class AdvancedSettingScreen extends StatelessWidget {
 
 class DesktopAdvancedSettingScreen extends StatelessWidget {
   final AdvancedSettingController cont = Get.put(AdvancedSettingController());
-
+  final TextEditingController msisdnController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -48,7 +47,7 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
               enfontName: FontName.acMunaBlack,
               enfontSize: 20,
             ),
-          ),
+          ),SizedBox(height: 3,),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,7 +58,7 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
+                        // border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(3),
                       ),
                       height: 250,
@@ -79,8 +78,14 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Text("ILIKEYOU"),
-                          Text("UNA RMS"),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: UText(title: "ILIKEYOU"),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: UText(title: "UNA RMS"),
+                          ),
                         ],
                       ),
                     ),
@@ -117,7 +122,14 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
                                 title: "Whom you want to play it?",
                                 enfontName: FontName.helveticaBold,
                               ),
-                            ),
+                            ),if (cont.selectedCallerOption.value == 'special_callers')
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: UMsisdnTextField(
+            textEditingController: cont.msisdnController,
+            hintText: 'Enter Special Callers',
+          ),
+        ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
@@ -131,14 +143,17 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
                                         borderRadius: BorderRadius.circular(2),
                                       ),
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(15.0),
                                             child: Text(
-                                              cont.selectedTimeOption.value == null
+                                              cont.selectedTimeOption.value ==
+                                                      null
                                                   ? 'Select time type'
-                                                  : cont.selectedTimeOption.value!
+                                                  : cont
+                                                      .selectedTimeOption.value!
                                                       .replaceAll('_', ' ')
                                                       .toUpperCase(),
                                             ),
@@ -147,9 +162,12 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
                                             children: [
                                               PopupMenuButton<String>(
                                                 onSelected: (String newValue) {
-                                                  cont.selectedTimeOption.value = newValue;
+                                                  cont.selectedTimeOption
+                                                      .value = newValue;
                                                 },
-                                                itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                                                itemBuilder: (BuildContext
+                                                        context) =>
+                                                    <PopupMenuEntry<String>>[
                                                   const PopupMenuItem<String>(
                                                     value: 'full_day',
                                                     child: Text('FULL DAY'),
@@ -160,10 +178,12 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
                                                   ),
                                                   const PopupMenuItem<String>(
                                                     value: 'select_date_time',
-                                                    child: Text('SELECT DATE TIME'),
+                                                    child: Text(
+                                                        'SELECT DATE TIME'),
                                                   ),
                                                 ],
-                                                child: Icon(Icons.arrow_drop_down),
+                                                child:
+                                                    Icon(Icons.arrow_drop_down),
                                               ),
                                             ],
                                           ),
@@ -171,7 +191,8 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
                                       ),
                                     );
                                   }),
-                                  if (cont.selectedTimeOption.value == 'full_day') ...[
+                                  if (cont.selectedTimeOption.value ==
+                                      'full_day') ...[
                                     SizedBox(width: 10),
                                     Icon(Icons.alarm),
                                     UText(title: 'Time', textColor: lightGrey),
@@ -179,30 +200,45 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
                                     UText(title: "24 hrs", textColor: black)
                                   ],
                                   SizedBox(width: 15),
-                                  if (cont.selectedTimeOption.value == 'select_time')
+                                  if (cont.selectedTimeOption.value ==
+                                      'select_time')
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        _buildTimeContainer('Start Time', cont.startTime, context),
+                                        _buildTimeContainer('Start Time',
+                                            cont.startTime, context),
                                         SizedBox(width: 15),
-                                        _buildTimeContainer('End Time', cont.endTime, context),
+                                        _buildTimeContainer(
+                                            'End Time', cont.endTime, context),
                                       ],
                                     ),
+        
                                 ],
                               ),
                             ),
                             SizedBox(height: 20),
-                            if (cont.selectedTimeOption.value == 'select_date_time')
+                            if (cont.selectedTimeOption.value ==
+                                'select_date_time')
                               Column(
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Row(
                                       children: [
-                                        _buildDateTimeContainer('Start Date', cont.startDate, cont.startTime, context),
+                                        _buildDateTimeContainer(
+                                            'Start Date',
+                                            cont.startDate,
+                                            cont.startTime,
+                                            context),
                                         SizedBox(width: 10),
-                                        _buildDateTimeContainer('End Date', cont.endDate, cont.endTime, context),
+                                        _buildDateTimeContainer(
+                                            'End Date',
+                                            cont.endDate,
+                                            cont.endTime,
+                                            context),
                                       ],
                                     ),
                                   ),
@@ -216,8 +252,11 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
                                 enfontName: FontName.helveticaBold,
                               ),
                             ),
-                            if (cont.selectedCallerOption.value != 'add_to_shuffle' && cont.selectedTimeOption.value != null)
+                            if (cont.selectedCallerOption.value !=
+                                    'add_to_shuffle' &&
+                                cont.selectedTimeOption.value != null)
                               ..._buildTimeOptionWidgets(context),
+                               
                           ],
                         ),
                       );
@@ -240,93 +279,116 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
       ),
     );
   }
+  // if (cont.selectedCallerOption.value == 'special_callers')
+  //       Padding(
+  //         padding: const EdgeInsets.all(8.0),
+  //         child: UMsisdnTextField(
+  //           textEditingController: cont.msisdnController,
+  //           hintText: 'Enter Special Callers',
+  //         ),
+  //       ),
+
+
 
   Column _buildCallerOptions(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: UText(
+          title: "Whom you want to play it?",
+          enfontName: FontName.helveticaBold,
+          enfontSize: 15,
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Row(
+          children: [
+            if (cont.selectedCallerOption.value == 'special_callers')
         Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: UText(
-            title: "Whom you want to play it?",
-            enfontName: FontName.helveticaBold,
-            enfontSize: 15,
+          padding: const EdgeInsets.all(8.0),
+          child: UMsisdnTextField(
+            textEditingController: cont.msisdnController,
+            hintText: 'Enter Special Callers',
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Row(
-            children: [
-              Obx(() {
-                return Radio<String>(
-                  value: 'all_callers',
-                  groupValue: cont.selectedCallerOption.value,
-                  onChanged: (value) {
-                    cont.selectedCallerOption.value = value!;
-                  },
-                );
-              }),
-              UText(
+            Obx(() {
+              return Radio<String>(
+                value: 'all_callers',
+                groupValue: cont.selectedCallerOption.value,
+                onChanged: (value) {
+                  cont.selectedCallerOption.value = value!;
+                },
+              );
+            }),
+            Obx(() {
+              return UText(
                 title: 'All Callers',
                 enfontName: FontName.acMunaBlack,
                 enfontSize: 20,
                 textColor: cont.selectedCallerOption.value == 'all_callers'
                     ? Color.fromARGB(255, 3, 33, 58)
                     : Colors.grey,
-              ),
-              SizedBox(width: 30),
-              Obx(() {
-                return Radio<String>(
-                  value: 'special_callers',
-                  groupValue: cont.selectedCallerOption.value,
-                  onChanged: (value) {
-                    cont.selectedCallerOption.value = value!;
-                  },
-                );
-              }),
-              UText(
+              );
+            }),
+            SizedBox(width: 30),
+            Obx(() {
+              return Radio<String>(
+                value: 'special_callers',
+                groupValue: cont.selectedCallerOption.value,
+                onChanged: (value) {
+                  cont.selectedCallerOption.value = value!;
+                },
+              );
+            }),
+            Obx(() {
+              return UText(
                 title: 'Special Callers',
                 enfontName: FontName.acMunaBlack,
                 enfontSize: 20,
                 textColor: cont.selectedCallerOption.value == 'special_callers'
                     ? Color.fromARGB(255, 3, 33, 58)
                     : Colors.grey,
-              ),
-              SizedBox(width: 30),
-              Obx(() {
-                return Radio<String>(
-                  value: 'add_to_shuffle',
-                  groupValue: cont.selectedCallerOption.value,
-                  onChanged: (value) {
-                    cont.selectedCallerOption.value = value!;
-                  },
-                );
-              }),
-              UText(
+              );
+            }),
+            SizedBox(width: 30),
+            Obx(() {
+              return Radio<String>(
+                value: 'add_to_shuffle',
+                groupValue: cont.selectedCallerOption.value,
+                onChanged: (value) {
+                  cont.selectedCallerOption.value = value!;
+                },
+              );
+            }),
+            Obx(() {
+              return UText(
                 title: 'Add to Shuffle',
                 enfontName: FontName.acMunaBlack,
                 enfontSize: 20,
                 textColor: cont.selectedCallerOption.value == 'add_to_shuffle'
                     ? Color.fromARGB(255, 3, 33, 58)
                     : Colors.grey,
-              ),
-            ],
-          ),
+              );
+            }),
+       
+          ],
         ),
-        if (cont.selectedCallerOption.value == 'special_callers')
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: UMsisdnTextField(
-              textEditingController: cont.msisdnController,
-              hintText: 'Enter Special Callers',
-            ),
-          ),
-      ],
-    );
+      ),
+     
+    ]);
   }
-
+// if (cont.selectedCallerOption.value == 'special_callers')
+//         Padding(
+//           padding: const EdgeInsets.all(8.0),
+//           child: UMsisdnTextField(
+//             textEditingController: cont.msisdnController,
+//             hintText: 'Enter Special Callers',
+//           ),
+//         ),
   List<Widget> _buildTimeOptionWidgets(BuildContext context) {
-    if (cont.selectedTimeOption.value == 'full_day' || cont.selectedTimeOption.value == 'select_time') {
+    if (cont.selectedTimeOption.value == 'full_day' ||
+        cont.selectedTimeOption.value == 'select_time') {
       return [
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -379,9 +441,10 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
                           child: Center(
                             child: UText(
                               title: label,
-                              textColor: cont.selectedRepeatOption.value == label
-                                  ? Colors.white
-                                  : Colors.grey,
+                              textColor:
+                                  cont.selectedRepeatOption.value == label
+                                      ? Colors.white
+                                      : Colors.grey,
                             ),
                           ),
                         ),
@@ -395,7 +458,8 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
     return [];
   }
 
-  Widget _buildTimeContainer(String label, Rx<TimeOfDay> time, BuildContext context) {
+  Widget _buildTimeContainer(
+      String label, Rx<TimeOfDay> time, BuildContext context) {
     return Obx(() {
       return Container(
         height: 60,
@@ -427,7 +491,8 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
     });
   }
 
-  Widget _buildDateTimeContainer(String label, Rx<DateTime> date, Rx<TimeOfDay> time, BuildContext context) {
+  Widget _buildDateTimeContainer(String label, Rx<DateTime> date,
+      Rx<TimeOfDay> time, BuildContext context) {
     return Obx(() {
       return Container(
         height: 60,
@@ -476,20 +541,17 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
   }
 
   String _formatDateTime(DateTime date, TimeOfDay time) {
-    final dt = DateTime(date.year, date.month, date.day, time.hour, time.minute);
+    final dt =
+        DateTime(date.year, date.month, date.day, time.hour, time.minute);
     final format = DateFormat.yMMMd().add_jm();
     return format.format(dt);
   }
 }
 
-
-
-
-
-
 class MobileAdvancedSettingScreen extends StatelessWidget {
-  final MobileAdvancedSettingController controller = Get.put(MobileAdvancedSettingController());
-
+  final MobileAdvancedSettingController controller =
+      Get.put(MobileAdvancedSettingController());
+  final TextEditingController msisdnController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -508,7 +570,7 @@ class MobileAdvancedSettingScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
+                // border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(3),
               ),
               height: 250,
@@ -551,7 +613,8 @@ class MobileAdvancedSettingScreen extends StatelessWidget {
                   ),
                 ),
                 Obx(() {
-                  if (controller.selectedCallerOption.value != 'add_to_shuffle') {
+                  if (controller.selectedCallerOption.value !=
+                      'add_to_shuffle') {
                     return Container(
                       width: double.infinity,
                       color: Colors.grey,
@@ -577,22 +640,27 @@ class MobileAdvancedSettingScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(2),
                                   ),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Obx(() {
                                           return Text(
-                                            controller.selectedTimeOption.value == null
+                                            controller.selectedTimeOption
+                                                        .value ==
+                                                    null
                                                 ? 'Select time type'
-                                                : controller.selectedTimeOption.value!
+                                                : controller
+                                                    .selectedTimeOption.value!
                                                     .replaceAll('_', ' ')
                                                     .toUpperCase(),
                                           );
                                         }),
                                       ),
                                       PopupMenuButton<String>(
-                                        onSelected: controller.setSelectedTimeOption,
+                                        onSelected:
+                                            controller.setSelectedTimeOption,
                                         itemBuilder: (BuildContext context) {
                                           return <String>[
                                             'full_day',
@@ -602,7 +670,9 @@ class MobileAdvancedSettingScreen extends StatelessWidget {
                                             return PopupMenuItem<String>(
                                               value: value,
                                               child: Text(
-                                                value.replaceAll('_', ' ').toUpperCase(),
+                                                value
+                                                    .replaceAll('_', ' ')
+                                                    .toUpperCase(),
                                                 style: TextStyle(
                                                   color: Colors.black,
                                                 ),
@@ -615,28 +685,40 @@ class MobileAdvancedSettingScreen extends StatelessWidget {
                                   ),
                                 ),
                                 SizedBox(height: 10),
-                                if (controller.selectedTimeOption.value == 'select_time')
+                                if (controller.selectedTimeOption.value ==
+                                    'select_time')
                                   Column(
                                     children: [
-                                      _buildTimeContainer('Start Time', controller.startTime, context),
+                                      _buildTimeContainer('Start Time',
+                                          controller.startTime, context),
                                       SizedBox(height: 15),
-                                      _buildTimeContainer('End Time', controller.endTime, context),
+                                      _buildTimeContainer('End Time',
+                                          controller.endTime, context),
                                     ],
                                   ),
                               ],
                             ),
                           ),
                           SizedBox(height: 20),
-                          if (controller.selectedTimeOption.value == 'select_date_time')
+                          if (controller.selectedTimeOption.value ==
+                              'select_date_time')
                             Column(
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     children: [
-                                      _buildDateTimeContainer('Start Date', controller.startDate, controller.startTime, context),
+                                      _buildDateTimeContainer(
+                                          'Start Date',
+                                          controller.startDate,
+                                          controller.startTime,
+                                          context),
                                       SizedBox(height: 10),
-                                      _buildDateTimeContainer('End Date', controller.endDate, controller.endTime, context),
+                                      _buildDateTimeContainer(
+                                          'End Date',
+                                          controller.endDate,
+                                          controller.endTime,
+                                          context),
                                     ],
                                   ),
                                 ),
@@ -650,7 +732,8 @@ class MobileAdvancedSettingScreen extends StatelessWidget {
                               enfontName: FontName.helveticaBold,
                             ),
                           ),
-                          if (controller.selectedCallerOption.value != 'add_to_shuffle' &&
+                          if (controller.selectedCallerOption.value !=
+                                  'add_to_shuffle' &&
                               controller.selectedTimeOption.value != null)
                             ..._buildTimeOptionWidgets(),
                         ],
@@ -697,9 +780,10 @@ class MobileAdvancedSettingScreen extends StatelessWidget {
                 title: Text(
                   'All Callers',
                   style: TextStyle(
-                      color: controller.selectedCallerOption.value == 'all_callers'
-                          ? const Color.fromARGB(255, 12, 63, 209)
-                          : Colors.black),
+                      color:
+                          controller.selectedCallerOption.value == 'all_callers'
+                              ? const Color.fromARGB(255, 12, 63, 209)
+                              : Colors.black),
                 ),
               ),
               RadioListTile<String>(
@@ -711,7 +795,8 @@ class MobileAdvancedSettingScreen extends StatelessWidget {
                 title: Text(
                   'Selected Callers',
                   style: TextStyle(
-                      color: controller.selectedCallerOption.value == 'selected_callers'
+                      color: controller.selectedCallerOption.value ==
+                              'selected_callers'
                           ? const Color.fromARGB(255, 12, 63, 209)
                           : Colors.black),
                 ),
@@ -719,12 +804,9 @@ class MobileAdvancedSettingScreen extends StatelessWidget {
               if (controller.selectedCallerOption.value == 'selected_callers')
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: controller.msisdnController,
-                    decoration: InputDecoration(
-                      hintText: 'Enter MSISDN',
-                      hintStyle: TextStyle(color: Colors.grey),
-                    ),
+                  child: UMsisdnTextField(
+                    textEditingController: msisdnController,
+                    hintText: 'Enter Special Callers',
                   ),
                 ),
               RadioListTile<String>(
@@ -736,7 +818,8 @@ class MobileAdvancedSettingScreen extends StatelessWidget {
                 title: Text(
                   'Add to Shuffle',
                   style: TextStyle(
-                      color: controller.selectedCallerOption.value == 'add_to_shuffle'
+                      color: controller.selectedCallerOption.value ==
+                              'add_to_shuffle'
                           ? const Color.fromARGB(255, 12, 63, 209)
                           : Colors.black),
                 ),
@@ -767,17 +850,19 @@ class MobileAdvancedSettingScreen extends StatelessWidget {
                           height: 40,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            color: controller.selectedRepeatOption.value == label
-                                ? Colors.blue
-                                : Colors.white,
+                            color:
+                                controller.selectedRepeatOption.value == label
+                                    ? Colors.blue
+                                    : Colors.white,
                           ),
                           padding: EdgeInsets.all(8.0),
                           child: Center(
                             child: UText(
                               title: label,
-                              textColor: controller.selectedRepeatOption.value == label
-                                  ? Colors.white
-                                  : Colors.grey,
+                              textColor:
+                                  controller.selectedRepeatOption.value == label
+                                      ? Colors.white
+                                      : Colors.grey,
                             ),
                           ),
                         );
@@ -790,7 +875,8 @@ class MobileAdvancedSettingScreen extends StatelessWidget {
     ];
   }
 
-  Widget _buildTimeContainer(String label, Rx<TimeOfDay> time, BuildContext context) {
+  Widget _buildTimeContainer(
+      String label, Rx<TimeOfDay> time, BuildContext context) {
     return Center(
       child: Container(
         height: 60,
@@ -818,8 +904,8 @@ class MobileAdvancedSettingScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDateTimeContainer(
-      String label, Rx<DateTime> date, Rx<TimeOfDay> time, BuildContext context) {
+  Widget _buildDateTimeContainer(String label, Rx<DateTime> date,
+      Rx<TimeOfDay> time, BuildContext context) {
     return Container(
       height: 60,
       width: 200,
