@@ -6,14 +6,17 @@ import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/common/web_navigation_view/web_navigation_view.dart';
 import 'package:you_yemen/files/controllers/category_controller.dart';
+import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_controller.dart';
 import 'package:you_yemen/files/controllers/profile_controller.dart';
 import 'package:you_yemen/files/controllers/u_search_controller.dart';
 import 'package:you_yemen/files/models/category_detail_model.dart';
 import 'package:you_yemen/files/screens/category_screen/category_detail_screen.dart';
-import 'package:you_yemen/files/screens/home_screen/home_screen.dart';
+
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/router/route_name.dart';
-import 'package:you_yemen/files/screens/profile_screen/my_tunes_screen.dart';
+import 'package:you_yemen/files/screens/home_screen/home_screen.dart';
+import 'package:you_yemen/files/screens/my_tune_screen/my_tune_screen.dart';
+
 import 'package:you_yemen/files/screens/profile_screen/profile_screen.dart';
 import 'package:you_yemen/files/screens/search_screen/search_screen.dart';
 import 'package:you_yemen/files/translation/strings.dart';
@@ -127,12 +130,14 @@ StatefulShellBranch _catDetailScreen() {
 }
 
 StatefulShellBranch _myTunezScreen() {
+  MyTuneController cont = Get.find();
   return StatefulShellBranch(
     routes: <RouteBase>[
       GoRoute(
           path: myTunezRoute,
           name: myTunezRoute,
           builder: (context, state) {
+            cont.makeApiCall();
             return MyTuneScreen(); //UText(title: "myTunez screen here");
           }),
     ],

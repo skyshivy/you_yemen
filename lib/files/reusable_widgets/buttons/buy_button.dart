@@ -21,7 +21,6 @@ Widget buyButton(TuneInfo info, Function()? onTap) {
       return GestureDetector(
         onTap: onTap != null
             ? () => Get.dialog(
-
 /////////////////           for buy/gift
 
                   Obx(() {
@@ -32,7 +31,7 @@ Widget buyButton(TuneInfo info, Function()? onTap) {
                             info: info,
                           );
                   }),
-                  
+
 ///////////////          for tell a friend
 
                   // Obx(() {
