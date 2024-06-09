@@ -6,6 +6,7 @@ import 'package:you_yemen/files/controllers/auth_controller/login_popup_controll
 import 'package:you_yemen/files/controllers/auth_controller/otp_controller.dart';
 import 'package:you_yemen/files/controllers/buy_controller.dart';
 import 'package:you_yemen/files/controllers/category_controller.dart';
+import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_controller.dart';
 import 'package:you_yemen/files/controllers/my_tunes_controller.dart';
 import 'package:you_yemen/files/controllers/player_controller.dart';
 import 'package:you_yemen/files/controllers/u_search_controller.dart';
@@ -39,6 +40,8 @@ _initController() async {
   Get.lazyPut(() => OtpController());
   Get.lazyPut(() => BuyController());
   MyTunesController myTunesController = Get.put(MyTunesController());
+  Get.lazyPut(() => MyTuneController());
+  // MyTuneController
 }
 
 class MyApp extends StatelessWidget {

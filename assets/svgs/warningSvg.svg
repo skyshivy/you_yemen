@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="179px" height="178px" viewBox="0 0 179 178" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>8B0A93D6-542B-44A9-877B-94420BBC1134@1.5x</title>
+    <defs>
+        <circle id="path-1" cx="75" cy="75" r="74.5901639"></circle>
+        <filter x="-14.1%" y="-11.4%" width="128.2%" height="128.2%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="4" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.166493663 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Sprint-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Sprint-2_Buy-Page-popup_3" transform="translate(-630.000000, -255.000000)">
+            <g id="Group-2" transform="translate(644.500000, 265.000000)">
+                <g id="Group">
+                    <g id="Oval">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use stroke="#FFFFFF" stroke-width="8" fill="#FF8F18" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                </g>
+                <g id="noun_Error_497784" transform="translate(65.500000, 38.500000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <path d="M18.5697612,22.9120094 L18.5697612,45.6922706 L9.45765489,45.6922706 L0.345548583,45.6922706 L0.345548583,22.9120094 L0.345548583,0.131743596 L9.45765489,0.131743596 L18.5697612,0.131743596 L18.5697612,22.9120094 Z M11.6644931,55.1732691 C14.7638759,55.91168 17.3955683,58.5368209 18.2171899,61.7096449 C18.5028271,62.8126768 18.5028271,65.0202895 18.2171899,66.1233214 C17.3970411,69.2904617 14.8316323,71.8558728 11.6644931,72.6760193 C11.1834673,72.8005818 10.2192812,72.8972384 9.45765489,72.8972384 C6.88120683,72.8972384 4.93250772,72.0895072 3.10857043,70.265571 C1.28463087,68.4416349 0.476904151,66.4929312 0.476904151,63.9164832 C0.476904151,61.4784936 1.27058,59.4650712 2.91062701,57.7425186 C5.22037624,55.3165797 8.37716296,54.3900608 11.6644931,55.1732691 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -13,6 +13,7 @@ import 'package:you_yemen/files/screens/category_screen/category_detail_screen.d
 import 'package:you_yemen/files/screens/home_screen/home_screen.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/router/route_name.dart';
+import 'package:you_yemen/files/screens/profile_screen/my_tunes_screen.dart';
 import 'package:you_yemen/files/screens/profile_screen/profile_screen.dart';
 import 'package:you_yemen/files/screens/search_screen/search_screen.dart';
 import 'package:you_yemen/files/translation/strings.dart';
@@ -132,7 +133,7 @@ StatefulShellBranch _myTunezScreen() {
           path: myTunezRoute,
           name: myTunezRoute,
           builder: (context, state) {
-            return UText(title: "myTunez screen here");
+            return MyTuneScreen(); //UText(title: "myTunez screen here");
           }),
     ],
   );
