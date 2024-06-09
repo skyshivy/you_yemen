@@ -130,7 +130,7 @@ Widget _listCell(int index, List<IconData> imageList, List<String> titleList) {
                   ),
                   UText(
                     title: titleList[index],
-                    enfontName: FontName.helvetica,
+                    fontName: FontName.helvetica,
                     textColor: isHovered ? white : black,
                   ),
                 ],

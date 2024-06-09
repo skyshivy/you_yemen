@@ -79,7 +79,7 @@ class _GenericGridViewState extends State<GenericGridView> {
                     ? widget.list.isEmpty
                         ? UText(
                             title: widget.emptyListMessage,
-                            enfontName: FontName.helveticaBold,
+                            fontName: FontName.helveticaBold,
                           )
                         : wrapBuilder()
                     : gridBuilder()

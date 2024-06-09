@@ -65,8 +65,8 @@ Widget buyButton(TuneInfo info, Function()? onTap) {
                       child: UText(
                         textColor: white,
                         title: buyStr,
-                        enfontSize: si.isMobile ? 12 : null,
-                        enfontName: FontName.helveticaBold,
+                        fontSize: si.isMobile ? 12 : null,
+                        fontName: FontName.helveticaBold,
                       ),
                     )
                   : Row(
@@ -83,7 +83,7 @@ Widget buyButton(TuneInfo info, Function()? onTap) {
                         UText(
                           textColor: white,
                           title: buyStr,
-                          enfontName: FontName.helveticaBold,
+                          fontName: FontName.helveticaBold,
                         ),
                       ],
                     ),

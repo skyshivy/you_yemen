@@ -76,7 +76,7 @@ Expanded _minuteColumn(CustomCalenderController cont, bool isFrom) {
     mainAxisSize: MainAxisSize.min,
     children: [
       const SizedBox(height: 10),
-      UText(title: minutesStr, enfontName: FontName.acMuna),
+      UText(title: minutesStr, fontName: FontName.acMuna),
       Obx(() {
         return customNumberPicker(
             isFrom ? cont.tempfromMin.value : cont.temptoMin.value, (p0) {
@@ -132,7 +132,7 @@ Expanded _hourColumn(CustomCalenderController cont, bool isFrom) {
     mainAxisSize: MainAxisSize.min,
     children: [
       const SizedBox(height: 10),
-      UText(title: hourStr.tr, enfontName: FontName.acMuna),
+      UText(title: hourStr.tr, fontName: FontName.acMuna),
       Obx(() {
         return customNumberPicker(
             isFrom ? cont.tempfromHour.value : cont.temptoHour.value, (p0) {

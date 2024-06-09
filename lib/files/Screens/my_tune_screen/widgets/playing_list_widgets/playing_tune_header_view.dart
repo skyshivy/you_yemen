@@ -29,8 +29,8 @@ Widget _leftContainer() {
     children: [
       UText(
         title: currentlyPlayingToMyCallersStr.tr,
-        enfontName: FontName.acMuna,
-        enfontSize: 24,
+        fontName: FontName.acMuna,
+        fontSize: 24,
       ),
       const SizedBox(height: 12),
       RichText(
@@ -99,15 +99,15 @@ Widget rowText(Widget? child, String info, String count) {
       child ??
           UText(
             title: count,
-            enfontSize: 13,
-            enfontName: FontName.acMuna,
+            fontSize: 13,
+            fontName: FontName.acMuna,
           ),
       const SizedBox(width: 4),
       Expanded(
           child: UText(
         title: info.tr,
-        enfontSize: 13,
-        enfontName: FontName.acMuna,
+        fontSize: 13,
+        fontName: FontName.acMuna,
       )),
     ],
   );
@@ -123,7 +123,7 @@ _toggelButton() {
       UText(
           title: shuffleStr.tr,
           textColor: grey,
-          enfontName: FontName.helveticaBold
+          fontName: FontName.helveticaBold
           //font: FontName.helveticaBold,
           ),
       const SizedBox(width: 4),

@@ -113,7 +113,7 @@ Widget cellTitle(MenuModel menu, bool isHover) {
   return UText(
     title: menu.title,
     textColor: isHover ? white : black,
-    enfontName: FontName.acMuna,
+    fontName: FontName.acMuna,
   );
 }
 

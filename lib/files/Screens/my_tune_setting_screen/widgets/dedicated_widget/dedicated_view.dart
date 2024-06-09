@@ -44,8 +44,8 @@ Widget titleWidget() {
       return UText(
         title: addNumberStr.tr,
         textColor: grey,
-        enfontSize: si.isMobile ? 12 : null,
-        enfontName: FontName.acMuna,
+        fontSize: si.isMobile ? 12 : null,
+        fontName: FontName.acMuna,
       );
     },
   );
@@ -57,8 +57,8 @@ Widget msisdnExampleWidget() {
       return UText(
         title: exampleMsisdnTextStr.tr,
         textColor: grey,
-        enfontName: FontName.acMuna,
-        enfontSize: si.isMobile ? 12 : null,
+        fontName: FontName.acMuna,
+        fontSize: si.isMobile ? 12 : null,
       );
     },
   );

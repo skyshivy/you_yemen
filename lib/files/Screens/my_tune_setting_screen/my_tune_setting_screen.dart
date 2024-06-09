@@ -80,16 +80,16 @@ class MyTuneSettingScreen extends StatelessWidget {
       children: [
         UText(
           title: advanceSettingStr.tr,
-          enfontName: FontName.helvetica,
-          enfontSize: si.isMobile ? 18 : 24,
+          fontName: FontName.helvetica,
+          fontSize: si.isMobile ? 18 : 24,
         ),
         Row(
           children: [
             UText(
               title: defaultToneStr.tr,
               textColor: grey,
-              enfontSize: si.isMobile ? 12 : null,
-              enfontName: FontName.acMuna,
+              fontSize: si.isMobile ? 12 : null,
+              fontName: FontName.acMuna,
             ),
             const SizedBox(width: 8),
             CupertinoSwitch(
@@ -120,10 +120,10 @@ class MyTuneSettingScreen extends StatelessWidget {
         const SizedBox(height: 8),
         UText(
           title: info.toneName ?? '',
-          enfontName: FontName.acMuna,
+          fontName: FontName.acMuna,
         ),
         UText(
-          enfontName: FontName.acMuna,
+          fontName: FontName.acMuna,
           title: info.toneName ?? '',
           textColor: grey,
         ),
@@ -157,8 +157,8 @@ class MyTuneSettingScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 12, top: 20),
                   child: UText(
                     title: whomYouWantToPlayItStr.tr,
-                    enfontName: FontName.acMuna,
-                    enfontSize: si.isMobile ? 14 : 16,
+                    fontName: FontName.acMuna,
+                    fontSize: si.isMobile ? 14 : 16,
                   ),
                 ),
                 Column(

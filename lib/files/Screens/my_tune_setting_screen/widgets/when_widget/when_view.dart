@@ -35,8 +35,8 @@ class WhenView extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                   child: UText(
                     title: whenYouWantToPlayItStr.tr,
-                    enfontName: FontName.acMuna,
-                    enfontSize: si.isMobile ? 14 : 16,
+                    fontName: FontName.acMuna,
+                    fontSize: si.isMobile ? 14 : 16,
                   ),
                 ),
                 buttonsWidget(),
@@ -69,8 +69,8 @@ class WhenView extends StatelessWidget {
           padding: const EdgeInsets.only(left: 8, top: 30),
           child: UText(
             title: repeatStr.tr,
-            enfontName: FontName.acMuna,
-            enfontSize: si.isMobile ? 12 : null,
+            fontName: FontName.acMuna,
+            fontSize: si.isMobile ? 12 : null,
           ),
         );
       },
@@ -216,11 +216,11 @@ class WhenView extends StatelessWidget {
         UText(
           title: title,
           textColor: grey,
-          enfontName: FontName.acMuna,
-          enfontSize: 12,
+          fontName: FontName.acMuna,
+          fontSize: 12,
         ),
         const SizedBox(height: 4),
-        UText(title: subtitle, enfontName: FontName.acMuna),
+        UText(title: subtitle, fontName: FontName.acMuna),
       ],
     );
   }

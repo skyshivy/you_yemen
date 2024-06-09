@@ -35,7 +35,7 @@ Widget popupHeaderView(
 Widget _titleWidget(String title) {
   return UText(
     title: title,
-    enfontSize: 16,
-    enfontName: FontName.acMuna,
+    fontSize: 16,
+    fontName: FontName.acMuna,
   );
 }

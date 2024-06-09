@@ -53,8 +53,8 @@ Padding cell(MyTuneSettingController cont, List<String> dayFull, int index,
             return UText(
               textColor: cont.yearRepeatindex.value == index ? white : black,
               title: dayFull[index],
-              enfontName: FontName.acMuna,
-              enfontSize: 12,
+              fontName: FontName.acMuna,
+              fontSize: 12,
             );
           })),
         ),

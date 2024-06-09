@@ -97,8 +97,8 @@ class _LoginPopupViewState extends State<LoginPopupView> {
                 const SizedBox(height: 20),
                 UText(
                     title: signInToYourAccountStr,
-                    enfontName: FontName.helveticaBold),
-                UText(title: pleaseEnterMobileNoToAuthStr, enfontSize: 12),
+                    fontName: FontName.helveticaBold),
+                UText(title: pleaseEnterMobileNoToAuthStr, fontSize: 12),
                 const SizedBox(height: 20),
                 msisdnTextField(),
                 errorMessage(),
@@ -149,7 +149,7 @@ class _LoginPopupViewState extends State<LoginPopupView> {
             padding: const EdgeInsets.only(top: 4),
             child: UText(
               title: con.errorMessage.value,
-              enfontSize: 12,
+              fontSize: 12,
               textColor: red,
             ),
           ),

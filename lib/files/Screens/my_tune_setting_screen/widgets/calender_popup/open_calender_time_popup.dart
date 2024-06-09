@@ -126,7 +126,7 @@ Expanded minuteColumn(CustomCalenderController cont, bool isFrom) {
       child: Column(
     children: [
       const SizedBox(height: 10),
-      UText(title: minutesStr, enfontName: FontName.helveticaBold),
+      UText(title: minutesStr, fontName: FontName.helveticaBold),
       //customNumberPicker(1, (p0) => null),
       Obx(() {
         return customNumberPicker(
@@ -177,7 +177,7 @@ Expanded hourColumn(CustomCalenderController cont, bool isFrom) {
       child: Column(
     children: [
       const SizedBox(height: 10),
-      UText(title: hourStr.tr, enfontName: FontName.helveticaBold),
+      UText(title: hourStr.tr, fontName: FontName.helveticaBold),
       Obx(() {
         return customNumberPicker(
             isFrom ? cont.tempfromHour.value : cont.temptoHour.value, (p0) {

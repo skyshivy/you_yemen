@@ -22,8 +22,8 @@ Widget _leftContainer() {
     children: [
       UText(
         title: myTunesStr.tr,
-        enfontName: FontName.helveticaBold,
-        enfontSize: 28,
+        fontName: FontName.helveticaBold,
+        fontSize: 28,
       ),
       const SizedBox(height: 12),
       RichText(

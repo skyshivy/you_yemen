@@ -30,8 +30,8 @@ Widget playButton(TuneInfo info, Function()? onTap) {
                 ? Center(
                     child: UText(
                       title: playStr,
-                      enfontName: FontName.helveticaBold,
-                      enfontSize: si.isMobile ? 12 : null,
+                      fontName: FontName.helveticaBold,
+                      fontSize: si.isMobile ? 12 : null,
                     ),
                   )
                 : Row(
@@ -43,7 +43,7 @@ Widget playButton(TuneInfo info, Function()? onTap) {
                       SizedBox(width: 4),
                       UText(
                         title: playStr,
-                        enfontName: FontName.helveticaBold,
+                        fontName: FontName.helveticaBold,
                       ),
                     ],
                   ),

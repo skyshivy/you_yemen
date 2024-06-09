@@ -54,8 +54,8 @@ Widget _button(String title, bool isSelected) {
     child: Center(
       child: UText(
         title: title,
-        enfontSize: 12,
-        enfontName: FontName.acMuna,
+        fontSize: 12,
+        fontName: FontName.acMuna,
         textColor: isSelected ? red : grey,
       ),
     ),

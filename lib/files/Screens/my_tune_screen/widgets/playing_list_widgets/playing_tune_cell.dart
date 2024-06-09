@@ -96,14 +96,14 @@ Widget titleSubtitle(String title, String subtitle) {
     children: [
       UText(
         title: title,
-        enfontName: FontName.acMuna,
+        fontName: FontName.acMuna,
         textColor: grey,
-        enfontSize: 12,
+        fontSize: 12,
       ),
       UText(
         title: subtitle,
-        enfontName: FontName.acMuna,
-        enfontSize: 12,
+        fontName: FontName.acMuna,
+        fontSize: 12,
       )
     ],
   );
@@ -134,12 +134,12 @@ Widget tuneNameWidget(ToneDetail info) {
       UText(
         maxLine: 1,
         title: info1.toneName ?? '',
-        enfontName: FontName.acMuna,
+        fontName: FontName.acMuna,
       ),
       UText(
         maxLine: 1,
         title: info1.artistName ?? '',
-        enfontName: FontName.acMuna,
+        fontName: FontName.acMuna,
         textColor: grey,
       )
     ],

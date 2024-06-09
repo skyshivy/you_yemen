@@ -76,8 +76,8 @@ Padding cell(MyTuneSettingController cont, List<String> dayFull, int index,
               textColor:
                   cont.selectedDays.contains("${index + 1}") ? white : black,
               title: dayFull[index],
-              enfontName: FontName.acMuna,
-              enfontSize: 12,
+              fontName: FontName.acMuna,
+              fontSize: 12,
             );
           })),
         ),

@@ -48,8 +48,8 @@ class TimeTypeButton extends StatelessWidget {
                 Obx(() {
                   return UText(
                     title: cont.whenButtonTitle.value,
-                    enfontName: FontName.acMuna,
-                    enfontSize: 13,
+                    fontName: FontName.acMuna,
+                    fontSize: 13,
                   );
                 }),
                 Icon(Icons.arrow_drop_down)

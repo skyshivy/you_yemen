@@ -58,9 +58,9 @@ class SuccessPopupView extends StatelessWidget {
         children: [
           UText(
             title: cont.successMessage,
-            enfontName: FontName.helvetica,
+            fontName: FontName.helvetica,
             textColor: Colors.white,
-            enfontSize: 20,
+            fontSize: 20,
             alignment: TextAlign.center,
           ),
         ],
