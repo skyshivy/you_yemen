@@ -14,7 +14,7 @@ class UText extends StatelessWidget {
     this.maxLine,
     this.alignment = TextAlign.start,
     required this.title,
-    
+
     // required String Title, //bhavya
   });
   final String title;
@@ -29,8 +29,8 @@ class UText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-     // maxLines: maxLine,
-      //textAlign: alignment,
+      maxLines: maxLine,
+      textAlign: alignment,
       style: TextStyle(
           color: textColor,
           fontFamily:

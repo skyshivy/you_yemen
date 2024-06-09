@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/state_manager.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
@@ -72,8 +73,7 @@ class _GenericGridViewState extends State<GenericGridView> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Flexible(
-          child: Obx(() {
-            return (widget.maxDisplay != null)
+            child: (widget.maxDisplay != null)
                 ? wrapBuilder()
                 : (widget.list.length < 20)
                     ? widget.list.isEmpty
@@ -82,22 +82,33 @@ class _GenericGridViewState extends State<GenericGridView> {
                             enfontName: FontName.helveticaBold,
                           )
                         : wrapBuilder()
-                    : gridBuilder();
-          }),
-        ),
+                    : gridBuilder()
+            // Obx(() {
+            //   return
+            // }),
+            ),
       ],
     );
   }
 
   Widget wrapBuilder() {
-    return _alignedGridView(
-        widget.maxDisplay ?? widget.list.length,
-        (index) =>
-            widget.child ??
-            (widget.list.isEmpty
-                ? SizedBox()
-                : TuneCard(info: widget.list[index])),
-        widget.physics);
+    Rx<int> displayCellCount = 0.obs;
+    displayCellCount.value = widget.maxDisplay ?? widget.list.length;
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Obx(() {
+          return _alignedGridView(
+              displayCellCount.value,
+              (index) =>
+                  widget.child ??
+                  (widget.list.isEmpty
+                      ? SizedBox()
+                      : TuneCard(info: widget.list[index])),
+              widget.physics,
+              si);
+        });
+      },
+    );
   }
 
   Widget gridBuilder() {
@@ -136,14 +147,15 @@ class _GenericGridViewState extends State<GenericGridView> {
   }
 }
 
-Widget _alignedGridView(
-    int count, Widget Function(int index) cell, ScrollPhysics? physics) {
-  const double runSpacing = 20;
-  const double spacing = 20;
+Widget _alignedGridView(int count, Widget Function(int index) cell,
+    ScrollPhysics? physics, SizingInformation si) {
+  double runSpacing = si.isMobile ? 8 : 20;
+  double spacing = si.isMobile ? 8 : 20;
 
   return ListView(
     physics: physics,
-    padding: EdgeInsets.all(20),
+    padding:
+        EdgeInsets.symmetric(horizontal: si.isMobile ? 4 : 20, vertical: 20),
     shrinkWrap: true,
     children: [
       Wrap(
@@ -151,7 +163,10 @@ Widget _alignedGridView(
         spacing: spacing,
         alignment: WrapAlignment.center,
         children: List.generate(count, (index) {
-          return SizedBox(height: 300, width: 250, child: cell(index));
+          return SizedBox(
+              height: si.isMobile ? 200 : 300,
+              width: si.isMobile ? 180 : 250,
+              child: cell(index));
         }),
       ),
     ],
