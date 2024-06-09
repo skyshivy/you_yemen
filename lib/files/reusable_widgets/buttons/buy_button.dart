@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/common/buy_popup/buy_popup.dart';
 import 'package:you_yemen/files/common/tell_friend_popup/buy_a_friend_popup.dart';
 
 import 'package:you_yemen/files/common/tell_friend_popup/popup.dart';
@@ -17,34 +18,34 @@ import 'package:you_yemen/files/utility/colors.dart';
 CustomPopupController cont = Get.put(CustomPopupController());
 Widget buyButton(TuneInfo info, Function()? onTap) {
   return ResponsiveBuilder(
-    builder: (context, sizingInformation) {
+    builder: (context, si) {
       return GestureDetector(
         onTap: onTap != null
             ? () => Get.dialog(
-/////////////////           for buy/gift
+                // Obx(() {
+                //   return cont.isSuccess.value
+                //       ? SuccessPopupView()
+                //       : Buy_a_friend_PopupView(
+                //           msisdn: StoreManager().msisdn,
+                //           info: info,
+                //         );
+                // }),
 
-                  Obx(() {
-                    return cont.isSuccess.value
-                        ? SuccessPopupView()
-                        : Buy_a_friend_PopupView(
-                            msisdn: StoreManager().msisdn,
-                            info: info,
-                          );
-                  }),
+                //   Obx(() {
+                //     return cont.isSuccess.value
+                //         ? SuccessPopupView()
+                //         : TellFriendPopupView(
+                //             msisdn: StoreManager().msisdn,
+                //             info: info,
+                //           );
+                //   }),
 
-///////////////          for tell a friend
-
-                  // Obx(() {
-                  //   return cont.isSuccess.value
-                  //       ? SuccessPopupView()
-                  //       : TellFriendPopupView(
-                  //           msisdn: StoreManager().msisdn,
-                  //           info: info,
-                  //         );
-                  // }),
-
-                  barrierDismissible: false,
-                )
+                //   barrierDismissible: false,
+                // )
+                // Get.dialog(Center(
+                //       child: BuyPopupView(info: info),
+                //     ))
+                BuyPopupView(info: info))
             :
             // Get.dialog(Center(
             //       child: BuyPopupView(info: info),
@@ -57,26 +58,35 @@ Widget buyButton(TuneInfo info, Function()? onTap) {
               borderRadius: BorderRadius.circular(20),
               border: Border.all(color: transparent),
             ),
-            child: const Padding(
+            child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.card_travel,
-                    size: 16,
-                    color: white,
-                  ),
-                  SizedBox(width: 4),
-                  UText(
-                    textColor: white,
-                    title: buyStr,
-                    enfontName: FontName.helveticaBold,
-                  ),
-                ],
-              ),
+              child: si.isMobile
+                  ? Center(
+                      child: UText(
+                        textColor: white,
+                        title: buyStr,
+                        enfontSize: si.isMobile ? 12 : null,
+                        enfontName: FontName.helveticaBold,
+                      ),
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.card_travel,
+                          size: 16,
+                          color: white,
+                        ),
+                        SizedBox(width: 4),
+                        UText(
+                          textColor: white,
+                          title: buyStr,
+                          enfontName: FontName.helveticaBold,
+                        ),
+                      ],
+                    ),
             )),
       );
     },
