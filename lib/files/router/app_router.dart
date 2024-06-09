@@ -112,6 +112,7 @@ StatefulShellBranch _wishlistScreen() {
 }
 
 StatefulShellBranch _catDetailScreen() {
+  Get.lazyPut(() => CategoryController());
   CategoryController con = Get.find();
   return StatefulShellBranch(
     routes: <RouteBase>[
@@ -130,6 +131,7 @@ StatefulShellBranch _catDetailScreen() {
 }
 
 StatefulShellBranch _myTunezScreen() {
+  Get.lazyPut(() => MyTuneController());
   MyTuneController cont = Get.find();
   return StatefulShellBranch(
     routes: <RouteBase>[
@@ -137,7 +139,7 @@ StatefulShellBranch _myTunezScreen() {
           path: myTunezRoute,
           name: myTunezRoute,
           builder: (context, state) {
-            cont.makeApiCall();
+            //  cont.makeApiCall();
             return MyTuneScreen(); //UText(title: "myTunez screen here");
           }),
     ],
@@ -145,6 +147,7 @@ StatefulShellBranch _myTunezScreen() {
 }
 
 StatefulShellBranch _searchScreen() {
+  Get.lazyPut(() => USearchController());
   USearchController cont = Get.find();
   return StatefulShellBranch(
     routes: <RouteBase>[

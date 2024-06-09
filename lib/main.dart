@@ -29,8 +29,6 @@ initialLoads() async {
 }
 
 _initController() async {
-  prefs = await SharedPreferences.getInstance();
-  appCont = Get.put(AppController());
   CategoryController catCont = Get.put(CategoryController());
   USearchController searchCont = Get.put(USearchController());
   PlayerController playCont = Get.put(PlayerController());

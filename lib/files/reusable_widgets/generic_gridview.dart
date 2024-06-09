@@ -96,7 +96,8 @@ class _GenericGridViewState extends State<GenericGridView> {
             widget.child ??
             (widget.list.isEmpty
                 ? SizedBox()
-                : TuneCard(info: widget.list[index])));
+                : TuneCard(info: widget.list[index])),
+        widget.physics);
   }
 
   Widget gridBuilder() {
@@ -135,11 +136,13 @@ class _GenericGridViewState extends State<GenericGridView> {
   }
 }
 
-Widget _alignedGridView(int count, Widget Function(int index) cell) {
+Widget _alignedGridView(
+    int count, Widget Function(int index) cell, ScrollPhysics? physics) {
   const double runSpacing = 20;
   const double spacing = 20;
 
   return ListView(
+    physics: physics,
     padding: EdgeInsets.all(20),
     shrinkWrap: true,
     children: [
