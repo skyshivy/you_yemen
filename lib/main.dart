@@ -18,9 +18,9 @@ import 'package:you_yemen/files/store_manager/store_manager.dart';
 
 late SharedPreferences prefs;
 late AppController appCont;
-void main() {
-  initialLoads();
+void main() async {
   _initController();
+  initialLoads();
   runApp(const MyApp());
 }
 
@@ -29,6 +29,8 @@ initialLoads() async {
 }
 
 _initController() async {
+  prefs = await SharedPreferences.getInstance();
+  appCont = Get.put(AppController());
   // CategoryController catCont = Get.put(CategoryController());
   // USearchController searchCont = Get.put(USearchController());
   // PlayerController playCont = Get.put(PlayerController());

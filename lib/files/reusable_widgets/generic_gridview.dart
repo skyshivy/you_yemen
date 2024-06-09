@@ -68,26 +68,30 @@ class _GenericGridViewState extends State<GenericGridView> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Flexible(
-            child: (widget.maxDisplay != null)
-                ? wrapBuilder()
-                : (widget.list.length < 20)
-                    ? widget.list.isEmpty
-                        ? UText(
-                            title: widget.emptyListMessage,
-                            fontName: FontName.helveticaBold,
-                          )
-                        : wrapBuilder()
-                    : gridBuilder()
-            // Obx(() {
-            //   return
-            // }),
-            ),
-      ],
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Flexible(
+                child: (widget.maxDisplay != null)
+                    ? wrapBuilder()
+                    : (widget.list.length < 20)
+                        ? widget.list.isEmpty
+                            ? UText(
+                                title: widget.emptyListMessage,
+                                fontName: FontName.helveticaBold,
+                              )
+                            : wrapBuilder()
+                        : gridBuilder()
+                // Obx(() {
+                //   return
+                // }),
+                ),
+          ],
+        );
+      },
     );
   }
 
