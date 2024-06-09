@@ -29,16 +29,21 @@ initialLoads() async {
 }
 
 _initController() async {
-  CategoryController catCont = Get.put(CategoryController());
-  USearchController searchCont = Get.put(USearchController());
-  PlayerController playCont = Get.put(PlayerController());
+  // CategoryController catCont = Get.put(CategoryController());
+  // USearchController searchCont = Get.put(USearchController());
+  // PlayerController playCont = Get.put(PlayerController());
+
+  Get.lazyPut(() => CategoryController());
+  Get.lazyPut(() => USearchController());
+  Get.lazyPut(() => PlayerController());
+
   StoreManager().initStoreManager();
   Get.lazyPut(() => RecomendedController());
   Get.lazyPut(() => LoginPopupController());
   Get.lazyPut(() => OtpController());
   Get.lazyPut(() => BuyController());
-  MyTuneController myTuneController = Get.put(MyTuneController());
-  //Get.lazyPut(() => MyTuneController());
+  //MyTuneController myTuneController = Get.put(MyTuneController());
+  Get.lazyPut(() => MyTuneController());
   // MyTuneController
 }
 
