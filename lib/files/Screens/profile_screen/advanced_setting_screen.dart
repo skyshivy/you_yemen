@@ -100,13 +100,14 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
                     width: 800,
                     decoration: BoxDecoration(
                       color: lightGrey,
-                      borderRadius: BorderRadius.circular(2),
+                      borderRadius : BorderRadius.circular(2),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: _buildCallerOptions(context),
                     ),
                   ),
+                  
                   Obx(() {
                     if (cont.selectedCallerOption.value != 'add_to_shuffle') {
                       return Container(
@@ -122,7 +123,8 @@ class DesktopAdvancedSettingScreen extends StatelessWidget {
                                 title: "Whom you want to play it?",
                                 enfontName: FontName.helveticaBold,
                               ),
-                            ),if (cont.selectedCallerOption.value == 'special_callers')
+                            ),
+                            if (cont.selectedCallerOption.value == 'special_callers')
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: UMsisdnTextField(

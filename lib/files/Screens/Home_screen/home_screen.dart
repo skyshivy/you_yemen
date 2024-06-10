@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 import 'package:you_yemen/files/Screens/Home_screen/success_popup.dart';
 import 'package:you_yemen/files/Screens/profile_screen/advanced_setting_screen.dart';
+import 'package:you_yemen/files/Screens/profile_screen/blocklist_screen.dart';
 import 'package:you_yemen/files/Screens/profile_screen/my_tunes_screen.dart';
+import 'package:you_yemen/files/Screens/profile_screen/view_blocklist_screen.dart';
 import 'package:you_yemen/files/api_calls/mytunes_api.dart';
 
 import 'package:you_yemen/files/api_calls/profile_api.dart';
@@ -20,6 +22,8 @@ import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_t
 import 'package:go_router/go_router.dart';
 
 import 'package:you_yemen/files/router/route_name.dart';
+
+import '../profile_screen/faq_screen.dart';
 // import 'package:you_yemen/files/screens/profile_screen/transition_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -104,6 +108,32 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           },
           child: Text('MYTunesScreen'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ViewBlackListScreen(),
+              ),
+            );
+          },
+          child: Text('Blacklist Screen'),
+        ),
+       
+
+
+
+
+
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => FaqScreen(),
+              ),
+            );
+          },
+          child: Text('Faq Screen')
         ),
       ],
     );

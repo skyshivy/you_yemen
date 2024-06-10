@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:you_yemen/files/Screens/profile_screen/advanced_setting_screen.dart';
@@ -53,66 +53,76 @@ class MyTuneScreen extends StatelessWidget {
   }
 
   Widget playingGridViewBuilder() {
-    return Obx(() {
-      return GridView.builder(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        itemCount: myTunesController.playingList.length,
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          mainAxisExtent: 500,
-          crossAxisSpacing: 2,
-          mainAxisSpacing: 2,
-          childAspectRatio: 1,
-          maxCrossAxisExtent: 250,
-        ),
-        itemBuilder: (context, index) {
-          return Container(
-            decoration: BoxDecoration(
-                border: Border(
-                    right:
-                        BorderSide(color: Colors.transparent.withOpacity(0.4)),
-                    bottom: BorderSide(
-                      color: Colors.transparent.withOpacity(0.2),
-                    ))),
-            child: Column(
-              children: [
-                Image.asset('assets/png/77.png'),
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        UText(
-                          title: "toneName",
-                          enfontName: FontName.helveticaLight,
-                          textColor: black,
-                        ),
-                        UText(
-                          title: "albumName",
-                          enfontName: FontName.helveticaLight,
-                          textColor: grey,
-                        )
-                      ],
-                    ),
-                    SizedBox(width: 80),
-                    Icon(Icons.play_arrow),
-                    SizedBox(width: 5),
-                    GestureDetector(
-                      onTap: () => _showDeletePopup(context),
-                      child: Icon(Icons.delete),
-                    ),
-                  ],
+    return Flexible(
+      child: Obx(() {
+        return GridView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: myTunesController.playingList.length,
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            mainAxisExtent: 500,
+            crossAxisSpacing: 2,
+            mainAxisSpacing: 2,
+            childAspectRatio: 1,
+            maxCrossAxisExtent: 250,
+          ),
+          itemBuilder: (context, index) {
+            return Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                      right:
+                          BorderSide(color: Colors.transparent.withOpacity(0.4)),
+                      bottom: BorderSide(
+                        color: Colors.transparent.withOpacity(0.2),
+                      ))),
+              child: Column(
+                children: [
+                  Image.asset('assets/png/77.png'),
+      
+                 
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                           UText(
+                  title: myTunesController
+                          .playingList.first.toneDetails?[index].toneName ??
+                      '',
+                  textColor: Colors.black,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Divider(),
+                          UText(
+                  title: myTunesController
+                          .playingList.first.toneDetails?[index].albumName ??
+                      '',
+                  textColor: Colors.black,
                 ),
-              ],
-            ),
-          );
-        },
-      );
-    });
+                        ],
+                      ),
+                      SizedBox(width: 80),
+                      Icon(Icons.play_arrow),
+                      SizedBox(width: 5),
+                      GestureDetector(
+                        onTap: () => _showDeletePopup(context),
+                        child: Icon(Icons.delete),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Divider(),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      }),
+    );
   }
+
+
+  
+
 
   Center myTuneSection() {
     return Center(

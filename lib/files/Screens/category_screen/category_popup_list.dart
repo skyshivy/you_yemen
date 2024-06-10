@@ -2,13 +2,12 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:popover/popover.dart';
-import 'package:you_yemen/files/api_calls/catrgory_api.dart';
-import 'package:you_yemen/files/models/category_list_model.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/router/route_name.dart';
 import 'package:you_yemen/files/reusable_widgets/image/UImage.dart';
 import 'package:you_yemen/files/controllers/category_controller.dart';
+
 void showCategoryPopup(BuildContext context) {
   showPopover(
     context: context,
@@ -18,7 +17,7 @@ void showCategoryPopup(BuildContext context) {
     },
   );
 }
-////////////bhavya
+////////////bhavyaaaa
 
 class CategoryPopupListView extends StatelessWidget {
   CategoryPopupListView({super.key});
@@ -75,6 +74,3 @@ class CategoryPopupListView extends StatelessWidget {
     );
   }
 }
-
-
-
