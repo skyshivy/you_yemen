@@ -6,8 +6,10 @@ import 'package:you_yemen/files/common/custom_repeat_monthly_view.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/playint_tune_model.dart';
+import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/play_button.dart';
+import 'package:you_yemen/files/reusable_widgets/buttons/play_icon.dart';
 import 'package:you_yemen/files/reusable_widgets/image/UImage.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/translation/strings.dart';
@@ -110,6 +112,11 @@ Widget titleSubtitle(String title, String subtitle) {
 }
 
 _tuneInfoView(ToneDetail info) {
+  TuneInfo inf = TuneInfo(
+      toneId: info.toneId ?? '',
+      toneName: info.toneName ?? '',
+      artistName: info.artistName ?? '',
+      toneIdStreamingUrl: info.toneIdStreamingUrl ?? '');
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
@@ -119,7 +126,9 @@ _tuneInfoView(ToneDetail info) {
       // playButton(
 
       // ),
-      UText(title: "Add play button herre"),
+
+      playIcon(inf, () => null),
+      //UText(title: "Add play button herre"),
       deleteButton(),
     ],
   );

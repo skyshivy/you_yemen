@@ -6,6 +6,7 @@ import 'package:you_yemen/files/controllers/auth_controller/login_popup_controll
 import 'package:you_yemen/files/controllers/auth_controller/otp_controller.dart';
 import 'package:you_yemen/files/controllers/buy_controller.dart';
 import 'package:you_yemen/files/controllers/category_controller.dart';
+import 'package:you_yemen/files/controllers/my_tune_controller.dart/custom_calender_controller.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_controller.dart';
 
 import 'package:you_yemen/files/controllers/player_controller.dart';
@@ -38,6 +39,7 @@ _initController() async {
   Get.lazyPut(() => CategoryController());
   Get.lazyPut(() => USearchController());
   Get.lazyPut(() => PlayerController());
+  Get.lazyPut(() => CustomCalenderController());
 
   StoreManager().initStoreManager();
   Get.lazyPut(() => RecomendedController());

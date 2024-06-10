@@ -18,36 +18,53 @@ Widget playButton(TuneInfo info, Function()? onTap) {
   }, child: ResponsiveBuilder(
     builder: (context, si) {
       return Container(
-          height: 40,
-          decoration: BoxDecoration(
-            color: transparent,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: buttonBorderColor),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-            child: si.isMobile
-                ? Center(
-                    child: UText(
-                      title: playStr,
+        height: 40,
+        decoration: BoxDecoration(
+          color: transparent,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: buttonBorderColor),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          child: si.isMobile
+              ? Center(
+                  child: Obx(() {
+                    return UText(
+                      title: (cont.toneId.value == info.toneId)
+                          ? pauseStr
+                          : playStr,
                       fontName: FontName.helveticaBold,
-                      fontSize: si.isMobile ? 12 : null,
-                    ),
-                  )
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(Icons.play_arrow_rounded),
-                      SizedBox(width: 4),
-                      UText(
-                        title: playStr,
-                        fontName: FontName.helveticaBold,
-                      ),
-                    ],
-                  ),
-          ));
+                      fontSize: si.isMobile ? 10 : 12,
+                    );
+                  }),
+                )
+              : Obx(
+                  () {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        cont.toneId.value == info.toneId
+                            ? Icon(
+                                Icons.pause,
+                                size: 18,
+                              )
+                            : Icon(Icons.play_arrow_rounded),
+                        SizedBox(width: 2),
+                        UText(
+                          title: (cont.toneId.value == info.toneId)
+                              ? pauseStr
+                              : playStr,
+                          fontName: FontName.helveticaBold,
+                          fontSize: si.isMobile ? 10 : 12,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+        ),
+      );
     },
   ));
 }

@@ -121,3 +121,4 @@ String infoStr = 'info';
 String exampleMsisdnTextStr = 'Example:+95-9XXXXXX';
 String settingStr = "Setting";
 String myTunesStr = "My Tunes";
+String pauseStr = 'Pause';

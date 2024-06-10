@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
@@ -11,6 +12,8 @@ Widget genericButton({
   Color btnColor = white,
   bool isLeftIcon = true,
   String? title,
+  FontName? fontName,
+  double? fontSize,
   BorderRadiusGeometry? borderRadius,
   Widget? child,
   Function()? onTap,
@@ -33,24 +36,32 @@ Widget genericButton({
       child: Padding(
         padding: padding ?? const EdgeInsets.symmetric(horizontal: 0),
         child: (title != null && child != null)
-            ? _buttonWithTitleAndIcon(child, title, isLeftIcon)
-            : _otherCase(title, child),
+            ? _buttonWithTitleAndIcon(
+                child, title, isLeftIcon, fontName, fontSize)
+            : _otherCase(title, child, fontName, fontSize),
       ),
     ),
   );
 }
 
-Widget? _otherCase(String? title, Widget? child) {
+Widget? _otherCase(
+    String? title, Widget? child, FontName? fontName, double? fontSize) {
   return title != null
-      ? Center(child: UText(title: title))
+      ? Center(
+          child: UText(
+          title: title,
+          fontName: fontName,
+          fontSize: fontSize,
+        ))
       : Center(child: child);
 }
 
-Row _buttonWithTitleAndIcon(Widget child, String title, isLeftIcon) {
+Row _buttonWithTitleAndIcon(Widget child, String title, isLeftIcon,
+    FontName? fontName, double? fontSize) {
   return Row(
     children: [
       isLeftIcon ? child : SizedBox(),
-      UText(title: title),
+      UText(title: title, fontName: fontName, fontSize: fontSize),
       isLeftIcon ? SizedBox() : child,
     ],
   );

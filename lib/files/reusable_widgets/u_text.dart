@@ -16,7 +16,7 @@ class UText extends StatelessWidget {
     // required String Title, //bhavya
   });
   final String title;
-  final FontName fontName;
+  final FontName? fontName;
   final double? fontSize;
   final Color? textColor;
   final int? maxLine;
@@ -29,7 +29,7 @@ class UText extends StatelessWidget {
       textAlign: alignment,
       style: TextStyle(
         color: textColor,
-        fontFamily: fontName.name,
+        fontFamily: fontName?.name,
         fontSize: (fontSize ?? 14),
       ),
     );

@@ -18,7 +18,7 @@ class PlayerController extends GetxController {
   RxString maxDurationStr = '00:00'.obs;
   RxString currentSeekingStr = '00:00'.obs;
   late TuneInfo? info;
-  String toneId = '';
+  RxString toneId = ''.obs;
   playUrl(TuneInfo? info, int index) async {
     this.info = info;
     tuneName.value = info?.toneName ?? '';
@@ -28,9 +28,9 @@ class PlayerController extends GetxController {
     print(
         "1 was $playingIndex and is $index  _isPaused $_isPaused  isPlaying$isPlaying");
 
-    if (toneId == (toneId = info?.toneId ?? '')) {
+    if (toneId.value == (toneId.value = info?.toneId ?? '')) {
       playingIndex.value = index;
-      toneId = info?.toneId ?? '';
+      toneId.value = info?.toneId ?? '';
       print(
           "2 was $playingIndex and is $index  _isPaused $_isPaused  isPlaying$isPlaying");
       if (_isPaused) {
@@ -42,7 +42,8 @@ class PlayerController extends GetxController {
       return;
     } else {
       playingIndex.value = index;
-      toneId = info?.toneId ?? '';
+      toneId.value = info?.toneId ?? '';
+
       print(
           "3 was $playingIndex and is $index  _isPaused $_isPaused  isPlaying $isPlaying");
       isBuffering.value = true;
@@ -71,6 +72,7 @@ class PlayerController extends GetxController {
   Future<void> pause() async {
     _isPaused = true;
     print("paused tapped");
+    toneId.value = '';
     isPlaying.value = false;
     await YouAudioPlayer.instance.pause();
   }
@@ -92,9 +94,9 @@ class PlayerController extends GetxController {
   Future<void> stop() async {
     await YouAudioPlayer.instance.stop();
     current.value = 0;
-    toneId = '';
+    toneId.value = '';
     playingIndex.value = -1;
-    toneId = '';
+    toneId.value = '';
     isPlaying.value = false;
     _isCompleted = true;
     _isPaused = false;
@@ -135,7 +137,7 @@ class PlayerController extends GetxController {
               print("completed  =SKY==  ProcessingState.completed   ");
             }
             playingIndex.value = -1;
-            toneId = '';
+            toneId.value = '';
             isPlaying.value = false;
             _isCompleted = true;
             _isPaused = false;

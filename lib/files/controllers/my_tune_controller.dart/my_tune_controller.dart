@@ -32,6 +32,9 @@ class MyTuneController extends GetxController {
   }
 
   _getPlayingList() async {
+    if (isLoadingPlayingList.value) {
+      return;
+    }
     playingError.value = '';
     isLoadingPlayingList.value = true;
     PlayingTuneModel model = await getPlayingListApi();
@@ -197,6 +200,9 @@ class MyTuneController extends GetxController {
   }
 
   _getMytuneList() async {
+    if (isLoadingMyTuneList.value) {
+      return;
+    }
     myTuneError.value = '';
     isLoadingMyTuneList.value = true;
     MyTuneModel model = await getMyTuneListApi();
