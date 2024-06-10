@@ -17,7 +17,7 @@ const double cellCornerRadius = 8;
 const double textFieldCornerRadius = 8;
 const double contanerCornerRadius = 8;
 String securityBaseUrl = '';
-String selfcareBaseUrl = '';
+String selfcareBaseUrl = 'https://funtone.ooredoo.com.mm/';
 String baseUrl =
     "https://funtone.ooredoo.com.mm/apigw/Middleware/api/adapter/v1/crbt/";
 String baseUrlSecurity =

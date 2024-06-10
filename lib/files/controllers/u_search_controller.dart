@@ -16,11 +16,13 @@ class USearchController extends GetxController {
     searchedText = searchKey;
     toneList.clear();
     isloading.value = true;
-    SearchModel model = await searchToneApi(searchKey, pageNo: pageNo);
+    SearchModel model = await advanceTuneSearchToneApi([searchKey], pageNo);
     isloading.value = false;
     if (model.statusCode == 'SC0000') {
-      toneList.value = model.responseMap?.songList ?? [];
+      toneList.value =
+          model.responseMap?.toneList ?? model.responseMap?.songList ?? [];
     }
+    isloading.value = false;
   }
 
   loadingMoreData() async {
@@ -31,13 +33,15 @@ class USearchController extends GetxController {
     isLoadingMore.value = true;
 
     SearchModel model =
-        await searchToneApi(searchedText, pageNo: toneList.length);
+        await advanceTuneSearchToneApi([searchedText], toneList.length);
 
     if (model.statusCode == 'SC0000') {
-      if ((model.responseMap?.songList ?? []).isEmpty) {
+      if (((model.responseMap?.toneList ?? model.responseMap?.songList ?? [])
+          .isEmpty)) {
         return;
       }
-      toneList.value += model.responseMap?.songList ?? [];
+      toneList.value +=
+          model.responseMap?.toneList ?? model.responseMap?.songList ?? [];
     }
     isLoadingMore.value = false;
   }

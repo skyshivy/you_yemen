@@ -1,4 +1,3 @@
-import 'package:you_yemen/files/common/transaction_id.dart';
 import 'package:you_yemen/files/models/app_setting_model.dart';
 import 'package:you_yemen/files/models/search_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
@@ -6,8 +5,7 @@ import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
-Future<SearchModel> advanceTuneSearchToneApi(
-    List<String> lst, int pageNo) async {
+Future<SearchModel> advanceArtistSearchApi(List<String> lst, int pageNo) async {
   if (StoreManager().others == null) {
     await Future.delayed(const Duration(seconds: 2));
   }
@@ -16,15 +14,13 @@ Future<SearchModel> advanceTuneSearchToneApi(
 
   List<String> idlst = ["!$catId"];
   var myPost = {
-    "transactionId": getTransactionId(),
-    "channelId": channelId,
-    "msisdn": StoreManager().msisdn,
     "sortBy": "OrderBy",
     "pageNo": pageNo,
     "perPageCount": pagePerCount,
-    "filter": "Content",
-    "filterPref": "begin",
+    "filter": "Artist",
+    "filterPref": "custom",
     "locale": StoreManager().isEnglish ? "en" : "my",
+    "msisdn": StoreManager().msisdn,
     "searchKey": lst,
     "categoryId": idlst,
   };
