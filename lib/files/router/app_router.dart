@@ -20,6 +20,7 @@ import 'package:you_yemen/files/router/route_name.dart';
 import 'package:you_yemen/files/screens/home_screen/home_screen.dart';
 import 'package:you_yemen/files/screens/my_tune_screen/my_tune_screen.dart';
 import 'package:you_yemen/files/screens/my_tune_setting_screen/my_tune_setting_screen.dart';
+import 'package:you_yemen/files/screens/profile_screen/faq_screen.dart';
 
 import 'package:you_yemen/files/screens/profile_screen/profile_screen.dart';
 import 'package:you_yemen/files/screens/search_screen/search_screen.dart';
@@ -183,10 +184,7 @@ StatefulShellBranch _faqScreen() {
           path: faqRoute,
           name: faqRoute,
           builder: (context, state) {
-            return Center(
-                child: UText(
-              title: "FAQ Screen here",
-            ));
+            return Center(child: FaqScreen());
           }),
     ],
   );
