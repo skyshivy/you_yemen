@@ -10,8 +10,7 @@ import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 
 import '../../api_calls/faq_api.dart';
-import '../../models/faq_screen_model.dart'; 
-
+import '../../models/faq_screen_model.dart';
 
 class FaqScreen extends StatelessWidget {
   const FaqScreen({Key? key});
@@ -61,7 +60,6 @@ class FaqScreen extends StatelessWidget {
   }
 }
 
-
 class ContainerListItem extends StatelessWidget {
   final FaqList faqItem;
   final RxBool isExpanded = false.obs; // RxBool for expansion state
@@ -82,7 +80,7 @@ class ContainerListItem extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              isExpanded.toggle(); 
+              isExpanded.toggle();
               getFaqDetailApi();
             },
             child: Container(
@@ -98,7 +96,10 @@ class ContainerListItem extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        UText(title:faqItem.question ?? '',enfontName: FontName.helveticaBold, ),
+                        UText(
+                          title: faqItem.question ?? '',
+                          fontName: FontName.helveticaBold,
+                        ),
                         Icon(isExpanded.value ? Icons.remove : Icons.add),
                       ],
                     ),
@@ -109,9 +110,8 @@ class ContainerListItem extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             if (answer.header != null)
-                              UText(title:
-                                answer.header??'',
-                                
+                              UText(
+                                title: answer.header ?? '',
                               ),
                             if (answer.dataList != null)
                               ...answer.dataList!.map((dataList) {
@@ -121,15 +121,15 @@ class ContainerListItem extends StatelessWidget {
                                     return Padding(
                                       padding: const EdgeInsets.only(left: 8),
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
-                                          Icon(Icons.fiber_manual_record, size: 7),
+                                          Icon(Icons.fiber_manual_record,
+                                              size: 7),
                                           SizedBox(width: 8),
                                           Expanded(
                                             child: UText(
-                                              title:
-                                              datum.text ?? '',
-                                              
+                                              title: datum.text ?? '',
                                             ),
                                           ),
                                         ],
@@ -151,4 +151,3 @@ class ContainerListItem extends StatelessWidget {
     );
   }
 }
-
