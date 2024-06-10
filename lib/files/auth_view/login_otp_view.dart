@@ -119,7 +119,7 @@ class _LoginOtpViewState extends State<LoginOtpView> {
             UText(
               title: otpCont.errorMesssage.value,
               textColor: red,
-              enfontSize: 12,
+              fontSize: 12,
             ),
             otpCont.errorMesssage.isEmpty),
       );

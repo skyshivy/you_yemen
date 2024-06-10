@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/rendering.dart';
+
 import 'package:get/get.dart';
 import 'package:you_yemen/files/controllers/u_search_controller.dart';
 import 'package:you_yemen/files/reusable_widgets/generic_gridview.dart';
@@ -13,7 +13,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  USearchController cont = Get.find();
+   USearchController cont = Get.find();
   @override
   Widget build(BuildContext context) {
     return Obx(() {

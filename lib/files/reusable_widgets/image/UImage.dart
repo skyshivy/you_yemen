@@ -7,6 +7,7 @@ Widget uImage({
   BorderRadiusGeometry borderRadius = BorderRadius.zero,
   Color? gredientColor,
   BoxFit fit = BoxFit.fill,
+  //  required int width,           //bhavya
 }) {
   return ClipRRect(
     borderRadius: borderRadius,

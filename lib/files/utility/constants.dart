@@ -17,9 +17,12 @@ const double cellCornerRadius = 8;
 const double textFieldCornerRadius = 8;
 const double contanerCornerRadius = 8;
 String securityBaseUrl = '';
-String selfcareBaseUrl = '';
+String selfcareBaseUrl = 'https://funtone.ooredoo.com.mm/';
 String baseUrl =
     "https://funtone.ooredoo.com.mm/apigw/Middleware/api/adapter/v1/crbt/";
 String baseUrlSecurity =
     'https://funtone.ooredoo.com.mm/security/Middleware/api/adapter/v1/crbt/';
 const String countryCode = '+27';
+
+
+// "http://172.31.1.137:8089/security/Middleware/api/adapter/v1/crbt/view-black-list"

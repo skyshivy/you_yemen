@@ -14,3 +14,22 @@ String buyTuneUrl = "${baseUrlSecurity}set-tone";
 String getCategoryUrl = '${baseUrl}categories?';
 String getCategoryDetailUrl = "${baseUrl}search-tone?";
 String searchToneUrl = "${baseUrl}specific-search-tones?";
+String editProfileUrl = '${baseUrlSecurity}edit-profile';
+String tellFriendUrl = "${baseUrlSecurity}referral";
+String transactionUrl = "${baseUrlSecurity}view-transactions-scm";
+String mytunesUrl = "${baseUrlSecurity}list-tones";
+String myTuneListUrl = '${baseUrl}list-tones?rbtMode=400';
+String addToShuffleUrl = "${baseUrlSecurity}add-tone-to-shuffle";
+String playingTuneListUrl = '${baseUrl}list-tones?rbtMode=0';
+String getPackStatusUrl = '${baseUrl}pack-status?';
+String setDefaultToneUrl = '${baseUrlSecurity}set-default-tone';
+String tuneSuffleUrl = '${baseUrlSecurity}shuffle-activation-deactivation';
+String tuneSettingDedicatedUrl =
+    '${baseUrlSecurity}dedicated-user-tone-addition-with-time-setting';
+String tuneSettingFulldayUrl =
+    '${baseUrlSecurity}time-based-setting-for-already-activated';
+
+String advanceTuneSearchUrl = '${selfcareBaseUrl}selfcare/advanced-search';
+
+String addToWishlistUrl =
+    "${selfcareBaseUrl}/selfcare/wishlist-service/get-wishlist";
