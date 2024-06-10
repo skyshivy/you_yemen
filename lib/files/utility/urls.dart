@@ -28,3 +28,8 @@ String tuneSettingDedicatedUrl =
     '${baseUrlSecurity}dedicated-user-tone-addition-with-time-setting';
 String tuneSettingFulldayUrl =
     '${baseUrlSecurity}time-based-setting-for-already-activated';
+
+String advanceTuneSearchUrl = '${selfcareBaseUrl}selfcare/advanced-search';
+
+String addToWishlistUrl =
+    "${selfcareBaseUrl}/selfcare/wishlist-service/get-wishlist";
