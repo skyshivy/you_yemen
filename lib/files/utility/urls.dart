@@ -29,6 +29,11 @@ String tuneSettingDedicatedUrl =
 String tuneSettingFulldayUrl =
     '${baseUrlSecurity}time-based-setting-for-already-activated';
 
+// ========== selfcare api================
+
+String getSubscriptionUrl =
+    '${selfcareBaseUrl}selfcare/subscription-service/get-subscription';
+
 String advanceTuneSearchUrl = '${selfcareBaseUrl}selfcare/advanced-search';
 
 String addToWishlistUrl =
