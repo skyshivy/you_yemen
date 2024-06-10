@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/state_manager.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
@@ -67,36 +68,51 @@ class _GenericGridViewState extends State<GenericGridView> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Flexible(
-          child: Obx(() {
-            return (widget.maxDisplay != null)
-                ? wrapBuilder()
-                : (widget.list.length < 20)
-                    ? widget.list.isEmpty
-                        ? UText(
-                            title: widget.emptyListMessage,
-                            enfontName: FontName.helveticaBold,
-                          )
-                        : wrapBuilder()
-                    : gridBuilder();
-          }),
-        ),
-      ],
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Flexible(
+                child: (widget.maxDisplay != null)
+                    ? wrapBuilder()
+                    : (widget.list.length < 20)
+                        ? widget.list.isEmpty
+                            ? UText(
+                                title: widget.emptyListMessage,
+                                fontName: FontName.helveticaBold,
+                              )
+                            : wrapBuilder()
+                        : gridBuilder()
+                // Obx(() {
+                //   return
+                // }),
+                ),
+          ],
+        );
+      },
     );
   }
 
   Widget wrapBuilder() {
-    return _alignedGridView(
-        widget.maxDisplay ?? widget.list.length,
-        (index) =>
-            widget.child ??
-            (widget.list.isEmpty
-                ? SizedBox()
-                : TuneCard(info: widget.list[index])));
+    Rx<int> displayCellCount = 0.obs;
+    displayCellCount.value = widget.maxDisplay ?? widget.list.length;
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Obx(() {
+          return _alignedGridView(
+              displayCellCount.value,
+              (index) =>
+                  widget.child ??
+                  (widget.list.isEmpty
+                      ? SizedBox()
+                      : TuneCard(info: widget.list[index])),
+              widget.physics,
+              si);
+        });
+      },
+    );
   }
 
   Widget gridBuilder() {
@@ -135,12 +151,15 @@ class _GenericGridViewState extends State<GenericGridView> {
   }
 }
 
-Widget _alignedGridView(int count, Widget Function(int index) cell) {
-  const double runSpacing = 20;
-  const double spacing = 20;
+Widget _alignedGridView(int count, Widget Function(int index) cell,
+    ScrollPhysics? physics, SizingInformation si) {
+  double runSpacing = si.isMobile ? 8 : 20;
+  double spacing = si.isMobile ? 8 : 20;
 
   return ListView(
-    padding: EdgeInsets.all(20),
+    physics: physics,
+    padding:
+        EdgeInsets.symmetric(horizontal: si.isMobile ? 4 : 20, vertical: 20),
     shrinkWrap: true,
     children: [
       Wrap(
@@ -148,7 +167,10 @@ Widget _alignedGridView(int count, Widget Function(int index) cell) {
         spacing: spacing,
         alignment: WrapAlignment.center,
         children: List.generate(count, (index) {
-          return SizedBox(height: 300, width: 250, child: cell(index));
+          return SizedBox(
+              height: si.isMobile ? 200 : 300,
+              width: si.isMobile ? 180 : 250,
+              child: cell(index));
         }),
       ),
     ],

@@ -100,7 +100,7 @@ class Buy_a_friend_PopupView extends StatelessWidget {
   UText descriptionBuilder() {
     return UText(
       title: giftFriendStr,
-      enfontName: FontName.helvetica,
+      fontName: FontName.helvetica,
       textColor: Colors.grey,
       alignment: TextAlign.center,
     );
@@ -120,8 +120,7 @@ class Buy_a_friend_PopupView extends StatelessWidget {
               child: UText(
                 title: giftFriendStr,
                 textColor: black,
-                enfontName: FontName.helveticaLight,
-                arfontSize: 20,
+                fontName: FontName.helveticaLight,
               ),
             ),
           ),

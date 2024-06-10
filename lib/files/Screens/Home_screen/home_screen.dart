@@ -1,6 +1,5 @@
-import 'package:get/get.dart';
-
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 
 import 'package:you_yemen/files/Screens/Home_screen/success_popup.dart';
 import 'package:you_yemen/files/Screens/profile_screen/advanced_setting_screen.dart';
@@ -26,6 +25,11 @@ import 'package:you_yemen/files/router/route_name.dart';
 import '../profile_screen/faq_screen.dart';
 // import 'package:you_yemen/files/screens/profile_screen/transition_screen.dart';
 
+=======
+import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_list_view.dart';
+import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_tab_view.dart';
+
+>>>>>>> 255239e4e6ade76e65028a39b5d82244c84112cc
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -38,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController textCont = TextEditingController();
   TextEditingController passwordTextCont = TextEditingController();
   TextEditingController umsisdnTextController = TextEditingController();
-  MyTunesController myTunesController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -47,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 10),
         RecomendedTabView(),
         RecomendedListView(),
+<<<<<<< HEAD
         ElevatedButton(
           onPressed: () async {
             getProfileDetailsApi();
@@ -135,6 +140,8 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           child: Text('Faq Screen')
         ),
+=======
+>>>>>>> 255239e4e6ade76e65028a39b5d82244c84112cc
       ],
     );
   }

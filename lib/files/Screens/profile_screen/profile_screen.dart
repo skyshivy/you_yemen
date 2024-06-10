@@ -20,11 +20,7 @@ import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
-
-
 import 'package:you_yemen/files/utility/constants.dart';
-
-
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -221,7 +217,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   UText(
                     title: cont.categories[index].categoryName ?? '',
-                    enfontSize: 14,
+                    fontSize: 14,
                   ),
                 ],
               ),
@@ -234,8 +230,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             child: Icon(
               cont.categories[index].isSelected.value
 
-              // ? Icons.circle :Icons.fork_right,
-
+                  // ? Icons.circle :Icons.fork_right,
 
                   ? Icons.radio_button_checked
                   : Icons.radio_button_unchecked,
@@ -250,7 +245,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget gridTitleWidget() {
     return Container(
       child: Wrap(
-        spacing: 8, 
+        spacing: 8,
         children: cont.categories.map((e) => prefTitleCell(e)).toList(),
       ),
     );
