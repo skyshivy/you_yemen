@@ -3,7 +3,7 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
-Widget closePopupButton({Color btnColor = white}) {
+Widget closePopupButton({Color btnColor = white, Color iconColor = black}) {
   return ResponsiveBuilder(
     builder: (context, sizingInformation) {
       return genericButton(
@@ -14,6 +14,7 @@ Widget closePopupButton({Color btnColor = white}) {
           child: Icon(
             Icons.close,
             size: 18,
+            color: iconColor,
           ),
         ),
         onTap: () {

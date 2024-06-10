@@ -6,9 +6,12 @@ import 'package:you_yemen/files/controllers/auth_controller/login_popup_controll
 import 'package:you_yemen/files/controllers/auth_controller/otp_controller.dart';
 import 'package:you_yemen/files/controllers/buy_controller.dart';
 import 'package:you_yemen/files/controllers/category_controller.dart';
+import 'package:you_yemen/files/controllers/my_tune_controller.dart/custom_calender_controller.dart';
+import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_controller.dart';
+
 import 'package:you_yemen/files/controllers/player_controller.dart';
 import 'package:you_yemen/files/controllers/u_search_controller.dart';
-import 'package:you_yemen/files/screens/home_screen/home_screen.dart';
+
 import 'package:you_yemen/files/api_calls/setting_api.dart';
 import 'package:you_yemen/files/controllers/recomended_controller.dart';
 import 'package:you_yemen/files/router/app_router.dart';
@@ -16,9 +19,9 @@ import 'package:you_yemen/files/store_manager/store_manager.dart';
 
 late SharedPreferences prefs;
 late AppController appCont;
-void main() {
-  initialLoads();
+void main() async {
   _initController();
+  initialLoads();
   runApp(const MyApp());
 }
 
@@ -29,14 +32,23 @@ initialLoads() async {
 _initController() async {
   prefs = await SharedPreferences.getInstance();
   appCont = Get.put(AppController());
-  CategoryController catCont = Get.put(CategoryController());
-  USearchController searchCont = Get.put(USearchController());
-  PlayerController playCont = Get.put(PlayerController());
+  // CategoryController catCont = Get.put(CategoryController());
+  // USearchController searchCont = Get.put(USearchController());
+  // PlayerController playCont = Get.put(PlayerController());
+
+  Get.lazyPut(() => CategoryController());
+  Get.lazyPut(() => USearchController());
+  Get.lazyPut(() => PlayerController());
+  Get.lazyPut(() => CustomCalenderController());
+
   StoreManager().initStoreManager();
   Get.lazyPut(() => RecomendedController());
   Get.lazyPut(() => LoginPopupController());
   Get.lazyPut(() => OtpController());
   Get.lazyPut(() => BuyController());
+  //MyTuneController myTuneController = Get.put(MyTuneController());
+  Get.lazyPut(() => MyTuneController());
+  // MyTuneController
 }
 
 class MyApp extends StatelessWidget {
@@ -45,7 +57,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'You Yemen',

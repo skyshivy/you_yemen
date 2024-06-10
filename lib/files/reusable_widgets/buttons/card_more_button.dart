@@ -67,7 +67,9 @@ Widget menuCardCell(BuildContext context, int index, List<IconData> iconList,
         child: Row(
           children: [
             Icon(iconList[index], size: 18),
-            UText(title: titleList[index],)
+            UText(
+              title: titleList[index],
+            )
           ],
         ),
       ),

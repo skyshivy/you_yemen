@@ -1,25 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
-Widget cancelButton(Function()? onTap) {
+Widget cancelButton({double titlePadding = 12, Function()? onTap}) {
   return InkWell(
-    onTap: onTap,
-    child: Container(
-        height: 40,
-        decoration: BoxDecoration(
-          color: transparent,
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: buttonBorderColor),
-        ),
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-          child: Center(
-            child: UText(
-              title: cancelStr,
-            ),
-          ),
-        )),
-  );
+      focusColor: transparent,
+      hoverColor: transparent,
+      splashColor: transparent,
+      highlightColor: transparent,
+      onTap: onTap,
+      child: ResponsiveBuilder(
+        builder: (context, si) {
+          return Container(
+              height: 40,
+              decoration: BoxDecoration(
+                color: transparent,
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: buttonBorderColor),
+              ),
+              child: Padding(
+                padding:
+                    EdgeInsets.symmetric(horizontal: titlePadding, vertical: 4),
+                child: Center(
+                  child: UText(
+                    title: cancelStr,
+                    fontSize: si.isMobile ? 10 : 12,
+                  ),
+                ),
+              ));
+        },
+      ));
 }

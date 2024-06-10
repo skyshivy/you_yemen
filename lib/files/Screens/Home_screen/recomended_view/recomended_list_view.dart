@@ -7,6 +7,7 @@ import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
 class RecomendedListView extends StatelessWidget {
   RecomendedListView({super.key});
   final RecomendedController cont = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Obx(() {

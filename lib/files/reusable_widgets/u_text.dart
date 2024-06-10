@@ -6,20 +6,18 @@ import 'package:you_yemen/files/utility/colors.dart';
 class UText extends StatelessWidget {
   const UText({
     super.key,
-    this.enfontName = FontName.helvetica,
-    this.arfontName = FontName.acMuna,
-    this.enfontSize,
-    this.arfontSize,
+    this.fontName = FontName.helvetica,
+    this.fontSize,
     this.textColor = black,
     this.maxLine,
     this.alignment = TextAlign.start,
-    required this.title, 
+    required this.title,
+
+    // required String Title, //bhavya
   });
   final String title;
-  final FontName enfontName;
-  final FontName arfontName;
-  final double? enfontSize;
-  final double? arfontSize;
+  final FontName? fontName;
+  final double? fontSize;
   final Color? textColor;
   final int? maxLine;
   final TextAlign alignment;
@@ -30,12 +28,10 @@ class UText extends StatelessWidget {
       maxLines: maxLine,
       textAlign: alignment,
       style: TextStyle(
-          color: textColor,
-          fontFamily:
-              StoreManager().isEnglish ? enfontName.name : arfontName.name,
-          fontSize: StoreManager().isEnglish
-              ? (enfontSize ?? 14)
-              : (arfontSize ?? 14)),
+        color: textColor,
+        fontFamily: fontName?.name,
+        fontSize: (fontSize ?? 14),
+      ),
     );
   }
 }

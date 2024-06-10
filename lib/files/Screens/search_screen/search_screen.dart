@@ -13,7 +13,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  USearchController cont = Get.find();
+   USearchController cont = Get.find();
   @override
   Widget build(BuildContext context) {
     return Obx(() {

@@ -1,164 +1,26 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
+import 'package:get/get.dart';
+
+import 'package:responsive_builder/responsive_builder.dart';
+
 import 'package:you_yemen/files/api_calls/edit_profile_screen_api.dart';
-import 'package:you_yemen/files/enums/enums.dart';
-import 'package:you_yemen/files/model/edit_modal.dart';
-import 'package:you_yemen/files/network_manager/network_manager.dart';
+import 'package:you_yemen/files/controllers/profile_controller.dart';
+
+import 'package:you_yemen/files/models/category_list_model.dart';
+
 import 'package:you_yemen/files/reusable_widgets/buttons/cancel_button.dart';
+import 'package:you_yemen/files/reusable_widgets/buttons/confirm_button.dart';
+
 import 'package:you_yemen/files/reusable_widgets/image/UImage.dart';
 import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
+import 'package:you_yemen/files/reusable_widgets/u_text_field/u_msisdn_textfield.dart';
+import 'package:you_yemen/files/store_manager/store_manager.dart';
+import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
-import 'package:flutter/services.dart';
-
-// class ProfileScreen extends StatelessWidget {
-//   final List<String> imagePaths = [
-//     'assets/png/77.png', 'assets/png/77.png', 'assets/png/77.png',
-//     'assets/png/77.png', 'assets/png/77.png', 'assets/png/77.png', 'assets/png/77.png',
-//   ];
-//   final List<String> texts = ['hj', 'jbn', 'bmm', 'nbn', 'jhg', 'gvh', 'hgf'];
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(),
-//       body: LayoutBuilder(
-//         builder: (context, constraints) {
-//           return Padding(
-//             padding: const EdgeInsets.only(left: 200.0),
-//             child: Row(
-//               mainAxisAlignment: MainAxisAlignment.start,
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Container(
-//                   decoration: BoxDecoration(
-//                     shape: BoxShape.circle,
-//                     border: Border.all(color: Colors.pink),
-//                   ),
-//                   child: Icon(Icons.person, size: 95),
-//                 ),
-//                 SizedBox(width: constraints.maxWidth * 0.04),
-//                 Expanded(
-//                   child: Padding(
-//                     padding: const EdgeInsets.only(left: 400.0),
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         UText(title:
-//                           'Contact Number',
-//                          enfontName: FontName.helvetica,
-//                         ),
-//                         SizedBox(height: 10),
-//                         Container(
-//                           width: constraints.maxWidth * 0.6,
-//                           height: 35,
-//                           decoration: BoxDecoration(
-//                             borderRadius: BorderRadius.circular(50),
-//                             border: Border.all(color: Colors.black),
-//                           ),
-//                           child: TextField(
-//                             keyboardType: TextInputType.number,
-//                             inputFormatters: <TextInputFormatter>[
-//                               FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-//                               LengthLimitingTextInputFormatter(10),
-//                             ],
-//                             decoration: InputDecoration(
-//                               hintText: "",
-//                               border: InputBorder.none,
-//                             ),
-//                           ),
-//                         ),
-//                         SizedBox(height: 20),
-//                         Padding(
-//                           padding: const EdgeInsets.only(left:10.0),
-//                           child: UText(title:
-//                             'Preferences*',
-//                              enfontName: FontName.helvetica,
-//                           ),
-//                         ),
-//                         SizedBox(height: 10),
-//                         Expanded(
-//                           child: Padding(
-//                             padding: const EdgeInsets.only(left:0,right: 90.0), // Add padding to bottom
-//                             child: GridView.builder(
-//                               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//                                 mainAxisExtent: 100, // Increase the main axis extent
-//                                 crossAxisCount: 3,
-//                                 mainAxisSpacing: 1,
-//                                 crossAxisSpacing: 1,
-//                                 childAspectRatio: 1,
-//                               ),
-//                               shrinkWrap: true,
-//                               physics: NeverScrollableScrollPhysics(),
-//                               itemCount: imagePaths.length,
-//                               itemBuilder: (context, index) {
-//                                 return Container(
-//                                   height: 100, // Adjust the height here
-//                                   child: Column(
-//                                     children: [
-//                                       ClipRRect(
-//                                         borderRadius: BorderRadius.circular(20),
-//                                         child: Container(height: 70,
-//                                           child: Image.asset(
-//                                             imagePaths[index],
-//                                             fit: BoxFit.cover,
-//                                           ),
-//                                         ),
-//                                       ),
-//                                       SizedBox(height: 3),
-//                                       Text(texts[index]),
-//                                     ],
-//                                   ),
-//                                 );
-//                               },
-//                             ),
-//                           ),
-//                         ),
-//                         SizedBox(height: 3),
-//                         SizedBox(width: 80,),
-//                         Padding(
-//                           padding: const EdgeInsets.only(left: 259.0),
-//                           child: Row(
-//                             children: [
-//                               ElevatedButton(
-//                                 onPressed: () {}, // Placeholder function
-//                                 child: UText(title: 'Cancel',enfontName: FontName.helveticaBold),
-//                               ),
-//                               SizedBox(width: 10),
-//                               ElevatedButton(
-//   onPressed: () {}, // Placeholder function
-//   style: ButtonStyle(
-//     backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
-//   ),
-//   child: UText(title: 'Save Changes',enfontName: FontName.helveticaBold, textColor: black),
-// ),SizedBox(height: 20,)
-//                             ],
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
-
-// void main() {
-//   runApp(MaterialApp(
-//     home: ProfileScreen(),
-//   ));
-// }
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
+import 'package:you_yemen/files/utility/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -166,78 +28,72 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final List<String> imagePaths = [
-    'assets/png/77.png',
-    'assets/png/77.png',
-    'assets/png/77.png',
-    'assets/png/77.png',
-    'assets/png/77.png',
-    'assets/png/77.png',
-    'assets/png/77.png',
-  ];
-  final List<String> texts = ['hj', 'jbn', 'bmm', 'nbn', 'jhg', 'gvh', 'hgf'];
+  TextEditingController textEditingController = TextEditingController();
+  @override
+  void initState() {
+    cont.getCatgeoryList();
+    cont.getProfileDetail();
+    super.initState();
+  }
 
-  bool isEditing = false;
-  List<bool> selectedItems = List<bool>.generate(7, (index) => false);
-
+  ProfileController cont = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body:ResponsiveBuilder(context,si){
-        return si.isMobile ? _buildResponsiveLayout():_buildDefaultLayout(constraints)
-      }
-      
-      //  LayoutBuilder(
-
-      //   builder: (context, constraints) {
-      //     if (constraints.maxWidth < 600) {
-      //       return _buildResponsiveLayout();
-      //     } else {
-      //       return _buildDefaultLayout(constraints);
-      //     }
-      //   },
-      // ),
+      body: Obx(() {
+        return cont.isloading.value
+            ? loadingIndicator(radius: 20)
+            : ResponsiveBuilder(
+                builder: (context, si) {
+                  return si.isMobile
+                      ? _buildResponsiveLayout()
+                      : _buildDefaultLayout();
+                },
+              );
+      }),
     );
   }
 
-  Widget _buildDefaultLayout(BoxConstraints constraints) {
+  Widget _buildDefaultLayout() {
     return Padding(
-      padding: const EdgeInsets.only(
-        left: 20,
-      ),
+      padding: const EdgeInsets.only(left: 20),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment
+            .spaceBetween, // Align items to start and end of the row
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildCircleAvatar(),
-          SizedBox(width: constraints.maxWidth * 0.04),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 40.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildContactNumberField(constraints),
+                  _buildContactNumberField(),
                   SizedBox(height: 2),
-                  _buildPreferencesGrid(constraints),
+                  _buildPreferencesGrid(),
                   SizedBox(height: 2),
-                  Row(
-                    children: [
-                      isEditing
-                          ? _buildSaveChangesButton()
-                          : _buildEditButton(),
-                      SizedBox(
-                        width: 10,
-                        height: 3,
-                      ),
-                      isEditing ? _buildCancelButton() : SizedBox(),
-                    ],
+                  SizedBox(
+                    height: 220,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment:
+                          CrossAxisAlignment.center, // Align items to center
+                      children: [
+                        isEditing
+                            ? _buildSaveChangesButton()
+                            : _buildEditButton(),
+                        SizedBox(width: 10),
+                        isEditing ? _buildCancelButton() : SizedBox(),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
           ),
+          SizedBox(width: 16),
         ],
       ),
     );
@@ -251,9 +107,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           _buildCircleAvatar(),
           SizedBox(height: 20),
-          _buildContactNumberField(null),
+          _buildContactNumberField(),
           SizedBox(height: 20),
-          _buildPreferencesGrid(null),
+          Flexible(
+            child: _buildPreferencesGrid(),
+          ),
           SizedBox(height: 20),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -270,177 +128,242 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildCircleAvatar() {
-    return Container(
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(color: Colors.pink),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: Colors.pink),
+        ),
+        child: Icon(Icons.person, size: 95),
       ),
-      child: Icon(Icons.person, size: 95),
     );
   }
 
-  Widget _buildContactNumberField(BoxConstraints? constraints) {
+  Widget _buildContactNumberField() {
+    textEditingController.text = StoreManager().msisdn;
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Contact Number',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 5),
-        Container(
-          width: constraints != null ? constraints.maxWidth * 0.6 : null,
-          height: 30,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-            border: Border.all(color: Colors.black),
-          ),
-          child: TextField(
-            keyboardType: TextInputType.number,
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-              LengthLimitingTextInputFormatter(10),
-            ],
-            decoration: InputDecoration(
-              hintText: "",
-              border: InputBorder.none,
-            ),
-          ),
-        ),
+        Text('Contact Number:'),
+        Row(
+          children: [
+            Flexible(
+              child: SizedBox(
+                  width: 300,
+                  child: UMsisdnTextField(
+                      enabled: false,
+                      hintText: StoreManager().msisdn,
+                      textEditingController: textEditingController)),
+            )
+          ],
+        )
       ],
     );
   }
 
-  Widget _buildPreferencesGrid(BoxConstraints? constraints) {
-    int itemCount = imagePaths.length;
-
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Preferences',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 1),
-          Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8, bottom: 0),
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, // Fixed to 3 columns
-                mainAxisExtent: 100,
-                mainAxisSpacing: 1,
-                crossAxisSpacing: 1,
-                childAspectRatio: 1,
-              ),
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: itemCount,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    if (isEditing) {
-                      setState(() {
-                        selectedItems[index] = !selectedItems[index];
-                      });
-                    }
+  _buildPreferencesGrid() {
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Obx(() {
+          return si.isMobile
+              ? gridTitleWidget()
+              : GridView.builder(
+                  shrinkWrap: true,
+                  itemCount: cont.categories.length,
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 180, mainAxisExtent: 120),
+                  itemBuilder: (context, index) {
+                    return Padding(
+                        padding: const EdgeInsets.only(left: 8, bottom: 8),
+                        child: gridCellWIthImage(index)
+                        // si.isMobile
+                        //     ?
+                        //     : ,
+                        );
                   },
-                  child: Container(
-                    color: Colors.transparent,
-                    child: Stack(
-                      alignment: Alignment.topLeft,
-                      children: [
-                        Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                height: 70,
-                                child:
-                                //  uImage()
-                                Image.asset(
-                                  imagePaths[index],
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 3),
-                            Text(texts[index]),
-                          ],
-                        ),
-                        if (selectedItems[index])
-                          Container(
-                            margin: EdgeInsets.all(5),
-                            width: 10,
-                            height: 10,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.yellow
-                            ), child: Icon(Icons.check, size: 10, color: Colors.white),
-                          ),
-                      ],
-                    ),
-                  ),
                 );
-              },
+        });
+      },
+    );
+  }
+
+  Widget gridCellWIthImage(int index) {
+    return Stack(
+      alignment: Alignment.topLeft,
+      children: [
+        Obx(() {
+          return InkWell(
+            onTap: !cont.editEnable.value
+                ? null
+                : () {
+                    cont.categories[index].isSelected.value =
+                        !cont.categories[index].isSelected.value;
+                  },
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(contanerCornerRadius),
+                  color: white),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Flexible(
+                    child: uImage(
+                        url: cont.categories[index].menuImagePath ?? '',
+                        borderRadius:
+                            BorderRadius.circular(contanerCornerRadius)),
+                  ),
+                  UText(
+                    title: cont.categories[index].categoryName ?? '',
+                    fontSize: 14,
+                  ),
+                ],
+              ),
+            ),
+          );
+        }),
+        Obx(() {
+          return Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Icon(
+              cont.categories[index].isSelected.value
+
+                  // ? Icons.circle :Icons.fork_right,
+
+                  ? Icons.radio_button_checked
+                  : Icons.radio_button_unchecked,
+              color: yellow,
+            ),
+          );
+        })
+      ],
+    );
+  }
+
+  Widget gridTitleWidget() {
+    return Container(
+      child: Wrap(
+        spacing: 8,
+        children: cont.categories.map((e) => prefTitleCell(e)).toList(),
+      ),
+    );
+  }
+
+  Widget prefTitleCell(Category e) {
+    return InkWell(
+      focusColor: transparent,
+      hoverColor: transparent,
+      splashColor: transparent,
+      highlightColor: transparent,
+      onTap: !cont.editEnable.value
+          ? null
+          : () {
+              e.isSelected.value = !e.isSelected.value;
+              print("SKY======${e.isSelected.value}");
+            },
+      child: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(contanerCornerRadius),
+            color: (e.isSelected.value) ? yellow : lightGrey,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: UText(
+              title: e.categoryName ?? '',
             ),
           ),
-        ],
+        ),
       ),
     );
   }
 
   Widget _buildEditButton() {
-    return ElevatedButton(
-      onPressed: () {
-        setState(() {
-          isEditing = true;
-        });
-      },
-      child: Text('Edit'),
-    );
+    return Obx(() {
+      return cont.savingEdit.value
+          ? loadingIndicator()
+          : Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Obx(() {
+                  return confirmButton(
+                    titlePadding: 32,
+                    title: cont.editButtonTitle.value,
+                    onTap: () {
+                      if (cont.editEnable.value) {
+                        cont.saveChanges();
+                      } else {
+                        cont.editProfile();
+                      }
+                    },
+                  );
+                }),
+                Obx(() {
+                  return cont.editEnable.value
+                      ? _buildCancelButton()
+                      : SizedBox();
+                })
+              ],
+            );
+    });
   }
 
-  
-  Widget _buildCancelButton() {
-    // return cancelButton
-    // //  ElevatedButton(
-    //   onPressed: () {
-    //     // setState(() {
-    //     //   isEditing = false;
-          
-    //     //   selectedItems = List<bool>.generate(7, (index) => false);
-    //     // });
-    //   },
-    //   child: Text(
-    //     'Cancel',
-    //     style: TextStyle(fontWeight: FontWeight.bold),
-    //   ),
-    
-  // }
-}
-
-Widget _buildSaveChangesButton() {
+  Widget _buildSaveChangesButton() {
     return Padding(
-      padding: const EdgeInsets.only(left: 10.0),
-      child: ElevatedButton(
-        onPressed: () {
-          saveChanges();
-        },
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
-        ),
-        child: Text(
-          'Save Changes',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-      ),
-    );
+        padding: const EdgeInsets.only(left: 10.0),
+        child: confirmButton(
+            title: saveChangeStr,
+            onTap: () {
+              cont.saveChanges();
+              // editProfile();
+
+              // getProfileDetailsApi();
+              // editProfileAfterSelecting(selectedItems);
+            }));
   }
 
-
-void main() {
-  runApp(MaterialApp(
-    home: ProfileScreen(),
-  ));
+  Widget _buildCancelButton() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20),
+      child: cancelButton(onTap: () {
+        cont.cancelEditing();
+      }),
+    );
+  }
 }
+
+////////////////////////////usingggggggggggg imahges
+//   List<String> imagePaths = [];
+//   List<String> texts = [];
+
+//   @override
+//   void initState() {
+//     super.initState();
+
+//     fetchImagesAndTexts();
+//   }
+
+//   Future<void> fetchImagesAndTexts() async {
+//     try {
+//       final url = 'https://callertunez.mtn.co.za/apigw/Middleware/api/adapter/v1/crbt/categories?language=English';
+//       final response = await NetworkManager().get(url);
+
+//       if (response.containsKey('statusCode') && response['statusCode'] == 200) {
+//         final List<dynamic> categories = response['responseMap']['categories'];
+//         setState(() {
+//   imagePaths = categories.map<String>((category) => category['menuImagePath']).toList();
+//   texts = categories.map<String>((category) => category['categoryName']).toList();
+//   print('Fetched Image Paths: $imagePaths');
+//   print('Fetched Texts: $texts');
+// });
+
+//       } else {
+//         print('Failed to fetch images or texts. Response: $response');
+//       }
+//     } catch (error) {
+//       print('Error fetching data: $error');
+//     }
+//   }

@@ -132,7 +132,7 @@ class _BuyPopupViewState extends State<BuyPopupView> {
             padding: const EdgeInsets.only(top: 4),
             child: UText(
               title: con.errorMessage.value,
-              enfontSize: 12,
+              fontSize: 12,
               textColor: red,
             ),
           ),
@@ -152,7 +152,7 @@ class _BuyPopupViewState extends State<BuyPopupView> {
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: UText(
               title: buyTuneStr,
-              enfontName: FontName.helveticaBold,
+              fontName: FontName.helveticaBold,
             ),
           ),
           closePopupButton(btnColor: transparent),
@@ -182,8 +182,8 @@ class _BuyPopupViewState extends State<BuyPopupView> {
       children: [
         UText(
           title: widget.info.toneName ?? '',
-          enfontName: FontName.helveticaBold,
-          enfontSize: 18,
+          fontName: FontName.helveticaBold,
+          fontSize: 18,
         ),
         UText(title: widget.info.artistName ?? '', textColor: grey)
       ],
@@ -198,8 +198,8 @@ class _BuyPopupViewState extends State<BuyPopupView> {
       children: [
         UText(
           title: tuneChargeStr,
-          enfontName: FontName.helveticaBold,
-          enfontSize: 18,
+          fontName: FontName.helveticaBold,
+          fontSize: 18,
         ),
         UText(title: "Rs:20/Month", textColor: grey)
       ],
@@ -232,22 +232,22 @@ class _BuyPopupViewState extends State<BuyPopupView> {
     return si.isMobile
         ? Column(
             children: [
-              confirmButton(() {
+              confirmButton(onTap: () {
                 con.onConfirmButtonAction();
               }),
               const SizedBox(height: 10),
-              cancelButton(() {
+              cancelButton(onTap: () {
                 Navigator.of(context).pop();
               })
             ],
           )
         : Row(
             children: [
-              Expanded(child: confirmButton(() {
+              Expanded(child: confirmButton(onTap: () {
                 con.onConfirmButtonAction();
               })),
               const SizedBox(width: 20),
-              Expanded(child: cancelButton(() {
+              Expanded(child: cancelButton(onTap: () {
                 Navigator.of(context).pop();
               })),
             ],

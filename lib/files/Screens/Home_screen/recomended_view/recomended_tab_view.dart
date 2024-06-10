@@ -8,6 +8,7 @@ import 'package:you_yemen/files/utility/colors.dart';
 
 class RecomendedTabView extends StatelessWidget {
   RecomendedTabView({super.key});
+
   final RecomendedController con = Get.find();
   @override
   Widget build(BuildContext context) {
@@ -68,7 +69,10 @@ class RecomendedTabView extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Center(child: UText(title: con.tabTitleList[index], )),
+              child: Center(
+                  child: UText(
+                title: con.tabTitleList[index],
+              )),
             ),
           );
         }),

@@ -12,3 +12,5 @@ Future<CategoryDetailModel> getCategoryDetailApi(String key, String catId,
   CategoryDetailModel model = CategoryDetailModel.fromJson(map);
   return model;
 }
+
+

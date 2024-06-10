@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:get/get.dart';
+
 CategoryListModel categoryListModelFromJson(String str) =>
     CategoryListModel.fromJson(json.decode(str));
 
@@ -67,20 +69,27 @@ class Category {
   String? categoryName;
   String? menuImagePath;
   String? language;
-
+  RxBool isSelected = false.obs;
   Category({
     this.categoryId,
     this.categoryName,
     this.menuImagePath,
     this.language,
+    required this.isSelected,
   });
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
-        categoryId: json["categoryId"],
-        categoryName: json["categoryName"],
-        menuImagePath: json["menuImagePath"],
-        language: json["language"],
-      );
+      categoryId: json["categoryId"],
+      categoryName: json["categoryName"],
+      menuImagePath: json["menuImagePath"],
+      language: json["language"],
+      isSelected: false.obs);
+
+  int? get id => null;
+
+  String? get searchKey => null;
+
+  String? get name => null;
 
   Map<String, dynamic> toJson() => {
         "categoryId": categoryId,
