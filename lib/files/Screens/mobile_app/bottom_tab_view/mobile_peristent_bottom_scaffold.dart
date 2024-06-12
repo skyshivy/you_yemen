@@ -162,8 +162,8 @@ class _PersistentBottomBarScaffoldState
         return Column(
           children: [
             icon(item, index),
-            title(item),
-            indicator(index),
+            (cont.index.value == index) ? title(item) : SizedBox(),
+            // indicator(index),
           ],
         );
       },
@@ -174,15 +174,15 @@ class _PersistentBottomBarScaffoldState
     return Icon(
       item.icon,
       size: 24,
-      color: (cont.index.value == index) ? red : grey,
+      color: (cont.index.value == index) ? black : grey,
     );
   }
 
   Widget title(PersistentTabItem item) {
     return UText(
       title: item.title.tr,
-      fontSize: 14,
-      fontName: FontName.acMuna,
+      fontSize: 12,
+      fontName: FontName.helveticaBold,
     );
   }
 
@@ -190,7 +190,7 @@ class _PersistentBottomBarScaffoldState
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(1.5),
-        color: red,
+        color: black,
       ),
       width: 50,
       height: 3,

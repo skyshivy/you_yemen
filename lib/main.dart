@@ -17,6 +17,7 @@ import 'package:you_yemen/files/api_calls/setting_api.dart';
 import 'package:you_yemen/files/controllers/recomended_controller.dart';
 import 'package:you_yemen/files/router/app_router.dart';
 import 'package:you_yemen/files/screens/mobile_app/bottom_tab_view/mobile_botton_tab_view.dart';
+import 'package:you_yemen/files/screens/mobile_app/mobile_login_screen.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
 
 late SharedPreferences prefs;
@@ -64,7 +65,13 @@ class MyApp extends StatelessWidget {
           )
         : GetMaterialApp(
             home: Scaffold(
-              body: MobileTabContainer(),
+              body: Obx(
+                () {
+                  return appCont.isLoggedIn.value
+                      ? MobileTabContainer()
+                      : MobileLoginScreen();
+                },
+              ),
             ),
           );
   }
