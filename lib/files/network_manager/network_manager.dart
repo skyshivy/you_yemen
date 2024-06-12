@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
+//import 'package:get/get.dart';
 import 'package:universal_io/io.dart';
 import 'package:you_yemen/files/common/custom_header.dart';
 import 'package:you_yemen/files/models/regenerate_model.dart';
@@ -47,9 +47,6 @@ class NetworkManager {
         Map<String, dynamic> valueMap = json.decode(stringData);
         return valueMap;
       }
-      // else {
-      //   return null;
-      // }
     } catch (error) {
       print("error for url ${url}");
       print("error =   =  ${error}");
@@ -58,7 +55,6 @@ class NetworkManager {
       return valueMap;
     }
   }
-
   Future<Map<String, dynamic>> post(String url, String? formData,
       {String? msisdn, Map<String, dynamic>? jsonData}) async {
     try {
@@ -143,7 +139,7 @@ class NetworkManager {
 
   _reGeneratToken() async {
     String refreshToken = StoreManager().refreshToken;
-    String accessToken = StoreManager().accessToken;
+    //String accessToken = StoreManager().accessToken;
 
     String url = regenTokenUrl;
     print("3url used currently is $url");

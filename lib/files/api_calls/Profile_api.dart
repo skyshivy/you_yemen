@@ -2,7 +2,7 @@
 // import 'package:you_yemen/files/network_manager/network_manager.dart';
 
 
-import 'package:you_yemen/files/api_calls/get_category_detail_api.dart';
+//import 'package:you_yemen/files/api_calls/get_category_detail_api.dart';
 import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
 import 'package:you_yemen/files/model/profile_modal.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/common/buy_popup/buy_popup.dart';
-import 'package:you_yemen/files/common/tell_friend_popup/buy_a_friend_popup.dart';
+//import 'package:you_yemen/files/common/tell_friend_popup/buy_a_friend_popup.dart';
 
-import 'package:you_yemen/files/common/tell_friend_popup/popup.dart';
+//import 'package:you_yemen/files/common/tell_friend_popup/popup.dart';
 
 import 'package:you_yemen/files/controllers/tell_a_friend_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
-import 'package:you_yemen/files/screens/home_screen/success_popup.dart';
-import 'package:you_yemen/files/store_manager/store_manager.dart';
+//import 'package:you_yemen/files/screens/home_screen/success_popup.dart';
+//import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 

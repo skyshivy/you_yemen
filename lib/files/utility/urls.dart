@@ -1,3 +1,5 @@
+//import 'package:flutter/material.dart';
+//import 'package:flutter/services.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 
 String settingUrl = '${baseUrl}settings';
@@ -37,4 +39,25 @@ String getSubscriptionUrl =
 String advanceTuneSearchUrl = '${selfcareBaseUrl}selfcare/advanced-search';
 
 String addToWishlistUrl =
-    "${selfcareBaseUrl}/selfcare/wishlist-service/get-wishlist";
+
+    "${selfcareBaseUrl}selfcare/wishlist-service/get-wishlist";
+
+String listSettingsUrl =
+    "${selfcareBaseUrl}selfcare/subscriber-management/list-settings";
+
+String buyToneUrl = "${selfcareBaseUrl}selfcare/subscriber-management/buy-tone";
+
+String suspendUrl = "${selfcareBaseUrl}selfcare/subscription/suspend";
+
+String resumeUrl = "${selfcareBaseUrl}selfcare/subscription/suspend";
+
+String deleteToneUrl =
+    "${selfcareBaseUrl}selfcare/subscriber-management/delete-tone";
+
+String deletePackUrl =
+    "${selfcareBaseUrl}selfcare/subscriber-management/delete-pack";
+
+
+//    "${selfcareBaseUrl}/selfcare/wishlist-service/get-wishlist";
+
+

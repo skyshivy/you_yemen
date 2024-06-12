@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:you_yemen/files/enums/enums.dart';
-import 'package:you_yemen/files/store_manager/store_manager.dart';
+//import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
 class UText extends StatelessWidget {
