@@ -63,14 +63,8 @@ class OtpController extends GetxController {
     if (model.respCode == 0) {
       String offerName = model.contentDetails?.offerName ?? '';
       String offerStatus = model.contentDetails?.offerStatus ?? '';
-      //String price = "${model.contentDetails?.contentPrice ?? 0}";
-      if (offerStatus == "A") {
-        _setTone(offerName);
-      } else {
-        errorMesssage.value = "${model.message ?? someThingWentWrongStr}" +
-            "\n Pack Name Status = $offerStatus";
-        isVerifying.value = false;
-      }
+
+      _setTone(offerName);
     } else {
       errorMesssage.value = model.message ?? someThingWentWrongStr;
       isVerifying.value = false;

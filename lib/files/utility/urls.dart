@@ -55,7 +55,7 @@ String deletePackUrl =
     "${selfcareBaseUrl}selfcare/subscriber-management/delete-pack";
 
 String scBuyToneUrl =
-    "http://10.0.13.19:9092/selfcare/subscriber-management/buy-tone";
+    "http://10.0.10.33:5679/selfcare/subscriber-management/buy-tone";
 String scGenerateOtpUrl =
     "http://10.0.13.19:9092/auth-service/selfcare/auth/otp";
 String scConfirmOtpUrl =

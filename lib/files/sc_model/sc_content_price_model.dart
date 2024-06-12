@@ -40,7 +40,7 @@ class ScContentPriceModel {
 class ContentDetails {
   String? offerName;
   String? offerStatus;
-  int? contentPrice;
+  String? contentPrice;
 
   ContentDetails({
     this.offerName,

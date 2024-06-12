@@ -9,7 +9,7 @@ import 'package:you_yemen/files/utility/constants.dart';
 
 import 'package:you_yemen/files/utility/urls.dart';
 
-scbuyTuneApi(String offerCode, String contentId) async {
+Future<GenericModel> scbuyTuneApi(String offerCode, String contentId) async {
   String url = scBuyToneUrl;
   Map<String, dynamic> jsonMap = {
     "transactionId": getTransactionId(),
