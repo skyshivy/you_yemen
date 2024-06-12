@@ -65,6 +65,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 onSubmitted: (p0) {
                   cont.searchText(p0);
                 },
+                onChanged: (p0) {
+                  cont.updateSearchedText(p0);
+                },
               ),
             ),
           ),
