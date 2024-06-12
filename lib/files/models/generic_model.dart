@@ -26,4 +26,8 @@ class GenericModel {
         "respCode": respCode,
         "message": message,
     };
+
 }
+
+
+
