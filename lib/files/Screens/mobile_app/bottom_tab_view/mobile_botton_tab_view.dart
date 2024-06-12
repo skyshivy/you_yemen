@@ -43,7 +43,11 @@ class _MobileTabContainerState extends State<MobileTabContainer> {
           navigatorkey: _tab1navigatorKey,
         ),
         PersistentTabItem(
-          tab: Scaffold(body: Center(child: SearchScreen())),
+          tab: Scaffold(
+              body: Center(
+                  child: SearchScreen(
+            isMobile: true,
+          ))),
           icon: Icons.search,
           title: searchStr.tr,
           navigatorkey: _tab2navigatorKey,
