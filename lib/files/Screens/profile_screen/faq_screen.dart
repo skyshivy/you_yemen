@@ -1,6 +1,8 @@
 //import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 import 'package:you_yemen/files/controllers/faq_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
@@ -68,86 +70,101 @@ class ContainerListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 25,
-        right: 25,
-        top: 12,
-        bottom: 12,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          InkWell(
-            onTap: () {
-              isExpanded.toggle();
-              getFaqDetailApi();
-            },
-            child: Container(
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.grey[100],
-                borderRadius: BorderRadius.circular(2),
-              ),
-              child: Obx(() {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        UText(
-                          title: faqItem.question ?? '',
-                          fontName: FontName.helveticaBold,
-                        ),
-                        Icon(isExpanded.value ? Icons.remove : Icons.add),
-                      ],
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: si.isMobile ? 8 : 20, vertical: 6),
+                child: InkWell(
+                  onTap: () {
+                    isExpanded.toggle();
+                    getFaqDetailApi();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(2),
                     ),
-                    //SizedBox(height: 8),
-                    if (isExpanded.value && faqItem.answer != null)
-                      ...faqItem.answer!.map((answer) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (answer.header != null)
-                              UText(
-                                title: answer.header ?? '',
+                    child: Obx(() {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: UText(
+                                  title: faqItem.question ?? '',
+                                  fontName: FontName.helveticaBold,
+                                ),
                               ),
-                            if (answer.dataList != null)
-                              ...answer.dataList!.map((dataList) {
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: dataList.data!.map((datum) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(left: 8),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Icon(Icons.fiber_manual_record,
-                                              size: 7),
-                                          SizedBox(width: 8),
-                                          Expanded(
-                                            child: UText(
-                                              title: datum.text ?? '',
+                              Icon(isExpanded.value ? Icons.remove : Icons.add),
+                            ],
+                          ),
+                          //SizedBox(height: 8),
+                          if (isExpanded.value && faqItem.answer != null)
+                            ...faqItem.answer!.map((answer) {
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (answer.header != null)
+                                    UText(
+                                      title: answer.header ?? '',
+                                    ),
+                                  if (answer.dataList != null)
+                                    ...answer.dataList!.map((dataList) {
+                                      return Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: dataList.data!.map((datum) {
+                                          return Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 8),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 8),
+                                                  child: Icon(
+                                                      Icons.fiber_manual_record,
+                                                      size: 7),
+                                                ),
+                                                SizedBox(width: 8),
+                                                Expanded(
+                                                  child: UText(
+                                                    title: datum.text ?? '',
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  }).toList(),
-                                );
-                              }).toList(),
-                          ],
-                        );
-                      }).toList(),
-                  ],
-                );
-              }),
-            ),
+                                          );
+                                        }).toList(),
+                                      );
+                                    }).toList(),
+                                ],
+                              );
+                            }).toList(),
+                        ],
+                      );
+                    }),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 }
