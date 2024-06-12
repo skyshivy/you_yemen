@@ -39,7 +39,6 @@ String getSubscriptionUrl =
 String advanceTuneSearchUrl = '${selfcareBaseUrl}selfcare/advanced-search';
 
 String addToWishlistUrl =
-
     "${selfcareBaseUrl}selfcare/wishlist-service/get-wishlist";
 
 String listSettingsUrl =
@@ -57,6 +56,10 @@ String deleteToneUrl =
 String deletePackUrl =
     "${selfcareBaseUrl}selfcare/subscriber-management/delete-pack";
 
+String deleteTonefromShuffleUrl =
+    "${selfcareBaseUrl}selfcareselfcare/setting-service/delete-tone-from-shufflelist";
+
+String shuffleUrl = "${selfcareBaseUrl}selfcare/setting-service/shuffle";
 
 //    "${selfcareBaseUrl}/selfcare/wishlist-service/get-wishlist";
 
