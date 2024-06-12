@@ -4,22 +4,22 @@ import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 
-subscriberValidationApi() async {
-  //
-  String getTonePriceUrl =
-      "${selfcareBaseUrl}subscriber-management/get-content";
+deleteWishlistApi() async {
+  String deleteWishlistUrl =
+      "${selfcareBaseUrl}/selfcare/wishlist-delete-from-wishlist";
+      
 
   Map<String, dynamic> jsonMap = {
-    "transactionId": getTransactionId(),
-    "featureId": '1',
-    "channelId": channelId,
-    "languageCode": StoreManager().languageCode,
     'msisdn': StoreManager().msisdn,
+    "contentId":"contentId",
+    "languageCode": StoreManager().languageCode,
+    "type":"type",
   };
 
-  await NetworkManager().post(getTonePriceUrl, null, jsonData: jsonMap);
-  Map<String,dynamic> respJson=
-      await NetworkManager().post(getTonePriceUrl, null, jsonData: jsonMap);
+  await NetworkManager().post(deleteWishlistUrl, null, jsonData: jsonMap);
+  Map<String, dynamic> respJson =
+      await NetworkManager().post(deleteWishlistUrl , null, jsonData: jsonMap);
   GenericModel model = GenericModel.fromJson(respJson);
   return model;
+  
 }

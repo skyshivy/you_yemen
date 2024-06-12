@@ -47,9 +47,6 @@ class NetworkManager {
         Map<String, dynamic> valueMap = json.decode(stringData);
         return valueMap;
       }
-      // else {
-      //   return null;
-      // }
     } catch (error) {
       print("error for url ${url}");
       print("error =   =  ${error}");
@@ -58,7 +55,6 @@ class NetworkManager {
       return valueMap;
     }
   }
-
   Future<Map<String, dynamic>> post(String url, String? formData,
       {String? msisdn, Map<String, dynamic>? jsonData}) async {
     try {
