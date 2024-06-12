@@ -24,6 +24,7 @@ class GenericGridView extends StatefulWidget {
     this.maxDisplay,
     this.loadMore,
     this.isLoadingMore = false,
+    this.gridPadding,
   });
 
   final Widget? child;
@@ -34,6 +35,7 @@ class GenericGridView extends StatefulWidget {
   final Axis scrollDirection;
   final ScrollPhysics? physics;
   final String emptyListMessage = emptyToneListStr;
+  final EdgeInsetsGeometry? gridPadding;
   final Function()? loadMore;
 
   @override
@@ -121,7 +123,7 @@ class _GenericGridViewState extends State<GenericGridView> {
         Expanded(
           child: GridView.builder(
             physics: widget.physics,
-            padding: const EdgeInsets.all(12),
+            padding: widget.gridPadding ?? const EdgeInsets.all(12),
             itemCount: widget.maxDisplay ?? widget.list.length,
             scrollDirection: widget.scrollDirection,
             controller: _scroll1,
