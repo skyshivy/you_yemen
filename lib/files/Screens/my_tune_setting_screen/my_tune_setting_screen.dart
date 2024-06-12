@@ -16,7 +16,7 @@ import 'package:you_yemen/files/router/route_name.dart';
 import 'package:you_yemen/files/screens/my_tune_setting_screen/widgets/dedicated_widget/dedicated_view.dart';
 import 'package:you_yemen/files/screens/my_tune_setting_screen/widgets/when_widget/when_view.dart';
 import 'package:you_yemen/files/screens/my_tune_setting_screen/widgets/whom_widgets/whom_view.dart';
-import 'package:you_yemen/files/store_manager/store_manager.dart';
+//import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 

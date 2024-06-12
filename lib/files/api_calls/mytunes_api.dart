@@ -9,7 +9,7 @@ Future<PlayingListModel> getPlayingListApi() async {
   final baseUrl = mytunesUrl;
   final msisdn = StoreManager().msisdn;
 
-  if (msisdn == null || msisdn.isEmpty) {
+  if (msisdn == Null || msisdn.isEmpty) {
     throw Exception("msisdn is null or empty");
   }
 
@@ -41,7 +41,7 @@ Future<MyTuneListModel> myTunesListApi() async {
   final baseUrl = mytunesUrl;
   final msisdn = StoreManager().msisdn;
 
-  if (msisdn == null || msisdn.isEmpty) {
+  if (msisdn == Null || msisdn.isEmpty) {
     throw Exception("msisdn is null or empty");
   }
 
