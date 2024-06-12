@@ -1,8 +1,8 @@
-import 'package:get/get.dart';
+//import 'package:get/get.dart';
 import 'package:you_yemen/files/models/pack_status_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
-import 'package:you_yemen/files/translation/strings.dart';
+//import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
 Future<PackStatusModel> getPackStatusApi() async {

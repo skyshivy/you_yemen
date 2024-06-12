@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:you_yemen/files/controllers/buy_a_friend_controller.dart';
 
-import 'package:you_yemen/files/controllers/tell_a_friend_controller.dart';
+//import 'package:you_yemen/files/controllers/tell_a_friend_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 
 import 'package:you_yemen/files/models/tune_info_model.dart';
