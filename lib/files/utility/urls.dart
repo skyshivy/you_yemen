@@ -39,13 +39,10 @@ String getSubscriptionUrl =
 String advanceTuneSearchUrl = '${selfcareBaseUrl}selfcare/advanced-search';
 
 String addToWishlistUrl =
-
     "${selfcareBaseUrl}selfcare/wishlist-service/get-wishlist";
 
 String listSettingsUrl =
     "${selfcareBaseUrl}selfcare/subscriber-management/list-settings";
-
-String buyToneUrl = "${selfcareBaseUrl}selfcare/subscriber-management/buy-tone";
 
 String suspendUrl = "${selfcareBaseUrl}selfcare/subscription/suspend";
 
@@ -57,7 +54,17 @@ String deleteToneUrl =
 String deletePackUrl =
     "${selfcareBaseUrl}selfcare/subscriber-management/delete-pack";
 
+String scBuyToneUrl =
+    "http://10.0.13.19:9092/selfcare/subscriber-management/buy-tone";
+String scGenerateOtpUrl =
+    "http://10.0.13.19:9092/auth-service/selfcare/auth/otp";
+String scConfirmOtpUrl =
+    "http://10.0.13.19:9092/auth-service/selfcare/auth/token";
 
+String scGetContentPriceUrl =
+    "http://10.0.14.4:8082/selfcare/subscriber-management/get-content-price";// get-content-price
+    
+//
 //    "${selfcareBaseUrl}/selfcare/wishlist-service/get-wishlist";
 
 

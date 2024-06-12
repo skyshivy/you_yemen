@@ -1,19 +1,17 @@
 import 'package:get/get.dart';
-import 'package:you_yemen/files/api_calls/confirm_otp_api.dart';
-//import 'package:you_yemen/files/api_calls/generate_otp_api.dart';
-import 'package:you_yemen/files/api_calls/get_security_token.dart';
-import 'package:you_yemen/files/api_calls/get_tune_price.dart';
-import 'package:you_yemen/files/api_calls/password_validation_api.dart';
-import 'package:you_yemen/files/api_calls/set_tone_api.dart';
-//import 'package:you_yemen/files/controllers/auth_controller/login_popup_controller.dart';
-//import 'package:you_yemen/files/enums/enums.dart';
-import 'package:you_yemen/files/models/buy_tune_model.dart';
-import 'package:you_yemen/files/models/confirm_otp_existing_model.dart';
-//import 'package:you_yemen/files/models/generete_otp_model.dart';
-import 'package:you_yemen/files/models/get_security_token_model.dart';
-import 'package:you_yemen/files/models/get_tune_price_model.dart';
-import 'package:you_yemen/files/models/password_validation_model.dart';
+import 'package:get/get_rx/get_rx.dart';
+
+import 'package:you_yemen/files/api_self_care/sc_buy_tone_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_confirm_otp_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_content_price_api.dart';
+import 'package:you_yemen/files/common/encryptor/aes_en_de_cryptor.dart';
+
+import 'package:you_yemen/files/models/generic_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
+
+import 'package:you_yemen/files/sc_model/sc_confirm_otp_model.dart';
+import 'package:you_yemen/files/sc_model/sc_content_price_model.dart';
+import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 
@@ -25,6 +23,8 @@ class OtpController extends GetxController {
   RxString errorMesssage = ''.obs;
   Function(String message)? onSuccess;
   TuneInfo? info;
+
+  RxInt otpResendTimeout = 0.obs;
   updateOpt(String value) {
     errorMesssage.value = '';
     print("update otp = $value");
@@ -38,10 +38,64 @@ class OtpController extends GetxController {
     }
     errorMesssage.value = '';
     isVerifying.value = true;
+
+    String encOtp = AesEnDeCryptor().aesEnc(otp);
+    ScConfirmOtpModel mo = await scConfirmOtpApi(msisdn, encOtp);
+    if (mo.respCode == 0) {
+      StoreManager().setMsisdn(msisdn);
+      await StoreManager().setLoginDetails(mo);
+      if (isBuyTune) {
+        await _getContentPrice();
+      } else {
+        isVerifying.value = false;
+        if (onSuccess != null) {
+          onSuccess!(mo.message ?? '');
+        }
+      }
+    } else {
+      errorMesssage.value = mo.message ?? someThingWentWrongStr;
+    }
+    isVerifying.value = false;
+  }
+
+  _getContentPrice() async {
+    ScContentPriceModel model = await scContentPriceApi(msisdn);
+    if (model.respCode == 0) {
+      String offerName = model.contentDetails?.offerName ?? '';
+      String offerStatus = model.contentDetails?.offerStatus ?? '';
+      //String price = "${model.contentDetails?.contentPrice ?? 0}";
+      if (offerStatus == "A") {
+        _setTone(offerName);
+      } else {
+        errorMesssage.value = "${model.message ?? someThingWentWrongStr}" +
+            "\n Pack Name Status = $offerStatus";
+        isVerifying.value = false;
+      }
+    } else {
+      errorMesssage.value = model.message ?? someThingWentWrongStr;
+      isVerifying.value = false;
+    }
+  }
+
+  _setTone(String offerCode) async {
+    GenericModel model = await scbuyTuneApi(offerCode, info?.toneId ?? '');
+    if (model.respCode == 0) {
+      isVerifying.value = false;
+      if (onSuccess != null) {
+        onSuccess!(model.message ?? '');
+      }
+    } else {
+      errorMesssage.value = model.message ?? someThingWentWrongStr;
+      isVerifying.value = false;
+    }
+  }
+
+/*
+    return;
     ConfirmOtpExistingModel model = await confirmOtpApi(msisdn, otp);
     print("onConfirmOtpButtonAction ==== ${model.message}");
     if (model.statusCode == 'SC0000') {
-      getSecurityToken();
+      //getSecurityToken();
       //con.authTypes.value = AuthTypes.showSuccessScreen;
     } else {
       errorMesssage.value = model.message ?? someThingWentWrongStr;
@@ -103,4 +157,5 @@ class OtpController extends GetxController {
       isVerifying.value = false;
     }
   }
+  */
 }

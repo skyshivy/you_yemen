@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:you_yemen/files/models/app_setting_model.dart';
 import 'package:you_yemen/files/models/password_validation_model.dart';
+import 'package:you_yemen/files/sc_model/sc_confirm_otp_model.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/main.dart';
 
@@ -177,27 +178,15 @@ class StoreManager {
     }
   }
 
-  Future<void> setLoginDetails(String detail) async {
+  Future<void> setLoginDetails(ScConfirmOtpModel detail) async {
 //    convertedToString  ==========
     setLoggedIn(true);
+    setAccessToken(detail.accessToken ?? '');
 
-    prefs.setString('LoginDetails', detail);
-    Map<String, dynamic> valueMap = json.decode(detail);
-    PasswordValidationModel detail1 =
-        PasswordValidationModel.fromJson(valueMap);
-    //loginDetails = detail1;
-    accessToken = detail1.responseMap?.accessToken ?? '';
-    deviceId = detail1.responseMap?.deviceId ?? '';
-    msisdn = detail1.responseMap?.msisdn ?? '';
-    setMsisdn(msisdn);
-    setAccessToken(accessToken);
-    setDeviceId(deviceId);
-    refreshToken = detail1.responseMap?.refreshToken ?? '';
-    setRefreshToken(detail1.responseMap?.refreshToken ?? '');
-    print("Login details is refreshToken ${detail1.responseMap?.refreshToken}");
-    print("Login details is accessToken ${detail1.responseMap?.accessToken}");
-    print("Login details is refreshToken ${detail1.responseMap?.refreshToken}");
-    print(
-        "Login details is  aboutAppurlBurmese ${detail1.responseMap?.settings?.others?.aboutAppurlBurmese?.attribute}");
+    setRefreshToken(detail.refreshToken ?? '');
+
+    print("Login details is refreshToken ${detail.refreshToken}");
+    print("Login details is accessToken ${detail.accessToken}");
+    print("Login details is refreshToken ${detail.refreshToken}");
   }
 }
