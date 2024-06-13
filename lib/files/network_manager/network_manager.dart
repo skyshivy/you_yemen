@@ -55,6 +55,7 @@ class NetworkManager {
       return valueMap;
     }
   }
+
   Future<Map<String, dynamic>> post(String url, String? formData,
       {String? msisdn, Map<String, dynamic>? jsonData}) async {
     try {
@@ -100,10 +101,18 @@ class NetworkManager {
         print("Request url = $url");
         return valueMap4;
       }
-
       print("resp code is ${response.statusCode}");
       Map<String, dynamic> valueMap = json.decode(stringData);
       return valueMap;
+      // if (response.statusCode == 200) {
+      //   print("resp code is ${response.statusCode}");
+      //   Map<String, dynamic> valueMap = json.decode(stringData);
+      //   return valueMap;
+      // } else {
+      //   Map<String, dynamic> valueMap =
+      //       json.decode("""{"message":"Error: ${stringData}"}""");
+      //   return valueMap;
+      // }
     } on SocketException catch (e) {
       Map<String, dynamic> valueMap =
           json.decode("""{"message":"Socket Error: ${e.toString()}"}""");

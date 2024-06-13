@@ -56,6 +56,7 @@ class _BuyPopupViewState extends State<BuyPopupView> {
                       msisdn: con.msisdn,
                       isBuyTune: true,
                       info: widget.info,
+                      otpResendTimeout: con.otpResendTimeout,
                       onSuccess: (message) {
                         con.successMessage = message;
                         con.authTypes.value = AuthTypes.showSuccessScreen;

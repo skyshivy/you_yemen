@@ -2,9 +2,12 @@ import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:you_yemen/files/api_calls/generate_otp_api.dart';
 import 'package:you_yemen/files/api_calls/subscriber_validation_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_generate_otp_api.dart';
+import 'package:you_yemen/files/common/encryptor/aes_en_de_cryptor.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/generete_otp_model.dart';
 import 'package:you_yemen/files/models/subscriber_validation_model.dart';
+import 'package:you_yemen/files/sc_model/sc_generate_otp_model.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 
@@ -13,9 +16,13 @@ class LoginPopupController extends GetxController {
   String msisdn = '';
   RxBool isVerifying = false.obs;
   RxBool enableButton = false.obs;
+  String userData = '';
+  int otpResendTimeout = 0;
   Rx<AuthTypes> authTypes = AuthTypes.showLoginPopup.obs;
 
   updateMsisdn(String value) {
+    userData = '';
+    otpResendTimeout = 0;
     errorMessage.value = '';
     if (value.length == msisdnLength) {
       enableButton.value = true;
@@ -26,6 +33,8 @@ class LoginPopupController extends GetxController {
   }
 
   onSubmitButtonAction() async {
+    userData = '';
+    otpResendTimeout = 0;
     errorMessage.value = '';
     if (msisdn.isEmpty) {
       errorMessage.value = enterValidMobileNumberStr;
@@ -36,7 +45,17 @@ class LoginPopupController extends GetxController {
       return;
     }
     isVerifying.value = true;
-
+    ScGenerateOtpModel mo = await scGenerateOtpApi(msisdn);
+    if (mo.respCode == 1000) {
+      authTypes.value = AuthTypes.showOtpScreen;
+      userData = mo.userData ?? '';
+      otpResendTimeout = mo.otpResendTimeout ?? 0;
+      AesEnDeCryptor().decryptWithAES(userData);
+    } else {
+      errorMessage.value = mo.message ?? someThingWentWrongStr;
+    }
+    isVerifying.value = false;
+    return;
     SubscriberValidationModel model = await subscriberValidateApi(msisdn);
     if (model.statusCode == 'SC0000') {
       if (model.responseMap?.respCode == "SC0000") {

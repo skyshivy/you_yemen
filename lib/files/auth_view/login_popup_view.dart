@@ -50,6 +50,7 @@ class _LoginPopupViewState extends State<LoginPopupView> {
         UAnimatedSwitcher(
             LoginOtpView(
               msisdn: con.msisdn,
+              otpResendTimeout: con.otpResendTimeout,
               onSuccess: (message) {
                 con.authTypes.value = AuthTypes.showSuccessScreen;
               },

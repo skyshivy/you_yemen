@@ -26,9 +26,11 @@ class LoginOtpView extends StatefulWidget {
     this.isBuyTune = false,
     this.info,
     required this.onSuccess,
+    required this.otpResendTimeout,
   });
   final String msisdn;
   final isBuyTune;
+  final int otpResendTimeout;
   final Function(String message) onSuccess;
   final TuneInfo? info;
   @override
@@ -98,7 +100,9 @@ class _LoginOtpViewState extends State<LoginOtpView> {
                       const SizedBox(height: 20),
                       verifyButtonBuilder(),
                       const SizedBox(height: 20),
-                      genericButton(width: 180, title: resendStr),
+                      genericButton(
+                          width: 180,
+                          title: "${resendStr} : ${widget.otpResendTimeout}"),
                       const SizedBox(height: 20),
                     ],
                   ),

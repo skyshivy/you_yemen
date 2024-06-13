@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:you_yemen/files/common/encryptor/cryptom.dart';
+import 'package:you_yemen/files/common/encryptor/rsa_cryptom.dart';
 import 'package:you_yemen/files/models/password_validation_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
@@ -39,7 +39,7 @@ Future<PasswordValidationModel> passowrdValidateApi(
   Map<String, dynamic> map = await NetworkManager().post(url, formData);
   PasswordValidationModel model = PasswordValidationModel.fromJson(map);
   String details = json.encode(model);
-  await StoreManager().setLoginDetails(details);
+  //await StoreManager().setLoginDetails(details);
 
   return model;
 }
