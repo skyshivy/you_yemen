@@ -5,12 +5,16 @@ import 'package:you_yemen/files/api_calls/generate_otp_api.dart';
 import 'package:you_yemen/files/api_calls/get_tune_price.dart';
 import 'package:you_yemen/files/api_calls/set_tone_api.dart';
 import 'package:you_yemen/files/api_calls/subscriber_validation_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_confirm_otp_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_generate_otp_api.dart';
+import 'package:you_yemen/files/common/encryptor/aes_en_de_cryptor.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/buy_tune_model.dart';
 import 'package:you_yemen/files/models/generete_otp_model.dart';
 import 'package:you_yemen/files/models/get_tune_price_model.dart';
 import 'package:you_yemen/files/models/subscriber_validation_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
+import 'package:you_yemen/files/sc_model/sc_generate_otp_model.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/constants.dart';
@@ -21,6 +25,7 @@ class BuyController extends GetxController {
   String msisdn = '';
   RxBool isVerifying = false.obs;
   TuneInfo? info;
+  int otpResendTimeout = 0;
   Rx<AuthTypes> authTypes = AuthTypes.showLoginPopup.obs;
   updateMsisdn(String value) {
     errorMessage.value = '';
@@ -29,7 +34,7 @@ class BuyController extends GetxController {
 
   onConfirmButtonAction() async {
     if (StoreManager().isLoggedIn) {
-      msisdn = "9923964719"; //StoreManager().msisdn;
+      msisdn = StoreManager().msisdn;
     }
     if (msisdn.length < msisdnLength) {
       errorMessage.value = enterValidMobileNumberStr;
@@ -37,6 +42,19 @@ class BuyController extends GetxController {
       return;
     }
     isVerifying.value = true;
+
+    ScGenerateOtpModel mo = await scGenerateOtpApi(msisdn);
+    if (mo.respCode == 1000) {
+      AesEnDeCryptor().decryptWithAES(mo.userData ?? '');
+      otpResendTimeout = mo.otpResendTimeout ?? 0;
+      authTypes.value = AuthTypes.showOtpScreen;
+      isVerifying.value = false;
+    } else {
+      errorMessage.value = mo.message ?? someThingWentWrongStr;
+      isVerifying.value = false;
+    }
+
+    return;
     SubscriberValidationModel model = await subscriberValidateApi(msisdn);
     if (model.statusCode == 'SC0000') {
       if (model.responseMap?.respCode == "SC0000") {

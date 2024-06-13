@@ -14,7 +14,7 @@ class RecomendedTabView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       return con.isLoadingTab.value
-          ? loadingIndicator()
+          ? loadingIndicator(height: 200, radius: 20)
           : Row(
               children: [
                 Flexible(

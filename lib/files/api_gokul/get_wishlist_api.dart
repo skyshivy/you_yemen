@@ -5,13 +5,12 @@ import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 
 getWislistApi() async {
-  
   String getWishlistUrl =
       "${selfcareBaseUrl}/selfcare/wishlist-service/get-wishlist";
 
   Map<String, dynamic> jsonMap = {
     "msisdn": StoreManager().msisdn,
-    "type":"1",
+    "type": "1",
     "languageCode": StoreManager().languageCode,
   };
 
