@@ -170,7 +170,7 @@ StatefulShellBranch _searchScreen() {
           name: searchRoute,
           builder: (context, state) {
             String searchKey = state.uri.queryParameters['searchKey'] ?? '';
-            //cont.searchText(searchKey);
+            cont.searchText(searchKey);
             return SearchScreen();
           }),
     ],

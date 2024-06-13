@@ -2,7 +2,8 @@
 //import 'package:flutter/services.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 
-String settingUrl = '${baseUrl}settings';
+String homeBannerUrl =
+    "https://mytune.atom.com.mm/apigw/Middleware/api/adapter/v1/crbt/banner?language=";
 String searchToneIdUrl = "${baseUrl}search-tone";
 String regenTokenUrl = "${baseUrlSecurity}regen-token";
 String recomurl = "${baseUrl}get-recommendation-songs?";
@@ -63,6 +64,7 @@ String scConfirmOtpUrl =
 
 String scGetContentPriceUrl =
     "http://10.0.14.4:8082/selfcare/subscriber-management/get-content-price"; // get-content-price
+String scSettingUrl = 'http://10.0.13.19:9093/setting-service/settings';
 
 String deleteTonefromShuffleUrl =
     "${selfcareBaseUrl}selfcareselfcare/setting-service/delete-tone-from-shufflelist";

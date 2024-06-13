@@ -131,3 +131,8 @@ String changePasswordStr = 'Change Password';
 String callerGroupStr = 'My Caller Group';
 String blackListStr = 'Blacklist';
 String myWishlistStr = 'My Wishlist';
+
+String toneStr = 'Tone';
+String toneCodeStr = 'Tone Code';
+String artistStr = 'Artist';
+String nameToneStr = 'Name Tone';

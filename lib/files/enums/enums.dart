@@ -35,3 +35,10 @@ enum PopupType {
   warning,
   error,
 }
+
+enum SearchType {
+  tone,
+  toneId,
+  artist,
+  nameTone,
+}

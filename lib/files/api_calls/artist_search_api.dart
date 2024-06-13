@@ -6,11 +6,11 @@ import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
 Future<SearchModel> advanceArtistSearchApi(List<String> lst, int pageNo) async {
-  if (StoreManager().others == null) {
+  if (StoreManager().appSetting == null) {
     await Future.delayed(const Duration(seconds: 2));
   }
-  Others? others = StoreManager().others;
-  String catId = others?.nameTuneCategoryid?.attribute ?? '0';
+  AppSettingModel? appSetting = StoreManager().appSetting;
+  String catId = ""; //others?.nameTuneCategoryid?.attribute ?? '0';
 
   List<String> idlst = ["!$catId"];
   var myPost = {

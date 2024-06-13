@@ -70,29 +70,11 @@ class WebNavigationView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Flexible(child: searchTextField(context)),
+        //Flexible(child: searchTextField(context)),
         const SizedBox(width: 12),
         navLoginButton(),
         const SizedBox(width: 12),
       ],
-    );
-  }
-
-  SizedBox searchTextField(BuildContext context) {
-    USearchController cont = Get.find();
-    return SizedBox(
-      width: 300,
-      child: UTextField(
-        hideSearchIcon: false,
-        textEditingController: textEditingController,
-        onChanged: (p0) {
-          cont.updateSearchedText(p0);
-        },
-        onSubmitted: (p0) {
-          cont.searchText(p0);
-          context.goNamed(searchRoute, queryParameters: {"searchKey": p0});
-        },
-      ),
     );
   }
 }
