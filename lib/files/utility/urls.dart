@@ -54,6 +54,7 @@ String deleteToneUrl =
 String deletePackUrl =
     "${selfcareBaseUrl}selfcare/subscriber-management/delete-pack";
 
+
 String scBuyToneUrl =
     "http://10.0.10.33:5679/selfcare/subscriber-management/buy-tone";
 String scGenerateOtpUrl =
@@ -64,7 +65,13 @@ String scConfirmOtpUrl =
 String scGetContentPriceUrl =
     "http://10.0.14.4:8082/selfcare/subscriber-management/get-content-price";// get-content-price
     
-//
-//    "${selfcareBaseUrl}/selfcare/wishlist-service/get-wishlist";
+
+String deleteTonefromShuffleUrl =
+    "${selfcareBaseUrl}selfcareselfcare/setting-service/delete-tone-from-shufflelist";
+
+String shuffleUrl = "${selfcareBaseUrl}selfcare/setting-service/shuffle";
+
+
+    "${selfcareBaseUrl}/selfcare/wishlist-service/get-wishlist";
 
 
