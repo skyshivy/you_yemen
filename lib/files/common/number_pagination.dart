@@ -5,14 +5,15 @@ import 'package:you_yemen/files/utility/colors.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 
 class NumberPagination extends StatefulWidget {
-  const NumberPagination(
-      {Key? key,
-      required this.totalItem,
-      required this.tappedIndex,
-      this.hidePagination})
-      : super(key: key);
+  const NumberPagination({
+    Key? key,
+    required this.totalItem,
+    required this.tappedIndex,
+    this.hidePagination,
+  }) : super(key: key);
   final int totalItem;
   final bool? hidePagination;
+
   final Function(int) tappedIndex;
   @override
   _NumberPaginationState createState() => _NumberPaginationState();
@@ -24,8 +25,13 @@ class _NumberPaginationState extends State<NumberPagination> {
   //int _currentPage = 0;
   @override
   void initState() {
-    var anc = (widget.totalItem / pagePerCount).ceil(); //.floor(); //
-    _numPages = anc;
+    if (widget.totalItem < 2) {
+      _numPages = 1;
+    } else {
+      var anc = (widget.totalItem / pagePerCount).ceil(); //.floor(); //
+      _numPages = anc;
+    }
+
     super.initState();
   }
 
@@ -37,7 +43,7 @@ class _NumberPaginationState extends State<NumberPagination> {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: black,
+          color: black.withOpacity(0.7),
         ),
         width: 500,
         child: NumberPaginator(

@@ -30,7 +30,7 @@ class _SearchScreenState extends State<SearchScreen> {
           : GenericGridView(
               list: cont.toneList,
               isLoadingMore: cont.isLoadingMore.value,
-              totalCount: 60,
+              totalCount: cont.totalCount,
               loadMore: () {
                 cont.loadingMoreData();
               },

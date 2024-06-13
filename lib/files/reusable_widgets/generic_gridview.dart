@@ -11,6 +11,7 @@ import 'package:you_yemen/files/reusable_widgets/tune_card.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/reusable_widgets/u_visibility.dart';
 import 'package:you_yemen/files/translation/strings.dart';
+import 'package:you_yemen/files/utility/constants.dart';
 
 class GenericGridView extends StatefulWidget {
   GenericGridView(
@@ -149,14 +150,13 @@ class _GenericGridViewState extends State<GenericGridView> {
                 },
               ),
             ),
-
-            // uVisibility(
-            //   Padding(
-            //     padding: const EdgeInsets.all(8.0),
-            //     child: loadingIndicator(radius: 16),
-            //   ),
-            //   !widget.isLoadingMore,
-            // ),
+            uVisibility(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: loadingIndicator(radius: 16),
+              ),
+              !widget.isLoadingMore,
+            ),
           ],
         ),
         Padding(

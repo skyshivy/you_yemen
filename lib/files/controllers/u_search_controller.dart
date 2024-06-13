@@ -13,6 +13,7 @@ class USearchController extends GetxController {
   RxList<TuneInfo> toneList = <TuneInfo>[].obs;
   SearchType searchType = SearchType.tone;
   RxInt selectedIndex = 0.obs;
+  int totalCount = 0;
   RxList<String> searchTypeList = <String>[
     toneStr,
     toneCodeStr,
@@ -68,6 +69,7 @@ class USearchController extends GetxController {
       toneList.value =
           model.responseMap?.toneList ?? model.responseMap?.songList ?? [];
     }
+
     return;
   }
 
