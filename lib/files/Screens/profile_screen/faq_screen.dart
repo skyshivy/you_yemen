@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/common/custom_app_bar.dart';
 
 import 'package:you_yemen/files/controllers/faq_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
@@ -20,6 +21,7 @@ class FaqScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: customAppBar(title: "FAQ"),
       body: Column(
         children: [
           Container(

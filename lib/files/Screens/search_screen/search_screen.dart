@@ -62,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ? loadingIndicator(radius: 18)
                   : gridView(
                       gridPadding: EdgeInsets.only(
-                          top: 140, left: 4, right: 4, bottom: 20));
+                          top: 146, left: 6, right: 6, bottom: 20));
             }),
           ),
           Container(

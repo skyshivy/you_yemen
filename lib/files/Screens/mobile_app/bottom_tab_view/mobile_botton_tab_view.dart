@@ -37,7 +37,10 @@ class _MobileTabContainerState extends State<MobileTabContainer> {
     return PersistentBottomBarScaffold(
       items: [
         PersistentTabItem(
-          tab: Scaffold(body: HomeScreen()),
+          tab: Scaffold(
+            body: HomeScreen(),
+            appBar: AppBar(),
+          ),
           icon: Icons.home,
           title: homeStr.tr,
           navigatorkey: _tab1navigatorKey,

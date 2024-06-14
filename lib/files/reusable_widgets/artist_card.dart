@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/common/mobile_navigation.dart';
 import 'package:you_yemen/files/controllers/artist_tunes_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
@@ -12,6 +14,7 @@ import 'package:you_yemen/files/reusable_widgets/decorations/card_decoration.dar
 import 'package:you_yemen/files/reusable_widgets/image/UImage.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/router/route_name.dart';
+import 'package:you_yemen/files/screens/artist_tunes_screen/artist_tunes_screen.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
@@ -68,8 +71,14 @@ class ArtistCard extends StatelessWidget {
                 onTap: () {
                   ArtistTunesController cont = Get.find();
                   cont.getArtistTunes(info?.artist ?? '');
-                  context.goNamed(artistTunesRoute,
-                      queryParameters: {'artistKey': info?.artist ?? ''});
+                  if (GetPlatform.isWeb) {
+                    context.goNamed(artistTunesRoute,
+                        queryParameters: {'artistKey': info?.artist ?? ''});
+                  } else {
+                    mobileNavigation(context,
+                        ArtistTunesScreen(artistKey: info?.artist ?? ''));
+                  }
+
                   print("View tapped");
                 },
               ),

@@ -125,54 +125,58 @@ class _GenericGridViewState extends State<GenericGridView> {
   }
 
   Widget gridBuilder(Function(TuneInfo)? cardBuilder) {
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
-        Column(
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Stack(
+          alignment: Alignment.bottomCenter,
           children: [
-            Expanded(
-              child: GridView.builder(
-                physics: widget.physics,
-                padding: widget.gridPadding ?? const EdgeInsets.all(12),
-                itemCount: widget.maxDisplay ?? widget.list.length,
-                scrollDirection: widget.scrollDirection,
-                controller: _scroll1,
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    mainAxisSpacing: 20,
-                    crossAxisSpacing: 20,
-                    maxCrossAxisExtent: 280,
-                    childAspectRatio: 0.9),
-                itemBuilder: (context, index) {
-                  return widget.cardBuilder != null
-                      ? widget.cardBuilder!((widget.list[index]))
-                      : TuneCard(
-                          info: widget.list[index],
-                        );
+            Column(
+              children: [
+                Expanded(
+                  child: GridView.builder(
+                    physics: widget.physics,
+                    padding: widget.gridPadding ?? const EdgeInsets.all(12),
+                    itemCount: widget.maxDisplay ?? widget.list.length,
+                    scrollDirection: widget.scrollDirection,
+                    controller: _scroll1,
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                        mainAxisSpacing: si.isMobile ? 6 : 20,
+                        crossAxisSpacing: si.isMobile ? 6 : 20,
+                        maxCrossAxisExtent: 280,
+                        childAspectRatio: 0.9),
+                    itemBuilder: (context, index) {
+                      return widget.cardBuilder != null
+                          ? widget.cardBuilder!((widget.list[index]))
+                          : TuneCard(
+                              info: widget.list[index],
+                            );
+                    },
+                  ),
+                ),
+                uVisibility(
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: loadingIndicator(radius: 16),
+                  ),
+                  !widget.isLoadingMore,
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10, left: 14, right: 14),
+              child: NumberPagination(
+                totalItem: widget.totalCount,
+                tappedIndex: (p0) {
+                  if (widget.pageNo != null) {
+                    widget.pageNo!(p0);
+                  }
                 },
               ),
             ),
-            uVisibility(
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: loadingIndicator(radius: 16),
-              ),
-              !widget.isLoadingMore,
-            ),
           ],
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10, left: 14, right: 14),
-          child: NumberPagination(
-            totalItem: widget.totalCount,
-            tappedIndex: (p0) {
-              if (widget.pageNo != null) {
-                widget.pageNo!(p0);
-              }
-            },
-          ),
-        ),
-      ],
+        );
+      },
     );
   }
 }
