@@ -16,6 +16,7 @@ Widget genericButton({
   double? fontSize,
   BorderRadiusGeometry? borderRadius,
   Widget? child,
+  Color? textColor,
   Function()? onTap,
 }) {
   return InkWell(
@@ -37,31 +38,37 @@ Widget genericButton({
         padding: padding ?? const EdgeInsets.symmetric(horizontal: 0),
         child: (title != null && child != null)
             ? _buttonWithTitleAndIcon(
-                child, title, isLeftIcon, fontName, fontSize)
-            : _otherCase(title, child, fontName, fontSize),
+                child, title, isLeftIcon, fontName, fontSize, textColor)
+            : _otherCase(title, child, fontName, fontSize, textColor),
       ),
     ),
   );
 }
 
-Widget? _otherCase(
-    String? title, Widget? child, FontName? fontName, double? fontSize) {
+Widget? _otherCase(String? title, Widget? child, FontName? fontName,
+    double? fontSize, Color? titleColor) {
   return title != null
       ? Center(
           child: UText(
           title: title,
           fontName: fontName,
           fontSize: fontSize,
+          textColor: titleColor,
         ))
       : Center(child: child);
 }
 
 Row _buttonWithTitleAndIcon(Widget child, String title, isLeftIcon,
-    FontName? fontName, double? fontSize) {
+    FontName? fontName, double? fontSize, Color? titleColor) {
   return Row(
     children: [
       isLeftIcon ? child : SizedBox(),
-      UText(title: title, fontName: fontName, fontSize: fontSize),
+      UText(
+        title: title,
+        fontName: fontName,
+        fontSize: fontSize,
+        textColor: titleColor,
+      ),
       isLeftIcon ? SizedBox() : child,
     ],
   );

@@ -14,6 +14,7 @@ import 'package:you_yemen/files/controllers/profile_controller.dart';
 import 'package:you_yemen/files/controllers/u_search_controller.dart';
 import 'package:you_yemen/files/models/category_detail_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
+import 'package:you_yemen/files/screens/artist_tunes_screen/artist_tunes_screen.dart';
 import 'package:you_yemen/files/screens/banner_detail_screen/banner_detail_screen.dart';
 import 'package:you_yemen/files/screens/category_screen/category_detail_screen.dart';
 
@@ -48,6 +49,7 @@ final router = GoRouter(
         _searchScreen(),
         _faqScreen(),
         _bannerDetailScreen(),
+        _artistTunesScreen(),
       ],
     ),
   ],
@@ -177,6 +179,23 @@ StatefulShellBranch _searchScreen() {
             //cont.updateSearchType(int.parse(searchType));
             cont.searchText(searchKey, type: searchType);
             return SearchScreen();
+          }),
+    ],
+  );
+}
+
+StatefulShellBranch _artistTunesScreen() {
+  USearchController cont = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+          path: artistTunesRoute,
+          name: artistTunesRoute,
+          builder: (context, state) {
+            String artistKey = state.uri.queryParameters['artistKey'] ?? '';
+            return ArtistTunesScreen(
+              artistKey: artistKey,
+            );
           }),
     ],
   );

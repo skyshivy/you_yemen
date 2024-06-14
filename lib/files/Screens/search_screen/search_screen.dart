@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:you_yemen/files/common/search_tune_text_field.dart';
 import 'package:you_yemen/files/controllers/u_search_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
+import 'package:you_yemen/files/reusable_widgets/artist_card.dart';
 import 'package:you_yemen/files/reusable_widgets/generic_gridview.dart';
 import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
@@ -35,7 +36,7 @@ class _SearchScreenState extends State<SearchScreen> {
               totalCount: cont.totalCount,
               cardBuilder: cont.searchType == SearchType.artist
                   ? (p0) {
-                      return UText(title: "Artist Search");
+                      return ArtistCard(info: p0);
                     }
                   : null,
               loadMore: () {

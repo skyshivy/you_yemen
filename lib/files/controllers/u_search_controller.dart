@@ -91,6 +91,7 @@ class USearchController extends GetxController {
     print("Search Artist here");
     SearchModel model = await searchArtistApi([searchedText]);
     toneList.value = model.responseMap?.toneList ?? [];
+
     return;
   }
 

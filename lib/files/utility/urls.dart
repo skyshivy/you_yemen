@@ -69,6 +69,7 @@ String searchNameToneUrl = "${baseUrl}specific-search-tones?";
 
 String artistSearchUrl = "${baseUrl}specific-search-tones?";
 String bannerDetailUrl = "${baseUrl}banner-search?";
+String artistTunesUrl = "${baseUrl}search-tone?";
 String deleteTonefromShuffleUrl =
     "${selfcareBaseUrl}selfcareselfcare/setting-service/delete-tone-from-shufflelist";
 
