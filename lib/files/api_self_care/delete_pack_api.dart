@@ -7,15 +7,15 @@ import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
 deletePackApi() async {
-  String url = deletePackUrl;
+  String url = "http://10.0.10.33:5679/selfcare/subscriber-management/delete-pack";
   Map<String, dynamic> jsonMap = {
-    "transactionId": getTransactionId(),
-    "featureId": "1",
-    "msisdn": StoreManager().msisdn,
-    "offerId": "offerId",
-    "offerCode": "offerCode",
-    "channelId": channelId
-  };
+  "transactionId": "84681012337",
+  "featureId": 1,
+  "msisdn": "92000001",
+  "offerId": 10,
+  "channelId": 2,
+  "offerCode": "CRBT_MONTHLY_REC"
+};
   Map<String, dynamic> respJson =
       await NetworkManager().post(url, null, jsonData: jsonMap);
   GenericModel model = GenericModel.fromJson(respJson);

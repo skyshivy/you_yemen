@@ -1,24 +1,23 @@
-import 'package:you_yemen/files/common/transaction_id.dart';
 import 'package:you_yemen/files/models/generic_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
-import 'package:you_yemen/files/store_manager/store_manager.dart';
-import 'package:you_yemen/files/utility/constants.dart';
-import 'package:you_yemen/files/utility/urls.dart';
+
 
 deleteTonefromShuffleApi() async {
-  String url = deleteTonefromShuffleUrl;
- Map<String, dynamic> jsonMap = {
-               "transactionId": getTransactionId(),
-    "featureId": "1",
-    "msisdn": StoreManager().msisdn,
-    "languageCode": StoreManager().languageCode,
-
-    "contentId": "contentId",
-    "channelId": channelId,
-    };
-  Map<String,dynamic> respJson=await NetworkManager().post(url, null, jsonData: jsonMap);
+  String url =
+      "http://10.0.10.33:9089/selfcare/setting-service/delete-tone-from-shufflelist";
+  // deleteTonefromShuffleUrl;
+  Map<String, dynamic> jsonMap = {
+    "transactionId": "3457297",
+    "featureId": 1,
+    "msisdn": "8182020000",
+    "channelId": 2,
+    "contentIdlist": [
+      {"contentId": "98000105"},
+      {"contentId": "19"}
+    ]
+  };
+  Map<String, dynamic> respJson =
+      await NetworkManager().post(url, null, jsonData: jsonMap);
   GenericModel model = GenericModel.fromJson(respJson);
   return model;
-
 }
-
