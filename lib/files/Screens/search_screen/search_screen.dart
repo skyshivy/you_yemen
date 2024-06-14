@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:you_yemen/files/common/search_tune_text_field.dart';
 import 'package:you_yemen/files/controllers/u_search_controller.dart';
+import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/reusable_widgets/generic_gridview.dart';
 import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
+import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text_field/u_textfield.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
@@ -31,6 +33,11 @@ class _SearchScreenState extends State<SearchScreen> {
               list: cont.toneList,
               isLoadingMore: cont.isLoadingMore.value,
               totalCount: cont.totalCount,
+              cardBuilder: cont.searchType == SearchType.artist
+                  ? (p0) {
+                      return UText(title: "Artist Search");
+                    }
+                  : null,
               loadMore: () {
                 cont.loadingMoreData();
               },

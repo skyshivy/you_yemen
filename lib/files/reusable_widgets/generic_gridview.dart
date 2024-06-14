@@ -18,7 +18,7 @@ class GenericGridView extends StatefulWidget {
       {Key? key,
 
       // super.key,
-      this.child,
+
       this.onTap,
       required this.list,
       this.scrollDirection = Axis.vertical,
@@ -28,9 +28,9 @@ class GenericGridView extends StatefulWidget {
       this.isLoadingMore = false,
       this.gridPadding,
       this.pageNo,
-      required this.totalCount});
+      required this.totalCount,
+      this.cardBuilder = null});
 
-  final Widget? child;
   final int? maxDisplay;
   final RxList<TuneInfo> list;
   final bool isLoadingMore;
@@ -41,6 +41,7 @@ class GenericGridView extends StatefulWidget {
   final EdgeInsetsGeometry? gridPadding;
   final Function()? loadMore;
   final Function(int)? pageNo;
+  final Function(TuneInfo)? cardBuilder;
   final int totalCount;
 
   @override
@@ -91,7 +92,7 @@ class _GenericGridViewState extends State<GenericGridView> {
                                 fontName: FontName.helveticaBold,
                               )
                             : wrapBuilder()
-                        : gridBuilder()
+                        : gridBuilder((p0) => widget.cardBuilder)
                 // Obx(() {
                 //   return
                 // }),
@@ -111,10 +112,10 @@ class _GenericGridViewState extends State<GenericGridView> {
           return _alignedGridView(
               displayCellCount.value,
               widget.gridPadding,
-              (index) =>
-                  widget.child ??
-                  (widget.list.isEmpty
-                      ? SizedBox()
+              (index) => (widget.list.isEmpty
+                  ? SizedBox()
+                  : widget.cardBuilder != null
+                      ? widget.cardBuilder!((widget.list[index]))
                       : TuneCard(info: widget.list[index])),
               widget.physics,
               si);
@@ -123,7 +124,7 @@ class _GenericGridViewState extends State<GenericGridView> {
     );
   }
 
-  Widget gridBuilder() {
+  Widget gridBuilder(Function(TuneInfo)? cardBuilder) {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
@@ -143,10 +144,11 @@ class _GenericGridViewState extends State<GenericGridView> {
                     maxCrossAxisExtent: 280,
                     childAspectRatio: 0.9),
                 itemBuilder: (context, index) {
-                  return widget.child ??
-                      TuneCard(
-                        info: widget.list[index],
-                      );
+                  return widget.cardBuilder != null
+                      ? widget.cardBuilder!((widget.list[index]))
+                      : TuneCard(
+                          info: widget.list[index],
+                        );
                 },
               ),
             ),
