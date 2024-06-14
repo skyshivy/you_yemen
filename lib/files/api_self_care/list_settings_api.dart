@@ -6,16 +6,17 @@ import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
 listSettingsApi() async {
-  String url = listSettingsUrl;
+  String url = "http://10.0.14.4:8082/selfcare/subscriber-management/list-settings";
+  // listSettingsUrl;
   Map<String, dynamic> jsonMap = {
-    "transactionId": getTransactionId(),
-    "featureId": "1",
-    "msisdn": StoreManager().msisdn,
-    "offerCode": "offerCode",
-    "languageCode": StoreManager().languageCode,
-    "channelId": channelId,
-    "serviceId": "serviceId",
-  };
+    "transactionId":"64836535",
+    "featureId":1,
+    "msisdn" : "8182010000",
+    "offerCode":"CRBT_WEEKLY",
+    "languageCode":"en",
+    "channelId":3,
+    "serviceId":"ALLCALLER"
+};
   await NetworkManager().post(url, null, jsonData: jsonMap);
   // GenericModel model = GenericModel.fromJson(respJson);
   // return model;
