@@ -6,14 +6,16 @@ import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
 suspendApi() async {
-  String url = suspendUrl;
+  String url = "http://10.0.10.33:9089/selfcare/setting-service/suspend";
+  
   Map<String, dynamic> jsonMap = {
-    "transactionId": getTransactionId(),
-    "featureId": "1",
-    "msisdn": StoreManager().msisdn,
-    "channelId": channelId
-  };
-  Map<String,dynamic>respJson= await NetworkManager().post(url, null, jsonData: jsonMap);
+    "transactionId":"3422",
+    "featureId" : 1,
+    "msisdn" : "8182020000",
+    "channelId":2
+};
+  Map<String, dynamic> respJson =
+      await NetworkManager().post(url, null, jsonData: jsonMap);
 
   GenericModel model = GenericModel.fromJson(respJson);
   return model;

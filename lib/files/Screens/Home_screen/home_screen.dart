@@ -2,6 +2,11 @@ import 'dart:io';
 
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:you_yemen/files/api_self_care/add_tone_from_shufflelist.dart';
+import 'package:you_yemen/files/api_self_care/deactivate_tone_api.dart';
+import 'package:you_yemen/files/api_self_care/delete_pack_api.dart';
+import 'package:you_yemen/files/api_self_care/delete_tone_from_shuffle_api.dart';
+import 'package:you_yemen/files/api_self_care/list_settings_api.dart';
 
 import 'package:you_yemen/files/Screens/wishlist_screen/wishlist_screen.dart';
 import 'package:you_yemen/files/api_gokul/add_detail_api.dart';
@@ -19,6 +24,8 @@ import 'package:responsive_builder/responsive_builder.dart';
 //import 'package:you_yemen/files/api_self_care/deactivate_tone_api.dart';
 //import 'package:you_yemen/files/api_self_care/list_settings_api.dart';
 import 'package:you_yemen/files/api_self_care/pack_deatil_api.dart';
+import 'package:you_yemen/files/api_self_care/suspend_api.dart';
+import 'package:you_yemen/files/api_self_care/tone_details_api.dart';
 //import 'package:you_yemen/files/api_self_care/suspend_api.dart';
 
 import 'package:you_yemen/files/api_gokul/add_to_wishlist_api.dart';
@@ -73,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 10),
             FooterView(),
 
+
       ],
 
     );
@@ -97,4 +105,5 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         : SizedBox();
   }
+
 }
