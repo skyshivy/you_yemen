@@ -65,7 +65,10 @@ String scConfirmOtpUrl =
 String scGetContentPriceUrl =
     "http://10.0.14.4:8082/selfcare/subscriber-management/get-content-price"; // get-content-price
 String scSettingUrl = 'http://10.0.13.19:9093/setting-service/settings';
+String searchNameToneUrl = "${baseUrl}specific-search-tones?";
 
+String artistSearchUrl = "${baseUrl}specific-search-tones?";
+String bannerDetailUrl = "${baseUrl}banner-search?";
 String deleteTonefromShuffleUrl =
     "${selfcareBaseUrl}selfcareselfcare/setting-service/delete-tone-from-shufflelist";
 

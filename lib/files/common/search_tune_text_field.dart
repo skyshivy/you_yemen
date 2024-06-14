@@ -33,8 +33,11 @@ Widget searchTuneTextField(
               },
               onSubmitted: (p0) {
                 cont.searchText(p0);
-                context
-                    .goNamed(searchRoute, queryParameters: {"searchKey": p0});
+
+                context.goNamed(searchRoute, queryParameters: {
+                  "searchKey": p0,
+                  'searchType': _getSearchType(cont.searchType)
+                });
               },
             ),
           ),
@@ -43,6 +46,18 @@ Widget searchTuneTextField(
       ),
     ),
   );
+}
+
+String _getSearchType(SearchType searchType) {
+  if (searchType == SearchType.tone) {
+    return "0";
+  } else if (searchType == SearchType.toneId) {
+    return "1";
+  } else if (searchType == SearchType.artist) {
+    return "2";
+  } else {
+    return "3";
+  }
 }
 
 Widget _searchTypeView(USearchController cont) {

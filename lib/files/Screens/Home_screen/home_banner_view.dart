@@ -1,12 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:you_yemen/files/controllers/banner_controller.dart';
 import 'package:you_yemen/files/models/home_banner_model.dart';
 import 'package:you_yemen/files/reusable_widgets/image/UImage.dart';
-import 'package:you_yemen/files/reusable_widgets/u_text.dart';
+
+import 'package:you_yemen/files/router/route_name.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
 class HomeBannerView extends StatelessWidget {
@@ -22,7 +24,8 @@ class HomeBannerView extends StatelessWidget {
           CarouselSlider(
             carouselController: carouselController,
             items: [
-              for (HomeBanner banner in con.banners) bannerCard(banner),
+              for (HomeBanner banner in con.banners)
+                bannerCard(context, banner),
             ],
             options: carousalOption(context),
           ),
@@ -35,12 +38,21 @@ class HomeBannerView extends StatelessWidget {
     });
   }
 
-  Widget bannerCard(HomeBanner homeBanner) {
-    return uImage(
-        gredientColor: transparent,
-        url: homeBanner.bannerPath ?? '',
-        fit: BoxFit.fill,
-        height: double.infinity);
+  Widget bannerCard(BuildContext context, HomeBanner homeBanner) {
+    return InkWell(
+      onTap: () {
+        con.getBannerDetail(homeBanner.searchKey ?? '', homeBanner.type ?? '');
+        context.goNamed(bannerDetailRoute, queryParameters: {
+          'searchKey': homeBanner.searchKey ?? '',
+          'type': homeBanner.type ?? ''
+        });
+      },
+      child: uImage(
+          gredientColor: transparent,
+          url: homeBanner.bannerPath ?? '',
+          fit: BoxFit.fill,
+          height: double.infinity),
+    );
   }
 
   Widget carousalIndicator() {

@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
+import 'package:you_yemen/files/api_calls/search_artist_api.dart';
+import 'package:you_yemen/files/api_calls/search_name_tone_api.dart';
 import 'package:you_yemen/files/api_calls/search_tone_api.dart';
+import 'package:you_yemen/files/api_calls/search_toneid_api.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/search_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
@@ -41,7 +44,11 @@ class USearchController extends GetxController {
     this.searchType = searchType;
   }
 
-  searchText(String searchKey, {int pageNo = 0}) async {
+  searchText(String searchKey, {String? type, int pageNo = 0}) async {
+    if (type != null) {
+      //searchType = type;
+      updateSearchType(int.parse(type));
+    }
     if (isloading.value) {
       return;
     }
@@ -67,7 +74,7 @@ class USearchController extends GetxController {
     isloading.value = false;
     if (model.statusCode == 'SC0000') {
       toneList.value =
-          model.responseMap?.toneList ?? model.responseMap?.songList ?? [];
+          model.responseMap?.toneList ?? model.responseMap?.toneList ?? [];
     }
 
     return;
@@ -75,16 +82,22 @@ class USearchController extends GetxController {
 
   Future<void> _searchToneId() async {
     print("Search Tone id here");
+    SearchModel model = await searchToneIdApi(searchedText);
+    toneList.value = model.responseMap?.toneList ?? [];
     return;
   }
 
   Future<void> _searchArtist() async {
     print("Search Artist here");
+    SearchModel model = await searchArtistApi([searchedText]);
+    toneList.value = model.responseMap?.toneList ?? [];
     return;
   }
 
   Future<void> _searchNameTone() async {
     print("Search name tune here");
+    SearchModel model = await searchNameToneApi([searchedText], "168");
+    toneList.value = model.responseMap?.songList ?? [];
     return;
   }
 
