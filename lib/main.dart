@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:you_yemen/files/controllers/app_controller.dart';
+import 'package:you_yemen/files/controllers/artist_tunes_controller.dart';
 import 'package:you_yemen/files/controllers/auth_controller/login_popup_controller.dart';
 import 'package:you_yemen/files/controllers/auth_controller/otp_controller.dart';
 import 'package:you_yemen/files/controllers/banner_controller.dart';
@@ -37,6 +38,7 @@ initialLoads() async {
 }
 
 _initController() async {
+  Get.lazyPut(() => ArtistTunesController());
   Get.lazyPut(() => MobileMenuController());
   Get.lazyPut(() => CategoryController());
   Get.lazyPut(() => USearchController());

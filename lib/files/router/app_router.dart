@@ -7,6 +7,7 @@ import 'package:get/route_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/common/web_navigation_view/web_navigation_view.dart';
+import 'package:you_yemen/files/controllers/artist_tunes_controller.dart';
 import 'package:you_yemen/files/controllers/banner_controller.dart';
 import 'package:you_yemen/files/controllers/category_controller.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_controller.dart';
@@ -185,7 +186,7 @@ StatefulShellBranch _searchScreen() {
 }
 
 StatefulShellBranch _artistTunesScreen() {
-  USearchController cont = Get.find();
+  ArtistTunesController cont = Get.find();
   return StatefulShellBranch(
     routes: <RouteBase>[
       GoRoute(
@@ -193,6 +194,7 @@ StatefulShellBranch _artistTunesScreen() {
           name: artistTunesRoute,
           builder: (context, state) {
             String artistKey = state.uri.queryParameters['artistKey'] ?? '';
+            cont.getArtistTunes(artistKey);
             return ArtistTunesScreen(
               artistKey: artistKey,
             );

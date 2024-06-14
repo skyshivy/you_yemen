@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/controllers/artist_tunes_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/generic_button.dart';
@@ -64,6 +66,8 @@ class ArtistCard extends StatelessWidget {
                 textColor: white,
                 title: viewStr,
                 onTap: () {
+                  ArtistTunesController cont = Get.find();
+                  cont.getArtistTunes(info?.artist ?? '');
                   context.goNamed(artistTunesRoute,
                       queryParameters: {'artistKey': info?.artist ?? ''});
                   print("View tapped");
