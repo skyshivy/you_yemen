@@ -6,11 +6,12 @@ import 'package:you_yemen/files/utility/constants.dart';
 
 deleteWishlistApi() async {
   String deleteWishlistUrl =
-      "${selfcareBaseUrl}/selfcare/wishlist-delete-from-wishlist";
+      "http://10.0.10.33:8088/selfcare/wishlist-service/delete-from-wishlist";
+      //"${selfcareBaseUrl}/selfcare/wishlist-delete-from-wishlist";
       
 
   Map<String, dynamic> jsonMap = {
-    'msisdn': StoreManager().msisdn,
+    'msisdn': "352447467",
     "contentId":"contentId",
     "languageCode": StoreManager().languageCode,
     "type":"type",
