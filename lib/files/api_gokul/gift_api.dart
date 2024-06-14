@@ -8,12 +8,13 @@ import 'package:you_yemen/files/utility/constants.dart';
 giftApi() async {
   
   String giftTonePriceUrl =
-      "${selfcareBaseUrl}subscriber-management/gift-tone";
-
+     "${selfcareBaseUrl}subscriber-management/gift-tone";
+  //"http://10.0.10.33:8088/selfcare/subscriber-management/gift-tone";
+      
   Map<String, dynamic> jsonMap = {
     "transactionId": getTransactionId(),
     "featureId": '1',
-    'msisdn': StoreManager().msisdn,
+    'msisdn': "325458667",//StoreManager().msisdn,
     'bmsisdn':"bmsisdn",
     'offerCode':"offerCode",
     'contentId':"contentId",
