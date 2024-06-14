@@ -68,6 +68,7 @@ class MyApp extends StatelessWidget {
             routerConfig: router,
           )
         : GetMaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Obx(
                 () {

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:you_yemen/files/common/mobile_navigation.dart';
 import 'package:you_yemen/files/controllers/mobile_menu_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/screens/profile_screen/faq_screen.dart';
+import 'package:you_yemen/files/translation/strings.dart';
 
 import 'package:you_yemen/files/utility/colors.dart';
 
@@ -16,9 +18,11 @@ class MoreScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        Container(
-          height: 50,
-        ),
+        GetPlatform.isWeb
+            ? Container(
+                height: 50,
+              )
+            : SizedBox(),
         Container(
           height: 1,
           color: lightGrey,
@@ -40,8 +44,9 @@ class MoreScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: InkWell(onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => FaqScreen()));
+        // Navigator.of(context)
+        //     .push(MaterialPageRoute(builder: (context) => FaqScreen()));
+        mobileNavigation(context, FaqScreen(), title: faqStr);
         con.updateOnSelection(index);
       }, child: Obx(() {
         return Container(
