@@ -7,12 +7,15 @@ import 'package:get/route_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/common/web_navigation_view/web_navigation_view.dart';
+import 'package:you_yemen/files/controllers/banner_controller.dart';
 import 'package:you_yemen/files/controllers/category_controller.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_controller.dart';
 import 'package:you_yemen/files/controllers/profile_controller.dart';
 import 'package:you_yemen/files/controllers/u_search_controller.dart';
 import 'package:you_yemen/files/models/category_detail_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
+import 'package:you_yemen/files/screens/artist_tunes_screen/artist_tunes_screen.dart';
+import 'package:you_yemen/files/screens/banner_detail_screen/banner_detail_screen.dart';
 import 'package:you_yemen/files/screens/category_screen/category_detail_screen.dart';
 
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
@@ -45,6 +48,8 @@ final router = GoRouter(
         _catDetailScreen(),
         _searchScreen(),
         _faqScreen(),
+        _bannerDetailScreen(),
+        _artistTunesScreen(),
       ],
     ),
   ],
@@ -170,8 +175,44 @@ StatefulShellBranch _searchScreen() {
           name: searchRoute,
           builder: (context, state) {
             String searchKey = state.uri.queryParameters['searchKey'] ?? '';
-            //cont.searchText(searchKey);
+            String searchType = state.uri.queryParameters['searchType'] ?? '0';
+            //cont.updateSearchType(int.parse(searchType));
+            cont.searchText(searchKey, type: searchType);
             return SearchScreen();
+          }),
+    ],
+  );
+}
+
+StatefulShellBranch _artistTunesScreen() {
+  USearchController cont = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+          path: artistTunesRoute,
+          name: artistTunesRoute,
+          builder: (context, state) {
+            String artistKey = state.uri.queryParameters['artistKey'] ?? '';
+            return ArtistTunesScreen(
+              artistKey: artistKey,
+            );
+          }),
+    ],
+  );
+}
+
+StatefulShellBranch _bannerDetailScreen() {
+  BannerController cont = Get.find();
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+          path: bannerDetailRoute,
+          name: bannerDetailRoute,
+          builder: (context, state) {
+            String searchKey = state.uri.queryParameters['searchKey'] ?? '';
+            String type = state.uri.queryParameters['type'] ?? '';
+            cont.getBannerDetail(searchKey, type);
+            return BannerDetailScreen();
           }),
     ],
   );

@@ -16,7 +16,7 @@ class StoreManager {
   factory StoreManager() {
     return _instance;
   }
-  Others? others;
+  AppSettingModel? appSetting;
   bool isEnglish = true;
   String language = "English";
   String languageSort = "en";

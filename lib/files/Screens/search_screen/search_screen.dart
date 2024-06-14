@@ -2,9 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:you_yemen/files/common/search_tune_text_field.dart';
 import 'package:you_yemen/files/controllers/u_search_controller.dart';
+import 'package:you_yemen/files/enums/enums.dart';
+import 'package:you_yemen/files/reusable_widgets/artist_card.dart';
 import 'package:you_yemen/files/reusable_widgets/generic_gridview.dart';
 import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
+import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text_field/u_textfield.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
@@ -29,6 +33,12 @@ class _SearchScreenState extends State<SearchScreen> {
           : GenericGridView(
               list: cont.toneList,
               isLoadingMore: cont.isLoadingMore.value,
+              totalCount: cont.totalCount,
+              cardBuilder: cont.searchType == SearchType.artist
+                  ? (p0) {
+                      return ArtistCard(info: p0);
+                    }
+                  : null,
               loadMore: () {
                 cont.loadingMoreData();
               },
@@ -47,30 +57,23 @@ class _SearchScreenState extends State<SearchScreen> {
                   ? loadingIndicator(radius: 18)
                   : GenericGridView(
                       gridPadding: EdgeInsets.only(
-                          top: 60, left: 12, right: 12, bottom: 20),
+                          top: 140, left: 12, right: 12, bottom: 20),
                       list: cont.toneList,
                       isLoadingMore: cont.isLoadingMore.value,
-                      loadMore: () {
-                        cont.loadingMoreData();
+                      totalCount: 60,
+                      // loadMore: () {
+                      //   cont.loadingMoreData();
+                      // },
+                      pageNo: (p0) {
+                        print("Page number tapped");
                       },
                     );
             }),
           ),
           Container(
-            color: white,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              child: UTextField(
-                textEditingController: TextEditingController(),
-                onSubmitted: (p0) {
-                  cont.searchText(p0);
-                },
-                onChanged: (p0) {
-                  cont.updateSearchedText(p0);
-                },
-              ),
-            ),
-          ),
+              height: 140,
+              color: black,
+              child: searchTuneTextField(context, TextEditingController()))
         ],
       ),
     );
