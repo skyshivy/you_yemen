@@ -11,6 +11,144 @@ String appSettingModelToJson(AppSettingModel data) =>
     json.encode(data.toJson());
 
 class AppSettingModel {
+  AppShareLink? contactUs;
+  AppShareLink? appShareLink;
+  AppShareLink? crbtToneCharge;
+  AppShareLink? artistListArabic;
+  AppShareLink? artistListEnglish;
+  AppShareLink? featuredCatArabic;
+  AppShareLink? featuredCatEnglish;
+  AppShareLink? languageListArabic;
+  AppShareLink? privacyTermsArabic;
+  AppShareLink? languageListEnglish;
+  AppShareLink? privacyTermsEnglish;
+  AppShareLink? categoriesListArabic;
+  AppShareLink? categoriesListEnglish;
+  AppShareLink? crbtSubscriptionPacksEng;
+  AppShareLink? crbtSubscriptionPacksArabic;
+
+  AppSettingModel({
+    this.contactUs,
+    this.appShareLink,
+    this.crbtToneCharge,
+    this.artistListArabic,
+    this.artistListEnglish,
+    this.featuredCatArabic,
+    this.featuredCatEnglish,
+    this.languageListArabic,
+    this.privacyTermsArabic,
+    this.languageListEnglish,
+    this.privacyTermsEnglish,
+    this.categoriesListArabic,
+    this.categoriesListEnglish,
+    this.crbtSubscriptionPacksEng,
+    this.crbtSubscriptionPacksArabic,
+  });
+
+  factory AppSettingModel.fromJson(Map<String, dynamic> json) =>
+      AppSettingModel(
+        contactUs: json["CONTACT_US"] == null
+            ? null
+            : AppShareLink.fromJson(json["CONTACT_US"]),
+        appShareLink: json["APP_SHARE_LINK"] == null
+            ? null
+            : AppShareLink.fromJson(json["APP_SHARE_LINK"]),
+        crbtToneCharge: json["CRBT_TONE_CHARGE"] == null
+            ? null
+            : AppShareLink.fromJson(json["CRBT_TONE_CHARGE"]),
+        artistListArabic: json["ARTIST_LIST_ARABIC"] == null
+            ? null
+            : AppShareLink.fromJson(json["ARTIST_LIST_ARABIC"]),
+        artistListEnglish: json["ARTIST_LIST_ENGLISH"] == null
+            ? null
+            : AppShareLink.fromJson(json["ARTIST_LIST_ENGLISH"]),
+        featuredCatArabic: json["FEATURED_CAT_ARABIC"] == null
+            ? null
+            : AppShareLink.fromJson(json["FEATURED_CAT_ARABIC"]),
+        featuredCatEnglish: json["FEATURED_CAT_ENGLISH"] == null
+            ? null
+            : AppShareLink.fromJson(json["FEATURED_CAT_ENGLISH"]),
+        languageListArabic: json["LANGUAGE_LIST_ARABIC"] == null
+            ? null
+            : AppShareLink.fromJson(json["LANGUAGE_LIST_ARABIC"]),
+        privacyTermsArabic: json["PRIVACY_TERMS_ARABIC"] == null
+            ? null
+            : AppShareLink.fromJson(json["PRIVACY_TERMS_ARABIC"]),
+        languageListEnglish: json["LANGUAGE_LIST_ENGLISH"] == null
+            ? null
+            : AppShareLink.fromJson(json["LANGUAGE_LIST_ENGLISH"]),
+        privacyTermsEnglish: json["PRIVACY_TERMS_ENGLISH"] == null
+            ? null
+            : AppShareLink.fromJson(json["PRIVACY_TERMS_ENGLISH"]),
+        categoriesListArabic: json["CATEGORIES_LIST_ARABIC"] == null
+            ? null
+            : AppShareLink.fromJson(json["CATEGORIES_LIST_ARABIC"]),
+        categoriesListEnglish: json["CATEGORIES_LIST_ENGLISH"] == null
+            ? null
+            : AppShareLink.fromJson(json["CATEGORIES_LIST_ENGLISH"]),
+        crbtSubscriptionPacksEng: json["CRBT_SUBSCRIPTION_PACKS_ENG"] == null
+            ? null
+            : AppShareLink.fromJson(json["CRBT_SUBSCRIPTION_PACKS_ENG"]),
+        crbtSubscriptionPacksArabic:
+            json["CRBT_SUBSCRIPTION_PACKS_ARABIC"] == null
+                ? null
+                : AppShareLink.fromJson(json["CRBT_SUBSCRIPTION_PACKS_ARABIC"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "CONTACT_US": contactUs?.toJson(),
+        "APP_SHARE_LINK": appShareLink?.toJson(),
+        "CRBT_TONE_CHARGE": crbtToneCharge?.toJson(),
+        "ARTIST_LIST_ARABIC": artistListArabic?.toJson(),
+        "ARTIST_LIST_ENGLISH": artistListEnglish?.toJson(),
+        "FEATURED_CAT_ARABIC": featuredCatArabic?.toJson(),
+        "FEATURED_CAT_ENGLISH": featuredCatEnglish?.toJson(),
+        "LANGUAGE_LIST_ARABIC": languageListArabic?.toJson(),
+        "PRIVACY_TERMS_ARABIC": privacyTermsArabic?.toJson(),
+        "LANGUAGE_LIST_ENGLISH": languageListEnglish?.toJson(),
+        "PRIVACY_TERMS_ENGLISH": privacyTermsEnglish?.toJson(),
+        "CATEGORIES_LIST_ARABIC": categoriesListArabic?.toJson(),
+        "CATEGORIES_LIST_ENGLISH": categoriesListEnglish?.toJson(),
+        "CRBT_SUBSCRIPTION_PACKS_ENG": crbtSubscriptionPacksEng?.toJson(),
+        "CRBT_SUBSCRIPTION_PACKS_ARABIC": crbtSubscriptionPacksArabic?.toJson(),
+      };
+}
+
+class AppShareLink {
+  bool? enable;
+  String? attribute;
+
+  AppShareLink({
+    this.enable,
+    this.attribute,
+  });
+
+  factory AppShareLink.fromJson(Map<String, dynamic> json) => AppShareLink(
+        enable: json["enable"],
+        attribute: json["attribute"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "enable": enable,
+        "attribute": attribute,
+      };
+}
+
+/*
+
+// To parse this JSON data, do
+//
+//     final appSettingModel = appSettingModelFromJson(jsonString);
+
+import 'dart:convert';
+
+AppSettingModel appSettingModelFromJson(String str) =>
+    AppSettingModel.fromJson(json.decode(str));
+
+String appSettingModelToJson(AppSettingModel data) =>
+    json.encode(data.toJson());
+
+class AppSettingModel {
   ResponseMap? responseMap;
   String? message;
   String? respTime;
@@ -471,3 +609,4 @@ class AboutAppurlBurmese {
         "attribute": attribute,
       };
 }
+*/

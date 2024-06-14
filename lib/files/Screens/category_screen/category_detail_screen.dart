@@ -17,6 +17,7 @@ class CategoryDetailScreen extends StatelessWidget {
           : GenericGridView(
               list: cont.toneList,
               isLoadingMore: cont.isLoadingMore.value,
+              totalCount: 0,
               loadMore: () {
                 cont.loadingMoreData();
               },

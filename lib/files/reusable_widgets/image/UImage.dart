@@ -7,6 +7,7 @@ Widget uImage({
   BorderRadiusGeometry borderRadius = BorderRadius.zero,
   Color? gredientColor,
   BoxFit fit = BoxFit.fill,
+  double? height,
   //  required int width,           //bhavya
 }) {
   return ClipRRect(
@@ -16,7 +17,8 @@ Widget uImage({
       children: [
         CachedNetworkImage(
           width: double.infinity,
-          fit: BoxFit.cover,
+          height: height,
+          fit: fit,
           imageUrl: url,
           placeholder: (context, url) =>
               Center(child: const CircularProgressIndicator()),
@@ -24,7 +26,7 @@ Widget uImage({
           fadeInDuration: const Duration(seconds: 1),
         ),
         Container(
-          color: gredientColor ?? gredientBlack,
+          color: gredientColor ?? transparent,
         ),
       ],
     ),

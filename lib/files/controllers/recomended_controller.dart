@@ -27,15 +27,15 @@ class RecomendedController extends GetxController {
 
   _createTabList() async {
     isLoadingTab.value = true;
-    if (StoreManager().others == null) {
+    if (StoreManager().appSetting == null) {
       await getAppSetting();
     }
     tabTitleList.clear();
     tabIdList.clear();
     tabValueList.clear();
     String? featureCats = StoreManager().isEnglish
-        ? StoreManager().others?.featuredCategoryEnglish?.attribute
-        : StoreManager().others?.featuredCategoryBurmese?.attribute;
+        ? StoreManager().appSetting?.featuredCatEnglish?.attribute
+        : StoreManager().appSetting?.featuredCatArabic?.attribute;
     if (featureCats?.isNotEmpty ?? true) {
       List<String> pipeSeparatedList = featureCats!.split("|");
       List<String> lst1 = [];

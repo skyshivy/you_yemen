@@ -17,6 +17,7 @@ class RecomendedListView extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               list: cont.displayList,
               maxDisplay: 6,
+              totalCount: 0,
             );
     });
   }

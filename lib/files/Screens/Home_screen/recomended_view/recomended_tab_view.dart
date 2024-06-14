@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/controllers/recomended_controller.dart';
 import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
@@ -12,21 +13,29 @@ class RecomendedTabView extends StatelessWidget {
   final RecomendedController con = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return con.isLoadingTab.value
-          ? loadingIndicator(height: 200, radius: 20)
-          : Row(
-              children: [
-                Flexible(
-                  child: Container(
-                    decoration: mainDecoration(),
-                    height: 40,
-                    child: listBuilder(),
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Obx(() {
+          return con.isLoadingTab.value
+              ? loadingIndicator(height: 200, radius: 20)
+              : Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: si.isMobile ? 8 : 20),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Container(
+                          decoration: mainDecoration(),
+                          height: 40,
+                          child: listBuilder(),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            );
-    });
+                );
+        });
+      },
+    );
   }
 
   BoxDecoration mainDecoration() {

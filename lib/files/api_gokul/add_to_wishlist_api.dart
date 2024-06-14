@@ -7,12 +7,13 @@ import 'package:you_yemen/files/utility/constants.dart';
 addtoWishListApi() async {
   
   String addToWishListUrl =
-      "${selfcareBaseUrl}/selfcare/wishlist-service/add-to-wishlist";
-
+      "http://10.0.10.33:8088/selfcare/wishlist-service/add-to-wishlist";
+      //"${selfcareBaseUrl}/selfcare/wishlist-service/add-to-wishlist";
+   
   Map<String, dynamic> jsonMap = {
-    'msisdn': StoreManager().msisdn,
-    "contentId": "contentId",
-    "contentPath":"contentPath",
+    'msisdn': "9408000131",//StoreManager().msisdn,
+    "contentId": "1511218201",
+    "contentPath":"https://ringtune.mpt.com.mm/stream-media/get-tone-path?fileId=XdYn8fG+ceO+CZyOn8viaA==",
     "previewImage":"previewImage",
     "contentName_L1":"contentName_L1",
     "album_L1":"album_L1",
