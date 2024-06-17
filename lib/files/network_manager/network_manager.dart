@@ -13,7 +13,7 @@ class NetworkManager {
   final client = HttpClient();
 
   Future<Map<String, dynamic>> get(String url,
-      {Map<String, String>? params}) async {
+      {Map<String, String>? params,}) async {
     try {
       var request = await client.getUrl(Uri.parse(url));
 
