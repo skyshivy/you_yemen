@@ -62,18 +62,8 @@ class _HomeScreenState extends State<HomeScreen> {
         RecomendedListView(),
         ElevatedButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => WishListScreen()),
-              );
-              getContentPriceApi();
-              //getWislistApi(); //working
-              //addtoWishListApi();  //working
-              //deleteWishlistApi(); //working
-              //getContentPriceApi(); //Status code 404
-              //giftApi(); //Status code 404
-            },
-            child: Text('Wishlist')),
+          },
+            child: Text('api')),
         const SizedBox(height: 10),
         FooterView(),
       ],
