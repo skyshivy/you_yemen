@@ -31,10 +31,12 @@ import 'package:you_yemen/files/api_gokul/add_to_wishlist_api.dart';
 
 import 'package:you_yemen/files/common/footer_view.dart';
 import 'package:you_yemen/files/common/search_tune_text_field.dart';
+import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/screens/home_screen/home_banner_view.dart';
 
 import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_list_view.dart';
 import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_tab_view.dart';
+import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
 // import 'package:you_yemen/files/screens/profile_screen/transition_screen.dart';
@@ -66,11 +68,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 context,
                 MaterialPageRoute(builder: (context) => WishListScreen()),
               );
-              getContentPriceApi();
-              //getWislistApi(); //working
-              //addtoWishListApi();  //working
+              //getContentPriceApi();//working
+              //getWishlistApi(); //working
+              //addtoWishListApi(TuneInfo());  //working
               //deleteWishlistApi(); //working
-              //getContentPriceApi(); //Status code 404
+              //getContentPriceApi(); //working
               //giftApi(); //Status code 404
             },
             child: Text('Wishlist')),

@@ -1,25 +1,25 @@
 // To parse this JSON data, do
 //
-//     final getWishlistModel = getWishlistModelFromJson(jsonString);
+//     final scWishListModel = scWishListModelFromJson(jsonString);
 
 import 'dart:convert';
 
-List<GetWishlistModel> getWishlistModelFromJson(String str) => List<GetWishlistModel>.from(json.decode(str).map((x) => GetWishlistModel.fromJson(x)));
+ScWishListModel scWishListModelFromJson(String str) => ScWishListModel.fromJson(json.decode(str));
 
-String getWishlistModelToJson(List<GetWishlistModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String scWishListModelToJson(ScWishListModel data) => json.encode(data.toJson());
 
-class GetWishlistModel {
+class ScWishListModel {
     int? respCode;
     String? message;
     List<Wishlist>? wishlist;
 
-    GetWishlistModel({
+    ScWishListModel({
         this.respCode,
         this.message,
         this.wishlist,
     });
 
-    factory GetWishlistModel.fromJson(Map<String, dynamic> json) => GetWishlistModel(
+    factory ScWishListModel.fromJson(Map<String, dynamic> json) => ScWishListModel(
         respCode: json["respCode"],
         message: json["message"],
         wishlist: json["wishlist"] == null ? [] : List<Wishlist>.from(json["wishlist"]!.map((x) => Wishlist.fromJson(x))),

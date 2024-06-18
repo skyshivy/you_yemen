@@ -50,7 +50,7 @@ class TuneCard extends StatelessWidget {
 
   Widget moreButtonWidget() {
     return moreButton == null
-        ? cardMoreButton()
+        ? cardMoreButton(info??TuneInfo()) //info??TuneInfo()
         : Padding(
             padding: const EdgeInsets.all(8.0),
             child: moreButton,
