@@ -156,7 +156,8 @@ class _LoginOtpViewState extends State<LoginOtpView> {
               },
               width: 180,
               title: verifyOtpStr,
-              btnColor: lightGrey);
+              textColor: otpCont.isEnable.value ? white : black,
+              btnColor: otpCont.isEnable.value ? black : lightGrey);
     });
   }
 
