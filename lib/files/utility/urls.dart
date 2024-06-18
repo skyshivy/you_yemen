@@ -54,7 +54,7 @@ String deleteToneUrl =
 
 String deletePackUrl =
     "${selfcareBaseUrl}selfcare/subscriber-management/delete-pack";
-
+String scGetBannerList = "http://10.0.14.4:5892/selfcare/get-banner-list?";
 String scBuyToneUrl =
     "http://10.0.10.33:5679/selfcare/subscriber-management/buy-tone";
 String scGenerateOtpUrl =
