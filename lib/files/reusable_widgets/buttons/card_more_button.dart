@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:popover/popover.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/api_gokul/add_to_wishlist_api.dart';
+import 'package:you_yemen/files/models/generic_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
+import 'package:you_yemen/files/reusable_widgets/custom_snack_bar.dart';
 import 'package:you_yemen/files/reusable_widgets/decorations/card_decoration.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/translation/strings.dart';
@@ -54,14 +56,14 @@ Widget _popoverListView(TuneInfo info) {
   );
 }
 
-Widget menuCardCell(BuildContext context, int index, List<IconData> iconList, TuneInfo info,
-    List<String> titleList) {
+Widget menuCardCell(BuildContext context, int index, List<IconData> iconList,
+    TuneInfo info, List<String> titleList) {
   return InkWell(
-    onTap: () {
+    onTap: () async {
       print("Tapped");
-      if(index==0){
-        addtoWishListApi(info);
-        //addtowishlistapi
+      if (index == 0) {
+        GenericModel model = await addtoWishListApi(info);
+        customSnackBar(model.message ?? '');
       }
       Navigator.of(context).pop();
     },

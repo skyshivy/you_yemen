@@ -137,3 +137,4 @@ String toneCodeStr = 'Tone Code';
 String artistStr = 'Artist';
 String nameToneStr = 'Name Tone';
 String viewStr = 'View';
+String deleteStr = "Delete";

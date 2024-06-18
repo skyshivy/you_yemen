@@ -74,6 +74,9 @@ String deleteTonefromShuffleUrl =
     "${selfcareBaseUrl}selfcareselfcare/setting-service/delete-tone-from-shufflelist";
 
 String shuffleUrl = "${selfcareBaseUrl}selfcare/setting-service/shuffle";
+
+String scDeleteFromWishlistUrl =
+    "http://10.0.10.33:8088/selfcare/wishlist-service/delete-from-wishlist";
 // "http://10.0.10.33:8088/selfcare/setting-service/shuffle";
 
 
