@@ -7,7 +7,7 @@ import 'package:you_yemen/files/utility/urls.dart';
 
 deactivateToneApi() async {
   String url = "http://10.0.10.33:5679/selfcare/subscriber-management/delete-tone";
-  deleteToneUrl;
+ // deleteToneUrl;
   Map<String, dynamic> jsonMap = {
   "transactionId": "9234567822",
   "featureId": 1,

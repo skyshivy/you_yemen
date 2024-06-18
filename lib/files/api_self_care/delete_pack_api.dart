@@ -7,7 +7,7 @@ import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
 deletePackApi() async {
-  String url = "http://10.0.10.33:5679/selfcare/subscriber-management/delete-pack";
+  String url = "http://10.0.10.33:9089/selfcare/setting-service/add-tone-to-shufflelist";
   Map<String, dynamic> jsonMap = {
   "transactionId": "84681012337",
   "featureId": 1,

@@ -5,7 +5,7 @@ import 'package:you_yemen/files/network_manager/network_manager.dart';
 deleteTonefromShuffleApi() async {
   String url =
       "http://10.0.10.33:9089/selfcare/setting-service/delete-tone-from-shufflelist";
-  // deleteTonefromShuffleUrl;w
+  
   Map<String, dynamic> jsonMap = {
     "transactionId": "3457297",
     "featureId": 1,
