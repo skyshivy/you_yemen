@@ -16,7 +16,7 @@ import 'package:you_yemen/files/api_self_care/tone_detail_api.dart';
 //import 'package:you_yemen/files/api_self_care/deactivate_tone_api.dart';
 //import 'package:you_yemen/files/api_self_care/list_settings_api.dart';
 
-//import 'package:you_yemen/files/api_self_care/suspend_api.dart';
+import 'package:you_yemen/files/common/encryptor/aes_en_de_cryptor.dart';
 
 import 'package:you_yemen/files/common/footer_view.dart';
 import 'package:you_yemen/files/common/search_tune_text_field.dart';
@@ -50,12 +50,19 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 10),
         RecomendedTabView(),
         RecomendedListView(),
+        genericButton(
+          title: "8123812512",
+          onTap: () {
+            AesEnDeCryptor().aesEnc("8123812512");
+          },
+        ),
+        ElevatedButton(onPressed: () {}, child: Text('api')),
         ElevatedButton(
             onPressed: () {
-              getBannerDetailsApi();
+              //scGetBannerDetailsApi();
               getCategoryListApi();
-              getRecommendationSongApi();
-              getBannerlistApi();
+              //getRecommendationSongApi();
+              scGetBannerlistApi();
               toneDetailApi();
               // suspendApi();
             },

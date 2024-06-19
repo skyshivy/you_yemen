@@ -6,6 +6,10 @@
 //
 //     final homeBannerModel = homeBannerModelFromJson(jsonString);
 
+// To parse this JSON data, do
+//
+//     final homeBannerModel = homeBannerModelFromJson(jsonString);
+
 import 'dart:convert';
 
 HomeBannerModel homeBannerModelFromJson(String str) =>
@@ -17,18 +21,38 @@ String homeBannerModelToJson(HomeBannerModel data) =>
 class HomeBannerModel {
   String? respCode;
   String? message;
-  List<BannerList>? bannerList;
+  ResponseMap? responseMap;
 
   HomeBannerModel({
     this.respCode,
     this.message,
-    this.bannerList,
+    this.responseMap,
   });
 
   factory HomeBannerModel.fromJson(Map<String, dynamic> json) =>
       HomeBannerModel(
         respCode: json["respCode"],
         message: json["message"],
+        responseMap: json["responseMap"] == null
+            ? null
+            : ResponseMap.fromJson(json["responseMap"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "respCode": respCode,
+        "message": message,
+        "responseMap": responseMap?.toJson(),
+      };
+}
+
+class ResponseMap {
+  List<BannerList>? bannerList;
+
+  ResponseMap({
+    this.bannerList,
+  });
+
+  factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
         bannerList: json["bannerList"] == null
             ? []
             : List<BannerList>.from(
@@ -36,8 +60,6 @@ class HomeBannerModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "respCode": respCode,
-        "message": message,
         "bannerList": bannerList == null
             ? []
             : List<dynamic>.from(bannerList!.map((x) => x.toJson())),
@@ -79,6 +101,7 @@ class BannerList {
         "bannerOrder": bannerOrder,
       };
 }
+
 
 /*
 import 'dart:convert';

@@ -105,6 +105,10 @@ class Category {
       };
 }*/
 
+// To parse this JSON data, do
+//
+//     final categoryListModel = categoryListModelFromJson(jsonString);
+
 import 'dart:convert';
 
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -118,18 +122,38 @@ String categoryListModelToJson(CategoryListModel data) =>
 class CategoryListModel {
   String? respCode;
   String? message;
-  List<CategoryList>? categoryList;
+  ResponseMap? responseMap;
 
   CategoryListModel({
     this.respCode,
     this.message,
-    this.categoryList,
+    this.responseMap,
   });
 
   factory CategoryListModel.fromJson(Map<String, dynamic> json) =>
       CategoryListModel(
         respCode: json["respCode"],
         message: json["message"],
+        responseMap: json["responseMap"] == null
+            ? null
+            : ResponseMap.fromJson(json["responseMap"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "respCode": respCode,
+        "message": message,
+        "responseMap": responseMap?.toJson(),
+      };
+}
+
+class ResponseMap {
+  List<CategoryList>? categoryList;
+
+  ResponseMap({
+    this.categoryList,
+  });
+
+  factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
         categoryList: json["categoryList"] == null
             ? []
             : List<CategoryList>.from(
@@ -137,8 +161,6 @@ class CategoryListModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "respCode": respCode,
-        "message": message,
         "categoryList": categoryList == null
             ? []
             : List<dynamic>.from(categoryList!.map((x) => x.toJson())),
@@ -151,14 +173,14 @@ class CategoryList {
   String? menuId;
   String? categoryName;
   String? menuImage;
-   RxBool isSelected = false.obs;
-
+  RxBool isSelected = false.obs;
   CategoryList({
     this.language,
     this.categoryId,
     this.menuId,
     this.categoryName,
-    this.menuImage,required this.isSelected,
+    this.menuImage,
+    required this.isSelected,
   });
 
   factory CategoryList.fromJson(Map<String, dynamic> json) => CategoryList(
@@ -166,7 +188,8 @@ class CategoryList {
         categoryId: json["categoryID"],
         menuId: json["menuID"],
         categoryName: json["categoryName"],
-        menuImage: json["menuImage"],isSelected: false.obs
+        menuImage: json["menuImage"],
+        isSelected: false.obs,
       );
 
   Map<String, dynamic> toJson() => {

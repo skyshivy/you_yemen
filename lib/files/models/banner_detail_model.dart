@@ -1,6 +1,9 @@
 // To parse this JSON data, do
 //
 //     final bannerDetailModel = bannerDetailModelFromJson(jsonString);
+// To parse this JSON data, do
+//
+//     final bannerDetailModel = bannerDetailModelFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -13,53 +16,87 @@ String bannerDetailModelToJson(BannerDetailModel data) =>
     json.encode(data.toJson());
 
 class BannerDetailModel {
-  ResponseMap? responseMap;
+  String? respCode;
   String? message;
-  String? respTime;
-  String? statusCode;
+  ResponseMap? responseMap;
 
   BannerDetailModel({
-    this.responseMap,
+    this.respCode,
     this.message,
-    this.respTime,
-    this.statusCode,
+    this.responseMap,
   });
 
   factory BannerDetailModel.fromJson(Map<String, dynamic> json) =>
       BannerDetailModel(
+        respCode: json["respCode"],
+        message: json["message"],
         responseMap: json["responseMap"] == null
             ? null
             : ResponseMap.fromJson(json["responseMap"]),
-        message: json["message"],
-        respTime: json["respTime"],
-        statusCode: json["statusCode"],
       );
 
   Map<String, dynamic> toJson() => {
-        "responseMap": responseMap?.toJson(),
+        "respCode": respCode,
         "message": message,
-        "respTime": respTime,
-        "statusCode": statusCode,
+        "responseMap": responseMap?.toJson(),
       };
 }
 
 class ResponseMap {
-  List<TuneInfo>? searchList;
+  List<TuneInfo>? bannerDetails;
 
   ResponseMap({
-    this.searchList,
+    this.bannerDetails,
   });
 
   factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
-        searchList: json["searchList"] == null
+        bannerDetails: json["bannerDetails"] == null
             ? []
             : List<TuneInfo>.from(
-                json["searchList"]!.map((x) => TuneInfo.fromJson(x))),
+                json["bannerDetails"]!.map((x) => TuneInfo.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "searchList": searchList == null
+        "bannerDetails": bannerDetails == null
             ? []
-            : List<dynamic>.from(searchList!.map((x) => x.toJson())),
+            : List<dynamic>.from(bannerDetails!.map((x) => x.toJson())),
       };
 }
+/*
+class BannerDetail {
+    String? location;
+    String? previewImage;
+    String? toneId;
+    String? contentName;
+    String? artistName;
+    String? albumName;
+
+    BannerDetail({
+        this.location,
+        this.previewImage,
+        this.toneId,
+        this.contentName,
+        this.artistName,
+        this.albumName,
+    });
+
+    factory BannerDetail.fromJson(Map<String, dynamic> json) => BannerDetail(
+        location: json["location"],
+        previewImage: json["previewImage"],
+        toneId: json["toneId"],
+        contentName: json["contentName"],
+        artistName: json["artistName"],
+        albumName: json["albumName"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "location": location,
+        "previewImage": previewImage,
+        "toneId": toneId,
+        "contentName": contentName,
+        "artistName": artistName,
+        "albumName": albumName,
+    };
+}
+
+*/

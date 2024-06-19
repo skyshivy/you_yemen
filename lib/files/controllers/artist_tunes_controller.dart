@@ -12,7 +12,7 @@ class ArtistTunesController extends GetxController {
     }
     isLoading.value = true;
     CategoryDetailModel model = await artistTunesApi(artistKey);
-    list.value = model.responseMap?.searchList ?? [];
+    list.value = model.responseMap?.toneList ?? [];
     isLoading.value = false;
   }
 }

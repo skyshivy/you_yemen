@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:popover/popover.dart';
+import 'package:you_yemen/files/enums/enums.dart';
+import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/router/route_name.dart';
@@ -61,13 +63,25 @@ class CategoryPopupListView extends StatelessWidget {
         padding: EdgeInsets.only(left: index == 0 ? 0 : 2),
         child: AspectRatio(
           aspectRatio: 1,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(contanerCornerRadius / 2),
-              color: red,
-            ),
-            child: uImage(url: cont.categoryList[index].menuImage ?? ''),
-            //width: 150,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(contanerCornerRadius / 2),
+                  color: grey,
+                ),
+                child: uImage(
+                  url: cont.categoryList[index].menuImage ?? '',
+                ),
+                //width: 150,
+              ),
+              UText(
+                title: cont.categoryList[index].categoryName ?? '',
+                fontName: FontName.helveticaBold,
+                textColor: white,
+              )
+            ],
           ),
         ),
       ),

@@ -4,6 +4,8 @@ import 'dart:math';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:you_yemen/files/api_calls/setting_api.dart';
+import 'package:you_yemen/files/api_self_care/get_recommendation_songs_api.dart';
+
 import 'package:you_yemen/files/models/home_feature_category.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
@@ -75,21 +77,30 @@ class RecomendedController extends GetxController {
       return;
     }
     isLoading.value = true;
-    Random random = Random();
-    int randomNumber = random.nextInt(1000000000);
-    var trailUrl =
-        "language=${StoreManager().language}&msisdn=${StoreManager().msisdn}&clientTxnId=$randomNumber&identifier=$id";
-    Map<String, dynamic> map = await NetworkManager().get(recomurl + trailUrl);
-    HomeFeatureModel model = HomeFeatureModel.fromJson(map);
-    if (model.statusCode == 'SC0000') {
-      if (_recoList[selectedTabIndex.value].isEmpty) {
-        _recoList[selectedTabIndex.value] =
-            model.responseMap?.recommendationSongsList ?? [];
-        displayList.value = _recoList[selectedTabIndex.value];
-      } else {
-        displayList.value = _recoList[selectedTabIndex.value];
-      }
+    HomeFeatureModel model = await scGetRecommendationSongApi(id);
+
+    if (_recoList[selectedTabIndex.value].isEmpty) {
+      _recoList[selectedTabIndex.value] =
+          model.responseMap?.recommendationList ?? [];
+      displayList.value = _recoList[selectedTabIndex.value];
+    } else {
+      displayList.value = _recoList[selectedTabIndex.value];
     }
+    // Random random = Random();
+    // int randomNumber = random.nextInt(1000000000);
+    // var trailUrl =
+    //     "language=${StoreManager().language}&msisdn=${StoreManager().msisdn}&clientTxnId=$randomNumber&identifier=$id";
+    // Map<String, dynamic> map = await NetworkManager().get(recomurl + trailUrl);
+    // HomeFeatureModel model = HomeFeatureModel.fromJson(map);
+    // if (model.respCode == 'SC0000') {
+    //   if (_recoList[selectedTabIndex.value].isEmpty) {
+    //     _recoList[selectedTabIndex.value] =
+    //         model.responseMap?.recommendationList ?? [];
+    //     displayList.value = _recoList[selectedTabIndex.value];
+    //   } else {
+    //     displayList.value = _recoList[selectedTabIndex.value];
+    //   }
+    // }
     isLoading.value = false;
   }
 }

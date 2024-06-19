@@ -27,7 +27,7 @@ class PlayerController extends GetxController {
         info?.toneIdpreviewImageUrl ?? info?.previewImageUrl ?? '';
     print(
         "1 was $playingIndex and is $index  _isPaused $_isPaused  isPlaying$isPlaying");
-
+    print("playing url ===== ${info?.toneIdStreamingUrl}");
     if (toneId.value == (toneId.value = info?.toneId ?? '')) {
       playingIndex.value = index;
       toneId.value = info?.toneId ?? '';
