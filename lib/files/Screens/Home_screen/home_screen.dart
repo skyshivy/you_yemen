@@ -28,6 +28,7 @@ import 'package:you_yemen/files/api_self_care/tone_details_api.dart';
 //import 'package:you_yemen/files/api_self_care/suspend_api.dart';
 
 import 'package:you_yemen/files/api_gokul/add_to_wishlist_api.dart';
+import 'package:you_yemen/files/common/encryptor/aes_en_de_cryptor.dart';
 
 import 'package:you_yemen/files/common/footer_view.dart';
 import 'package:you_yemen/files/common/search_tune_text_field.dart';
@@ -61,10 +62,13 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 10),
         RecomendedTabView(),
         RecomendedListView(),
-        ElevatedButton(
-            onPressed: () {
+        genericButton(
+          title: "8123812512",
+          onTap: () {
+            AesEnDeCryptor().aesEnc("8123812512");
           },
-            child: Text('api')),
+        ),
+        ElevatedButton(onPressed: () {}, child: Text('api')),
         const SizedBox(height: 10),
         FooterView(),
       ],

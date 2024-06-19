@@ -276,7 +276,8 @@ Widget _shellRouteIndex(BuildContext context, GoRouterState state,
                 ? Scaffold(
                     appBar: AppBar(
                       title: UText(
-                        title: (state.fullPath ?? '').replaceAll("/", " "),
+                        title: ((state.fullPath ?? '').replaceAll("/", " "))
+                            .toUpperCase(),
                         fontName: FontName.helveticaBold,
                       ),
                       elevation: 2,
