@@ -8,3 +8,4 @@ const String catDetailRoute = '/categoryDetail';
 const String searchRoute = '/search';
 const String bannerDetailRoute = '/bannerDetail';
 const String faqRoute = '/faq';
+const String seeAllRoute = '/SeeAll';

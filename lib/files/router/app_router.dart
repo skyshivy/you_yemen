@@ -31,6 +31,7 @@ import 'package:you_yemen/files/screens/profile_screen/faq_screen.dart';
 
 import 'package:you_yemen/files/screens/profile_screen/profile_screen.dart';
 import 'package:you_yemen/files/screens/search_screen/search_screen.dart';
+import 'package:you_yemen/files/screens/see_all_screen/see_all_screen.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 import 'package:you_yemen/files/utility/constants.dart';
@@ -55,6 +56,7 @@ final router = GoRouter(
         _faqScreen(),
         _bannerDetailScreen(),
         _artistTunesScreen(),
+        _seeAllScreen(),
       ],
     ),
   ],
@@ -232,6 +234,21 @@ StatefulShellBranch _faqScreen() {
           name: faqRoute,
           builder: (context, state) {
             return Center(child: FaqScreen());
+          }),
+    ],
+  );
+}
+
+StatefulShellBranch _seeAllScreen() {
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+          path: seeAllRoute,
+          name: seeAllRoute,
+          builder: (context, state) {
+            List<TuneInfo> list = state.extra as List<TuneInfo>;
+            print("list ======= ${list.length}");
+            return SeeAllScreen(lst: list);
           }),
     ],
   );
