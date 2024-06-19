@@ -44,7 +44,7 @@ class ProfileController {
   getProfileDetail() async {
     isloading.value = true;
     CategoryListModel catModel = await getCategoryListApi();
-    categories.value = catModel.categoryList ?? [];
+    categories.value = catModel.responseMap?.categoryList ?? [];
 
     profileModel = await getProfileDetailsApi();
     if (profileModel?.statusCode == 'SC0000') {

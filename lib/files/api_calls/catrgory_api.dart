@@ -2,11 +2,9 @@
 
 //import 'package:http/http.dart' as http;
 
-
 //import 'package:http/http.dart' as http;
 import 'package:you_yemen/files/models/category_list_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
-
 
 // class CategoryApi {
 //   static const String baseURL =
@@ -24,7 +22,7 @@ import 'package:you_yemen/files/network_manager/network_manager.dart';
 //   }
 // }
 
- // Import your network manager package
+// Import your network manager package
 
 class CategoryApi {
   static const String baseURL =
@@ -32,7 +30,7 @@ class CategoryApi {
 
   static Future<CategoryListModel> getCategoryList(String language) async {
     final url = '$baseURL&language=$language';
-    final response = await NetworkManager().get(url); 
+    final response = await NetworkManager().get(url);
 
     if (response.containsKey('statusCode') && response['statusCode'] == 200) {
       return CategoryListModel.fromJson(response['responseMap']);
@@ -41,4 +39,3 @@ class CategoryApi {
     }
   }
 }
-

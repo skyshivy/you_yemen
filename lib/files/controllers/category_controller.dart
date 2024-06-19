@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:you_yemen/files/api_calls/get_category_detail_api.dart';
 import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
+import 'package:you_yemen/files/api_self_care/category_detail_api.dart';
 import 'package:you_yemen/files/models/category_detail_model.dart';
 import 'package:you_yemen/files/models/category_list_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
@@ -25,7 +26,7 @@ class CategoryController extends GetxController {
     CategoryListModel model = await getCategoryListApi();
 
     if (model.respCode == 'SC0000') {
-      categoryList.value = model.categoryList?? [];
+      categoryList.value = model.responseMap?.categoryList ?? [];
     }
   }
 
@@ -33,11 +34,12 @@ class CategoryController extends GetxController {
     searchedkey = key;
     this.catId = catId;
     isLoading.value = true;
-    CategoryDetailModel model =
-        await getCategoryDetailApi(key, catId, pageNo: pageNo);
+
+    CategoryDetailModel model = await scGetCategoryDetailApi(key, catId);
+
     isLoading.value = false;
     if (model.statusCode == 'SC0000') {
-      toneList.value = model.responseMap?.searchList ?? [];
+      toneList.value = model.responseMap?.toneList ?? [];
     } else {}
   }
 
@@ -48,11 +50,11 @@ class CategoryController extends GetxController {
     print("testLoadingMore called");
     isLoadingMore.value = true;
 
-    CategoryDetailModel model = 
-        await getCategoryDetailApi(searchedkey, catId, pageNo: toneList.length);
+    CategoryDetailModel model = await scGetCategoryDetailApi(searchedkey, catId,
+        pageNo: toneList.length);
 
     if (model.statusCode == 'SC0000') {
-      toneList.value += model.responseMap?.searchList ?? [];
+      toneList.value += model.responseMap?.toneList ?? [];
     } else {}
     isLoadingMore.value = false;
   }

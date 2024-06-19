@@ -16,12 +16,7 @@ import 'package:you_yemen/files/api_self_care/tone_detail_api.dart';
 //import 'package:you_yemen/files/api_self_care/deactivate_tone_api.dart';
 //import 'package:you_yemen/files/api_self_care/list_settings_api.dart';
 
-<<<<<<< HEAD
-import 'package:you_yemen/files/api_gokul/add_to_wishlist_api.dart';
 import 'package:you_yemen/files/common/encryptor/aes_en_de_cryptor.dart';
-=======
-//import 'package:you_yemen/files/api_self_care/suspend_api.dart';
->>>>>>> 1c5f7a83bbdc9dae49358f8ee4f25be7a9397fbf
 
 import 'package:you_yemen/files/common/footer_view.dart';
 import 'package:you_yemen/files/common/search_tune_text_field.dart';
@@ -55,7 +50,6 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 10),
         RecomendedTabView(),
         RecomendedListView(),
-<<<<<<< HEAD
         genericButton(
           title: "8123812512",
           onTap: () {
@@ -63,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         ElevatedButton(onPressed: () {}, child: Text('api')),
-=======
         ElevatedButton(
             onPressed: () {
               getBannerDetailsApi();
@@ -74,7 +67,6 @@ class _HomeScreenState extends State<HomeScreen> {
               // suspendApi();
             },
             child: Text('api')),
->>>>>>> 1c5f7a83bbdc9dae49358f8ee4f25be7a9397fbf
         const SizedBox(height: 10),
         FooterView(),
       ],

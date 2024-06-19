@@ -87,6 +87,8 @@ String scresumeUrl = "http://10.0.10.33:9089/selfcare/subscription/suspend";
 String sclistTonesUrl =
     "http://10.0.14.4:8082/selfcare/subscriber-management/list-tones";
 
+String scAdvanceSearchUrl = "${selfcareBaseUrl}selfcare/advanced-search";
+
 String searchNameToneUrl = "${baseUrl}specific-search-tones?";
 
 String artistSearchUrl = "${baseUrl}specific-search-tones?";
