@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:you_yemen/files/common/mobile_navigation.dart';
 import 'package:you_yemen/files/controllers/banner_controller.dart';
 import 'package:you_yemen/files/models/home_banner_model.dart';
 import 'package:you_yemen/files/reusable_widgets/image/UImage.dart';
 
 import 'package:you_yemen/files/router/route_name.dart';
+import 'package:you_yemen/files/screens/banner_detail_screen/banner_detail_screen.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
 class HomeBannerView extends StatelessWidget {
@@ -42,10 +44,14 @@ class HomeBannerView extends StatelessWidget {
     return InkWell(
       onTap: () {
         con.getBannerDetail(homeBanner.searchKey ?? '', homeBanner.type ?? '');
-        context.goNamed(bannerDetailRoute, queryParameters: {
-          'searchKey': homeBanner.searchKey ?? '',
-          'type': homeBanner.type ?? ''
-        });
+        if (GetPlatform.isWeb) {
+          context.goNamed(bannerDetailRoute, queryParameters: {
+            'searchKey': homeBanner.searchKey ?? '',
+            'type': homeBanner.type ?? ''
+          });
+        } else {
+          mobileNavigation(context, BannerDetailScreen());
+        }
       },
       child: uImage(
           gredientColor: transparent,

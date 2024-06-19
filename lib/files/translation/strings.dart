@@ -46,7 +46,7 @@ String fullDayStr = "FullDay";
 String statusStr = "Status";
 String callersStr = "Callers";
 String allStr = "All";
-
+String seeAllStr = "See All";
 String selectTimeStr = "Select Time";
 String selectTimeDateStr = "Select time and Date";
 

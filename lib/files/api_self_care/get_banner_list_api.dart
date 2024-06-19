@@ -4,6 +4,7 @@ import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
+
 Future<HomeBannerModel> getBannerlistApi() async {
   String url =
       "${scGetBannerList}channelId=$channelId&languageCode=${StoreManager().languageSort}";
@@ -12,6 +13,8 @@ Future<HomeBannerModel> getBannerlistApi() async {
   };
   Map<String, dynamic> response =
       await NetworkManager().get(url, params: header);
+
   HomeBannerModel model = HomeBannerModel.fromJson(response);
   return model;
+
 }

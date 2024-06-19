@@ -13,27 +13,31 @@ import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
 Widget myTuneHeaderView() {
-  return _leftContainer();
+  return ResponsiveBuilder(
+    builder: (context, sizingInformation) {
+      return _leftContainer(sizingInformation);
+    },
+  );
 }
 
-Widget _leftContainer() {
+Widget _leftContainer(SizingInformation si) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       UText(
         title: myTunesStr.tr,
         fontName: FontName.helveticaBold,
-        fontSize: 28,
+        fontSize: si.isMobile ? 14 : 24,
       ),
-      const SizedBox(height: 12),
+      SizedBox(height: 2),
       RichText(
         text: TextSpan(children: [
           TextSpan(
               text: howToPlaySelectedTunesToYourCallersStr.tr,
-              style: _textStyle()),
+              style: _textStyle(si)),
           const TextSpan(text: "  "),
           TextSpan(
-              style: _textStyle(color: red),
+              style: _textStyle(si, color: red),
               text: learnMoreStr.tr,
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
@@ -77,5 +81,8 @@ Widget _leftContainer() {
   );
 }
 
-TextStyle _textStyle({Color color = grey}) =>
-    TextStyle(fontFamily: FontName.helveticaBold.name, color: color);
+TextStyle _textStyle(SizingInformation si, {Color color = grey}) => TextStyle(
+      fontFamily: FontName.acMuna.name,
+      color: color,
+      fontSize: si.isMobile ? 12 : 16,
+    );

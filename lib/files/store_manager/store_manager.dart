@@ -68,6 +68,7 @@ class StoreManager {
     setUserName('');
     setPassword('');
     setDeviceId('');
+
     print("Logout called from StoreManager");
 
     return;

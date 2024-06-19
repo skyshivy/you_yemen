@@ -23,21 +23,26 @@ class MyTuneListView extends StatelessWidget {
   final MyTuneController cont = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return cont.isLoadingMyTuneList.value
-          ? loadingIndicator(height: 300)
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: myTuneHeaderView(),
-                ),
-                const SizedBox(height: 20),
-                gridView(),
-              ],
-            );
-    });
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Obx(() {
+          return cont.isLoadingMyTuneList.value
+              ? loadingIndicator(height: 300, radius: 20)
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: si.isMobile ? 8 : 30),
+                      child: myTuneHeaderView(),
+                    ),
+                    const SizedBox(height: 20),
+                    gridView(),
+                  ],
+                );
+        });
+      },
+    );
   }
 
   Widget gridView() {
@@ -66,7 +71,11 @@ class MyTuneListView extends StatelessWidget {
           : Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [UText(title: cont.myTuneError.value)],
+              children: [
+                SizedBox(
+                    height: 200,
+                    child: Center(child: UText(title: cont.myTuneError.value)))
+              ],
             );
     });
   }

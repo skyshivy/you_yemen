@@ -32,12 +32,13 @@ Widget searchTuneTextField(
                 cont.updateSearchedText(p0);
               },
               onSubmitted: (p0) {
-                cont.searchText(p0);
-
-                context.goNamed(searchRoute, queryParameters: {
-                  "searchKey": p0,
-                  'searchType': _getSearchType(cont.searchType)
-                });
+                cont.searchText(p0, type: _getSearchType(cont.searchType));
+                if (GetPlatform.isWeb) {
+                  context.goNamed(searchRoute, queryParameters: {
+                    "searchKey": p0,
+                    'searchType': _getSearchType(cont.searchType)
+                  });
+                }
               },
             ),
           ),

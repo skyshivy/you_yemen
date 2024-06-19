@@ -1,10 +1,8 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:you_yemen/files/controllers/artist_tunes_controller.dart';
+import 'package:flutter/widgets.dart';
 import 'package:you_yemen/files/reusable_widgets/generic_gridview.dart';
 import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
+import 'package:you_yemen/files/controllers/artist_tunes_controller.dart';
 
 class ArtistTunesScreen extends StatefulWidget {
   const ArtistTunesScreen({super.key, required this.artistKey});
@@ -14,24 +12,26 @@ class ArtistTunesScreen extends StatefulWidget {
 }
 
 class _ArtistTunesScreenState extends State<ArtistTunesScreen> {
-  late ArtistTunesController cont;
+  ArtistTunesController cont = Get.find();
   @override
   void initState() {
-    cont = Get.put(ArtistTunesController());
     super.initState();
+    print("_ArtistTunesScreenState initiated");
   }
 
   @override
   void dispose() {
-    Get.delete<ArtistTunesController>();
     super.dispose();
+    print("_ArtistTunesScreenState Disposed");
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Obx(() {
-        return cont.isLoading.value ? loadingIndicator() : Text("data");
+        return cont.isLoading.value
+            ? loadingIndicator()
+            : GenericGridView(list: cont.list, totalCount: 0);
       }),
     );
   }
