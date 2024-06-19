@@ -9,7 +9,7 @@ class BannerController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isLoadingDetail = false.obs;
   RxInt selectedIndex = 0.obs;
-  RxList<HomeBanner> banners = <HomeBanner>[].obs;
+  RxList<BannerList> banners = <BannerList>[].obs;
   RxList<TuneInfo> tuneList = <TuneInfo>[].obs;
   @override
   void onInit() {
@@ -20,7 +20,7 @@ class BannerController extends GetxController {
   getBanners() async {
     isLoading.value = true;
     HomeBannerModel model = await getHomeBannerApi();
-    banners.value = model.responseMap?.banners ?? [];
+    banners.value = model.bannerList ?? [];
     isLoading.value = false;
   }
 
@@ -29,7 +29,7 @@ class BannerController extends GetxController {
       return;
     }
     isLoadingDetail.value = true;
-    BannerDetailModel model = await bannerDetailApi(key, type);
+    BannerDetailModel model = await getBannerDetail(key, type);
     tuneList.value = model.responseMap?.searchList ?? [];
     isLoadingDetail.value = false;
   }

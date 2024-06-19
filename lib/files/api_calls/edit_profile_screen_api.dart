@@ -36,7 +36,7 @@ Future<EditProfileModal> editProfile() async {
 
 Future<List<String>> fetchCategoryIds(String language) async {
   CategoryListModel model = await getCategoryListApi();
-  final categoryIds = model.responseMap!.categories!
+  final categoryIds = model.categoryList!
       .map((category) => category.categoryId.toString())
       .toList();
 
