@@ -54,3 +54,5 @@ class TransitionScreenController extends GetxController {
     }
   }
 }
+
+

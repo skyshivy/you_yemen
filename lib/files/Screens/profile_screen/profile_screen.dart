@@ -211,7 +211,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 children: [
                   Flexible(
                     child: uImage(
-                        url: cont.categories[index].menuImagePath ?? '',
+                        url: cont.categories[index].menuImage ?? '',
                         borderRadius:
                             BorderRadius.circular(contanerCornerRadius)),
                   ),
@@ -251,7 +251,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget prefTitleCell(Category e) {
+  Widget prefTitleCell(CategoryList e) {
     return InkWell(
       focusColor: transparent,
       hoverColor: transparent,
@@ -270,7 +270,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             borderRadius: BorderRadius.circular(contanerCornerRadius),
             color: (e.isSelected.value) ? yellow : lightGrey,
           ),
-          child: Padding(
+          child : Padding(
             padding: const EdgeInsets.all(8.0),
             child: UText(
               title: e.categoryName ?? '',

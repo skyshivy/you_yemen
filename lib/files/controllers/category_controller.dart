@@ -8,7 +8,7 @@ import 'package:you_yemen/files/models/tune_info_model.dart';
 
 class CategoryController extends GetxController {
   RxBool isLoading = false.obs;
-  RxList<Category> categoryList = <Category>[].obs;
+  RxList<CategoryList> categoryList = <CategoryList>[].obs;
   RxList<TuneInfo> toneList = <TuneInfo>[].obs;
   RxBool isLoadingMore = false.obs;
   String searchedkey = '';
@@ -24,8 +24,8 @@ class CategoryController extends GetxController {
     print("Category list called");
     CategoryListModel model = await getCategoryListApi();
 
-    if (model.statusCode == 'SC0000') {
-      categoryList.value = model.responseMap?.categories ?? [];
+    if (model.respCode == 'SC0000') {
+      categoryList.value = model.categoryList?? [];
     }
   }
 
@@ -48,7 +48,7 @@ class CategoryController extends GetxController {
     print("testLoadingMore called");
     isLoadingMore.value = true;
 
-    CategoryDetailModel model =
+    CategoryDetailModel model = 
         await getCategoryDetailApi(searchedkey, catId, pageNo: toneList.length);
 
     if (model.statusCode == 'SC0000') {

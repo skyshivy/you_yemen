@@ -2,6 +2,85 @@
 //
 //     final homeBannerModel = homeBannerModelFromJson(jsonString);
 
+// To parse this JSON data, do
+//
+//     final homeBannerModel = homeBannerModelFromJson(jsonString);
+
+import 'dart:convert';
+
+HomeBannerModel homeBannerModelFromJson(String str) =>
+    HomeBannerModel.fromJson(json.decode(str));
+
+String homeBannerModelToJson(HomeBannerModel data) =>
+    json.encode(data.toJson());
+
+class HomeBannerModel {
+  String? respCode;
+  String? message;
+  List<BannerList>? bannerList;
+
+  HomeBannerModel({
+    this.respCode,
+    this.message,
+    this.bannerList,
+  });
+
+  factory HomeBannerModel.fromJson(Map<String, dynamic> json) =>
+      HomeBannerModel(
+        respCode: json["respCode"],
+        message: json["message"],
+        bannerList: json["bannerList"] == null
+            ? []
+            : List<BannerList>.from(
+                json["bannerList"]!.map((x) => BannerList.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "respCode": respCode,
+        "message": message,
+        "bannerList": bannerList == null
+            ? []
+            : List<dynamic>.from(bannerList!.map((x) => x.toJson())),
+      };
+}
+
+class BannerList {
+  String? language;
+  String? bannerId;
+  String? bannerPath;
+  String? type;
+  String? searchKey;
+  String? bannerOrder;
+
+  BannerList({
+    this.language,
+    this.bannerId,
+    this.bannerPath,
+    this.type,
+    this.searchKey,
+    this.bannerOrder,
+  });
+
+  factory BannerList.fromJson(Map<String, dynamic> json) => BannerList(
+        language: json["language"],
+        bannerId: json["bannerId"],
+        bannerPath: json["bannerPath"],
+        type: json["type"],
+        searchKey: json["searchKey"],
+        bannerOrder: json["bannerOrder"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "language": language,
+        "bannerId": bannerId,
+        "bannerPath": bannerPath,
+        "type": type,
+        "searchKey": searchKey,
+        "bannerOrder": bannerOrder,
+      };
+}
+
+/*
 import 'dart:convert';
 
 HomeBannerModel homeBannerModelFromJson(String str) =>
@@ -93,3 +172,5 @@ class HomeBanner {
         "bannerOrder": bannerOrder,
       };
 }
+*/
+

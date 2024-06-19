@@ -1,12 +1,11 @@
 import 'package:you_yemen/files/models/generic_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
-
+import 'package:you_yemen/files/utility/urls.dart';
 
 deleteTonefromShuffleApi() async {
-  String url =
-      "http://10.0.10.33:9089/selfcare/setting-service/delete-tone-from-shufflelist";
-  // deleteTonefromShuffleUrl;w
-  Map<String, dynamic> jsonMap = {
+  String url = scdeleteTonefromShuffleListUrl;
+
+Map<String, dynamic> jsonMap = {
     "transactionId": "3457297",
     "featureId": 1,
     "msisdn": "8182020000",

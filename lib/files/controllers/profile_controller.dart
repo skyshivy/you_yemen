@@ -16,7 +16,7 @@ class ProfileController {
   RxBool savingEdit = false.obs;
   RxString editButtonTitle = editStr.obs;
   RxBool editEnable = false.obs;
-  RxList<Category> categories = <Category>[].obs;
+  RxList<CategoryList> categories = <CategoryList>[].obs;
   List<String> selectedCatIds = [];
   ProfileModal? profileModel;
   getCatgeoryList() async {}
@@ -44,7 +44,7 @@ class ProfileController {
   getProfileDetail() async {
     isloading.value = true;
     CategoryListModel catModel = await getCategoryListApi();
-    categories.value = catModel.responseMap?.categories ?? [];
+    categories.value = catModel.categoryList ?? [];
 
     profileModel = await getProfileDetailsApi();
     if (profileModel?.statusCode == 'SC0000') {

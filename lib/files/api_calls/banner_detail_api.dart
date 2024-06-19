@@ -6,10 +6,13 @@ import 'package:you_yemen/files/utility/urls.dart';
 
 Future<BannerDetailModel> bannerDetailApi(String key, String type,
     {int pageNo = 0}) async {
-  //pagePerCount
   String url = bannerDetailUrl +
-      "language=${StoreManager().language}&pageNo=$pageNo&pagePerCount=$pagePerCount&type=$type&searchKey=$key";
+      "http://10.0.14.4:5892/selfcare/get-banner-details?searchKey=95957&languageCode=en";
+       Map<String, String> header = {
+    "transId": "87863646846",
+  };
   Map<String, dynamic> jsonData = await NetworkManager().get(url);
   BannerDetailModel model = BannerDetailModel.fromJson(jsonData);
   return model;
 }
+

@@ -26,7 +26,7 @@ class HomeBannerView extends StatelessWidget {
           CarouselSlider(
             carouselController: carouselController,
             items: [
-              for (HomeBanner banner in con.banners)
+              for (BannerList banner in con.banners)
                 bannerCard(context, banner),
             ],
             options: carousalOption(context),
@@ -40,7 +40,7 @@ class HomeBannerView extends StatelessWidget {
     });
   }
 
-  Widget bannerCard(BuildContext context, HomeBanner homeBanner) {
+  Widget bannerCard(BuildContext context, BannerList homeBanner) {
     return InkWell(
       onTap: () {
         con.getBannerDetail(homeBanner.searchKey ?? '', homeBanner.type ?? '');
