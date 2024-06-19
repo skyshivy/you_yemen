@@ -89,6 +89,11 @@ String sclistTonesUrl =
 
 String scAdvanceSearchUrl = "${selfcareBaseUrl}selfcare/advanced-search";
 
+String scCategoryDetailUrl = "http://10.0.14.4:8090/advanced-search";
+String scGetRecomndedUrl =
+    "http://10.0.14.4:5892/selfcare/get-recommendations?";
+String scGetBannerDetailUrl =
+    "http://10.0.14.4:5892/selfcare/get-banner-details?";
 String searchNameToneUrl = "${baseUrl}specific-search-tones?";
 
 String artistSearchUrl = "${baseUrl}specific-search-tones?";

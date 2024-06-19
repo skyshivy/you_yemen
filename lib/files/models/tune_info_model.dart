@@ -61,7 +61,7 @@ class TuneInfo {
       id: json['id'],
       contentId: json['contentId'],
       contentName: json['contentName'],
-      path: json['path'],
+      path: json['path'] ?? json['location'],
       album: json['album'] ?? json['albumName'],
       artist: json['artist'] ?? json['artistName'],
       msisdn: json['msisdn'],
@@ -72,9 +72,10 @@ class TuneInfo {
       categoryId: '${json['categoryId']}',
       downloadCount: json['downloadCount'],
       likeCount: json['likeCount'],
-      previewImageUrl: json['previewImageUrl'],
+      previewImageUrl: json['previewImageUrl'] ?? json['previewImage'],
       toneId: json['toneId'] ?? json['contentId'],
-      toneIdStreamingUrl: json['toneIdStreamingUrl'] ?? json['path'],
+      toneIdStreamingUrl:
+          json['toneIdStreamingUrl'] ?? json['path'] ?? json['location'],
       toneIdpreviewImageUrl:
           json['toneIdpreviewImageUrl'] ?? json['previewImageUrl'],
       toneName: json['toneName'] ?? json['contentName'],

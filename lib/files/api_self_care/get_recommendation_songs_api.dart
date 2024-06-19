@@ -1,20 +1,18 @@
-import 'package:you_yemen/files/common/transaction_id.dart';
-import 'package:you_yemen/files/models/generic_model.dart';
-import 'package:you_yemen/files/models/home_banner_model.dart';
-import 'package:you_yemen/files/network_manager/network_manager.dart';
-import 'package:you_yemen/files/store_manager/store_manager.dart';
-import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
+import 'package:you_yemen/files/common/transaction_id.dart';
+import 'package:you_yemen/files/store_manager/store_manager.dart';
+import 'package:you_yemen/files/models/home_feature_category.dart';
+import 'package:you_yemen/files/network_manager/network_manager.dart';
 
-Future<GenericModel> getRecommendationSongApi() async {
+Future<HomeFeatureModel> scGetRecommendationSongApi(String identifier) async {
   String url =
-      "http://10.0.14.4:5892/selfcare/get-recommendations?languageCode=en&identifier=Recommendations";
+      "${scGetRecomndedUrl}languageCode=${StoreManager().languageSort}&identifier=$identifier&msisdn=${StoreManager().msisdn}";
 
   Map<String, String> header = {
     "transId": getTransactionId(),
   };
   Map<String, dynamic> response =
       await NetworkManager().get(url, params: header);
-  GenericModel model = GenericModel.fromJson(response);
+  HomeFeatureModel model = HomeFeatureModel.fromJson(response);
   return model;
 }

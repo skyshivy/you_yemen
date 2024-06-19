@@ -1,15 +1,16 @@
+import 'package:you_yemen/files/common/transaction_id.dart';
+import 'package:you_yemen/files/models/banner_detail_model.dart';
 import 'package:you_yemen/files/models/home_banner_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
+import 'package:you_yemen/files/store_manager/store_manager.dart';
+import 'package:you_yemen/files/utility/urls.dart';
 
-
-Future<HomeBannerModel> getBannerDetailsApi() async {
+Future<BannerDetailModel> scGetBannerDetailsApi(String searchkey) async {
   String url =
-      "http://10.0.14.4:5892/selfcare/get-banner-details?searchKey=95957&languageCode=en";
-  Map<String, String> header = {
-    "transId": "87863646846",
-  };
+      "${scGetBannerDetailUrl}searchKey=$searchkey&languageCode=${StoreManager().languageSort}";
+  Map<String, String> header = {"transId": getTransactionId()};
   Map<String, dynamic> response =
       await NetworkManager().get(url, params: header);
-  HomeBannerModel model = HomeBannerModel.fromJson(response);
+  BannerDetailModel model = BannerDetailModel.fromJson(response);
   return model;
 }

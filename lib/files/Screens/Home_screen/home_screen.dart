@@ -59,10 +59,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ElevatedButton(onPressed: () {}, child: Text('api')),
         ElevatedButton(
             onPressed: () {
-              getBannerDetailsApi();
+              //scGetBannerDetailsApi();
               getCategoryListApi();
-              getRecommendationSongApi();
-              getBannerlistApi();
+              //getRecommendationSongApi();
+              scGetBannerlistApi();
               toneDetailApi();
               // suspendApi();
             },

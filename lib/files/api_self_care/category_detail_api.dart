@@ -7,7 +7,7 @@ import 'package:you_yemen/files/utility/urls.dart';
 
 Future<CategoryDetailModel> scGetCategoryDetailApi(String searchKey, String id,
     {int pageNo = 0}) async {
-  String url = scAdvanceSearchUrl;
+  String url = scCategoryDetailUrl;
   Map<String, dynamic> jsonData = {
     'transactionId': getTransactionId(),
     'channelId': channelId,

@@ -5,7 +5,7 @@ import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
-Future<HomeBannerModel> getBannerlistApi() async {
+Future<HomeBannerModel> scGetBannerlistApi() async {
   String url =
       "${scGetBannerList}channelId=$channelId&languageCode=${StoreManager().languageSort}";
   Map<String, String> header = {"transId": getTransactionId()};
