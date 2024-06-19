@@ -8,6 +8,7 @@ import 'package:you_yemen/files/controllers/auth_controller/otp_controller.dart'
 import 'package:you_yemen/files/controllers/banner_controller.dart';
 import 'package:you_yemen/files/controllers/buy_controller.dart';
 import 'package:you_yemen/files/controllers/category_controller.dart';
+import 'package:you_yemen/files/controllers/custom_drawer_controller.dart';
 import 'package:you_yemen/files/controllers/mobile_menu_controller.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/custom_calender_controller.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_controller.dart';
@@ -51,6 +52,7 @@ _initController() async {
   Get.lazyPut(() => LoginPopupController());
   Get.lazyPut(() => OtpController());
   Get.lazyPut(() => BuyController());
+  Get.lazyPut(() => CustomDrawerController());
 
   Get.lazyPut(() => MyTuneController());
 }
