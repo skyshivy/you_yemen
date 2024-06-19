@@ -1,4 +1,3 @@
-
 import 'package:you_yemen/files/models/generic_model.dart';
 
 import 'package:you_yemen/files/network_manager/network_manager.dart';
@@ -6,15 +5,15 @@ import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
 toneDetailApi() async {
-  String url =
-      "http://10.0.14.4:8082/selfcare/subscriber-management/list-settings";
+  String url = sclistTonesUrl;
   deleteToneUrl;
   Map<String, dynamic> jsonMap = {
     "transactionId": "655652",
     "featureId": 1,
-    "msisdn": "92326145",
-    "languageCode": "br",
-    "channelId": 2
+    "msisdn": "8182010000",
+    "languageCode": "en",
+    "channelId": 2,
+    "offerCode": "CRBT_WEEKLY",
   };
   Map<String, dynamic> respJson =
       await NetworkManager().post(url, null, jsonData: jsonMap);

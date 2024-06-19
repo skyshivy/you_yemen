@@ -2,17 +2,15 @@ import 'dart:io';
 
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:you_yemen/files/api_self_care/add_tone_from_shufflelist.dart';
-
-import 'package:you_yemen/files/api_self_care/deactivate_tone_api.dart';
-import 'package:you_yemen/files/api_self_care/delete_pack_api.dart';
-import 'package:you_yemen/files/api_self_care/delete_tone_from_shuffle_api.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
+import 'package:you_yemen/files/api_self_care/get_banner_details_api.dart';
 import 'package:you_yemen/files/api_self_care/get_banner_list_api.dart';
-import 'package:you_yemen/files/api_self_care/resume_api.dart';
-import 'package:you_yemen/files/api_self_care/suspend_api.dart';
+
+import 'package:you_yemen/files/api_self_care/get_recommendation_songs_api.dart';
+import 'package:you_yemen/files/api_self_care/tone_detail_api.dart';
 
 //import 'package:you_yemen/files/api_self_care/activation_api.dart';
 //import 'package:you_yemen/files/api_self_care/deactivate_tone_api.dart';
@@ -53,7 +51,11 @@ class _HomeScreenState extends State<HomeScreen> {
         RecomendedListView(),
         ElevatedButton(
             onPressed: () {
+              getBannerDetailsApi();
+              getCategoryListApi();
+              getRecommendationSongApi();
               getBannerlistApi();
+              toneDetailApi();
               // suspendApi();
             },
             child: Text('api')),

@@ -66,7 +66,7 @@ class CategoryPopupListView extends StatelessWidget {
               borderRadius: BorderRadius.circular(contanerCornerRadius / 2),
               color: red,
             ),
-            child: uImage(url: cont.categoryList[index].menuImagePath ?? ''),
+            child: uImage(url: cont.categoryList[index].menuImage ?? ''),
             //width: 150,
           ),
         ),

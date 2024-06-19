@@ -6,16 +6,16 @@ import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
 deactivateToneApi() async {
-  String url = "http://10.0.10.33:5679/selfcare/subscriber-management/delete-tone";
- // deleteToneUrl;
+  String url = scdeactivatetoneUrl;
+
   Map<String, dynamic> jsonMap = {
-  "transactionId": "9234567822",
-  "featureId": 1,
-  "msisdn": "92000002",
-  "contentId": "1157833",
-  "channelId": 2 ,
-  "offerCode":"CRBT_MONTHLY_REC"
-};
+    "transactionId": "9234567822",
+    "featureId": 1,
+    "msisdn": "92000002",
+    "contentId": "1157833",
+    "channelId": 2,
+    "offerCode": "CRBT_MONTHLY_REC"
+  };
   Map<String, dynamic> respJson =
       await NetworkManager().post(url, null, jsonData: jsonMap);
 

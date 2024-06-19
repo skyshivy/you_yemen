@@ -5,7 +5,7 @@
 
 // getCategorylistApi() async {
 //   String url =
-//       "http://10.0.14.4:5892/selfcare/get-banner-list?channelId=$channelId&languageCode=${StoreManager().languageCode}";
+//       "http://10.0.14.4:5892/selfcare/get-category-list?languageCode=en&categoryValue=4";
 //   Map<String, String> header = {"transId": getTransactionId()};
 //   Map<String, dynamic> response =
 //       await NetworkManager().get(url, params: header);
