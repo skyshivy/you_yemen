@@ -21,6 +21,9 @@ class WishListController extends GetxController {
   // }
 
   getWishListTones() async {
+    if(isLoadingg.value){
+      return ;
+    }
     isLoadingg.value = true;
     await Future.delayed(Duration(milliseconds: 200));
     ScWishListModel model = await getWishlistApi();
