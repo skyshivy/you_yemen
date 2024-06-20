@@ -3,7 +3,7 @@ import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
 addTonefromWishlistApi() async {
-  String url = scaddUrl;
+  String url = scaddTonetoShufflelistUrl;
   ;
   Map<String, dynamic> jsonMap = {
     "transactionId": "3457297",
