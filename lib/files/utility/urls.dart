@@ -79,5 +79,7 @@ String scDeleteFromWishlistUrl =
     "http://10.0.10.33:8088/selfcare/wishlist-service/delete-from-wishlist";
 // "http://10.0.10.33:8088/selfcare/setting-service/shuffle";
 
-
+String scAddToWishListUrl="http://10.0.10.33:8088/selfcare/wishlist-service/add-to-wishlist";
+String scGetWishListUrl="http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist";
+String scGiftTonePriceUrl='${selfcareBaseUrl}subscriber-management/gift-tone';
 // "http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist"

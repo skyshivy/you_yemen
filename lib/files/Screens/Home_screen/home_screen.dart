@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:you_yemen/files/Screens/my_tune_header_view.dart';
 import 'package:you_yemen/files/api_self_care/add_tone_from_shufflelist.dart';
 import 'package:you_yemen/files/api_self_care/deactivate_tone_api.dart';
 import 'package:you_yemen/files/api_self_care/delete_pack_api.dart';
@@ -77,6 +78,13 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: Text('Wishlist')),
         const SizedBox(height: 10),
+        ElevatedButton(
+          onPressed:(){
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>MyTuneHeaderView() ),
+              );
+          } , child:Text('myTuneHeaderView')),
         FooterView(),
       ],
     );

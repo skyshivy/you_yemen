@@ -3,10 +3,11 @@ import 'package:you_yemen/files/models/sc_wishlist_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/constants.dart';
+import 'package:you_yemen/files/utility/urls.dart';
 
 Future <ScWishListModel> getWishlistApi() async {
-  String getWishlistUrl =
-      "http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist";
+  String getWishlistUrl = scGetWishListUrl;
+      //"http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist";
   //http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist
   Map<String, dynamic> jsonMap = {
     "msisdn": "9408000131",//StoreManager().msisdn,

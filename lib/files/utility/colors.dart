@@ -7,6 +7,7 @@ const Color white = Colors.white;
 const Color grey = Colors.grey;
 Color lightGrey = Colors.grey.withOpacity(0.3);
 const Color yellow = Colors.yellow;
+const Color myTuneHeaderViewColor= Color.fromARGB(255, 252, 207, 6);
 const Color red = Colors.red;
 const Color buttonBorderColor = black;
 const warningColor = Color.fromRGBO(252, 124, 21, 1);
