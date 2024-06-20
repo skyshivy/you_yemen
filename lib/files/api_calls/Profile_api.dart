@@ -1,21 +1,21 @@
 // import 'package:you_yemen/files/model/edit_modal.dart';
 // import 'package:you_yemen/files/network_manager/network_manager.dart';
 
-
 //import 'package:you_yemen/files/api_calls/get_category_detail_api.dart';
 import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
+import 'package:you_yemen/files/common/transaction_id.dart';
 import 'package:you_yemen/files/model/profile_modal.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
 
 Future<ProfileModal> getProfileDetailsApi() async {
-  await getCategoryListApi();
+  await scGetCategoryListApi();
 
   final url =
       'https://funtone.ooredoo.com.mm/security/Middleware/api/adapter/v1/crbt/get-profile-details';
   Map<String, dynamic> payload = {
-    "clientTxnId": "528696036",
-    "aPartyMsisdn": "9923964719",
+    "clientTxnId": getTransactionId(),
+    "aPartyMsisdn": StoreManager().msisdn,
     "identifier": "GetUserDetails",
     "language": StoreManager().language,
   };

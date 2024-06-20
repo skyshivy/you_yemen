@@ -20,8 +20,9 @@ String searchToneUrl = "${baseUrl}specific-search-tones?";
 String editProfileUrl = '${baseUrlSecurity}edit-profile';
 String tellFriendUrl = "${baseUrlSecurity}referral";
 String transactionUrl = "${baseUrlSecurity}view-transactions-scm";
-String mytunesUrl = "${baseUrlSecurity}list-tones";
-String myTuneListUrl = '${baseUrl}list-tones?rbtMode=400';
+//String mytunesUrl = "${baseUrlSecurity}list-tones";
+
+//String myTuneListUrl = '${baseUrl}list-tones?rbtMode=400';
 String addToShuffleUrl = "${baseUrlSecurity}add-tone-to-shuffle";
 String playingTuneListUrl = '${baseUrl}list-tones?rbtMode=0';
 String getPackStatusUrl = '${baseUrl}pack-status?';
@@ -33,7 +34,7 @@ String tuneSettingFulldayUrl =
     '${baseUrlSecurity}time-based-setting-for-already-activated';
 
 // ========== selfcare api================
-
+String scMyTunesUrl = "http://10.0.10.33:8990/selfcare/crbtbl/list-tones";
 String getSubscriptionUrl =
     '${selfcareBaseUrl}selfcare/subscription-service/get-subscription';
 

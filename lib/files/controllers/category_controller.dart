@@ -40,7 +40,9 @@ class CategoryController extends GetxController {
     isLoading.value = false;
     if (model.statusCode == 'SC0000') {
       toneList.value = model.responseMap?.toneList ?? [];
-    } else {}
+    } else {
+      print("SKY error is ==== ${model.message}");
+    }
   }
 
   loadingMoreData() async {

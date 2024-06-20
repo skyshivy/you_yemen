@@ -32,6 +32,8 @@ const String myProfileStr = 'My Profile';
 const String myTunezStr = 'My Tunez';
 const String myWishListStr = 'My Wishlist';
 const String logoutStr = 'Logout';
+const String messageForNonLoggedInStr =
+    'This feature is available for logged in user';
 const String loggedInSuccessStr = "You are successfully logged in";
 const String emptyToneListStr = 'No Result found';
 const String contactNumberStr = "Contact Number";
@@ -138,5 +140,4 @@ String artistStr = 'Artist';
 String nameToneStr = 'Name Tone';
 String viewStr = 'View';
 String deleteStr = "Delete";
-String callerGroupStr2='Creating a caller group is a breeze!';
-
+String callerGroupStr2 = 'Creating a caller group is a breeze!';

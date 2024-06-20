@@ -9,6 +9,8 @@ import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/custom_snack_bar.dart';
 import 'package:you_yemen/files/reusable_widgets/decorations/card_decoration.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
+import 'package:you_yemen/files/screens/home_screen/success_popup.dart';
+import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
@@ -62,12 +64,22 @@ Widget menuCardCell(BuildContext context, int index, List<IconData> iconList,
     TuneInfo info, List<String> titleList) {
   return InkWell(
     onTap: () async {
+      Navigator.of(context).pop();
       WishListController wishListController = Get.find();
       print("Tapped");
       if (index == 0) {
-        wishListController.addToWishlist(info);
+        if (StoreManager().isLoggedIn) {
+          wishListController.addToWishlist(info);
+        } else {
+          Get.dialog(SuccessPopupView(
+            message: messageForNonLoggedInStr,
+            bgColor: red,
+            showImage: false,
+          ));
+          print("User is not logged in");
+        }
       }
-      Navigator.of(context).pop();
+      //
     },
     child: Padding(
       padding: EdgeInsets.only(top: index == 0 ? 0 : 1),

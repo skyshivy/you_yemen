@@ -36,7 +36,7 @@ void main() async {
 }
 
 initialLoads() async {
-  getAppSetting();
+  scGetAppSetting();
 }
 
 _initController() async {

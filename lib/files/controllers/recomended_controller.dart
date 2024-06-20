@@ -30,7 +30,11 @@ class RecomendedController extends GetxController {
   _createTabList() async {
     isLoadingTab.value = true;
     if (StoreManager().appSetting == null) {
-      await getAppSetting();
+      bool status = await scGetAppSetting();
+      if (!status) {
+        isLoadingTab.value = false;
+        return;
+      }
     }
     tabTitleList.clear();
     tabIdList.clear();

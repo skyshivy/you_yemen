@@ -14,7 +14,7 @@ Future<GenericModel> scAddtoWishListApi(TuneInfo info) async {
     'msisdn': StoreManager().msisdn,
     "contentId": info.toneId,
     "contentPath": info.toneIdStreamingUrl,
-    "previewImage": info.previewImageUrl,
+    "previewImage": info.previewImageUrl ?? info.toneIdpreviewImageUrl,
     "contentName_L1": info.toneName,
     "album_L1": info.albumName,
     "artist_L1": info.artistName,

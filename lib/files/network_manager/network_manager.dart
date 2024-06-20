@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:flutter/foundation.dart';
 //import 'package:get/get.dart';
@@ -12,8 +13,10 @@ import 'package:you_yemen/files/utility/urls.dart';
 class NetworkManager {
   final client = HttpClient();
 
-  Future<Map<String, dynamic>> get(String url,
-      {Map<String, String>? params,}) async {
+  Future<Map<String, dynamic>> get(
+    String url, {
+    Map<String, String>? params,
+  }) async {
     try {
       var request = await client.getUrl(Uri.parse(url));
 
@@ -26,7 +29,9 @@ class NetworkManager {
         }
       }
       String stringData = '';
-      HttpClientResponse response1 = await request.close();
+      HttpClientResponse response1 = await request
+          .close()
+          .timeout(Duration(seconds: StoreManager().timeOutDuration));
 
       stringData = await response1.transform(utf8.decoder).join();
       print(stringData);
@@ -38,15 +43,39 @@ class NetworkManager {
 
         request = await CustomHeader().settingHeader(url, request);
         String stringData = '';
-        HttpClientResponse response1 = await request.close();
+        HttpClientResponse response1 = await request
+            .close()
+            .timeout(Duration(seconds: StoreManager().timeOutDuration));
 
         stringData = await response1.transform(utf8.decoder).join();
         Map<String, dynamic> valueMap = json.decode(stringData);
         return valueMap;
       } else {
-        Map<String, dynamic> valueMap = json.decode(stringData);
-        return valueMap;
+        try {
+          print("SKY error 1");
+          Map<String, dynamic> valueMap = json.decode(stringData);
+          print("SKY error 2");
+          return valueMap;
+        } catch (e) {
+          print("SKY error 3 $e");
+          Map<String, dynamic> valueMap = json.decode(
+              """{"message":"Socket Error ${e.toString()} status code ${response1.statusCode}"}""");
+
+          print("SKY error 4 ====== ${e}");
+          return valueMap;
+        }
       }
+    } on TimeoutException catch (error) {
+      print("TimeoutException ==== $error");
+      Map<String, dynamic> valueMap =
+          json.decode("""{"message":"Socket Error: ${error.toString()}"}""");
+      return valueMap;
+    } on SocketException catch (error) {
+      print("SocketException ==== $error");
+      // Other exception
+      Map<String, dynamic> valueMap =
+          json.decode("""{"message":"Socket Error: ${error.toString()}"}""");
+      return valueMap;
     } catch (error) {
       print("error for url ${url}");
       print("error =   =  ${error}");
@@ -79,7 +108,9 @@ class NetworkManager {
       if (formData != null) {
         request.write(formData);
       }
-      HttpClientResponse response = await request.close();
+      HttpClientResponse response = await request
+          .close()
+          .timeout(Duration(seconds: StoreManager().timeOutDuration));
       final stringData = await response.transform(utf8.decoder).join();
       if (kDebugMode) {
         print(stringData);
@@ -95,29 +126,35 @@ class NetworkManager {
         if (formData != null) {
           request4.write(formData);
         }
-        HttpClientResponse response4 = await request4.close();
+        HttpClientResponse response4 = await request4
+            .close()
+            .timeout(Duration(seconds: StoreManager().timeOutDuration));
         final stringData4 = await response4.transform(utf8.decoder).join();
         Map<String, dynamic> valueMap4 = json.decode(stringData4);
         print("Request url = $url");
         return valueMap4;
       }
       print("resp code is ${response.statusCode}");
-      Map<String, dynamic> valueMap = json.decode(stringData);
-      return valueMap;
-      // if (response.statusCode == 200) {
-      //   print("resp code is ${response.statusCode}");
-      //   Map<String, dynamic> valueMap = json.decode(stringData);
-      //   return valueMap;
-      // } else {
-      //   Map<String, dynamic> valueMap =
-      //       json.decode("""{"message":"Error: ${stringData}"}""");
-      //   return valueMap;
-      // }
+      try {
+        print("SKY error 1");
+        Map<String, dynamic> valueMap = json.decode(stringData);
+        print("SKY error 2");
+        return valueMap;
+      } catch (e) {
+        print("SKY error 3 $e");
+        Map<String, dynamic> valueMap = json.decode(
+            """{"message":"Socket Error ${e.toString()} status code ${response.statusCode}"}""");
+
+        print("SKY error 4 ====== ${e}");
+        return valueMap;
+      }
     } on SocketException catch (e) {
+      print("SocketException ==== $e");
       Map<String, dynamic> valueMap =
           json.decode("""{"message":"Socket Error: ${e.toString()}"}""");
       return valueMap;
     } on TimeoutException catch (e) {
+      print("TimeoutException ==== $e");
       Map<String, dynamic> valueMap =
           json.decode("""{"message":"Timeout Error: ${e.toString()}"}""");
       return valueMap;
@@ -169,7 +206,9 @@ class NetworkManager {
 
     request = await CustomHeader().settingHeader(url, request);
     request.write(formData);
-    HttpClientResponse response = await request.close();
+    HttpClientResponse response = await request
+        .close()
+        .timeout(Duration(seconds: StoreManager().timeOutDuration));
 
     if (response.statusCode == 498 || response.statusCode == 500) {
       print("Logut in case of regen");

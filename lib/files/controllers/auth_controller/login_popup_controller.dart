@@ -46,6 +46,7 @@ class LoginPopupController extends GetxController {
     }
     isVerifying.value = true;
     ScGenerateOtpModel mo = await scGenerateOtpApi(msisdn);
+    print("generate otp = $mo");
     if (mo.respCode == 1000) {
       authTypes.value = AuthTypes.showOtpScreen;
       userData = mo.userData ?? '';
