@@ -70,7 +70,7 @@ String scGetContentPriceUrl =
     "http://10.0.14.4:8082/selfcare/subscriber-management/get-content-price"; // get-content-price
 String scSettingUrl = 'http://10.0.13.19:9093/setting-service/settings';
 
-String scaddUrl =
+String scaddTonetoShufflelistUrl =
     "http://10.0.10.33:9089/selfcare/setting-service/add-tone-to-shufflelist";
 
 String scdeleteTonefromShuffleListUrl =
@@ -103,7 +103,7 @@ String deleteTonefromShuffleUrl =
     "${selfcareBaseUrl}selfcareselfcare/setting-service/delete-tone-from-shufflelist";
 
 
-String shuffleUrl = "${selfcareBaseUrl}selfcare/setting-service/shuffle";
+//String shuffleUrl = "${selfcareBaseUrl}selfcare/setting-service/shuffle";
 
 String scDeleteFromWishlistUrl =
     "http://10.0.10.33:8088/selfcare/wishlist-service/delete-from-wishlist";
@@ -113,8 +113,8 @@ String scAddToWishListUrl="http://10.0.10.33:8088/selfcare/wishlist-service/add-
 String scGetWishListUrl="http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist";
 String scGiftTonePriceUrl='${selfcareBaseUrl}subscriber-management/gift-tone';
 
-String shuffleUrl =
-    "http://10.0.10.33:9089/selfcare/setting-service/add-tone-to-shufflelist";
+// String shuffleUrl =
+//     "http://10.0.10.33:9089/selfcare/setting-service/add-tone-to-shufflelist";
 // "http://10.0.10.33:8088/selfcare/setting-service/shuffle";
 
 // "http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist"
