@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
-import 'package:you_yemen/files/api_calls/banner_detail_api.dart';
-import 'package:you_yemen/files/api_calls/get_home_banner_api.dart';
+
 import 'package:you_yemen/files/api_self_care/get_banner_details_api.dart';
 import 'package:you_yemen/files/api_self_care/get_banner_list_api.dart';
 import 'package:you_yemen/files/models/banner_detail_model.dart';
@@ -33,7 +32,7 @@ class BannerController extends GetxController {
     }
     isLoadingDetail.value = true;
     BannerDetailModel model = await scGetBannerDetailsApi(key);
-    //BannerDetailModel model = await getBannerDetail(key, type);
+
     tuneList.value = model.responseMap?.bannerDetails ?? [];
     isLoadingDetail.value = false;
   }
