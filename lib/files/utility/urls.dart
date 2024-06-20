@@ -102,7 +102,19 @@ String artistTunesUrl = "${baseUrl}search-tone?";
 String deleteTonefromShuffleUrl =
     "${selfcareBaseUrl}selfcareselfcare/setting-service/delete-tone-from-shufflelist";
 
+
+String shuffleUrl = "${selfcareBaseUrl}selfcare/setting-service/shuffle";
+
+String scDeleteFromWishlistUrl =
+    "http://10.0.10.33:8088/selfcare/wishlist-service/delete-from-wishlist";
+// "http://10.0.10.33:8088/selfcare/setting-service/shuffle";
+
+String scAddToWishListUrl="http://10.0.10.33:8088/selfcare/wishlist-service/add-to-wishlist";
+String scGetWishListUrl="http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist";
+String scGiftTonePriceUrl='${selfcareBaseUrl}subscriber-management/gift-tone';
+
 String shuffleUrl =
     "http://10.0.10.33:9089/selfcare/setting-service/add-tone-to-shufflelist";
 // "http://10.0.10.33:8088/selfcare/setting-service/shuffle";
+
 // "http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist"

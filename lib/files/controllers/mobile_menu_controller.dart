@@ -6,7 +6,7 @@ class MobileMenuController extends GetxController {
   RxInt selectedIndex = 0.obs;
 
   List<MobileMenuModel> menuList = [
-    MobileMenuModel(callerGroupStr, "imageName"),
+    MobileMenuModel(callerGroupStr1, "imageName"),
     MobileMenuModel(myWishListStr, "imageName"),
     MobileMenuModel(blackListStr, "imageName"),
     MobileMenuModel(historyStr, "imageName"),

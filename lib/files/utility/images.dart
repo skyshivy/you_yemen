@@ -26,3 +26,5 @@ const whiteQuotesSvg = 'assets/svgs/white_quotes_svg.svg';
 const yellowQuotesSvg = 'assets/svgs/yellow_quote_svg.svg';
 
 const searchTuneBgImgSvg = 'assets/svgs/search_tune_bg_img_svg.svg';
+
+const defaultHeaderImage = 'assets/png/you_yamen.png';

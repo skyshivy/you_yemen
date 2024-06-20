@@ -128,7 +128,7 @@ String myTuneStr = 'My Tunes';
 String moreStr = 'More';
 String historyStr = 'History';
 String changePasswordStr = 'Change Password';
-String callerGroupStr = 'My Caller Group';
+String callerGroupStr1 = 'My Caller Group';
 String blackListStr = 'Blacklist';
 String myWishlistStr = 'My Wishlist';
 
@@ -137,3 +137,6 @@ String toneCodeStr = 'Tone Code';
 String artistStr = 'Artist';
 String nameToneStr = 'Name Tone';
 String viewStr = 'View';
+String deleteStr = "Delete";
+String callerGroupStr2='Creating a caller group is a breeze!';
+

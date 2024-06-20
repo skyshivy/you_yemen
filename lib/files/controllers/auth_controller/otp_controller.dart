@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import 'package:you_yemen/files/api_self_care/sc_buy_tone_api.dart';
 import 'package:you_yemen/files/api_self_care/sc_confirm_otp_api.dart';
@@ -23,9 +24,11 @@ class OtpController extends GetxController {
   RxString errorMesssage = ''.obs;
   Function(String message)? onSuccess;
   TuneInfo? info;
-
+  RxBool isEnable = false.obs;
   RxInt otpResendTimeout = 0.obs;
   updateOpt(String value) {
+    if (value.length < otpLength) {}
+    isEnable.value = value.length >= otpLength;
     errorMesssage.value = '';
     print("update otp = $value");
     otp = value;

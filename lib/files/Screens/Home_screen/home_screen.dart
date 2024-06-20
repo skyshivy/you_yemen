@@ -3,6 +3,20 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 
+import 'package:you_yemen/files/Screens/my_tune_header_view.dart';
+import 'package:you_yemen/files/api_self_care/add_tone_from_shufflelist.dart';
+import 'package:you_yemen/files/api_self_care/deactivate_tone_api.dart';
+import 'package:you_yemen/files/api_self_care/delete_pack_api.dart';
+import 'package:you_yemen/files/api_self_care/delete_tone_from_shuffle_api.dart';
+import 'package:you_yemen/files/api_self_care/list_settings_api.dart';
+
+import 'package:you_yemen/files/Screens/wishlist_screen/wishlist_screen.dart';
+import 'package:you_yemen/files/api_gokul/add_detail_api.dart';
+import 'package:you_yemen/files/api_gokul/delete_wishlist_api.dart';
+import 'package:you_yemen/files/api_gokul/get_content_price_api.dart';
+import 'package:you_yemen/files/api_gokul/get_wishlist_api.dart';
+import 'package:you_yemen/files/api_gokul/gift_api.dart';
+
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
@@ -20,11 +34,16 @@ import 'package:you_yemen/files/common/encryptor/aes_en_de_cryptor.dart';
 
 import 'package:you_yemen/files/common/footer_view.dart';
 import 'package:you_yemen/files/common/search_tune_text_field.dart';
+
+import 'package:you_yemen/files/models/tune_info_model.dart';
+
 import 'package:you_yemen/files/reusable_widgets/buttons/generic_button.dart';
+
 import 'package:you_yemen/files/screens/home_screen/home_banner_view.dart';
 
 import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_list_view.dart';
 import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_tab_view.dart';
+import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
 // import 'package:you_yemen/files/screens/profile_screen/transition_screen.dart';
@@ -59,15 +78,38 @@ class _HomeScreenState extends State<HomeScreen> {
         ElevatedButton(onPressed: () {}, child: Text('api')),
         ElevatedButton(
             onPressed: () {
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => WishListScreen()),
+              );
+              //getContentPriceApi();//working
+              //getWishlistApi(); //working
+              //addtoWishListApi(TuneInfo());  //working
+              //deleteWishlistApi(); //working
+              //getContentPriceApi(); //working
+              //giftApi(); //Status code 404
+
               //scGetBannerDetailsApi();
               getCategoryListApi();
               //getRecommendationSongApi();
               scGetBannerlistApi();
               toneDetailApi();
               // suspendApi();
+
             },
             child: Text('api')),
         const SizedBox(height: 10),
+        ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CustomHeaderView(
+                        title: callerGroupStr1, subTitle: callerGroupStr2)),
+              );
+            },
+            child: Text('myTuneHeaderView')),
         FooterView(),
       ],
     );

@@ -3,11 +3,12 @@ import 'package:you_yemen/files/models/generic_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/constants.dart';
+import 'package:you_yemen/files/utility/urls.dart';
 
 getContentPriceApi() async {
   //
-  String getTonePriceUrl =
-      "http://10.0.14.4:8082/selfcare/subscriber-management/get-content-price";
+  String getContentPriceUrl = scGetContentPriceUrl;
+      //"http://10.0.14.4:8082/selfcare/subscriber-management/get-content-price";
       //"${selfcareBaseUrl}subscriber-management/get-content";
      //"http://10.0.10.33:8088/selfcare/subscriber-management/get-content";
       
@@ -25,9 +26,9 @@ getContentPriceApi() async {
     "msisdn":"8182000001",
   };
 
-  await NetworkManager().post(getTonePriceUrl, null, jsonData: jsonMap);
+  
   Map<String,dynamic> respJson=
-      await NetworkManager().post(getTonePriceUrl, null, jsonData: jsonMap);
+      await NetworkManager().post(getContentPriceUrl, null, jsonData: jsonMap);
   GenericModel model = GenericModel.fromJson(respJson);
   return model;
 }
