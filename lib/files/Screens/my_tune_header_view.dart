@@ -1,196 +1,81 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:you_yemen/files/reusable_widgets/u_text.dart';
-import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/reusable_widgets/u_text.dart';
+import 'package:you_yemen/files/utility/images.dart';
 
-class MyTuneHeaderView extends StatelessWidget {
-  const MyTuneHeaderView({super.key});
-
+class CustomHeaderView extends StatelessWidget {
+  const CustomHeaderView(
+      {super.key,
+      this.bgImage = defaultHeaderImage,
+      required this.title,
+      required this.subTitle});
+  final String bgImage;
+  final String title;
+  final String subTitle;
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Column(
-        children: [
-          LayoutBuilder(builder: (context, constraints){
-            if(constraints.maxWidth>650){
-          return DesktopLayout(size);
-        }
-        else if(constraints.maxWidth>450){
-          return TabletLayout(size);
-        }
-        else{
-          return MobileLayout(size);
-        }
-          }),
-          
-        ],
-      ),
+    return Scaffold(body: ResponsiveBuilder(
+      builder: (context, sizingInformation) {
+        return ovalShape(sizingInformation);
+      },
+    ));
+  }
+
+  Container ovalShape(SizingInformation si) {
+    return Container(
+      width: double.infinity,
+      height: si.isMobile ? 200 : 280,
+      child: Stack(alignment: Alignment.centerRight, children: [
+        backgroundImageBuilder(),
+        Positioned(
+          right: -60,
+          child: clipOvalShape(si),
+        ),
+      ]),
     );
   }
 
-  Container DesktopLayout(Size size) {
-    return Container(
-          width: double.infinity,
-          height: 280,
-          child: Stack(
-            alignment: Alignment.centerRight,
-            children: [
-            Positioned.fill(
-              child: Image.asset(
-                'assets/png/you_yamen.png',
-                fit: BoxFit.cover,
-              ),
+  ClipOval clipOvalShape(SizingInformation si) {
+    return ClipOval(
+      child: Container(
+          height: si.isMobile ? 130 : 200,
+          width: si.isMobile ? 280 : 400,
+          decoration: BoxDecoration(color: myTuneHeaderViewColor),
+          child: Padding(
+            padding: const EdgeInsets.only(
+              left: 32,
+              right: 80,
             ),
-            Positioned(
-              right:-60,
-              child: ClipOval(
-                child: Container(
-                  height:200, 
-                  
-                  width:400,
-                  
-                  decoration:BoxDecoration(
-                    color:myTuneHeaderViewColor
-                  ),
-                  child:Padding(
-                    padding: const EdgeInsets.only(
-                      left:12,
-                      right:80,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        UText(
-                          title:callerGroupStr1,
-                          fontSize: 28 ,
-                          fontWeight: FontWeight.w900,
-                        ),
-                         UText(
-                          title:callerGroupStr2,
-                          fontSize: 16,
-                          //fontWeight: FontWeight.w900,
-                          
-                        ),
-                      ],
-                    ),
-                  )),
-              ),
-            ),
-          ]),
-        );
+            child: infoColumnBuilder(si),
+          )),
+    );
   }
 
-  Container TabletLayout(Size size) {
-    return Container(
-          width: double.infinity,
-          height: size.height * 0.5,
-          child: Stack(
-            alignment: Alignment.centerRight,
-            children: [
-            Positioned.fill(
-              child: Image.asset(
-                'assets/png/you_yamen.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-            Positioned(
-              right:-size.width*0.09,
-              //-60,
-              child: ClipOval(
-                child: Container(
-                  height:size.width*0.28,
-                  //200, 
-                  
-                  width:size.width*0.55,
-                  
-                  decoration:BoxDecoration(
-                    color:myTuneHeaderViewColor
-                  ),
-                  child:Padding(
-                    padding: const EdgeInsets.only(
-                      left:5,
-                      right:45,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        UText(
-                          title:callerGroupStr1,
-                          fontSize: size.width*0.035 ,
-                          fontWeight: FontWeight.w900,
-                        ),
-                         UText(
-                          title:callerGroupStr2,
-                          fontSize: size.width*0.023,
-                          //fontWeight: FontWeight.w900,
-                          
-                        ),
-                      ],
-                    ),
-                  )),
-              ),
-            ),
-          ]),
-        );
+  Column infoColumnBuilder(SizingInformation si) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        UText(
+          title: title,
+          fontSize: si.isMobile ? 18 : 24,
+          fontWeight: FontWeight.w900,
+        ),
+        UText(
+          title: subTitle,
+          fontSize: si.isMobile ? 12 : 15,
+        ),
+      ],
+    );
   }
 
-  Container MobileLayout(Size size) {
-    return Container(
-          width: double.infinity,
-          height: 180,
-          child: Stack(
-            alignment: Alignment.centerRight,
-            children: [
-            Positioned.fill(
-              child: Image.asset(
-                'assets/png/you_yamen.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-            Positioned(
-              right:-size.width*0.09,
-              child: ClipOval(
-                child: Container(
-                  height:size.width*0.3, 
-                  
-                  width:size.width*0.6,
-                  
-                  decoration:BoxDecoration(
-                    color:myTuneHeaderViewColor
-                  ),
-                  child:Padding(
-                    padding: const EdgeInsets.only(
-                      left:0,
-                      right:30,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        UText(
-                          title:callerGroupStr1,
-                          fontSize: size.width*0.040,
-                          fontWeight: FontWeight.w900,
-                        ),
-                         UText(
-                          title:callerGroupStr2,
-                          fontSize: size.width*0.029,
-                          //fontWeight: FontWeight.w900,
-                          
-                        ),
-                      ],
-                    ),
-                  )),
-              ),
-            ),
-          ]),
-        );
+  Positioned backgroundImageBuilder() {
+    return Positioned.fill(
+      child: Image.asset(
+        bgImage,
+        fit: BoxFit.cover,
+      ),
+    );
   }
 }

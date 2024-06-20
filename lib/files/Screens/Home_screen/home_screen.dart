@@ -79,12 +79,15 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Text('Wishlist')),
         const SizedBox(height: 10),
         ElevatedButton(
-          onPressed:(){
-            Navigator.push(
+            onPressed: () {
+              Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>MyTuneHeaderView() ),
+                MaterialPageRoute(
+                    builder: (context) => CustomHeaderView(
+                        title: callerGroupStr1, subTitle: callerGroupStr2)),
               );
-          } , child:Text('myTuneHeaderView')),
+            },
+            child: Text('myTuneHeaderView')),
         FooterView(),
       ],
     );
