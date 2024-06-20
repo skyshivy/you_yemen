@@ -135,7 +135,8 @@ class _LoginPopupViewState extends State<LoginPopupView> {
           : genericButton(
               width: 150,
               title: requestOtpStr,
-              btnColor: con.enableButton.value ? yellow : lightGrey,
+              textColor: con.enableButton.value ? white : black,
+              btnColor: con.enableButton.value ? black : lightGrey,
               onTap: () {
                 con.onSubmitButtonAction();
               },

@@ -11,6 +11,7 @@ class UText extends StatelessWidget {
     this.textColor = black,
     this.maxLine,
     this.alignment = TextAlign.start,
+    this.fontWeight, 
     required this.title,
 
     // required String Title, //bhavya
@@ -21,6 +22,7 @@ class UText extends StatelessWidget {
   final Color? textColor;
   final int? maxLine;
   final TextAlign alignment;
+  final FontWeight? fontWeight; //gokul
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -31,6 +33,7 @@ class UText extends StatelessWidget {
         color: textColor,
         fontFamily: fontName?.name,
         fontSize: (fontSize ?? 14),
+        fontWeight:(fontWeight??FontWeight.normal),
       ),
     );
   }

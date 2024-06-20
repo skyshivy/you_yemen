@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:popover/popover.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/api_gokul/add_to_wishlist_api.dart';
+import 'package:you_yemen/files/models/generic_model.dart';
+import 'package:you_yemen/files/models/tune_info_model.dart';
+import 'package:you_yemen/files/reusable_widgets/custom_snack_bar.dart';
 import 'package:you_yemen/files/reusable_widgets/decorations/card_decoration.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
-Widget cardMoreButton() {
+Widget cardMoreButton(TuneInfo info) {
   return ResponsiveBuilder(
     builder: (context, si) {
       return InkWell(
         onTap: () {
           showPopover(
             context: context,
-            bodyBuilder: (context) => _popoverListView(),
+            bodyBuilder: (context) => _popoverListView(info),
             onPop: () => print('Popover was popped!'),
             direction: PopoverDirection.bottom,
             width: 130,
@@ -36,7 +40,7 @@ Widget cardMoreButton() {
   );
 }
 
-Widget _popoverListView() {
+Widget _popoverListView(TuneInfo info) {
   List<String> titleList = [wishlistStr];
   List<IconData> iconList = [Icons.bookmark];
   return ClipRRect(
@@ -46,17 +50,21 @@ Widget _popoverListView() {
       shrinkWrap: true,
       itemCount: titleList.length,
       itemBuilder: (context, index) {
-        return menuCardCell(context, index, iconList, titleList);
+        return menuCardCell(context, index, iconList, info, titleList);
       },
     ),
   );
 }
 
 Widget menuCardCell(BuildContext context, int index, List<IconData> iconList,
-    List<String> titleList) {
+    TuneInfo info, List<String> titleList) {
   return InkWell(
-    onTap: () {
+    onTap: () async {
       print("Tapped");
+      if (index == 0) {
+        GenericModel model = await addtoWishListApi(info);
+        customSnackBar(model.message ?? '');
+      }
       Navigator.of(context).pop();
     },
     child: Padding(
