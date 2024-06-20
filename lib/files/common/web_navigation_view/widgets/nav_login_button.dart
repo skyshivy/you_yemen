@@ -8,6 +8,7 @@ import 'package:you_yemen/files/auth_view/login_popup_view.dart';
 //import 'package:you_yemen/files/common/buy_popup/buy_popup.dart';
 import 'package:you_yemen/files/common/custom_hover.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_controller.dart';
+import 'package:you_yemen/files/controllers/wishlist_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
@@ -94,6 +95,8 @@ _popoverMyAccountMenu(
                   con.makeApiCall();
                   context.goNamed(myTunezRoute);
                 } else if (index == 2) {
+                  WishListController wishlist=Get.find();
+                  wishlist.getWishListTones();
                   context.goNamed(wishlistRoute);
                 } else {
                   StoreManager().logout();

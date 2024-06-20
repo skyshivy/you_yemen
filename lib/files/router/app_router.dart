@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/Screens/wishlist_screen/wishlist_screen.dart';
 import 'package:you_yemen/files/common/web_navigation_view/custom_drawer.dart';
 import 'package:you_yemen/files/common/web_navigation_view/web_navigation_view.dart';
 import 'package:you_yemen/files/common/web_navigation_view/widgets/logo_widget.dart';
@@ -15,6 +16,7 @@ import 'package:you_yemen/files/controllers/category_controller.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_controller.dart';
 import 'package:you_yemen/files/controllers/profile_controller.dart';
 import 'package:you_yemen/files/controllers/u_search_controller.dart';
+import 'package:you_yemen/files/controllers/wishlist_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/category_detail_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
@@ -125,13 +127,16 @@ StatefulShellBranch _tuneSettingScreen() {
 }
 
 StatefulShellBranch _wishlistScreen() {
+  WishListController wishListController=Get.find();
   return StatefulShellBranch(
     routes: <RouteBase>[
       GoRoute(
           path: wishlistRoute,
           name: wishlistRoute,
           builder: (context, state) {
-            return UText(title: "wishlistRoute screen here");
+            wishListController.getWishListTones();
+            return WishListScreen();
+            //return UText(title: "wishlistRoute screen here");
           }),
     ],
   );
