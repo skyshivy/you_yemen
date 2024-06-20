@@ -73,7 +73,7 @@ class TuneInfo {
       downloadCount: json['downloadCount'],
       likeCount: json['likeCount'],
       previewImageUrl: json['previewImageUrl'] ?? json['previewImage'],
-      toneId: json['toneId'] ?? json['contentId'],
+      toneId: json['toneId'] ?? json['contentId'] ?? json['contentID'],
       toneIdStreamingUrl:
           json['toneIdStreamingUrl'] ?? json['path'] ?? json['location'],
       toneIdpreviewImageUrl:

@@ -78,7 +78,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ElevatedButton(onPressed: () {}, child: Text('api')),
         ElevatedButton(
             onPressed: () {
-
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => WishListScreen()),
@@ -91,12 +90,11 @@ class _HomeScreenState extends State<HomeScreen> {
               //giftApi(); //Status code 404
 
               //scGetBannerDetailsApi();
-              getCategoryListApi();
+              scGetCategoryListApi();
               //getRecommendationSongApi();
               scGetBannerlistApi();
               toneDetailApi();
               // suspendApi();
-
             },
             child: Text('api')),
         const SizedBox(height: 10),

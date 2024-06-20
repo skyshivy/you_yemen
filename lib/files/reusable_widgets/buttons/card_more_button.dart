@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:popover/popover.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/api_gokul/add_to_wishlist_api.dart';
+import 'package:you_yemen/files/controllers/wishlist_controller.dart';
 import 'package:you_yemen/files/models/generic_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/reusable_widgets/custom_snack_bar.dart';
@@ -60,10 +62,10 @@ Widget menuCardCell(BuildContext context, int index, List<IconData> iconList,
     TuneInfo info, List<String> titleList) {
   return InkWell(
     onTap: () async {
+      WishListController wishListController = Get.find();
       print("Tapped");
       if (index == 0) {
-        GenericModel model = await addtoWishListApi(info);
-        customSnackBar(model.message ?? '');
+        wishListController.addToWishlist(info);
       }
       Navigator.of(context).pop();
     },

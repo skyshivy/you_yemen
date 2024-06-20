@@ -23,7 +23,7 @@ class CategoryController extends GetxController {
   getCategoryList() async {
     toneList.clear();
     print("Category list called");
-    CategoryListModel model = await getCategoryListApi();
+    CategoryListModel model = await scGetCategoryListApi();
 
     if (model.respCode == 'SC0000') {
       categoryList.value = model.responseMap?.categoryList ?? [];
