@@ -18,6 +18,7 @@ import 'package:you_yemen/files/controllers/u_search_controller.dart';
 
 import 'package:you_yemen/files/api_calls/setting_api.dart';
 import 'package:you_yemen/files/controllers/recomended_controller.dart';
+import 'package:you_yemen/files/controllers/wishlist_controller.dart';
 import 'package:you_yemen/files/router/app_router.dart';
 import 'package:you_yemen/files/screens/mobile_app/bottom_tab_view/mobile_botton_tab_view.dart';
 import 'package:you_yemen/files/screens/mobile_app/mobile_login_screen.dart';
@@ -55,6 +56,7 @@ _initController() async {
   Get.lazyPut(() => CustomDrawerController());
 
   Get.lazyPut(() => MyTuneController());
+  Get.lazyPut(() => WishListController());
 }
 
 class MyApp extends StatelessWidget {
