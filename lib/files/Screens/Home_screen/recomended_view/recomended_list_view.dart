@@ -25,7 +25,8 @@ class RecomendedListView extends StatelessWidget {
                 GenericGridView(
                   physics: const NeverScrollableScrollPhysics(),
                   list: cont.displayList,
-                  maxDisplay: 6,
+                  maxDisplay:
+                      cont.displayList.length > 6 ? 6 : cont.displayList.length,
                   totalCount: 0,
                 ),
                 cont.displayList.length <= 6
