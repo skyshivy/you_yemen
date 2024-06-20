@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
+
 import 'package:you_yemen/files/api_calls/search_artist_api.dart';
 import 'package:you_yemen/files/api_calls/search_name_tone_api.dart';
 import 'package:you_yemen/files/api_calls/search_tone_api.dart';

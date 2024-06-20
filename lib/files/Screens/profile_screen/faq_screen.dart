@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/common/custom_app_bar.dart';
 
 import 'package:you_yemen/files/controllers/faq_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
@@ -19,46 +20,50 @@ class FaqScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            height: 50,
-            width: double.infinity,
-            color: Colors.grey[300],
-            child: Center(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(width: 15),
-                ],
-              ),
-            ),
+    return Column(
+      children: [
+        GetPlatform.isWeb
+            ? Container(
+                height: 50,
+                width: double.infinity,
+                color: Colors.grey[300],
+                child: Center(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(width: 15),
+                    ],
+                  ),
+                ),
+              )
+            : SizedBox(),
+        Expanded(
+          child: GetX<FaqController>(
+            init: FaqController(),
+            builder: (controller) {
+              if (controller.isLoading.value) {
+                return Center(child: loadingIndicator(radius: 20));
+              } else if (controller.error.isNotEmpty) {
+                return Center(child: Text('Error: ${controller.error}'));
+              } else if (controller.faqList.isEmpty) {
+                return Center(child: Text('No data available'));
+              } else {
+                return ListView.builder(
+                  itemCount: controller.faqList.length,
+                  itemBuilder: (context, index) {
+                    return ContainerListItem(controller.faqList[index]);
+                  },
+                );
+              }
+            },
           ),
-          Expanded(
-            child: GetX<FaqController>(
-              init: FaqController(),
-              builder: (controller) {
-                if (controller.isLoading.value) {
-                  return Center(child: loadingIndicator(radius: 20));
-                } else if (controller.error.isNotEmpty) {
-                  return Center(child: Text('Error: ${controller.error}'));
-                } else if (controller.faqList.isEmpty) {
-                  return Center(child: Text('No data available'));
-                } else {
-                  return ListView.builder(
-                    itemCount: controller.faqList.length,
-                    itemBuilder: (context, index) {
-                      return ContainerListItem(controller.faqList[index]);
-                    },
-                  );
-                }
-              },
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
+    // Scaffold(
+    //   //appBar: customAppBar(title: "FAQ"),
+    //   body:
+    // );
   }
 }
 

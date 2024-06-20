@@ -2,7 +2,12 @@
 //
 //     final categoryDetailModel = categoryDetailModelFromJson(jsonString);
 
+// To parse this JSON data, do
+//
+//     final categoryDetailModel = categoryDetailModelFromJson(jsonString);
+
 import 'dart:convert';
+
 import 'package:you_yemen/files/models/tune_info_model.dart';
 
 CategoryDetailModel categoryDetailModelFromJson(String str) =>
@@ -12,6 +17,11 @@ String categoryDetailModelToJson(CategoryDetailModel data) =>
     json.encode(data.toJson());
 
 class CategoryDetailModel {
+  ResponseMap? responseMap;
+  String? message;
+  String? respTime;
+  String? statusCode;
+
   CategoryDetailModel({
     this.responseMap,
     this.message,
@@ -19,14 +29,11 @@ class CategoryDetailModel {
     this.statusCode,
   });
 
-  ResponseMap? responseMap;
-  String? message;
-  String? respTime;
-  String? statusCode;
-
   factory CategoryDetailModel.fromJson(Map<String, dynamic> json) =>
       CategoryDetailModel(
-        responseMap: ResponseMap.fromJson(json["responseMap"]),
+        responseMap: json["responseMap"] == null
+            ? null
+            : ResponseMap.fromJson(json["responseMap"]),
         message: json["message"],
         respTime: json["respTime"],
         statusCode: json["statusCode"],
@@ -41,25 +48,27 @@ class CategoryDetailModel {
 }
 
 class ResponseMap {
+  List<TuneInfo>? toneList;
+
   ResponseMap({
-    this.searchList,
-    this.totalCount,
+    this.toneList,
   });
 
-  List<TuneInfo>? searchList;
-  int? totalCount;
-
   factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
-        searchList: List<TuneInfo>.from(
-            json["searchList"].map((x) => TuneInfo.fromJson(x))),
-        totalCount: json["totalCount"],
+        toneList: json["toneList"] == null
+            ? []
+            : List<TuneInfo>.from(
+                json["toneList"]!.map((x) => TuneInfo.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-        "searchList": List<dynamic>.from(searchList!.map((x) => x.toJson())),
-        "totalCount": totalCount,
+        "toneList": toneList == null
+            ? []
+            : List<dynamic>.from(toneList!.map((x) => x.toJson())),
       };
 }
+
+
 
 /*
 class SearchList {

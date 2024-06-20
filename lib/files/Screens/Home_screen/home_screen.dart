@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
+
 import 'package:you_yemen/files/Screens/my_tune_header_view.dart';
 import 'package:you_yemen/files/api_self_care/add_tone_from_shufflelist.dart';
 import 'package:you_yemen/files/api_self_care/deactivate_tone_api.dart';
@@ -18,21 +19,26 @@ import 'package:you_yemen/files/api_gokul/gift_api.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
+import 'package:you_yemen/files/api_self_care/get_banner_details_api.dart';
+import 'package:you_yemen/files/api_self_care/get_banner_list_api.dart';
+
+import 'package:you_yemen/files/api_self_care/get_recommendation_songs_api.dart';
+import 'package:you_yemen/files/api_self_care/tone_detail_api.dart';
 
 //import 'package:you_yemen/files/api_self_care/activation_api.dart';
 //import 'package:you_yemen/files/api_self_care/deactivate_tone_api.dart';
 //import 'package:you_yemen/files/api_self_care/list_settings_api.dart';
-import 'package:you_yemen/files/api_self_care/pack_deatil_api.dart';
-import 'package:you_yemen/files/api_self_care/suspend_api.dart';
-import 'package:you_yemen/files/api_self_care/tone_details_api.dart';
-//import 'package:you_yemen/files/api_self_care/suspend_api.dart';
 
-import 'package:you_yemen/files/api_gokul/add_to_wishlist_api.dart';
+import 'package:you_yemen/files/common/encryptor/aes_en_de_cryptor.dart';
 
 import 'package:you_yemen/files/common/footer_view.dart';
 import 'package:you_yemen/files/common/search_tune_text_field.dart';
+
 import 'package:you_yemen/files/models/tune_info_model.dart';
+
+import 'package:you_yemen/files/reusable_widgets/buttons/generic_button.dart';
+
 import 'package:you_yemen/files/screens/home_screen/home_banner_view.dart';
 
 import 'package:you_yemen/files/screens/home_screen/recomended_view/recomended_list_view.dart';
@@ -63,8 +69,16 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 10),
         RecomendedTabView(),
         RecomendedListView(),
+        genericButton(
+          title: "8123812512",
+          onTap: () {
+            AesEnDeCryptor().aesEnc("8123812512");
+          },
+        ),
+        ElevatedButton(onPressed: () {}, child: Text('api')),
         ElevatedButton(
             onPressed: () {
+
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => WishListScreen()),
@@ -75,8 +89,16 @@ class _HomeScreenState extends State<HomeScreen> {
               //deleteWishlistApi(); //working
               //getContentPriceApi(); //working
               //giftApi(); //Status code 404
+
+              //scGetBannerDetailsApi();
+              getCategoryListApi();
+              //getRecommendationSongApi();
+              scGetBannerlistApi();
+              toneDetailApi();
+              // suspendApi();
+
             },
-            child: Text('Wishlist')),
+            child: Text('api')),
         const SizedBox(height: 10),
         ElevatedButton(
             onPressed: () {

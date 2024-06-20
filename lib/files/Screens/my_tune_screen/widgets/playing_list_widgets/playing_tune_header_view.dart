@@ -16,29 +16,34 @@ import 'package:you_yemen/files/utility/colors.dart';
 import 'package:you_yemen/files/utility/images.dart';
 
 Widget playingTuneHeaderView() {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [_leftContainer(), _toggelButton()],
+  return ResponsiveBuilder(
+    builder: (context, si) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [Expanded(child: _leftContainer(si)), _toggelButton(si)],
+      );
+    },
   );
 }
 
-Widget _leftContainer() {
+Widget _leftContainer(SizingInformation si) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       UText(
         title: currentlyPlayingToMyCallersStr.tr,
-        fontName: FontName.acMuna,
-        fontSize: 24,
+        fontName: FontName.helveticaBold,
+        fontSize: si.isMobile ? 14 : 24,
       ),
-      const SizedBox(height: 12),
+      const SizedBox(height: 2),
       RichText(
         text: TextSpan(children: [
-          TextSpan(text: wantToEditYourPlayingListStr.tr, style: _textStyle()),
+          TextSpan(
+              text: wantToEditYourPlayingListStr.tr, style: _textStyle(si)),
           const TextSpan(text: "  "),
           TextSpan(
-              style: _textStyle(color: red),
+              style: _textStyle(si, color: red),
               text: learnMoreStr.tr,
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
@@ -113,19 +118,23 @@ Widget rowText(Widget? child, String info, String count) {
   );
 }
 
-TextStyle _textStyle({Color color = grey}) =>
-    TextStyle(fontFamily: FontName.helveticaBold.name, color: color);
+TextStyle _textStyle(SizingInformation si, {Color color = grey}) => TextStyle(
+      fontFamily: FontName.acMuna.name,
+      color: color,
+      fontSize: si.isMobile ? 12 : 16,
+    );
 
-_toggelButton() {
+_toggelButton(SizingInformation si) {
   MyTuneController con = Get.find();
   return Row(
     children: [
       UText(
-          title: shuffleStr.tr,
-          textColor: grey,
-          fontName: FontName.helveticaBold
-          //font: FontName.helveticaBold,
-          ),
+        title: shuffleStr.tr,
+        textColor: grey,
+        fontName: si.isMobile ? FontName.acMuna : FontName.helveticaBold,
+        fontSize: si.isMobile ? 14.0 : 14.0,
+        //font: FontName.helveticaBold,
+      ),
       const SizedBox(width: 4),
       Obx(() {
         return con.isChangeSuffleStatus.value

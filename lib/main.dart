@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:you_yemen/files/controllers/app_controller.dart';
+import 'package:you_yemen/files/controllers/artist_tunes_controller.dart';
 import 'package:you_yemen/files/controllers/auth_controller/login_popup_controller.dart';
 import 'package:you_yemen/files/controllers/auth_controller/otp_controller.dart';
 import 'package:you_yemen/files/controllers/banner_controller.dart';
 import 'package:you_yemen/files/controllers/buy_controller.dart';
 import 'package:you_yemen/files/controllers/category_controller.dart';
+import 'package:you_yemen/files/controllers/custom_drawer_controller.dart';
 import 'package:you_yemen/files/controllers/mobile_menu_controller.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/custom_calender_controller.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_controller.dart';
@@ -37,6 +39,7 @@ initialLoads() async {
 }
 
 _initController() async {
+  Get.lazyPut(() => ArtistTunesController());
   Get.lazyPut(() => MobileMenuController());
   Get.lazyPut(() => CategoryController());
   Get.lazyPut(() => USearchController());
@@ -49,6 +52,7 @@ _initController() async {
   Get.lazyPut(() => LoginPopupController());
   Get.lazyPut(() => OtpController());
   Get.lazyPut(() => BuyController());
+  Get.lazyPut(() => CustomDrawerController());
 
   Get.lazyPut(() => MyTuneController());
 }
@@ -66,6 +70,7 @@ class MyApp extends StatelessWidget {
             routerConfig: router,
           )
         : GetMaterialApp(
+            debugShowCheckedModeBanner: false,
             home: Scaffold(
               body: Obx(
                 () {

@@ -6,12 +6,16 @@ import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/common/web_navigation_view/custom_drawer.dart';
 import 'package:you_yemen/files/common/web_navigation_view/web_navigation_view.dart';
+import 'package:you_yemen/files/common/web_navigation_view/widgets/logo_widget.dart';
+import 'package:you_yemen/files/controllers/artist_tunes_controller.dart';
 import 'package:you_yemen/files/controllers/banner_controller.dart';
 import 'package:you_yemen/files/controllers/category_controller.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_controller.dart';
 import 'package:you_yemen/files/controllers/profile_controller.dart';
 import 'package:you_yemen/files/controllers/u_search_controller.dart';
+import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/category_detail_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/screens/artist_tunes_screen/artist_tunes_screen.dart';
@@ -27,7 +31,9 @@ import 'package:you_yemen/files/screens/profile_screen/faq_screen.dart';
 
 import 'package:you_yemen/files/screens/profile_screen/profile_screen.dart';
 import 'package:you_yemen/files/screens/search_screen/search_screen.dart';
+import 'package:you_yemen/files/screens/see_all_screen/see_all_screen.dart';
 import 'package:you_yemen/files/translation/strings.dart';
+import 'package:you_yemen/files/utility/colors.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -50,6 +56,7 @@ final router = GoRouter(
         _faqScreen(),
         _bannerDetailScreen(),
         _artistTunesScreen(),
+        _seeAllScreen(),
       ],
     ),
   ],
@@ -185,7 +192,7 @@ StatefulShellBranch _searchScreen() {
 }
 
 StatefulShellBranch _artistTunesScreen() {
-  USearchController cont = Get.find();
+  ArtistTunesController cont = Get.find();
   return StatefulShellBranch(
     routes: <RouteBase>[
       GoRoute(
@@ -193,6 +200,7 @@ StatefulShellBranch _artistTunesScreen() {
           name: artistTunesRoute,
           builder: (context, state) {
             String artistKey = state.uri.queryParameters['artistKey'] ?? '';
+            cont.getArtistTunes(artistKey);
             return ArtistTunesScreen(
               artistKey: artistKey,
             );
@@ -231,10 +239,25 @@ StatefulShellBranch _faqScreen() {
   );
 }
 
+StatefulShellBranch _seeAllScreen() {
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+          path: seeAllRoute,
+          name: seeAllRoute,
+          builder: (context, state) {
+            List<TuneInfo> list = state.extra as List<TuneInfo>;
+            print("list ======= ${list.length}");
+            return SeeAllScreen(lst: list);
+          }),
+    ],
+  );
+}
+
 Widget _shellRouteIndex(BuildContext context, GoRouterState state,
     StatefulNavigationShell navigationShell) {
   print("Selected index must be===== ${navigationShell.currentIndex}");
-
+  print("Route name is ${state.fullPath} path is ${state.path}");
   return GetMaterialApp(
     debugShowCheckedModeBanner: false,
     title: "Yemen",
@@ -249,7 +272,28 @@ Widget _shellRouteIndex(BuildContext context, GoRouterState state,
                 Expanded(child: navigationShell),
               ],
             ),
-            WebNavigationView(),
+            si.isMobile
+                ? Scaffold(
+                    appBar: AppBar(
+                      title: UText(
+                        title: ((state.fullPath ?? '').replaceAll("/", " "))
+                            .toUpperCase(),
+                        fontName: FontName.helveticaBold,
+                      ),
+                      elevation: 2,
+                      leading: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: LogoWidget(),
+                      ),
+                      backgroundColor: white,
+                    ),
+                    endDrawer: Drawer(
+                      child: CustomDrawer(),
+                    ),
+                    body: SizedBox(
+                      child: navigationShell,
+                    ))
+                : WebNavigationView(),
           ],
         ));
       },

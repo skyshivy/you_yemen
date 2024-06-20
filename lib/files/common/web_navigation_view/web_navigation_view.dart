@@ -1,21 +1,14 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:you_yemen/files/utility/colors.dart';
+import 'package:you_yemen/files/utility/constants.dart';
 import 'package:responsive_builder/responsive_builder.dart';
-
 import 'package:you_yemen/files/common/web_navigation_view/widgets/faq_button.dart';
 import 'package:you_yemen/files/common/web_navigation_view/widgets/logo_widget.dart';
 import 'package:you_yemen/files/common/web_navigation_view/widgets/nav_login_button.dart';
 import 'package:you_yemen/files/common/web_navigation_view/widgets/nav_tunez_button.dart';
-
-import 'package:you_yemen/files/controllers/u_search_controller.dart';
-
-import 'package:you_yemen/files/reusable_widgets/u_text_field/u_textfield.dart';
-import 'package:you_yemen/files/router/route_name.dart';
-import 'package:you_yemen/files/utility/colors.dart';
-import 'package:you_yemen/files/utility/constants.dart';
 
 class WebNavigationView extends StatelessWidget {
   WebNavigationView({super.key});

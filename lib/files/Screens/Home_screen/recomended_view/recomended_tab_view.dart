@@ -74,13 +74,14 @@ class RecomendedTabView extends StatelessWidget {
           return Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
-              color: index == con.selectedTabIndex.value ? white : null,
+              color: index == con.selectedTabIndex.value ? black : null,
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Center(
                   child: UText(
                 title: con.tabTitleList[index],
+                textColor: index == con.selectedTabIndex.value ? white : null,
               )),
             ),
           );

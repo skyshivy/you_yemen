@@ -2,6 +2,11 @@
 //
 //     final categoryListModel = categoryListModelFromJson(jsonString);
 
+// To parse this JSON data, do
+//
+//     final categoryListModel = categoryListModelFromJson(jsonString);
+
+/*
 import 'dart:convert';
 
 import 'package:get/get.dart';
@@ -70,6 +75,7 @@ class Category {
   String? menuImagePath;
   String? language;
   RxBool isSelected = false.obs;
+  
   Category({
     this.categoryId,
     this.categoryName,
@@ -96,5 +102,101 @@ class Category {
         "categoryName": categoryName,
         "menuImagePath": menuImagePath,
         "language": language,
+      };
+}*/
+
+// To parse this JSON data, do
+//
+//     final categoryListModel = categoryListModelFromJson(jsonString);
+
+import 'dart:convert';
+
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+
+CategoryListModel categoryListModelFromJson(String str) =>
+    CategoryListModel.fromJson(json.decode(str));
+
+String categoryListModelToJson(CategoryListModel data) =>
+    json.encode(data.toJson());
+
+class CategoryListModel {
+  String? respCode;
+  String? message;
+  ResponseMap? responseMap;
+
+  CategoryListModel({
+    this.respCode,
+    this.message,
+    this.responseMap,
+  });
+
+  factory CategoryListModel.fromJson(Map<String, dynamic> json) =>
+      CategoryListModel(
+        respCode: json["respCode"],
+        message: json["message"],
+        responseMap: json["responseMap"] == null
+            ? null
+            : ResponseMap.fromJson(json["responseMap"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "respCode": respCode,
+        "message": message,
+        "responseMap": responseMap?.toJson(),
+      };
+}
+
+class ResponseMap {
+  List<CategoryList>? categoryList;
+
+  ResponseMap({
+    this.categoryList,
+  });
+
+  factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
+        categoryList: json["categoryList"] == null
+            ? []
+            : List<CategoryList>.from(
+                json["categoryList"]!.map((x) => CategoryList.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "categoryList": categoryList == null
+            ? []
+            : List<dynamic>.from(categoryList!.map((x) => x.toJson())),
+      };
+}
+
+class CategoryList {
+  String? language;
+  String? categoryId;
+  String? menuId;
+  String? categoryName;
+  String? menuImage;
+  RxBool isSelected = false.obs;
+  CategoryList({
+    this.language,
+    this.categoryId,
+    this.menuId,
+    this.categoryName,
+    this.menuImage,
+    required this.isSelected,
+  });
+
+  factory CategoryList.fromJson(Map<String, dynamic> json) => CategoryList(
+        language: json["language"],
+        categoryId: json["categoryID"],
+        menuId: json["menuID"],
+        categoryName: json["categoryName"],
+        menuImage: json["menuImage"],
+        isSelected: false.obs,
+      );
+
+  Map<String, dynamic> toJson() => {
+        "language": language,
+        "categoryID": categoryId,
+        "menuID": menuId,
+        "categoryName": categoryName,
+        "menuImage": menuImage,
       };
 }

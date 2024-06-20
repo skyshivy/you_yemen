@@ -3,7 +3,7 @@ import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
-
+/*
 Future<CategoryDetailModel> getCategoryDetailApi(String key, String catId,
     {int pageNo = 0}) async {
   String url = getCategoryDetailUrl +
@@ -12,5 +12,5 @@ Future<CategoryDetailModel> getCategoryDetailApi(String key, String catId,
   CategoryDetailModel model = CategoryDetailModel.fromJson(map);
   return model;
 }
-
+*/
 

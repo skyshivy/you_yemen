@@ -28,21 +28,26 @@ class _SearchScreenState extends State<SearchScreen> {
 
   Widget forWebWidget() {
     return Obx(() {
-      return cont.isloading.value
-          ? loadingIndicator(radius: 18)
-          : GenericGridView(
-              list: cont.toneList,
-              isLoadingMore: cont.isLoadingMore.value,
-              totalCount: cont.totalCount,
-              cardBuilder: cont.searchType == SearchType.artist
-                  ? (p0) {
-                      return ArtistCard(info: p0);
-                    }
-                  : null,
-              loadMore: () {
-                cont.loadingMoreData();
-              },
-            );
+      return cont.isloading.value ? loadingIndicator(radius: 18) : gridView();
+    });
+  }
+
+  Widget gridView({EdgeInsetsGeometry? gridPadding}) {
+    return Obx(() {
+      return GenericGridView(
+        gridPadding: gridPadding,
+        list: cont.toneList,
+        isLoadingMore: cont.isLoadingMore.value,
+        totalCount: cont.totalCount,
+        cardBuilder: cont.searchType == SearchType.artist
+            ? (p0) {
+                return ArtistCard(info: p0);
+              }
+            : null,
+        loadMore: () {
+          cont.loadingMoreData();
+        },
+      );
     });
   }
 
@@ -55,19 +60,9 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Obx(() {
               return cont.isloading.value
                   ? loadingIndicator(radius: 18)
-                  : GenericGridView(
+                  : gridView(
                       gridPadding: EdgeInsets.only(
-                          top: 140, left: 12, right: 12, bottom: 20),
-                      list: cont.toneList,
-                      isLoadingMore: cont.isLoadingMore.value,
-                      totalCount: 60,
-                      // loadMore: () {
-                      //   cont.loadingMoreData();
-                      // },
-                      pageNo: (p0) {
-                        print("Page number tapped");
-                      },
-                    );
+                          top: 146, left: 6, right: 6, bottom: 20));
             }),
           ),
           Container(

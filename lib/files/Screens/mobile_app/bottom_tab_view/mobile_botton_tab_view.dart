@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:you_yemen/files/common/custom_app_bar.dart';
 import 'package:you_yemen/files/controllers/app_controller.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/screens/home_screen/home_screen.dart';
@@ -11,6 +12,7 @@ import 'package:you_yemen/files/screens/my_tune_screen/my_tune_screen.dart';
 import 'package:you_yemen/files/screens/profile_screen/faq_screen.dart';
 import 'package:you_yemen/files/screens/search_screen/search_screen.dart';
 import 'package:you_yemen/files/translation/strings.dart';
+import 'package:you_yemen/files/utility/urls.dart';
 
 class MobileTabContainer extends StatefulWidget {
   const MobileTabContainer({super.key});
@@ -37,29 +39,35 @@ class _MobileTabContainerState extends State<MobileTabContainer> {
     return PersistentBottomBarScaffold(
       items: [
         PersistentTabItem(
-          tab: Scaffold(body: HomeScreen()),
+          tab: Scaffold(
+            body: HomeScreen(),
+            appBar: customAppBar(title: homeStr),
+          ),
           icon: Icons.home,
           title: homeStr.tr,
           navigatorkey: _tab1navigatorKey,
         ),
         PersistentTabItem(
           tab: Scaffold(
+              appBar: customAppBar(title: searchStr),
               body: Center(
                   child: SearchScreen(
-            isMobile: true,
-          ))),
+                isMobile: true,
+              ))),
           icon: Icons.search,
           title: searchStr.tr,
           navigatorkey: _tab2navigatorKey,
         ),
         PersistentTabItem(
-          tab: Scaffold(body: MyTuneScreen()),
+          tab: Scaffold(
+              appBar: customAppBar(title: myTuneStr), body: MyTuneScreen()),
           icon: Icons.music_note,
           title: myTuneStr.tr,
           navigatorkey: _tab3navigatorKey,
         ),
         PersistentTabItem(
-          tab: Scaffold(body: MoreScreen()),
+          tab: Scaffold(
+              appBar: customAppBar(title: moreStr), body: MoreScreen()),
           icon: Icons.more_horiz,
           title: moreStr,
           navigatorkey: _tab4navigatorKey,
