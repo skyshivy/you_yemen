@@ -7,7 +7,6 @@ import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
 Future<PlayingListModel> scGetPlayingListApi() async {
-  final baseUrl = scMyTunesUrl;
   final msisdn = StoreManager().msisdn;
 
   if (msisdn == Null || msisdn.isEmpty) {
@@ -29,7 +28,6 @@ Future<PlayingListModel> scGetPlayingListApi() async {
   try {
     final response = await NetworkManager()
         .post(scMyTunesUrl, null, jsonData: queryParameters);
-    //get(uri.toString());
 
     PlayingListModel modal = PlayingListModel.fromJson(response);
     print("modal = ${modal.message}");
@@ -40,7 +38,7 @@ Future<PlayingListModel> scGetPlayingListApi() async {
   }
 }
 
-Future<MyTuneListModel> myTunesListApi() async {
+Future<MyTuneListModel> scMyTunesListApi() async {
   final msisdn = StoreManager().msisdn;
 
   if (msisdn == Null || msisdn.isEmpty) {

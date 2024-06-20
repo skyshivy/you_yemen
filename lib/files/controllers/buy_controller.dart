@@ -34,7 +34,11 @@ class BuyController extends GetxController {
 
   onConfirmButtonAction() async {
     if (StoreManager().isLoggedIn) {
+      isVerifying.value = true;
       msisdn = StoreManager().msisdn;
+      await _getTonePrice();
+      isVerifying.value = false;
+      return;
     }
     if (msisdn.length < msisdnLength) {
       errorMessage.value = enterValidMobileNumberStr;
@@ -86,7 +90,7 @@ class BuyController extends GetxController {
     }
   }
 
-  _getTonePrice() async {
+  Future<void> _getTonePrice() async {
     TonePriceModel model = await getTonePriceApi(msisdn, info ?? TuneInfo());
     if (model.statusCode == 'SC0000') {
       String packName =
@@ -94,15 +98,16 @@ class BuyController extends GetxController {
       if (packName.isEmpty) {
         errorMessage.value = "No pack name or null";
       } else {
-        _setTune(info ?? TuneInfo(), packName);
+        await _setTune(info ?? TuneInfo(), packName);
       }
     } else {
       errorMessage.value = model.message ?? someThingWentWrongStr;
       isVerifying.value = false;
     }
+    return;
   }
 
-  _setTune(TuneInfo info, String packName) async {
+  Future<void> _setTune(TuneInfo info, String packName) async {
     BuyTuneModel model = await setToneApi(info, packName);
     if (model.statusCode == 'SC0000') {
       successMessage = model.message ?? '';
@@ -112,5 +117,6 @@ class BuyController extends GetxController {
       errorMessage.value = model.message ?? someThingWentWrongStr;
       isVerifying.value = false;
     }
+    return;
   }
 }

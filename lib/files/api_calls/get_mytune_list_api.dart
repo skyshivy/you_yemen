@@ -11,7 +11,7 @@ getMyTuneListApi({int pageNo = 0}) async {
   String msisdn = StoreManager().msisdn;
 
   String url =
-      '$myTuneListUrl&language=$langId&msisdn=$msisdn&startIndex=$pageNo&endIndex=$pagePerCount';
+      '$scMyTunesUrl&language=$langId&msisdn=$msisdn&startIndex=$pageNo&endIndex=$pagePerCount';
   Map<String, dynamic>? map = await NetworkManager().get(url);
 
   MyTuneModel model = MyTuneModel.fromJson(map);

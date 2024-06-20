@@ -34,7 +34,8 @@ String tuneSettingFulldayUrl =
     '${baseUrlSecurity}time-based-setting-for-already-activated';
 
 // ========== selfcare api================
-String scMyTunesUrl = "http://10.0.10.33:8990/selfcare/crbtbl/list-tones";
+String scMyTunesUrl =
+    'http://10.0.14.4:8081/selfcare/subscriber-management/list-tones'; //"http://10.0.10.33:8990/selfcare/crbtbl/list-tones";
 String getSubscriptionUrl =
     '${selfcareBaseUrl}selfcare/subscription-service/get-subscription';
 

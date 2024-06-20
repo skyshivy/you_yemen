@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:you_yemen/files/api_calls/get_mytune_list_api.dart';
 import 'package:you_yemen/files/api_calls/get_playing_list_api.dart';
+import 'package:you_yemen/files/api_calls/mytunes_api.dart';
 
 import 'package:you_yemen/files/api_calls/suffle_playing_tune_api.dart';
 import 'package:you_yemen/files/common/warning_popup/warning_popup.dart';
@@ -37,8 +38,9 @@ class MyTuneController extends GetxController {
     }
     playingError.value = '';
     isLoadingPlayingList.value = true;
-    PlayingTuneModel model = await getPlayingListApi();
-
+    //  PlayingTuneModel model = await getPlayingListApi();
+    await scMyTunesListApi();
+/*
     if (model.statusCode == 'SC0000') {
       playingList.value = model.responseMap?.listToneApk ?? [];
       newPlayingList.value =
@@ -51,6 +53,7 @@ class MyTuneController extends GetxController {
     } else {
       playingError.value = model.message ?? someThingWentWrongStr.tr;
     }
+    */
     isLoadingPlayingList.value = false;
   }
 
@@ -205,19 +208,20 @@ class MyTuneController extends GetxController {
     }
     myTuneError.value = '';
     isLoadingMyTuneList.value = true;
-    MyTuneModel model = await getMyTuneListApi();
-    if (model.statusCode == 'SC0000') {
-      myTuneList.value = model.responseMap?.listToneApk ?? [];
-      if (myTuneList.isEmpty) {
-        myTuneError.value = emptyToneListStr.tr;
-      }
-      // for (var it in myTuneList) {
-      //   print("sky======== ${it.toneName}");
-      //   print("sky=======cons= ${it.contentName}");
-      // }
-    } else {
-      myTuneError.value = model.message ?? someThingWentWrongStr.tr;
-    }
+    scGetPlayingListApi();
+    // MyTuneModel model = await getMyTuneListApi();
+    // if (model.statusCode == 'SC0000') {
+    //   myTuneList.value = model.responseMap?.listToneApk ?? [];
+    //   if (myTuneList.isEmpty) {
+    //     myTuneError.value = emptyToneListStr.tr;
+    //   }
+    // for (var it in myTuneList) {
+    //   print("sky======== ${it.toneName}");
+    //   print("sky=======cons= ${it.contentName}");
+    // }
+    // } else {
+    //   myTuneError.value = model.message ?? someThingWentWrongStr.tr;
+    // }
     isLoadingMyTuneList.value = false;
   }
 
