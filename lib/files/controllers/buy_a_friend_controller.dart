@@ -48,7 +48,7 @@
 //       if (packName.isNotEmpty) {
 //         try {
 //           isLoading.value = true;
-         
+
 //           GiftModel giftModel = await buyaFriendApi(info, msisdn, packName);
 //           if (giftModel.statusCode == 'SC0000') {
 //             isLoading.value = false;
@@ -73,13 +73,12 @@
 //   }
 // }
 
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:you_yemen/files/api_calls/buy_a_friend_api.dart';
 import 'package:you_yemen/files/api_calls/get_tune_price.dart';
+import 'package:you_yemen/files/api_gokul/get_content_price_api.dart';
 import 'package:you_yemen/files/models/get_tune_price_model.dart';
 import 'package:you_yemen/files/models/gift_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
@@ -108,7 +107,7 @@ class BuyAFriendPopupController extends GetxController {
     isSuccess.value = false;
   }
 
- getTonePrice(TuneInfo info) async {
+  getTonePrice(TuneInfo info) async {
     isSuccess.value = false;
     if (msisdn.isEmpty) {
       errorMessage.value = 'Please enter a mobile number';
@@ -118,14 +117,13 @@ class BuyAFriendPopupController extends GetxController {
     isLoading.value = true;
 
     try {
-     
-      TonePriceModel model = await getTonePriceApi(msisdn, info);
+      TonePriceModel model = await getContentPriceApi(
+          info.toneId ?? ''); //getTonePriceApi(msisdn, info);
 
-      if (model.statusCode == 'SC0000') {
-        String packName = model.responseMap?.responseDetails?.first.packName ?? '';
+      if (model.respCode == 0) {
+        String packName = model.toneDetails?.packName ?? '';
         print("Packname ========0 $packName ");
         if (packName.isNotEmpty) {
-         
           GiftModel giftModel = await buyaFriendApi(info, msisdn, packName);
 
           if (giftModel.statusCode == 'SC0000') {

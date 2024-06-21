@@ -53,15 +53,22 @@ class NetworkManager {
       } else {
         try {
           print("SKY error 1");
-          Map<String, dynamic> valueMap = json.decode(stringData);
-          print("SKY error 2");
-          return valueMap;
+          if (response1.statusCode == 200) {
+            Map<String, dynamic> valueMap = json.decode(stringData);
+            print("SKY error 2");
+            return valueMap;
+          } else {
+            Map<String, dynamic> valueMap = json.decode(
+                """{"message":"Error status code ${response1.statusCode}"}""");
+            print("SKY error 5 ====== ");
+            return valueMap;
+          }
         } catch (e) {
           print("SKY error 3 $e");
-          Map<String, dynamic> valueMap = json.decode(
-              """{"message":"Socket Error ${e.toString()} status code ${response1.statusCode}"}""");
+          Map<String, dynamic> valueMap =
+              json.decode("""{"message":"hello"}""");
 
-          print("SKY error 4 ====== ${e}");
+          print("SKY error 4 ====== ${e} ===== $valueMap");
           return valueMap;
         }
       }
@@ -137,9 +144,17 @@ class NetworkManager {
       print("resp code is ${response.statusCode}");
       try {
         print("SKY error 1");
-        Map<String, dynamic> valueMap = json.decode(stringData);
-        print("SKY error 2");
-        return valueMap;
+        if (response.statusCode == 200) {
+          Map<String, dynamic> valueMap = json.decode(stringData);
+          print("SKY error 2");
+          return valueMap;
+        } else {
+          Map<String, dynamic> valueMap = json
+              .decode("""{"message":"status code ${response.statusCode}"}""");
+
+          print("SKY error 5 ======");
+          return valueMap;
+        }
       } catch (e) {
         print("SKY error 3 $e");
         Map<String, dynamic> valueMap = json.decode(

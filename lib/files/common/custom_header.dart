@@ -5,17 +5,16 @@ import 'package:you_yemen/files/utility/constants.dart';
 
 class CustomHeader {
   settingHeader(String url, HttpClientRequest request) async {
-    if (url.contains("security")) {
-      if (StoreManager().isLoggedIn) {
-        print("Security url================");
+    if (StoreManager().isLoggedIn) {
+      print("Security url================");
 
-        print("Access Token================${StoreManager().accessToken}");
-        request.headers.set('accessToken', StoreManager().accessToken,
-            preserveHeaderCase: true);
-        request.headers.set('channelId', channelId, preserveHeaderCase: true);
-        request.headers.set('deviceId', deviceId, preserveHeaderCase: true);
-      }
+      print("Access Token================${StoreManager().accessToken}");
+      request.headers.set('accessToken', StoreManager().accessToken,
+          preserveHeaderCase: true);
+      request.headers.set('channelId', channelId, preserveHeaderCase: true);
+      request.headers.set('deviceId', deviceId, preserveHeaderCase: true);
     }
+
     request.headers.set('Content-Type', 'application/x-www-form-urlencoded',
         preserveHeaderCase: true);
     request.headers.set('versionCode', versionCode, preserveHeaderCase: true);

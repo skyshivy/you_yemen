@@ -13,14 +13,15 @@ Future<BuyTuneModel> setToneApi(TuneInfo info, String packName) async {
   int randomNumber = random.nextInt(1000000000);
 
   var body = {
-    'clientTxnId': randomNumber.toString(),
-    'language': StoreManager().languageCode,
     'msisdn': StoreManager().msisdn,
     'toneId': info.toneId,
     'toneName': info.toneName,
     'packName': packName,
-    'username': StoreManager().msisdn,
+    'languageCode': StoreManager().languageSort,
     'channelId': channelId,
+    'clientTxId': randomNumber.toString(),
+    "serviceId": "1",
+    "priority": "0",
   };
 
   body.forEach((key, value) {
@@ -28,7 +29,8 @@ Future<BuyTuneModel> setToneApi(TuneInfo info, String packName) async {
         '${Uri.encodeQueryComponent(value.toString())}');
   });
   var formData = parts.join('&');
-  Map<String, dynamic> map = await NetworkManager().post(buyTuneUrl, formData);
+  Map<String, dynamic> map =
+      await NetworkManager().post(buyTuneUrl, null, jsonData: body);
   BuyTuneModel model = BuyTuneModel.fromJson(map);
   return model;
 }
