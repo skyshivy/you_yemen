@@ -4,6 +4,137 @@
 
 import 'dart:convert';
 
+import 'package:you_yemen/files/models/tune_info_model.dart';
+
+MyTuneModel myTuneModelFromJson(String str) =>
+    MyTuneModel.fromJson(json.decode(str));
+
+String myTuneModelToJson(MyTuneModel data) => json.encode(data.toJson());
+
+class MyTuneModel {
+  List<Listtone>? listtones;
+  String? message;
+  String? respCode;
+
+  MyTuneModel({
+    this.listtones,
+    this.message,
+    this.respCode,
+  });
+
+  factory MyTuneModel.fromJson(Map<String, dynamic> json) => MyTuneModel(
+        listtones: json["listtones"] == null
+            ? []
+            : List<Listtone>.from(
+                json["listtones"]!.map((x) => Listtone.fromJson(x))),
+        message: json["message"],
+        respCode: json["respCode"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "listtones": listtones == null
+            ? []
+            : List<dynamic>.from(listtones!.map((x) => x.toJson())),
+        "message": message,
+        "respCode": respCode,
+      };
+}
+
+class Listtone {
+  String? serviceName;
+  TuneInfo? toneDetails;
+
+  Listtone({
+    this.serviceName,
+    this.toneDetails,
+  });
+
+  factory Listtone.fromJson(Map<String, dynamic> json) => Listtone(
+        serviceName: json["serviceName"],
+        toneDetails: json["toneDetails"] == null
+            ? null
+            : TuneInfo.fromJson(json["toneDetails"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "serviceName": serviceName,
+        "toneDetails": toneDetails?.toJson(),
+      };
+}
+/*
+class ToneDetails {
+    String? artist;
+    String? artistArabic;
+    String? createdDate;
+    String? imagePath;
+    String? isCopy;
+    String? isGift;
+    String? status;
+    String? toneId;
+    String? toneIdStreamingUrl;
+    String? toneIdpreviewImageUrl;
+    String? toneName;
+    String? toneNameArabic;
+    String? tonePath;
+
+    ToneDetails({
+        this.artist,
+        this.artistArabic,
+        this.createdDate,
+        this.imagePath,
+        this.isCopy,
+        this.isGift,
+        this.status,
+        this.toneId,
+        this.toneIdStreamingUrl,
+        this.toneIdpreviewImageUrl,
+        this.toneName,
+        this.toneNameArabic,
+        this.tonePath,
+    });
+
+    factory ToneDetails.fromJson(Map<String, dynamic> json) => ToneDetails(
+        artist: json["artist"],
+        artistArabic: json["artist_Arabic"],
+        createdDate: json["createdDate"],
+        imagePath: json["imagePath"],
+        isCopy: json["isCopy"],
+        isGift: json["isGift"],
+        status: json["status"],
+        toneId: json["toneId"],
+        toneIdStreamingUrl: json["toneIdStreamingUrl"],
+        toneIdpreviewImageUrl: json["toneIdpreviewImageUrl"],
+        toneName: json["toneName"],
+        toneNameArabic: json["toneName_Arabic"],
+        tonePath: json["tonePath"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "artist": artist,
+        "artist_Arabic": artistArabic,
+        "createdDate": createdDate,
+        "imagePath": imagePath,
+        "isCopy": isCopy,
+        "isGift": isGift,
+        "status": status,
+        "toneId": toneId,
+        "toneIdStreamingUrl": toneIdStreamingUrl,
+        "toneIdpreviewImageUrl": toneIdpreviewImageUrl,
+        "toneName": toneName,
+        "toneName_Arabic": toneNameArabic,
+        "tonePath": tonePath,
+    };
+}
+*/
+
+
+/*
+// To parse this JSON data, do
+//
+//     final myTuneModel = myTuneModelFromJson(jsonString);
+
+import 'dart:convert';
+
 // To parse this JSON data, do
 //
 //     final myTuneModel = myTuneModelFromJson(jsonString);
@@ -96,6 +227,7 @@ class ListToneApk1 {
         "groupId": groupId,
       };
 }
+*/
 /*
 class ToneDetail {
     String? toneId;

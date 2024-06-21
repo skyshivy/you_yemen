@@ -55,8 +55,7 @@ class MyTuneListView extends StatelessWidget {
               shrinkWrap: true,
               itemCount: cont.myTuneList.length,
               itemBuilder: (context, index) {
-                TuneInfo inf =
-                    cont.myTuneList[index].toneDetails?.first ?? TuneInfo();
+                TuneInfo inf = cont.myTuneList[index].toneDetails ?? TuneInfo();
                 return TuneCard(
                   info: inf, //TuneInfo(artistName: "gfgfghf"),
                   rightButton: settingWidget(context, inf),

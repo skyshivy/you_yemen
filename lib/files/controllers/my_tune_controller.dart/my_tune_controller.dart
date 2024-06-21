@@ -18,7 +18,7 @@ class MyTuneController extends GetxController {
   RxBool isShuffle = false.obs;
   RxBool isChangeSuffleStatus = false.obs;
   RxList<PlayingToneList> playingList = <PlayingToneList>[].obs;
-  RxList<ListToneApk1> myTuneList = <ListToneApk1>[].obs;
+  RxList<Listtone> myTuneList = <Listtone>[].obs;
   RxList<ToneDetail> newPlayingList = <ToneDetail>[].obs;
 
   @override
@@ -210,8 +210,8 @@ class MyTuneController extends GetxController {
     isLoadingMyTuneList.value = true;
     //scGetPlayingListApi();
     MyTuneModel model = await getMyTuneListApi();
-    if (model.statusCode == 'SC0000') {
-      myTuneList.value = model.responseMap?.listToneApk ?? [];
+    if (model.respCode == '0') {
+      myTuneList.value = model.listtones ?? [];
       if (myTuneList.isEmpty) {
         myTuneError.value = emptyToneListStr.tr;
       }
