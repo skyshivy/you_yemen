@@ -38,9 +38,9 @@ class MyTuneController extends GetxController {
     }
     playingError.value = '';
     isLoadingPlayingList.value = true;
-    //  PlayingTuneModel model = await getPlayingListApi();
-    await scMyTunesListApi();
-/*
+    PlayingTuneModel model = await getPlayingListApi();
+    //await scMyTunesListApi();
+
     if (model.statusCode == 'SC0000') {
       playingList.value = model.responseMap?.listToneApk ?? [];
       newPlayingList.value =
@@ -53,7 +53,7 @@ class MyTuneController extends GetxController {
     } else {
       playingError.value = model.message ?? someThingWentWrongStr.tr;
     }
-    */
+
     isLoadingPlayingList.value = false;
   }
 
@@ -208,20 +208,20 @@ class MyTuneController extends GetxController {
     }
     myTuneError.value = '';
     isLoadingMyTuneList.value = true;
-    scGetPlayingListApi();
-    // MyTuneModel model = await getMyTuneListApi();
-    // if (model.statusCode == 'SC0000') {
-    //   myTuneList.value = model.responseMap?.listToneApk ?? [];
-    //   if (myTuneList.isEmpty) {
-    //     myTuneError.value = emptyToneListStr.tr;
-    //   }
-    // for (var it in myTuneList) {
-    //   print("sky======== ${it.toneName}");
-    //   print("sky=======cons= ${it.contentName}");
-    // }
-    // } else {
-    //   myTuneError.value = model.message ?? someThingWentWrongStr.tr;
-    // }
+    //scGetPlayingListApi();
+    MyTuneModel model = await getMyTuneListApi();
+    if (model.statusCode == 'SC0000') {
+      myTuneList.value = model.responseMap?.listToneApk ?? [];
+      if (myTuneList.isEmpty) {
+        myTuneError.value = emptyToneListStr.tr;
+      }
+      // for (var it in myTuneList) {
+      //   print("sky======== ${it.toneName}");
+      //   print("sky=======cons= ${it.contentName}");
+      // }
+    } else {
+      myTuneError.value = model.message ?? someThingWentWrongStr.tr;
+    }
     isLoadingMyTuneList.value = false;
   }
 

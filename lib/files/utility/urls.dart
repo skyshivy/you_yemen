@@ -24,7 +24,7 @@ String transactionUrl = "${baseUrlSecurity}view-transactions-scm";
 
 //String myTuneListUrl = '${baseUrl}list-tones?rbtMode=400';
 String addToShuffleUrl = "${baseUrlSecurity}add-tone-to-shuffle";
-String playingTuneListUrl = '${baseUrl}list-tones?rbtMode=0';
+//String playingTuneListUrl = '${baseUrl}list-tones?rbtMode=0';
 String getPackStatusUrl = '${baseUrl}pack-status?';
 String setDefaultToneUrl = '${baseUrlSecurity}set-default-tone';
 String tuneSuffleUrl = '${baseUrlSecurity}shuffle-activation-deactivation';
@@ -89,8 +89,6 @@ String sclistSettingsUrl =
 String scpackDetailsUrl =
     "http://10.0.10.33:9089/selfcare/setting-servic/get-subscription";
 String scresumeUrl = "http://10.0.10.33:9089/selfcare/subscription/suspend";
-String sclistTonesUrl =
-    "http://10.0.14.4:8082/selfcare/subscriber-management/list-tones";
 
 String scAdvanceSearchUrl = "${selfcareBaseUrl}selfcare/advanced-search";
 
