@@ -40,12 +40,15 @@ class MyTuneController extends GetxController {
     isLoadingPlayingList.value = true;
     PlayingTuneModel model = await getPlayingListApi();
     //await scMyTunesListApi();
-
-    if (model.statusCode == 'SC0000') {
-      playingList.value = model.responseMap?.listToneApk ?? [];
-      newPlayingList.value =
-          await createANewList(model.responseMap?.listToneApk ?? []);
-      playingList.removeAt(0);
+    print("SKY1 newPlayingList = ${model.playinListTones}");
+    if (model.respCode == '0') {
+      playingList.value = model.playinListTones ?? [];
+      newPlayingList.value = await createANewList(model.playinListTones ?? []);
+      print("SKY newPlayingList = ${newPlayingList}");
+      if (playingList.isNotEmpty) {
+        playingList.removeAt(0);
+      }
+      //
       if (playingList.isEmpty) {
         playingError.value = emptyToneListStr.tr;
       }
@@ -172,7 +175,7 @@ class MyTuneController extends GetxController {
       for (var item in list) {
         if (item.serviceName == 'AllCaller') {
           isShuffle.value =
-              (item.toneDetails?[0].isShuffle == 'T') ? true : false;
+              (item.packUserDetailsCrbt?.isShuffle == 'T') ? true : false;
         }
       }
     }

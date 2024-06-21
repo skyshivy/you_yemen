@@ -2,6 +2,158 @@
 //
 //     final playingTuneModel = playingTuneModelFromJson(jsonString);
 
+// To parse this JSON data, do
+//
+//     final playingTuneModel = playingTuneModelFromJson(jsonString);
+
+import 'dart:convert';
+
+PlayingTuneModel playingTuneModelFromJson(String str) =>
+    PlayingTuneModel.fromJson(json.decode(str));
+
+String playingTuneModelToJson(PlayingTuneModel data) =>
+    json.encode(data.toJson());
+
+class PlayingTuneModel {
+  List<PlayingToneList>? playinListTones;
+  String? message;
+  String? respCode;
+
+  PlayingTuneModel({
+    this.playinListTones,
+    this.message,
+    this.respCode,
+  });
+
+  factory PlayingTuneModel.fromJson(Map<String, dynamic> json) =>
+      PlayingTuneModel(
+        playinListTones: json["playinListTones"] == null
+            ? []
+            : List<PlayingToneList>.from(json["playinListTones"]!
+                .map((x) => PlayingToneList.fromJson(x))),
+        message: json["message"],
+        respCode: json["respCode"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "playinListTones": playinListTones == null
+            ? []
+            : List<dynamic>.from(playinListTones!.map((x) => x.toJson())),
+        "message": message,
+        "respCode": respCode,
+      };
+}
+
+class PlayingToneList {
+  PackDetails? packUserDetailsCrbt;
+  String? serviceName;
+  int? groupId;
+  String? msisdnB;
+  List<ToneDetail>? toneDetails;
+
+  PlayingToneList({
+    this.packUserDetailsCrbt,
+    this.serviceName,
+    this.groupId,
+    this.msisdnB,
+    this.toneDetails,
+  });
+
+  factory PlayingToneList.fromJson(Map<String, dynamic> json) =>
+      PlayingToneList(
+        packUserDetailsCrbt: json["packUserDetails_Crbt"] == null
+            ? null
+            : PackDetails.fromJson(json["packUserDetails_Crbt"]),
+        serviceName: json["serviceName"],
+        groupId: json["groupId"],
+        msisdnB: json["msisdnB"],
+        toneDetails: json["toneDetails"] == null
+            ? []
+            : List<ToneDetail>.from(
+                json["toneDetails"]!.map((x) => ToneDetail.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "packUserDetails_Crbt": packUserDetailsCrbt?.toJson(),
+        "serviceName": serviceName,
+        "groupId": groupId,
+        "msisdnB": msisdnB,
+        "toneDetails": toneDetails == null
+            ? []
+            : List<dynamic>.from(toneDetails!.map((x) => x.toJson())),
+      };
+}
+
+/*
+class PlayinListTone {
+  PackDetails? packDetails;
+  String? serviceName;
+  ToneDetail? toneDetails;
+
+  PlayinListTone({
+    this.packDetails,
+    this.serviceName,
+    this.toneDetails,
+  });
+
+  factory PlayinListTone.fromJson(Map<String, dynamic> json) => PlayinListTone(
+        packDetails: json["packDetails"] == null
+            ? null
+            : PackDetails.fromJson(json["packDetails"]),
+        serviceName: json["serviceName"],
+        toneDetails: json["toneDetails"] == null
+            ? null
+            : ToneDetail.fromJson(json["toneDetails"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "packDetails": packDetails?.toJson(),
+        "serviceName": serviceName,
+        "toneDetails": toneDetails?.toJson(),
+      };
+}
+*/
+class PackDetails {
+  String? isShuffle;
+  String? isSuspend;
+  String? languageId;
+  String? packExpiry;
+  String? packName;
+  String? serialNo;
+  String? serviceType;
+
+  PackDetails({
+    this.isShuffle,
+    this.isSuspend,
+    this.languageId,
+    this.packExpiry,
+    this.packName,
+    this.serialNo,
+    this.serviceType,
+  });
+
+  factory PackDetails.fromJson(Map<String, dynamic> json) => PackDetails(
+        isShuffle: json["isShuffle"],
+        isSuspend: json["isSuspend"],
+        languageId: json["languageId"],
+        packExpiry: json["packExpiry"],
+        packName: json["packName"],
+        serialNo: json["serialNo"],
+        serviceType: json["serviceType"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "isShuffle": isShuffle,
+        "isSuspend": isSuspend,
+        "languageId": languageId,
+        "packExpiry": packExpiry,
+        "packName": packName,
+        "serialNo": serialNo,
+        "serviceType": serviceType,
+      };
+}
+
+/*
 import 'dart:convert';
 
 PlayingTuneModel playingTuneModelFromJson(String str) =>
@@ -142,7 +294,7 @@ class PackUserDetailsCrbt {
         "serviceType": serviceType,
       };
 }
-
+*/
 class ToneDetail {
   String? toneId;
   String? toneName;
