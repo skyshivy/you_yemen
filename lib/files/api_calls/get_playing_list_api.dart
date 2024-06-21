@@ -22,7 +22,7 @@ Future<PlayingTuneModel> getPlayingListApi({int pageNo = 0}) async {
     "activityId": "4",
     "serviceId": "1"
   };
-
+  await Future.delayed(Duration(seconds: 2));
   String url = scMyTunesUrl;
   //&language=$langId&msisdn=$msisdn&startIndex=$pageNo&endIndex=$pagePerCount';
   // Map<String, dynamic> map =

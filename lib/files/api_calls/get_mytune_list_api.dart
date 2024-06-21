@@ -21,6 +21,7 @@ getMyTuneListApi({int pageNo = 0}) async {
     "activityId": "4",
     "serviceId": "1"
   };
+  await Future.delayed(Duration(seconds: 4));
   String url = scMyTunesUrl;
   //'$scMyTunesUrl&language=$langId&msisdn=$msisdn&startIndex=$pageNo&endIndex=$pagePerCount';
   // Map<String, dynamic> map =
