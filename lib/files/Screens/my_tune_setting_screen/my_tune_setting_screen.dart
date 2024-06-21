@@ -9,6 +9,7 @@ import 'package:you_yemen/files/common/warning_popup/warning_popup.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_setting_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
+import 'package:you_yemen/files/reusable_widgets/buttons/cancel_button.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/confirm_button.dart';
 import 'package:you_yemen/files/reusable_widgets/image/UImage.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
@@ -22,6 +23,7 @@ import 'package:you_yemen/files/utility/colors.dart';
 
 class MyTuneSettingScreen extends StatelessWidget {
   MyTuneSettingScreen({super.key, required this.info});
+  final TextEditingController textEditingController = TextEditingController();
   final TuneInfo info;
   final MyTuneSettingController cont = Get.put(MyTuneSettingController());
 
@@ -164,7 +166,7 @@ class MyTuneSettingScreen extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [whomView(), dedicatedView()],
+                  children: [whomView(), dedicatedView(textEditingController)],
                 ),
               ],
             ));
@@ -197,6 +199,7 @@ class MyTuneSettingScreen extends StatelessWidget {
                 : MainAxisAlignment.start,
             children: [
               confirmButton(
+                titlePadding: 30,
                 onTap: () {
                   print("tapped123");
                   cont.confirmButtonTap();
@@ -215,9 +218,12 @@ class MyTuneSettingScreen extends StatelessWidget {
               //   };
               // }, width: 150),
               const SizedBox(width: 20),
-              confirmButton(
+              cancelButton(
+                titlePadding: 30,
                 onTap: () {
-                  context.goNamed(myTunezRoute);
+                  Navigator.of(context).pop();
+
+                  //context.goNamed(myTunezRoute);
                 },
               )
             ],

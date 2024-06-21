@@ -62,6 +62,7 @@ Widget _leftContainer(SizingInformation si) {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 confirmButton(
+                                    titlePadding: 40,
                                     title: okStr,
                                     onTap: () {
                                       Navigator.of(context).pop();

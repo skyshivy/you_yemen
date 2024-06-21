@@ -29,6 +29,7 @@ class TimeTypeButton extends StatelessWidget {
         onTap: () {
           calCont.resetValue();
           print("On tap selectTimeDateStr");
+          return;
           Get.dialog(showPositionedPopup(
             _key,
             menuList,
@@ -52,7 +53,7 @@ class TimeTypeButton extends StatelessWidget {
                     fontSize: 13,
                   );
                 }),
-                Icon(Icons.arrow_drop_down)
+                SizedBox() // Icon(Icons.arrow_drop_down)
               ],
             ),
           ),

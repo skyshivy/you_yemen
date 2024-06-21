@@ -1,6 +1,7 @@
 //import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +18,7 @@ import 'package:you_yemen/files/router/route_name.dart';
 import 'package:you_yemen/files/screens/my_tune_screen/widgets/my_tune_list_widgets/my_tune_header_view.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
+import 'package:you_yemen/files/utility/images.dart';
 
 class MyTuneListView extends StatelessWidget {
   MyTuneListView({super.key});
@@ -57,14 +59,9 @@ class MyTuneListView extends StatelessWidget {
               itemBuilder: (context, index) {
                 TuneInfo inf = cont.myTuneList[index].toneDetails ?? TuneInfo();
                 return TuneCard(
-                  info: inf, //TuneInfo(artistName: "gfgfghf"),
-                  rightButton: settingWidget(context, inf),
-                  moreButton: Container(
-                    height: 30,
-                    width: 30,
-                    color: red,
-                  ),
-                );
+                    info: inf, //TuneInfo(artistName: "gfgfghf"),
+                    rightButton: settingWidget(context, inf),
+                    moreButton: _moreButton(inf));
               },
             )
           : Row(
@@ -79,26 +76,47 @@ class MyTuneListView extends StatelessWidget {
     });
   }
 
-  ListView listViewBuilder(TuneInfo info) {
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: 10,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.only(right: 20),
-          child: SizedBox(
-            width: 220,
-            child: TuneCard(
-              info: info,
-              rightButton: settingWidget(context, info),
-              moreButton: UText(title: "More button Here"),
-            ),
-          ),
-        );
+  Widget _moreButton(TuneInfo info) {
+    return genericButton(
+      width: 40,
+      height: 40,
+      btnColor: lightGrey,
+      child: SvgPicture.asset(
+        deleteSvg,
+        height: 14,
+      ), //Image.asset(deleteSvg),
+      onTap: () {
+        cont.deleteMyTune(info);
       },
     );
+    // Container(
+    //   height: 30,
+    //   width: 30,
+    //   color: red,
+    //   child: icons,
+    // );
   }
+
+  // ListView listViewBuilder(TuneInfo info) {
+  //   return ListView.builder(
+  //     scrollDirection: Axis.horizontal,
+  //     itemCount: 10,
+  //     shrinkWrap: true,
+  //     itemBuilder: (context, index) {
+  //       return Padding(
+  //         padding: const EdgeInsets.only(right: 20),
+  //         child: SizedBox(
+  //           width: 220,
+  //           child: TuneCard(
+  //             info: info,
+  //             rightButton: settingWidget(context, info),
+  //             moreButton: UText(title: "More button Here"),
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   settingWidget(BuildContext context, TuneInfo info) {
     return ResponsiveBuilder(

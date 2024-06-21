@@ -8,6 +8,7 @@ import 'package:you_yemen/files/common/warning_popup/warning_popup.dart';
 import 'package:you_yemen/files/models/my_tune_model.dart';
 import 'package:you_yemen/files/models/my_tune_shuffle_model.dart';
 import 'package:you_yemen/files/models/playint_tune_model.dart';
+import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 
 class MyTuneController extends GetxController {
@@ -19,7 +20,7 @@ class MyTuneController extends GetxController {
   RxBool isChangeSuffleStatus = false.obs;
   RxList<PlayingToneList> playingList = <PlayingToneList>[].obs;
   RxList<Listtone> myTuneList = <Listtone>[].obs;
-  RxList<ToneDetail> newPlayingList = <ToneDetail>[].obs;
+  RxList<PlayingToneDetail> newPlayingList = <PlayingToneDetail>[].obs;
 
   @override
   void onInit() {
@@ -40,10 +41,10 @@ class MyTuneController extends GetxController {
     isLoadingPlayingList.value = true;
     PlayingTuneModel model = await getPlayingListApi();
     //await scMyTunesListApi();
-    print("SKY1 newPlayingList = ${model.playinListTones}");
+    print("SKY1 newPlayingList = ${model.playingToneList}");
     if (model.respCode == '0') {
-      playingList.value = model.playinListTones ?? [];
-      newPlayingList.value = await createANewList(model.playinListTones ?? []);
+      playingList.value = model.playingToneList ?? [];
+      newPlayingList.value = await createANewList(model.playingToneList ?? []);
       print("SKY newPlayingList = ${newPlayingList}");
       if (playingList.isNotEmpty) {
         playingList.removeAt(0);
@@ -60,77 +61,68 @@ class MyTuneController extends GetxController {
     isLoadingPlayingList.value = false;
   }
 
-  Future<List<ToneDetail>> createANewList(
+  Future<List<PlayingToneDetail>> createANewList(
       List<PlayingToneList> listToneApk) async {
     if (listToneApk.isEmpty) return [];
-    List<ToneDetail> newList = [];
+    List<PlayingToneDetail> newList = [];
     for (var element in listToneApk) {
       if (element.toneDetails != null) {
-        for (ToneDetail item in element.toneDetails ?? []) {
-          if (item.customiseStartDate != '0') {
-            print("SKY NONE");
+        PlayingToneDetail item = element.toneDetails ?? PlayingToneDetail();
+        //for (PlayingToneDetail item in element.toneDetails ?? []) {
+        if (item.customiseStartDate != '0') {
+          print("SKY NONE");
 
-            newList.add(createNewDetail(
-                item,
-                "None",
-                (element.msisdnB == null)
-                    ? element.serviceName
-                    : element.msisdnB,
-                repeatType.none));
-          }
-          if (item.endDayMonthly != '0') {
-            print("SKY MONTHLY");
-            newList.add(createNewDetail(
-                item,
-                "Monthly",
-                (element.msisdnB == null)
-                    ? element.serviceName
-                    : element.msisdnB,
-                repeatType.monthly));
-          }
-          if (item.yearlyEndMonth != '0') {
-            print("SKY YEARLY");
-
-            newList.add(createNewDetail(
-                item,
-                "Yearly",
-                (element.msisdnB == null)
-                    ? element.serviceName
-                    : element.msisdnB,
-                repeatType.yearly));
-          }
-          if (item.startTimeWeekly == "00:00:00" &&
-              item.endTimeWeekly != "00:00:00") {
-            print("SKY full day ");
-            newList.add(createNewDetail(
-                item,
-                "Full day",
-                (element.msisdnB == null)
-                    ? element.serviceName
-                    : element.msisdnB,
-                repeatType.fullday));
-          }
-          if (item.endTimeWeekly != "00:00:00" &&
-              item.startTimeWeekly != "00:00:00") {
-            print("SKY Custom time base ");
-            newList.add(createNewDetail(
-                item,
-                "Custom time",
-                (element.msisdnB == null)
-                    ? element.serviceName
-                    : element.msisdnB,
-                repeatType.customTime));
-          }
+          newList.add(createNewDetail(
+              item,
+              "None",
+              (element.msisdnB == null) ? element.serviceName : element.msisdnB,
+              repeatType.none));
         }
+        if (item.endDayMonthly != '0') {
+          print("SKY MONTHLY");
+          newList.add(createNewDetail(
+              item,
+              "Monthly",
+              (element.msisdnB == null) ? element.serviceName : element.msisdnB,
+              repeatType.monthly));
+        }
+        if (item.yearlyEndMonth != '0') {
+          print("SKY YEARLY");
+
+          newList.add(createNewDetail(
+              item,
+              "Yearly",
+              (element.msisdnB == null) ? element.serviceName : element.msisdnB,
+              repeatType.yearly));
+        }
+        if (item.startTimeWeekly == "00:00:00" &&
+            item.endTimeWeekly != "00:00:00") {
+          print("SKY full day ");
+          newList.add(createNewDetail(
+              item,
+              "Full day",
+              (element.msisdnB == null) ? element.serviceName : element.msisdnB,
+              repeatType.fullday));
+        }
+        if (item.endTimeWeekly != "00:00:00" &&
+            item.startTimeWeekly != "00:00:00") {
+          print("SKY Custom time base ");
+          newList.add(createNewDetail(
+              item,
+              "Custom time",
+              (element.msisdnB == null) ? element.serviceName : element.msisdnB,
+              repeatType.customTime));
+        }
+        //}
       }
     }
     print("SKY total items are ${newList.length}");
     return newList;
   }
 
-  ToneDetail createNewDetail(
-      ToneDetail item, String type, String? callerType, repeatType cellType) {
-    ToneDetail td = ToneDetail();
+  PlayingToneDetail createNewDetail(PlayingToneDetail item, String type,
+      String? callerType, repeatType cellType) {
+    PlayingToneDetail td = PlayingToneDetail();
 
     td.toneId = item.toneId;
     td.toneName = item.toneName;
@@ -174,8 +166,7 @@ class MyTuneController extends GetxController {
       isShuffle.value = false;
       for (var item in list) {
         if (item.serviceName == 'AllCaller') {
-          isShuffle.value =
-              (item.packUserDetailsCrbt?.isShuffle == 'T') ? true : false;
+          isShuffle.value = (item.packDetails?.isShuffle == 'T') ? true : false;
         }
       }
     }
@@ -228,8 +219,8 @@ class MyTuneController extends GetxController {
     isLoadingMyTuneList.value = false;
   }
 
-  String timeType(ToneDetail info) {
-    ToneDetail? info1 = info; //toneDetails?.first;
+  String timeType(PlayingToneDetail info) {
+    PlayingToneDetail? info1 = info; //toneDetails?.first;
     // if ((info1?.startTimeWeekly != '00:00:00') ||
     //     (info1?.endTimeWeekly != '00:00:00')) {
     //   return customStr;
@@ -241,8 +232,8 @@ class MyTuneController extends GetxController {
     }
   }
 
-  String statusType(ToneDetail info) {
-    ToneDetail? info1 = info; //.toneDetails?.first;
+  String statusType(PlayingToneDetail info) {
+    PlayingToneDetail? info1 = info; //.toneDetails?.first;
     if (info1.isShuffle == "T") {
       return shuffleStr.tr;
     } else {
@@ -250,11 +241,11 @@ class MyTuneController extends GetxController {
     }
   }
 
-  String getCallersType(ToneDetail info) {
+  String getCallersType(PlayingToneDetail info) {
     return info.callerType ?? '';
   }
 
-  String fromDate(ToneDetail info1) {
+  String fromDate(PlayingToneDetail info1) {
     if (info1.type == repeatType.yearly) {
       return "${info1.yearlyStartDay}/${info1.yearlyStartMonth}, ${getCustomTime(info1.yearlyStartTime ?? "")}";
     } else if (info1.type == repeatType.monthly) {
@@ -281,8 +272,8 @@ class MyTuneController extends GetxController {
     // }
   }
 
-  String toDate(ToneDetail info) {
-    ToneDetail? info1 = info; //toneDetails?.first;
+  String toDate(PlayingToneDetail info) {
+    PlayingToneDetail? info1 = info; //toneDetails?.first;
 
     if (info1.type == repeatType.yearly) {
       return "${info1.yearlyEndDay}/${info1.yearlyEndMonth}, ${getCustomTime(info1.yearlyEndTime ?? "")}";
@@ -339,8 +330,8 @@ class MyTuneController extends GetxController {
     return "${list[0]}:${list[1]}";
   }
 
-  int repeatYearlySelectedType(ToneDetail info) {
-    ToneDetail? info1 = info; //.toneDetails?.first;
+  int repeatYearlySelectedType(PlayingToneDetail info) {
+    PlayingToneDetail? info1 = info; //.toneDetails?.first;
     if (info1.type == repeatType.monthly) {
       return 1;
     } else if (info1.type == repeatType.yearly) {
@@ -352,13 +343,21 @@ class MyTuneController extends GetxController {
     }
   }
 
-  bool isHideRepeatView(ToneDetail info) {
-    ToneDetail? info1 = info; //.toneDetails?.first;
+  bool isHideRepeatView(PlayingToneDetail info) {
+    PlayingToneDetail? info1 = info; //.toneDetails?.first;
     if ((info1.type == repeatType.monthly) ||
         (info1.type == repeatType.yearly) ||
         (info1.type == repeatType.none)) {
       return false;
     }
     return true;
+  }
+
+  deletePlayingTune(PlayingToneDetail info) {
+    print("Delete plating tune");
+  }
+
+  deleteMyTune(TuneInfo info) {
+    print("Delete My tune");
   }
 }

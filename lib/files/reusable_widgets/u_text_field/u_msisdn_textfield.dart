@@ -20,18 +20,20 @@ class UMsisdnTextField extends StatelessWidget {
     this.onChanged,
     this.onSubmitted,
     this.enabled,
+    this.borderColor,
   });
   final TextEditingController textEditingController;
   final RxBool _hideCloseButton = true.obs;
   final String? hintText;
   final bool? enabled;
+  final Color? borderColor;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border.all(color: grey),
+        border: Border.all(color: borderColor ?? grey),
         borderRadius: BorderRadius.circular(20),
         color: white,
       ),
@@ -41,7 +43,10 @@ class UMsisdnTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(width: 8),
-          const Center(child: UText(title: countryCode, )),
+          const Center(
+              child: UText(
+            title: countryCode,
+          )),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             child: Container(width: 1.5, color: grey),

@@ -6,11 +6,12 @@ import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_setting_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
+import 'package:you_yemen/files/reusable_widgets/u_text_field/u_msisdn_textfield.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text_field/u_textfield.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
-Widget dedicatedView() {
+Widget dedicatedView(TextEditingController textEditingController) {
   MyTuneSettingController cont = Get.find();
   return Obx(() {
     return AnimatedSizeAndFade(
@@ -25,7 +26,7 @@ Widget dedicatedView() {
                   children: [
                     titleWidget(),
                     const SizedBox(height: 4),
-                    textFieldContainerWidget(),
+                    textFieldContainerWidget(textEditingController),
                     const SizedBox(height: 2),
                     msisdnExampleWidget(),
                     const SizedBox(height: 30),
@@ -57,19 +58,30 @@ Widget msisdnExampleWidget() {
       return UText(
         title: exampleMsisdnTextStr.tr,
         textColor: grey,
-        fontName: FontName.acMuna,
+        fontName: FontName.helvetica,
         fontSize: si.isMobile ? 12 : null,
       );
     },
   );
 }
 
-Widget textFieldContainerWidget() {
+Widget textFieldContainerWidget(TextEditingController textEditingController) {
   MyTuneSettingController cont = Get.find();
   return Container(
-    color: white,
-    child: UTextField(
-      textEditingController: TextEditingController(),
-    ),
-  );
+      color: white,
+      child: UMsisdnTextField(
+        hintText: enterFriendMobileNumberStr,
+        textEditingController: textEditingController,
+        onChanged: (p0) {
+          cont.updateBparty(p0);
+        },
+        onSubmitted: (p0) {
+          cont.confirmButtonTap();
+        },
+        borderColor: transparent,
+      )
+      // UTextField(
+      //   textEditingController: TextEditingController(),
+      // ),
+      );
 }
