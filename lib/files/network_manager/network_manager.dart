@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-//import 'package:get/get.dart';
 import 'package:universal_io/io.dart';
 import 'package:you_yemen/files/common/custom_header.dart';
 import 'package:you_yemen/files/models/regenerate_model.dart';
