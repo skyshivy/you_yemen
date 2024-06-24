@@ -15,11 +15,12 @@ class CustomHeaderView extends StatelessWidget {
   final String subTitle;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: ResponsiveBuilder(
+    return Scaffold(
+      body: ResponsiveBuilder(
       builder: (context, sizingInformation) {
         return ovalShape(sizingInformation);
       },
-    ));
+    ),);
   }
 
   Container ovalShape(SizingInformation si) {
