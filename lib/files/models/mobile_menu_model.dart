@@ -1,5 +1,6 @@
 class MobileMenuModel {
   String title;
   String imageName;
-  MobileMenuModel(this.title, this.imageName);
+  String routeName;
+  MobileMenuModel(this.title, this.imageName, this.routeName);
 }

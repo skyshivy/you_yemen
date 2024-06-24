@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:you_yemen/files/Screens/wishlist_screen/wishlist_screen.dart';
 import 'package:you_yemen/files/common/mobile_navigation.dart';
 import 'package:you_yemen/files/controllers/mobile_menu_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
+import 'package:you_yemen/files/router/route_name.dart';
 import 'package:you_yemen/files/screens/profile_screen/faq_screen.dart';
+import 'package:you_yemen/files/screens/profile_screen/transaction_screen.dart';
+import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 
 import 'package:you_yemen/files/utility/colors.dart';
@@ -44,9 +48,16 @@ class MoreScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: InkWell(onTap: () {
-        // Navigator.of(context)
-        //     .push(MaterialPageRoute(builder: (context) => FaqScreen()));
-        mobileNavigation(context, FaqScreen(), title: faqStr);
+        if (con.menuList[index].routeName == wishlistRoute) {
+          mobileNavigation(context, WishListScreen(), title: wishlistStr);
+        } else if (con.menuList[index].routeName == faqRoute) {
+          mobileNavigation(context, FaqScreen(), title: faqStr);
+        } else if (con.menuList[index].routeName == transactionRoute) {
+          mobileNavigation(context, TransactionScreen(), title: historyStr);
+        } else if (con.menuList[index].routeName == logoutStr) {
+          StoreManager().logout();
+        }
+
         con.updateOnSelection(index);
       }, child: Obx(() {
         return Container(

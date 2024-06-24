@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'package:responsive_builder/responsive_builder.dart';
@@ -31,12 +30,8 @@ class _TransactionScreenState extends State<TransactionScreen> {
   Widget build(BuildContext context) {
     controller.makeAPICall();
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Transition Screen'),
-      ),
       backgroundColor: lightGrey,
-      body: 
-      SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
