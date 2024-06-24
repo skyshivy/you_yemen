@@ -5,7 +5,7 @@ import 'package:you_yemen/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
-Widget customDayListView(ToneDetail info) {
+Widget customDayListView(PlayingToneDetail info) {
   List<String> dayArray = (info.weeklyDays ?? '').split(',');
   return SizedBox(
     height: 24,

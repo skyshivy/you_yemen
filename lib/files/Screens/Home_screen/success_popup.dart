@@ -9,6 +9,14 @@ import 'package:you_yemen/files/utility/colors.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 
 class SuccessPopupView extends StatelessWidget {
+  final bool showImage;
+  final Color bgColor;
+  final String? message;
+  const SuccessPopupView(
+      {super.key,
+      this.showImage = true,
+      this.bgColor = Colors.teal,
+      this.message});
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -17,7 +25,7 @@ class SuccessPopupView extends StatelessWidget {
         child: Container(
           width: popupWidth,
           decoration: BoxDecoration(
-            color: Colors.teal,
+            color: bgColor,
             borderRadius: BorderRadius.circular(contanerCornerRadius),
           ),
           child: Column(
@@ -31,7 +39,7 @@ class SuccessPopupView extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 50),
-              checkImageBuilder(),
+              showImage ? checkImageBuilder() : SizedBox(),
               SizedBox(height: 10),
               successMessageBuilder(),
               SizedBox(height: 50),
@@ -57,7 +65,7 @@ class SuccessPopupView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           UText(
-            title: cont.successMessage,
+            title: message ?? cont.successMessage,
             fontName: FontName.helvetica,
             textColor: Colors.white,
             fontSize: 20,

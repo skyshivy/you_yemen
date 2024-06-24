@@ -5,7 +5,7 @@ import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
 toneDetailApi() async {
-  String url = sclistTonesUrl;
+  String url = scMyTunesUrl;
   deleteToneUrl;
   Map<String, dynamic> jsonMap = {
     "transactionId": "655652",

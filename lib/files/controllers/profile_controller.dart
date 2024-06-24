@@ -43,7 +43,7 @@ class ProfileController {
 
   getProfileDetail() async {
     isloading.value = true;
-    CategoryListModel catModel = await getCategoryListApi();
+    CategoryListModel catModel = await scGetCategoryListApi();
     categories.value = catModel.responseMap?.categoryList ?? [];
 
     profileModel = await getProfileDetailsApi();

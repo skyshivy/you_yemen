@@ -73,6 +73,8 @@ Widget _leftContainer(SizingInformation si) {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 confirmButton(
+                                  title: okStr,
+                                  titlePadding: 40,
                                   onTap: () {
                                     Navigator.of(context).pop();
                                   },
@@ -105,21 +107,21 @@ Widget rowText(Widget? child, String info, String count) {
           UText(
             title: count,
             fontSize: 13,
-            fontName: FontName.acMuna,
+            fontName: FontName.helvetica,
           ),
       const SizedBox(width: 4),
       Expanded(
           child: UText(
         title: info.tr,
         fontSize: 13,
-        fontName: FontName.acMuna,
+        fontName: FontName.helvetica,
       )),
     ],
   );
 }
 
 TextStyle _textStyle(SizingInformation si, {Color color = grey}) => TextStyle(
-      fontFamily: FontName.acMuna.name,
+      fontFamily: FontName.helvetica.name,
       color: color,
       fontSize: si.isMobile ? 12 : 16,
     );

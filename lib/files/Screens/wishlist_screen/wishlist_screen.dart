@@ -60,84 +60,89 @@ class _WishListScreenState extends State<WishListScreen> {
                     itemBuilder: (context, index) {
                       Wishlist data = contt.toneList[index];
 
-                      return Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                              color: const Color.fromRGBO(224, 224, 224, 1),
-                            ),
-                            borderRadius: BorderRadius.circular(4),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.2),
-                                spreadRadius: 4,
-                                blurRadius: 5,
-                                offset: Offset(0, 3),
-                              )
-                            ]),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                                child: Stack(
-                              alignment: Alignment.topRight,
-                              children: [
-                                uImage(
-                                  url: data.previewImage.toString(),
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(4),
-                                    topRight: Radius.circular(4),
-                                  ),
-                                ),
-                                cardMoreButtonWishlist(index, data),
-                              ],
-                            )),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  UText(
-                                    title: StoreManager().isEnglish
-                                        ? data.albumL1.toString()
-                                        : data.albumL2.toString(),
-                                    fontName: FontName.helveticaBold,
-                                    maxLine: 1,
-                                  ),
-                                  UText(
-                                    title: StoreManager().isEnglish
-                                        ? data.artistL1.toString()
-                                        : data.artistL2
-                                            .toString(), //data.artistL1.toString(),
-                                    textColor: grey,
-                                    maxLine: 1,
-                                  ),
-                                  SizedBox(height: 8),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child:
-                                            playButton(TuneInfo(), () => null),
-                                      ),
-                                      SizedBox(width: 20),
-                                      Expanded(
-                                        child:
-                                            buyButton(TuneInfo(), () => null),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      );
+                      return wishlistCard(data, index);
                     },
                   ),
                 );
     });
+  }
+
+  Container wishlistCard(Wishlist data, int index) {
+    TuneInfo inf = TuneInfo(
+      toneId: "${data.contentId ?? 0}",
+      toneUrl: data.contentPath,
+      toneIdStreamingUrl: data.contentPath,
+    );
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(
+              color: lightGrey //const Color.fromRGBO(224, 224, 224, 1),
+              ),
+          borderRadius: BorderRadius.circular(4),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 4,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            )
+          ]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+              child: Stack(
+            alignment: Alignment.topRight,
+            children: [
+              uImage(
+                url: data.previewImage.toString(),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(4),
+                  topRight: Radius.circular(4),
+                ),
+              ),
+              cardMoreButtonWishlist(index, data),
+            ],
+          )),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                UText(
+                  title: StoreManager().isEnglish
+                      ? data.albumL1.toString()
+                      : data.albumL2.toString(),
+                  fontName: FontName.helveticaBold,
+                  maxLine: 1,
+                ),
+                UText(
+                  title: StoreManager().isEnglish
+                      ? data.artistL1.toString()
+                      : data.artistL2.toString(), //data.artistL1.toString(),
+                  textColor: grey,
+                  maxLine: 1,
+                ),
+                SizedBox(height: 8),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: playButton(inf, () => null),
+                    ),
+                    SizedBox(width: 20),
+                    Expanded(
+                      child: buyButton(TuneInfo(), () => null),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

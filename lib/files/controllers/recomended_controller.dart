@@ -30,7 +30,11 @@ class RecomendedController extends GetxController {
   _createTabList() async {
     isLoadingTab.value = true;
     if (StoreManager().appSetting == null) {
-      await getAppSetting();
+      bool status = await scGetAppSetting();
+      if (!status) {
+        isLoadingTab.value = false;
+        return;
+      }
     }
     tabTitleList.clear();
     tabIdList.clear();
@@ -71,6 +75,8 @@ class RecomendedController extends GetxController {
   getRecomendedItems(String id) async {
     print("Items are ${_recoList[selectedTabIndex.value].length}");
     if (_recoList[selectedTabIndex.value].isNotEmpty) {
+      //isLoading.value = true;
+      //await Future.delayed(Duration(milliseconds: 200));
       displayList.value = _recoList[selectedTabIndex.value];
       print("Item name is ${_recoList[selectedTabIndex.value][0].toneName}");
       isLoading.value = false;

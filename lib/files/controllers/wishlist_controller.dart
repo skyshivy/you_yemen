@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:you_yemen/files/api_gokul/add_to_wishlist_api.dart';
 import 'package:you_yemen/files/api_gokul/delete_wishlist_api.dart';
 import 'package:you_yemen/files/api_gokul/get_wishlist_api.dart';
 import 'package:you_yemen/files/models/generic_model.dart';
@@ -21,17 +22,25 @@ class WishListController extends GetxController {
   // }
 
   getWishListTones() async {
+    if (isLoadingg.value) {
+      return;
+    }
     isLoadingg.value = true;
     await Future.delayed(Duration(milliseconds: 200));
-    ScWishListModel model = await getWishlistApi();
+    ScWishListModel model = await scGetWishlistApi();
     toneList.value = model.wishlist ?? [];
     //  List<TuneInfo> lst=model.responseMap?.toneDetailsList??[];
     //  toneList.value=lst;
     isLoadingg.value = false;
   }
 
+  addToWishlist(TuneInfo info) async {
+    GenericModel model = await scAddtoWishListApi(info);
+    customSnackBar(model.message ?? '');
+  }
+
   void deleteFromWishlist(Wishlist wishlist) async {
-    GenericModel model = await deleteWishlistApi(wishlist);
+    GenericModel model = await scDeleteFromWishlistApi(wishlist);
 
     if (model.respCode == 0) {
       toneList.remove(wishlist);

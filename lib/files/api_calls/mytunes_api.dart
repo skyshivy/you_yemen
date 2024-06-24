@@ -1,12 +1,12 @@
-
+import 'package:you_yemen/files/common/transaction_id.dart';
 import 'package:you_yemen/files/models/my_tunes_model.dart';
 import 'package:you_yemen/files/models/playing_tune_list_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
+import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
-Future<PlayingListModel> getPlayingListApi() async {
-  final baseUrl = mytunesUrl;
+Future<PlayingListModel> scGetPlayingListApi() async {
   final msisdn = StoreManager().msisdn;
 
   if (msisdn == Null || msisdn.isEmpty) {
@@ -14,19 +14,20 @@ Future<PlayingListModel> getPlayingListApi() async {
   }
 
   Map<String, String> queryParameters = {
-    "language": StoreManager().languageCode,
+    "clientTxId": getTransactionId(),
+    "languageCode": StoreManager().languageSort,
     "msisdn": StoreManager().msisdn,
-    "startIndex": "0",
-    "endIndex": "20",
+    "channelId": channelId,
     "rbtMode": "0",
+    "activityId": "4",
+    "serviceId": "1"
   };
 
-  final uri = Uri.parse(baseUrl).replace(queryParameters: queryParameters);
-
-  await Future.delayed(Duration(seconds: 3));
+  await Future.delayed(Duration(seconds: 1));
 
   try {
-    final response = await NetworkManager().get(uri.toString());
+    final response = await NetworkManager()
+        .post(scMyTunesUrl, null, jsonData: queryParameters);
 
     PlayingListModel modal = PlayingListModel.fromJson(response);
     print("modal = ${modal.message}");
@@ -37,8 +38,7 @@ Future<PlayingListModel> getPlayingListApi() async {
   }
 }
 
-Future<MyTuneListModel> myTunesListApi() async {
-  final baseUrl = mytunesUrl;
+Future<MyTuneListModel> scMyTunesListApi() async {
   final msisdn = StoreManager().msisdn;
 
   if (msisdn == Null || msisdn.isEmpty) {
@@ -46,20 +46,20 @@ Future<MyTuneListModel> myTunesListApi() async {
   }
 
   Map<String, String> queryParameters = {
-    "language": StoreManager().languageCode,
-    "msisdn": StoreManager().msisdn, // msisdn.toString(),
-
-    "startIndex": "0",
-    "endIndex": "20",
+    "clientTxId": getTransactionId(),
+    "languageCode": StoreManager().languageSort,
+    "msisdn": StoreManager().msisdn,
+    "channelId": channelId,
     "rbtMode": "400",
+    "activityId": "4",
+    "serviceId": "1"
   };
 
-  final uri = Uri.parse(baseUrl).replace(queryParameters: queryParameters);
-
-  await Future.delayed(Duration(seconds: 3));
+  await Future.delayed(Duration(seconds: 1));
 
   try {
-    Map<String, dynamic> response = await NetworkManager().get(uri.toString());
+    final response = await NetworkManager()
+        .post(scMyTunesUrl, null, jsonData: queryParameters);
 
     //Map<String, dynamic> responseMap = jsonDecode(response);
     MyTuneListModel modal = MyTuneListModel.fromJson(response);
@@ -70,5 +70,3 @@ Future<MyTuneListModel> myTunesListApi() async {
     throw e;
   }
 }
-
-

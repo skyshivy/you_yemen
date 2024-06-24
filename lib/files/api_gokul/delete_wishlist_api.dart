@@ -7,11 +7,11 @@ import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
-Future<GenericModel> deleteWishlistApi(Wishlist wishinfo) async {
+Future<GenericModel> scDeleteFromWishlistApi(Wishlist wishinfo) async {
   String deleteWishlistUrl = scDeleteFromWishlistUrl;
 
   Map<String, dynamic> jsonMap = {
-    'msisdn': "9408000131",
+    'msisdn': StoreManager().msisdn,
     "contentId": wishinfo.contentId,
     "languageCode": StoreManager().languageCode,
     "type": '1', //"type",

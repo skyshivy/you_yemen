@@ -4,7 +4,7 @@ import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
-Future<CategoryListModel> getCategoryListApi() async {
+Future<CategoryListModel> scGetCategoryListApi() async {
   //"${scGetCategoryListUrl}languageCode=en&categoryValue=4";
 
   String url =

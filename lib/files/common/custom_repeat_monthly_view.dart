@@ -10,7 +10,7 @@ import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
-Widget customRepeatMonthlyView(ToneDetail info) {
+Widget customRepeatMonthlyView(PlayingToneDetail info) {
   MyTuneController co = Get.find();
   return SizedBox(
     height: 50,

@@ -13,17 +13,18 @@ String confirmOtpExistingUrl = "${baseUrl}confirm-otp";
 String getSecurityTokenUrl = "${baseUrl}security-token";
 String passwordValidationUrl = "${baseUrl}password-validation";
 String getTonePriceUrl = "${baseUrlSecurity}get-tone-price";
-String buyTuneUrl = "${baseUrlSecurity}set-tone";
+
 String getCategoryUrl = '${baseUrl}categories?';
 String getCategoryDetailUrl = "${baseUrl}search-tone?";
 String searchToneUrl = "${baseUrl}specific-search-tones?";
 String editProfileUrl = '${baseUrlSecurity}edit-profile';
 String tellFriendUrl = "${baseUrlSecurity}referral";
 String transactionUrl = "${baseUrlSecurity}view-transactions-scm";
-String mytunesUrl = "${baseUrlSecurity}list-tones";
-String myTuneListUrl = '${baseUrl}list-tones?rbtMode=400';
+//String mytunesUrl = "${baseUrlSecurity}list-tones";
+
+//String myTuneListUrl = '${baseUrl}list-tones?rbtMode=400';
 String addToShuffleUrl = "${baseUrlSecurity}add-tone-to-shuffle";
-String playingTuneListUrl = '${baseUrl}list-tones?rbtMode=0';
+//String playingTuneListUrl = '${baseUrl}list-tones?rbtMode=0';
 String getPackStatusUrl = '${baseUrl}pack-status?';
 String setDefaultToneUrl = '${baseUrlSecurity}set-default-tone';
 String tuneSuffleUrl = '${baseUrlSecurity}shuffle-activation-deactivation';
@@ -33,7 +34,10 @@ String tuneSettingFulldayUrl =
     '${baseUrlSecurity}time-based-setting-for-already-activated';
 
 // ========== selfcare api================
+String buyTuneUrl = "http://10.0.14.4:8990/selfcare/crbtbl/set-tone";
 
+String scMyTunesUrl =
+    'http://10.0.14.4:8081/selfcare/subscriber-management/list-tones'; //"http://10.0.10.33:8990/selfcare/crbtbl/list-tones";
 String getSubscriptionUrl =
     '${selfcareBaseUrl}selfcare/subscription-service/get-subscription';
 
@@ -67,7 +71,8 @@ String scConfirmOtpUrl =
     "http://10.0.13.19:9092/auth-service/selfcare/auth/token";
 
 String scGetContentPriceUrl =
-    "http://10.0.14.4:8082/selfcare/subscriber-management/get-content-price"; // get-content-price
+    'http://10.0.14.4:8990/selfcare/crbtbl/get-tone-price';
+//"http://10.0.14.4:8082/selfcare/subscriber-management/get-content-price"; // get-content-price
 String scSettingUrl = 'http://10.0.13.19:9093/setting-service/settings';
 
 String scaddTonetoShufflelistUrl =
@@ -84,8 +89,6 @@ String sclistSettingsUrl =
 String scpackDetailsUrl =
     "http://10.0.10.33:9089/selfcare/setting-servic/get-subscription";
 String scresumeUrl = "http://10.0.10.33:9089/selfcare/subscription/suspend";
-String sclistTonesUrl =
-    "http://10.0.14.4:8082/selfcare/subscriber-management/list-tones";
 
 String scAdvanceSearchUrl = "${selfcareBaseUrl}selfcare/advanced-search";
 
@@ -94,6 +97,7 @@ String scGetRecomndedUrl =
     "http://10.0.14.4:5892/selfcare/get-recommendations?";
 String scGetBannerDetailUrl =
     "http://10.0.14.4:5892/selfcare/get-banner-details?";
+
 String searchNameToneUrl = "${baseUrl}specific-search-tones?";
 
 String artistSearchUrl = "${baseUrl}specific-search-tones?";
@@ -102,16 +106,17 @@ String artistTunesUrl = "${baseUrl}search-tone?";
 String deleteTonefromShuffleUrl =
     "${selfcareBaseUrl}selfcareselfcare/setting-service/delete-tone-from-shufflelist";
 
-
 //String shuffleUrl = "${selfcareBaseUrl}selfcare/setting-service/shuffle";
 
 String scDeleteFromWishlistUrl =
     "http://10.0.10.33:8088/selfcare/wishlist-service/delete-from-wishlist";
 // "http://10.0.10.33:8088/selfcare/setting-service/shuffle";
 
-String scAddToWishListUrl="http://10.0.10.33:8088/selfcare/wishlist-service/add-to-wishlist";
-String scGetWishListUrl="http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist";
-String scGiftTonePriceUrl='${selfcareBaseUrl}subscriber-management/gift-tone';
+String scAddToWishListUrl =
+    "http://10.0.10.33:8088/selfcare/wishlist-service/add-to-wishlist";
+String scGetWishListUrl =
+    "http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist";
+String scGiftTonePriceUrl = '${selfcareBaseUrl}subscriber-management/gift-tone';
 
 // String shuffleUrl =
 //     "http://10.0.10.33:9089/selfcare/setting-service/add-tone-to-shufflelist";

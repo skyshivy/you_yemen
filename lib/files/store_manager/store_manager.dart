@@ -18,6 +18,7 @@ class StoreManager {
   }
   AppSettingModel? appSetting;
   bool isEnglish = true;
+  int timeOutDuration = 5;
   String language = "English";
   String languageSort = "en";
   String languageCode = "0";

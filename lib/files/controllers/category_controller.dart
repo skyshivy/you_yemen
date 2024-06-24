@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-import 'package:you_yemen/files/api_calls/get_category_detail_api.dart';
 import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
+
 import 'package:you_yemen/files/api_self_care/category_detail_api.dart';
 import 'package:you_yemen/files/models/category_detail_model.dart';
 import 'package:you_yemen/files/models/category_list_model.dart';
@@ -23,7 +23,7 @@ class CategoryController extends GetxController {
   getCategoryList() async {
     toneList.clear();
     print("Category list called");
-    CategoryListModel model = await getCategoryListApi();
+    CategoryListModel model = await scGetCategoryListApi();
 
     if (model.respCode == 'SC0000') {
       categoryList.value = model.responseMap?.categoryList ?? [];
@@ -40,7 +40,9 @@ class CategoryController extends GetxController {
     isLoading.value = false;
     if (model.statusCode == 'SC0000') {
       toneList.value = model.responseMap?.toneList ?? [];
-    } else {}
+    } else {
+      print("SKY error is ==== ${model.message}");
+    }
   }
 
   loadingMoreData() async {

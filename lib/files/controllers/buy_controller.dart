@@ -5,6 +5,7 @@ import 'package:you_yemen/files/api_calls/generate_otp_api.dart';
 import 'package:you_yemen/files/api_calls/get_tune_price.dart';
 import 'package:you_yemen/files/api_calls/set_tone_api.dart';
 import 'package:you_yemen/files/api_calls/subscriber_validation_api.dart';
+import 'package:you_yemen/files/api_gokul/get_content_price_api.dart';
 import 'package:you_yemen/files/api_self_care/sc_confirm_otp_api.dart';
 import 'package:you_yemen/files/api_self_care/sc_generate_otp_api.dart';
 import 'package:you_yemen/files/common/encryptor/aes_en_de_cryptor.dart';
@@ -34,7 +35,11 @@ class BuyController extends GetxController {
 
   onConfirmButtonAction() async {
     if (StoreManager().isLoggedIn) {
+      isVerifying.value = true;
       msisdn = StoreManager().msisdn;
+      await _getTonePrice();
+      isVerifying.value = false;
+      return;
     }
     if (msisdn.length < msisdnLength) {
       errorMessage.value = enterValidMobileNumberStr;
@@ -86,25 +91,27 @@ class BuyController extends GetxController {
     }
   }
 
-  _getTonePrice() async {
-    TonePriceModel model = await getTonePriceApi(msisdn, info ?? TuneInfo());
-    if (model.statusCode == 'SC0000') {
-      String packName =
-          model.responseMap?.responseDetails?.first.packName ?? '';
+  Future<void> _getTonePrice() async {
+    TonePriceModel model = await getContentPriceApi(info?.toneId ?? '');
+    //TonePriceModel model = await getTonePriceApi(msisdn, info ?? TuneInfo());
+    if (model.respCode == 0) {
+      String packName = model.toneDetails?.packName ?? '';
+      //responseMap?.responseDetails?.first.packName ?? '';
       if (packName.isEmpty) {
         errorMessage.value = "No pack name or null";
       } else {
-        _setTune(info ?? TuneInfo(), packName);
+        await _setTune(info ?? TuneInfo(), packName);
       }
     } else {
       errorMessage.value = model.message ?? someThingWentWrongStr;
       isVerifying.value = false;
     }
+    return;
   }
 
-  _setTune(TuneInfo info, String packName) async {
+  Future<void> _setTune(TuneInfo info, String packName) async {
     BuyTuneModel model = await setToneApi(info, packName);
-    if (model.statusCode == 'SC0000') {
+    if (model.respCode == 0) {
       successMessage = model.message ?? '';
       authTypes.value = AuthTypes.showSuccessScreen;
       isVerifying.value = false;
@@ -112,5 +119,6 @@ class BuyController extends GetxController {
       errorMessage.value = model.message ?? someThingWentWrongStr;
       isVerifying.value = false;
     }
+    return;
   }
 }

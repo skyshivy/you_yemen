@@ -6,23 +6,19 @@ import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
-Future<GenericModel> addtoWishListApi(TuneInfo info) async {
+Future<GenericModel> scAddtoWishListApi(TuneInfo info) async {
   //TuneInfo info
   String addToWishListUrl = scAddToWishListUrl;
-  //"http://10.0.10.33:8088/selfcare/wishlist-service/add-to-wishlist";
-  //"${selfcareBaseUrl}/selfcare/wishlist-service/add-to-wishlist";
 
   Map<String, dynamic> jsonMap = {
-    'msisdn': "9408000131", //StoreManager().msisdn,
-    "contentId": info.toneId, //"1511218201",
-    "contentPath": info
-        .toneIdStreamingUrl, //"https://ringtune.mpt.com.mm/stream-media/get-tone-path?fileId=XdYn8fG+ceO+CZyOn8viaA==",
-    "previewImage": info.previewImageUrl, //"previewImage",
-    "contentName_L1": info.toneName, //"contentName_L1",
-    "album_L1": info.albumName, //"album_L1",
+    'msisdn': StoreManager().msisdn,
+    "contentId": info.toneId,
+    "contentPath": info.toneIdStreamingUrl,
+    "previewImage": info.previewImageUrl ?? info.toneIdpreviewImageUrl,
+    "contentName_L1": info.toneName,
+    "album_L1": info.albumName,
     "artist_L1": info.artistName,
-    "contentName_L2": info
-        .toneName, //StoreManager().isEnglish?'':info.toneName,//"contentName_L2",
+    "contentName_L2": info.toneName,
     "album_L2": info.album,
     "artist_L2": info.artist,
     "price": info.price,

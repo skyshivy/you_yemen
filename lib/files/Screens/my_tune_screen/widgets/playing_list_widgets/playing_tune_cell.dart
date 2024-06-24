@@ -16,7 +16,7 @@ import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 import 'package:you_yemen/files/utility/images.dart';
 
-Widget playingTuneCell(ToneDetail info) {
+Widget playingTuneCell(PlayingToneDetail info) {
   MyTuneController con = Get.find();
   return SizedBox(
     //width: 200,
@@ -41,7 +41,7 @@ Widget playingTuneCell(ToneDetail info) {
   );
 }
 
-Widget repeatView(ToneDetail info) {
+Widget repeatView(PlayingToneDetail info) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +67,7 @@ Widget dividerWidget() {
   );
 }
 
-Widget timeWidget(ToneDetail info) {
+Widget timeWidget(PlayingToneDetail info) {
   MyTuneController con = Get.find();
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,7 +78,7 @@ Widget timeWidget(ToneDetail info) {
   );
 }
 
-Widget statusView(ToneDetail info) {
+Widget statusView(PlayingToneDetail info) {
   MyTuneController con = Get.find();
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,20 +98,20 @@ Widget titleSubtitle(String title, String subtitle) {
     children: [
       UText(
         title: title,
-        fontName: FontName.acMuna,
+        fontName: FontName.helvetica,
         textColor: grey,
         fontSize: 12,
       ),
       UText(
         title: subtitle,
-        fontName: FontName.acMuna,
+        fontName: FontName.helvetica,
         fontSize: 12,
       )
     ],
   );
 }
 
-_tuneInfoView(ToneDetail info) {
+_tuneInfoView(PlayingToneDetail info) {
   TuneInfo inf = TuneInfo(
       toneId: info.toneId ?? '',
       toneName: info.toneName ?? '',
@@ -129,13 +129,13 @@ _tuneInfoView(ToneDetail info) {
 
       playIcon(inf, () => null),
       //UText(title: "Add play button herre"),
-      deleteButton(),
+      deleteButton(info),
     ],
   );
 }
 
-Widget tuneNameWidget(ToneDetail info) {
-  ToneDetail? info1 = info; //.toneDetails?.first;
+Widget tuneNameWidget(PlayingToneDetail info) {
+  PlayingToneDetail? info1 = info; //.toneDetails?.first;
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,7 +155,8 @@ Widget tuneNameWidget(ToneDetail info) {
   );
 }
 
-Widget deleteButton() {
+Widget deleteButton(PlayingToneDetail info) {
+  MyTuneController con = Get.find();
   return genericButton(
     height: 40,
     width: 40,
@@ -164,10 +165,13 @@ Widget deleteButton() {
       deleteSvg,
       height: 20,
     ),
+    onTap: () {
+      con.deletePlayingTune(info);
+    },
   );
 }
 
-Widget _tuneImage(ToneDetail info) {
+Widget _tuneImage(PlayingToneDetail info) {
   return Container(
     child: uImage(url: info.toneIdpreviewImageUrl ?? ''),
   );

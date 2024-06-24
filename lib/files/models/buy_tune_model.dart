@@ -1,7 +1,38 @@
 // To parse this JSON data, do
 //
 //     final buyTuneModel = buyTuneModelFromJson(jsonString);
+// To parse this JSON data, do
+//
+//     final buyTuneModel = buyTuneModelFromJson(jsonString);
 
+import 'dart:convert';
+
+BuyTuneModel buyTuneModelFromJson(String str) =>
+    BuyTuneModel.fromJson(json.decode(str));
+
+String buyTuneModelToJson(BuyTuneModel data) => json.encode(data.toJson());
+
+class BuyTuneModel {
+  int? respCode;
+  String? message;
+
+  BuyTuneModel({
+    this.respCode,
+    this.message,
+  });
+
+  factory BuyTuneModel.fromJson(Map<String, dynamic> json) => BuyTuneModel(
+        respCode: json["respCode"],
+        message: json["message"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "respCode": respCode,
+        "message": message,
+      };
+}
+
+/*
 import 'dart:convert';
 
 BuyTuneModel buyTuneModelFromJson(String str) =>
@@ -52,3 +83,4 @@ class ResponseMap {
         "responseMessage": responseMessage,
       };
 }
+*/
