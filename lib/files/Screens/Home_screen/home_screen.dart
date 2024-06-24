@@ -71,10 +71,11 @@ class _HomeScreenState extends State<HomeScreen> {
               //addtoWishListApi(TuneInfo());  //working
               //deleteWishlistApi(); //working
               //getContentPriceApi(); //working
-              //giftApi(); //Status code 404
-
+              //giftApi();   //Status code 404
               //scGetBannerDetailsApi();
+
               scGetCategoryListApi();
+
               //getRecommendationSongApi();
               scGetBannerlistApi();
               toneDetailApi();
