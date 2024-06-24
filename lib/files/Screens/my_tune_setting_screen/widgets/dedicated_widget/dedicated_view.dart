@@ -1,15 +1,13 @@
-import 'package:animated_size_and_fade/animated_size_and_fade.dart';
-import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:responsive_builder/responsive_builder.dart';
-import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_setting_controller.dart';
+import 'package:flutter/material.dart';
 import 'package:you_yemen/files/enums/enums.dart';
-import 'package:you_yemen/files/reusable_widgets/u_text.dart';
-import 'package:you_yemen/files/reusable_widgets/u_text_field/u_msisdn_textfield.dart';
-import 'package:you_yemen/files/reusable_widgets/u_text_field/u_textfield.dart';
-import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
+import 'package:you_yemen/files/translation/strings.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/reusable_widgets/u_text.dart';
+import 'package:animated_size_and_fade/animated_size_and_fade.dart';
+import 'package:you_yemen/files/reusable_widgets/u_text_field/u_msisdn_textfield.dart';
+import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_setting_controller.dart';
 
 Widget dedicatedView(TextEditingController textEditingController) {
   MyTuneSettingController cont = Get.find();

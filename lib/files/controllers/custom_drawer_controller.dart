@@ -12,6 +12,7 @@ class CustomDrawerController extends GetxController {
     DrawerModel(wishlistStr, wishlistRoute, wishlistSvg),
     DrawerModel(tunezStr, catDetailRoute, ""),
     DrawerModel(myTunesStr, myTunezRoute, myTuneSvg),
+    DrawerModel(historyStr, transactionRoute, transactionRoute),
     DrawerModel(faqStr, faqRoute, ""),
     DrawerModel(logoutStr, logoutStr, logoutSvg),
   ].obs;

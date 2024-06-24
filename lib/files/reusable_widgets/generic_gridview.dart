@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/state_manager.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -29,7 +30,10 @@ class GenericGridView extends StatefulWidget {
       this.gridPadding,
       this.pageNo,
       required this.totalCount,
-      this.cardBuilder = null});
+      this.cardBuilder = null,
+      this.scrollController,
+      this.userScrollDirection,
+      this.emptyListMessage = emptyToneListStr});
 
   final int? maxDisplay;
   final RxList<TuneInfo> list;
@@ -37,39 +41,58 @@ class GenericGridView extends StatefulWidget {
   final Function()? onTap;
   final Axis scrollDirection;
   final ScrollPhysics? physics;
-  final String emptyListMessage = emptyToneListStr;
+  final String emptyListMessage;
   final EdgeInsetsGeometry? gridPadding;
   final Function()? loadMore;
   final Function(int)? pageNo;
   final Function(TuneInfo)? cardBuilder;
+  final Function(ScrollDirection)? userScrollDirection;
   final int totalCount;
+  final ScrollController? scrollController;
 
   @override
   State<GenericGridView> createState() => _GenericGridViewState();
 }
 
 class _GenericGridViewState extends State<GenericGridView> {
-  ScrollController _scroll1 = ScrollController();
+  //ScrollController _scroll1 = ScrollController();
   @override
   void initState() {
-    _scroll1.addListener(onScroll);
+    widget.scrollController?.addListener(onScroll);
     super.initState();
   }
 
   void onScroll() {
-    if (_scroll1.position.pixels == _scroll1.position.maxScrollExtent) {
+    if (widget.scrollController?.position.pixels ==
+        widget.scrollController?.position.maxScrollExtent) {
       if (widget.loadMore != null) {
         widget.loadMore!();
       }
     }
-    if (_scroll1.position.pixels == _scroll1.position.minScrollExtent) {
+    if (widget.userScrollDirection != null) {
+      if (widget.userScrollDirection != null) {
+        widget.userScrollDirection!(
+            widget.scrollController!.position.userScrollDirection);
+      }
+    }
+
+    if (widget.scrollController?.position.userScrollDirection ==
+        ScrollDirection.forward) {
+      print("Scroll down");
+    } else {
+      print("Scroll UP");
+    }
+    // print(
+    //     " ========= ${widget.scrollController?.position.pixels} == \n ${widget.scrollController?.position.userScrollDirection} +++++++++\n ${widget.scrollController?.position.userScrollDirection} ");
+    if (((widget.scrollController?.position.pixels ?? 0)) ==
+        widget.scrollController?.position.minScrollExtent) {
       print("reached to top");
     }
   }
 
   @override
   void dispose() {
-    _scroll1.removeListener(onScroll);
+    widget.scrollController?.removeListener(onScroll);
     print("scroll controller disposed");
     super.dispose();
   }
@@ -87,9 +110,14 @@ class _GenericGridViewState extends State<GenericGridView> {
                     ? wrapBuilder()
                     : (widget.list.length < 20)
                         ? widget.list.isEmpty
-                            ? UText(
-                                title: widget.emptyListMessage,
-                                fontName: FontName.helveticaBold,
+                            ? Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: UText(
+                                    title: widget.emptyListMessage,
+                                    fontName: FontName.helveticaBold,
+                                  ),
+                                ),
                               )
                             : wrapBuilder()
                         : gridBuilder((p0) => widget.cardBuilder)
@@ -138,7 +166,7 @@ class _GenericGridViewState extends State<GenericGridView> {
                     padding: widget.gridPadding ?? const EdgeInsets.all(12),
                     itemCount: widget.maxDisplay ?? widget.list.length,
                     scrollDirection: widget.scrollDirection,
-                    controller: _scroll1,
+                    controller: widget.scrollController,
                     shrinkWrap: true,
                     gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                         mainAxisSpacing: si.isMobile ? 6 : 20,
@@ -189,8 +217,10 @@ Widget _alignedGridView(
     SizingInformation si) {
   double runSpacing = si.isMobile ? 8 : 20;
   double spacing = si.isMobile ? 8 : 20;
+  ScrollController? controller;
 
   return ListView(
+    controller: controller,
     physics: physics,
     padding: gridPadding ??
         EdgeInsets.symmetric(horizontal: si.isMobile ? 4 : 20, vertical: 20),
@@ -206,7 +236,7 @@ Widget _alignedGridView(
               width: si.isMobile ? 180 : 250,
               child: cell(index));
         }),
-      ),
+      )
     ],
   );
 }

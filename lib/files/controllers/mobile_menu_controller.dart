@@ -1,17 +1,16 @@
 import 'package:get/get.dart';
 import 'package:you_yemen/files/models/mobile_menu_model.dart';
+import 'package:you_yemen/files/router/route_name.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 
 class MobileMenuController extends GetxController {
   RxInt selectedIndex = 0.obs;
 
   List<MobileMenuModel> menuList = [
-    MobileMenuModel(callerGroupStr1, "imageName"),
-    MobileMenuModel(myWishListStr, "imageName"),
-    MobileMenuModel(blackListStr, "imageName"),
-    MobileMenuModel(historyStr, "imageName"),
-    MobileMenuModel(changePasswordStr, "imageName"),
-    MobileMenuModel(logoutStr, "imageName"),
+    MobileMenuModel(myWishListStr, "imageName", wishlistRoute),
+    MobileMenuModel(historyStr, "imageName", transactionRoute),
+    MobileMenuModel(faqStr, "imageName", faqRoute),
+    MobileMenuModel(logoutStr, "imageName", logoutStr),
   ];
   @override
   void onInit() {

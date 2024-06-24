@@ -32,6 +32,7 @@ import 'package:you_yemen/files/screens/my_tune_setting_screen/my_tune_setting_s
 import 'package:you_yemen/files/screens/profile_screen/faq_screen.dart';
 
 import 'package:you_yemen/files/screens/profile_screen/profile_screen.dart';
+import 'package:you_yemen/files/screens/profile_screen/transaction_screen.dart';
 import 'package:you_yemen/files/screens/search_screen/search_screen.dart';
 import 'package:you_yemen/files/screens/see_all_screen/see_all_screen.dart';
 import 'package:you_yemen/files/translation/strings.dart';
@@ -59,6 +60,7 @@ final router = GoRouter(
         _bannerDetailScreen(),
         _artistTunesScreen(),
         _seeAllScreen(),
+        _transactionsScreen()
       ],
     ),
   ],
@@ -127,7 +129,7 @@ StatefulShellBranch _tuneSettingScreen() {
 }
 
 StatefulShellBranch _wishlistScreen() {
-  WishListController wishListController=Get.find();
+  WishListController wishListController = Get.find();
   return StatefulShellBranch(
     routes: <RouteBase>[
       GoRoute(
@@ -136,6 +138,20 @@ StatefulShellBranch _wishlistScreen() {
           builder: (context, state) {
             wishListController.getWishListTones();
             return WishListScreen();
+            //return UText(title: "wishlistRoute screen here");
+          }),
+    ],
+  );
+}
+
+StatefulShellBranch _transactionsScreen() {
+  return StatefulShellBranch(
+    routes: <RouteBase>[
+      GoRoute(
+          path: transactionRoute,
+          name: transactionRoute,
+          builder: (context, state) {
+            return TransactionScreen();
             //return UText(title: "wishlistRoute screen here");
           }),
     ],

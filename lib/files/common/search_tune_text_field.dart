@@ -29,6 +29,7 @@ Widget searchTuneTextField(
               hideSearchIcon: false,
               textEditingController: textEditingController,
               onChanged: (p0) {
+                print("on change $p0");
                 cont.updateSearchedText(p0);
               },
               onSubmitted: (p0) {

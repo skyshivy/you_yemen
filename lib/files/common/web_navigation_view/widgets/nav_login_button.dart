@@ -10,6 +10,7 @@ import 'package:you_yemen/files/common/custom_hover.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_controller.dart';
 import 'package:you_yemen/files/controllers/wishlist_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
+import 'package:you_yemen/files/models/mobile_menu_model.dart';
 import 'package:you_yemen/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 import 'package:you_yemen/files/router/route_name.dart';
@@ -19,13 +20,19 @@ import 'package:you_yemen/files/utility/colors.dart';
 import 'package:you_yemen/main.dart';
 
 Widget navLoginButton() {
-  List<String> titleList = [myProfileStr, myTunezStr, myWishListStr, logoutStr];
+  List<String> titleList = [myTunezStr, myWishListStr, historyStr, logoutStr];
   List<IconData> imageList = [
-    Icons.person,
     Icons.music_note_sharp,
     Icons.favorite_outline,
+    Icons.history,
     Icons.logout
   ];
+  // List<MobileMenuModel> menuList = [
+  //   MobileMenuModel(wishlistStr, "imageName", wishlistRoute),
+  //   MobileMenuModel(myTunezStr, "imageName", myTunezRoute),
+  //   MobileMenuModel(historyStr, "imageName", transactionRoute),
+  //   MobileMenuModel(historyStr, "imageName", transactionRoute),
+  // ].obs;
 
   return ResponsiveBuilder(
     builder: (context, si) {
@@ -95,9 +102,11 @@ _popoverMyAccountMenu(
                   con.makeApiCall();
                   context.goNamed(myTunezRoute);
                 } else if (index == 2) {
-                  WishListController wishlist=Get.find();
+                  WishListController wishlist = Get.find();
                   wishlist.getWishListTones();
                   context.goNamed(wishlistRoute);
+                } else if (index == 3) {
+                  context.goNamed(transactionRoute);
                 } else {
                   StoreManager().logout();
                   GoRouter.of(context).go(homeRoute);
