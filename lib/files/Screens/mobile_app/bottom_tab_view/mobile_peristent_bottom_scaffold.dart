@@ -1,8 +1,13 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:you_yemen/files/controllers/app_controller.dart';
+import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_controller.dart';
+import 'package:you_yemen/files/controllers/u_search_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
+import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
 class PersistentBottomBarScaffold extends StatefulWidget {
@@ -21,6 +26,7 @@ class _PersistentBottomBarScaffoldState
     extends State<PersistentBottomBarScaffold> {
   //int _selectedTab = 0;
   //AppController appController = Get.find();
+  bool isMyTuneLoaded = false;
   AppController appCont = Get.find();
   MobileTabController cont = Get.find();
   @override
@@ -76,14 +82,25 @@ class _PersistentBottomBarScaffoldState
 
   void ontap(index) {
     print("cont.index.value   === ${cont.index.value}");
+
     // StoreManager().context =
     //     widget.items[index].navigatorkey?.currentState?.context;
     //appCont.appTitle.value = "${index}";
     if (index == 0) {
       //appCont.appTitle.value = home.tr;
     } else if (index == 1) {
+      USearchController co = Get.find();
+
+      co.errorMessage.value = searchHintStr;
       //appCont.appTitle.value = myMusic.tr;
     } else if (index == 2) {
+      if (isMyTuneLoaded) {
+      } else {
+        MyTuneController cont = Get.find();
+        cont.makeApiCall();
+        isMyTuneLoaded = true;
+      }
+
       //appCont.appTitle.value = search.tr;
     } else if (index == 3) {
       //appCont.appTitle.value = myProfile.tr;
@@ -149,8 +166,10 @@ class _PersistentBottomBarScaffoldState
     if (widget.items[cont.index.value].navigatorkey?.currentState?.canPop() ??
         false) {
       widget.items[cont.index.value].navigatorkey?.currentState?.pop();
+      print("trapped sky 12");
       return false;
     } else {
+      print("trapped sky");
       // if current tab can't be popped then use the root navigator
       return true;
     }

@@ -98,6 +98,7 @@ class UTextField extends StatelessWidget {
           onTap: () {
             textEditingController.text = '';
             _hideCloseButton.value = true;
+            onChanged!('');
           },
           child: const SizedBox(
             height: 40,
