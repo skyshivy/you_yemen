@@ -96,16 +96,14 @@ _popoverMyAccountMenu(
               onTap: () {
                 Navigator.of(context).pop();
                 if (index == 0) {
-                  context.goNamed(profileRoute);
-                } else if (index == 1) {
                   MyTuneController con = Get.find();
                   con.makeApiCall();
                   context.goNamed(myTunezRoute);
-                } else if (index == 2) {
+                } else if (index == 1) {
                   WishListController wishlist = Get.find();
                   wishlist.getWishListTones();
                   context.goNamed(wishlistRoute);
-                } else if (index == 3) {
+                } else if (index == 2) {
                   context.goNamed(transactionRoute);
                 } else {
                   StoreManager().logout();
