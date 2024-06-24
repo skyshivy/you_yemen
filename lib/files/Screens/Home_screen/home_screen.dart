@@ -7,19 +7,16 @@ import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
 
 import 'package:you_yemen/files/api_self_care/get_banner_list_api.dart';
 
+import 'package:you_yemen/files/Screens/wishlist_screen/wishlist_screen.dart';
+
+import 'package:get/get.dart';
+import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
+import 'package:you_yemen/files/api_self_care/get_banner_list_api.dart';
+
 import 'package:you_yemen/files/api_self_care/tone_detail_api.dart';
-
-//import 'package:you_yemen/files/api_self_care/activation_api.dart';
-//import 'package:you_yemen/files/api_self_care/deactivate_tone_api.dart';
-//import 'package:you_yemen/files/api_self_care/list_settings_api.dart';
-
 import 'package:you_yemen/files/common/encryptor/aes_en_de_cryptor.dart';
-
 import 'package:you_yemen/files/common/footer_view.dart';
 import 'package:you_yemen/files/common/search_tune_text_field.dart';
-
-import 'package:you_yemen/files/models/tune_info_model.dart';
-
 import 'package:you_yemen/files/reusable_widgets/buttons/generic_button.dart';
 import 'package:you_yemen/files/screens/custom_header_view.dart';
 
