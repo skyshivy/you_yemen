@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 
 import 'package:you_yemen/files/api_self_care/sc_search_artist_api.dart';
 import 'package:you_yemen/files/api_self_care/sc_search_name_tone_api.dart';
@@ -13,7 +14,9 @@ import 'package:you_yemen/files/translation/strings.dart';
 class USearchController extends GetxController {
   String searchedText = '';
   RxBool isloading = false.obs;
+  RxBool hideSearchBar = false.obs;
   RxBool isLoadingMore = false.obs;
+  RxString errorMessage = ''.obs;
   RxList<TuneInfo> toneList = <TuneInfo>[].obs;
   SearchType searchType = SearchType.tone;
   RxInt selectedIndex = 0.obs;
@@ -27,10 +30,18 @@ class USearchController extends GetxController {
 
   updateSearchedText(String value) {
     searchedText = value;
+    print("searchedText ======= ${searchedText}");
+    toneList.clear();
+    if (value.isEmpty) {
+      errorMessage.value = searchHintStr;
+    }
   }
 
   updateSearchType(int index) {
     selectedIndex.value = index;
+    toneList.clear();
+    errorMessage.value = searchHintStr;
+
     if (index == 0) {
       this.searchType = SearchType.tone;
     } else if (index == 1) {
@@ -46,6 +57,9 @@ class USearchController extends GetxController {
   }
 
   searchText(String searchKey, {String? type, int pageNo = 0}) async {
+    if (searchKey.isEmpty) {
+      return;
+    }
     if (type != null) {
       //searchType = type;
       updateSearchType(int.parse(type));
@@ -76,6 +90,11 @@ class USearchController extends GetxController {
     if (model.statusCode == 'SC0000') {
       toneList.value =
           model.responseMap?.toneList ?? model.responseMap?.toneList ?? [];
+      if (toneList.isEmpty) {
+        errorMessage.value = emptyToneListStr;
+      } else {
+        errorMessage.value = '';
+      }
     }
 
     return;
@@ -85,6 +104,11 @@ class USearchController extends GetxController {
     print("Search Tone id here");
     SearchModel model = await searchToneIdApi(searchedText);
     toneList.value = model.responseMap?.toneList ?? [];
+    if (toneList.isEmpty) {
+      errorMessage.value = emptyToneListStr;
+    } else {
+      errorMessage.value = '';
+    }
     return;
   }
 
@@ -92,7 +116,11 @@ class USearchController extends GetxController {
     print("Search Artist here");
     SearchModel model = await scSearchArtistApi([searchedText]);
     toneList.value = model.responseMap?.toneList ?? [];
-
+    if (toneList.isEmpty) {
+      errorMessage.value = emptyToneListStr;
+    } else {
+      errorMessage.value = '';
+    }
     return;
   }
 
@@ -100,6 +128,11 @@ class USearchController extends GetxController {
     print("Search name tune here");
     SearchModel model = await scSearchNameToneApi([searchedText], "168");
     toneList.value = model.responseMap?.songList ?? [];
+    if (toneList.isEmpty) {
+      errorMessage.value = emptyToneListStr;
+    } else {
+      errorMessage.value = '';
+    }
     return;
   }
 

@@ -21,8 +21,8 @@ import 'package:you_yemen/files/utility/colors.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 
 class LoginPopupView extends StatefulWidget {
-  const LoginPopupView({super.key});
-
+  const LoginPopupView({super.key, this.enableCloseButton = true});
+  final bool enableCloseButton;
   @override
   State<LoginPopupView> createState() => _LoginPopupViewState();
 }
@@ -160,14 +160,16 @@ class _LoginPopupViewState extends State<LoginPopupView> {
   }
 
   Widget headerView() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 4),
-          child: closePopupButton(),
-        )
-      ],
-    );
+    return widget.enableCloseButton
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 4),
+                child: closePopupButton(),
+              )
+            ],
+          )
+        : SizedBox();
   }
 }

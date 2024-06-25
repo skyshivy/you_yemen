@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:you_yemen/files/auth_view/login_popup_view.dart';
+import 'package:you_yemen/files/utility/colors.dart';
 
 class MobileLoginScreen extends StatelessWidget {
   const MobileLoginScreen({super.key});
@@ -7,7 +8,10 @@ class MobileLoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LoginPopupView(),
+      backgroundColor: black,
+      body: LoginPopupView(
+        enableCloseButton: false,
+      ),
     );
   }
 }
