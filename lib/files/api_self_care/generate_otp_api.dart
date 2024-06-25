@@ -12,9 +12,7 @@ Future<GenerateOtpModel> generateOtpApi(String msisdn) async {
     'deviceId': deviceId,
     'msisdn': msisdn
   };
-
   Map<String, dynamic> map1 = await NetworkManager().get(url, params: headers);
-
   GenerateOtpModel model = GenerateOtpModel.fromJson(map1);
   return model;
 }

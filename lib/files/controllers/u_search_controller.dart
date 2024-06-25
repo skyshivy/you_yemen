@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 
-import 'package:you_yemen/files/api_calls/search_artist_api.dart';
-import 'package:you_yemen/files/api_calls/search_name_tone_api.dart';
-import 'package:you_yemen/files/api_calls/search_tone_api.dart';
-import 'package:you_yemen/files/api_calls/search_toneid_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_search_artist_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_search_name_tone_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_search_tone_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_search_toneid_api.dart';
+
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/search_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
@@ -113,7 +114,7 @@ class USearchController extends GetxController {
 
   Future<void> _searchArtist() async {
     print("Search Artist here");
-    SearchModel model = await searchArtistApi([searchedText]);
+    SearchModel model = await scSearchArtistApi([searchedText]);
     toneList.value = model.responseMap?.toneList ?? [];
     if (toneList.isEmpty) {
       errorMessage.value = emptyToneListStr;
@@ -125,7 +126,7 @@ class USearchController extends GetxController {
 
   Future<void> _searchNameTone() async {
     print("Search name tune here");
-    SearchModel model = await searchNameToneApi([searchedText], "168");
+    SearchModel model = await scSearchNameToneApi([searchedText], "168");
     toneList.value = model.responseMap?.songList ?? [];
     if (toneList.isEmpty) {
       errorMessage.value = emptyToneListStr;

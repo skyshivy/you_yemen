@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:you_yemen/files/api_calls/edit_profile_screen_api.dart';
-import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
-import 'package:you_yemen/files/api_calls/profile_api.dart';
+
+
+
+import 'package:you_yemen/files/api_self_care/sc_get_category_list_api.dart';
+
 import 'package:you_yemen/files/model/profile_modal.dart';
 import 'package:you_yemen/files/models/category_list_model.dart';
 import 'package:you_yemen/files/translation/strings.dart';
@@ -46,7 +48,7 @@ class ProfileController {
     CategoryListModel catModel = await scGetCategoryListApi();
     categories.value = catModel.responseMap?.categoryList ?? [];
 
-    profileModel = await getProfileDetailsApi();
+   /* profileModel = await getProfileDetailsApi();
     if (profileModel?.statusCode == 'SC0000') {
       List<String> categoryIdList =
           (profileModel?.responseMap?.getProfileDetails?.categories ?? "")
@@ -61,12 +63,13 @@ class ProfileController {
 
       isloading.value = false;
     }
+    */
   }
 
   Future<void> _editProfileAfterSelecting() async {
     //isEditing = false;
     savingEdit.value = true;
-    final response = await editProfileAfterSelecting(selectedCatIds);
+  //  final response = await editProfileAfterSelecting(selectedCatIds);
     savingEdit.value = false;
   }
 

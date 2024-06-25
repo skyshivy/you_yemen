@@ -1,13 +1,16 @@
 //import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
-import 'package:you_yemen/files/api_calls/generate_otp_api.dart';
-import 'package:you_yemen/files/api_calls/get_tune_price.dart';
-import 'package:you_yemen/files/api_calls/set_tone_api.dart';
-import 'package:you_yemen/files/api_calls/subscriber_validation_api.dart';
+import 'package:you_yemen/files/api_self_care/generate_otp_api.dart';
+
+import 'package:you_yemen/files/api_self_care/sc_set_tone_api.dart';
+
+
 import 'package:you_yemen/files/api_gokul/get_content_price_api.dart';
+
 import 'package:you_yemen/files/api_self_care/sc_confirm_otp_api.dart';
 import 'package:you_yemen/files/api_self_care/sc_generate_otp_api.dart';
+
 import 'package:you_yemen/files/common/encryptor/aes_en_de_cryptor.dart';
 import 'package:you_yemen/files/enums/enums.dart';
 import 'package:you_yemen/files/models/buy_tune_model.dart';
@@ -60,35 +63,35 @@ class BuyController extends GetxController {
     }
 
     return;
-    SubscriberValidationModel model = await subscriberValidateApi(msisdn);
-    if (model.statusCode == 'SC0000') {
-      if (model.responseMap?.respCode == "SC0000") {
-        if (StoreManager().isLoggedIn) {
-          _getTonePrice();
-        } else {
-          GenerateOtpModel genModel = await generateOtpApi(msisdn);
-          if (genModel.statusCode == "SC0000") {
-            authTypes.value = AuthTypes.showOtpScreen;
-            isVerifying.value = false;
-          } else {
-            errorMessage.value = model.message ?? someThingWentWrongStr;
-            isVerifying.value = false;
-          }
-        }
-      } else if (model.responseMap?.respCode == "100") {
-        print("it is a new user");
-      } else if (model.responseMap?.respCode == "101") {
-        errorMessage.value =
-            model.responseMap?.respDesc ?? someThingWentWrongStr;
-        isVerifying.value = false;
-      } else {
-        errorMessage.value = model.message ?? someThingWentWrongStr;
-        isVerifying.value = false;
-      }
-    } else {
-      errorMessage.value = model.message ?? someThingWentWrongStr;
-      isVerifying.value = false;
-    }
+    // SubscriberValidationModel model = await subscriberValidateApi(msisdn);
+    // if (model.statusCode == 'SC0000') {
+    //   if (model.responseMap?.respCode == "SC0000") {
+    //     if (StoreManager().isLoggedIn) {
+    //       _getTonePrice();
+    //     } else {
+    //       GenerateOtpModel genModel = await generateOtpApi(msisdn);
+    //       if (genModel.statusCode == "SC0000") {
+    //         authTypes.value = AuthTypes.showOtpScreen;
+    //         isVerifying.value = false;
+    //       } else {
+    //         errorMessage.value = model.message ?? someThingWentWrongStr;
+    //         isVerifying.value = false;
+    //       }
+    //     }
+    //   } else if (model.responseMap?.respCode == "100") {
+    //     print("it is a new user");
+    //   } else if (model.responseMap?.respCode == "101") {
+    //     errorMessage.value =
+    //         model.responseMap?.respDesc ?? someThingWentWrongStr;
+    //     isVerifying.value = false;
+    //   } else {
+    //     errorMessage.value = model.message ?? someThingWentWrongStr;
+    //     isVerifying.value = false;
+    //   }
+    // } else {
+    //   errorMessage.value = model.message ?? someThingWentWrongStr;
+    //   isVerifying.value = false;
+    // }
   }
 
   Future<void> _getTonePrice() async {

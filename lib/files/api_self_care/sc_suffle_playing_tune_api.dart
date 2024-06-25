@@ -3,33 +3,30 @@ import 'dart:math';
 import 'package:you_yemen/files/models/my_tune_shuffle_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
-import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
-Future<TuneSettingModel> addToShuffleApi(String toneId) async {
+Future<TuneSettingModel> scSufflePlayingTuneApi(bool activate) async {
+  print("sufflePlayingTuneApi called");
+  return TuneSettingModel();
+  /*
   Random random = Random();
   var randomNumber = random.nextInt(1000000000);
-
-  var jsonData = {
+  print(" randomNumber data is = 123");
+  Map<String, dynamic> params = {
     'clientTxnId': '$randomNumber',
-    'serviceId': '1',
     'aPartyMsisdn': StoreManager().msisdn,
-    'channelId': channelId,
-    'toneIdList': [
-      {"toneId": toneId}
-    ],
-    'priority': '0',
-    'activityId': '1',
+    'identifier': activate ? 'activate' : 'deactivate',
     'language': StoreManager().languageCode,
   };
   var parts = [];
-  jsonData.forEach((key, value) {
+  params.forEach((key, value) {
     parts.add('$key='
         '$value');
   });
   var formData = parts.join('&');
-  Map<String, dynamic> jsonResp =
-      await NetworkManager().post(addToShuffleUrl, formData);
-  TuneSettingModel model = TuneSettingModel.fromJson(jsonResp);
+  Map<String, dynamic> res =
+      await NetworkManager().post(tuneSuffleUrl, formData);
+  TuneSettingModel model = TuneSettingModel.fromJson(res);
   return model;
+  */
 }

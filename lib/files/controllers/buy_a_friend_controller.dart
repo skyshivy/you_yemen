@@ -76,9 +76,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:you_yemen/files/api_calls/buy_a_friend_api.dart';
-import 'package:you_yemen/files/api_calls/get_tune_price.dart';
+
+
 import 'package:you_yemen/files/api_gokul/get_content_price_api.dart';
+
 import 'package:you_yemen/files/models/get_tune_price_model.dart';
 import 'package:you_yemen/files/models/gift_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
@@ -123,21 +124,21 @@ class BuyAFriendPopupController extends GetxController {
       if (model.respCode == 0) {
         String packName = model.toneDetails?.packName ?? '';
         print("Packname ========0 $packName ");
-        if (packName.isNotEmpty) {
-          GiftModel giftModel = await buyaFriendApi(info, msisdn, packName);
+        // if (packName.isNotEmpty) {
+        //   GiftModel giftModel = await buyaFriendApi(info, msisdn, packName);
 
-          if (giftModel.statusCode == 'SC0000') {
-            isLoading.value = false;
-            successMessage = giftModel.message ?? '';
-            isSuccess.value = true;
-          } else {
-            isLoading.value = false;
-            errorMessage.value = giftModel.message ?? someThingWentWrongStr;
-          }
-        } else {
-          errorMessage.value = someThingWentWrongStr;
-          isLoading.value = false;
-        }
+        //   if (giftModel.statusCode == 'SC0000') {
+        //     isLoading.value = false;
+        //     successMessage = giftModel.message ?? '';
+        //     isSuccess.value = true;
+        //   } else {
+        //     isLoading.value = false;
+        //     errorMessage.value = giftModel.message ?? someThingWentWrongStr;
+        //   }
+        // } else {
+        //   errorMessage.value = someThingWentWrongStr;
+        //   isLoading.value = false;
+        // }
       } else {
         errorMessage.value = model.message ?? someThingWentWrongStr;
         isLoading.value = false;

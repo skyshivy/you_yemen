@@ -1,6 +1,5 @@
 import 'package:you_yemen/files/common/transaction_id.dart';
 import 'package:you_yemen/files/models/banner_detail_model.dart';
-import 'package:you_yemen/files/models/home_banner_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/urls.dart';

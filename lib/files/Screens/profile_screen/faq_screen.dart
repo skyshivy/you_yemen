@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:you_yemen/files/api_self_care/sc_faq_api.dart';
+
 import 'package:you_yemen/files/common/custom_app_bar.dart';
 
 import 'package:you_yemen/files/controllers/faq_controller.dart';
@@ -12,7 +14,7 @@ import 'package:get/get.dart';
 import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
 
-import '../../api_calls/faq_api.dart';
+
 import '../../models/faq_screen_model.dart';
 
 class FaqScreen extends StatelessWidget {
@@ -88,7 +90,8 @@ class ContainerListItem extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     isExpanded.toggle();
-                    getFaqDetailApi();
+                    scGetFaqDetailApi();
+                    //  scgetFaqDetailApi();
                   },
                   child: Container(
                     padding: EdgeInsets.all(8),

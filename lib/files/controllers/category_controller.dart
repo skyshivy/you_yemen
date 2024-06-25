@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
+
+import 'package:you_yemen/files/api_self_care/sc_get_category_list_api.dart';
 
 import 'package:you_yemen/files/api_self_care/category_detail_api.dart';
+
 import 'package:you_yemen/files/models/category_detail_model.dart';
 import 'package:you_yemen/files/models/category_list_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';

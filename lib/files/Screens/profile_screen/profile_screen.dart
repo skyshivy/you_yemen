@@ -1,32 +1,18 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
-
-import 'package:responsive_builder/responsive_builder.dart';
-
-import 'package:you_yemen/files/api_calls/edit_profile_screen_api.dart';
-import 'package:you_yemen/files/controllers/profile_controller.dart';
-
-import 'package:you_yemen/files/models/category_list_model.dart';
-
-import 'package:you_yemen/files/reusable_widgets/buttons/cancel_button.dart';
-import 'package:you_yemen/files/reusable_widgets/buttons/confirm_button.dart';
-
-import 'package:you_yemen/files/reusable_widgets/image/UImage.dart';
-import 'package:you_yemen/files/reusable_widgets/loading_indicator.dart';
 import 'package:you_yemen/files/reusable_widgets/u_text.dart';
-import 'package:you_yemen/files/reusable_widgets/u_text_field/u_msisdn_textfield.dart';
-import 'package:you_yemen/files/store_manager/store_manager.dart';
-import 'package:you_yemen/files/translation/strings.dart';
-import 'package:you_yemen/files/utility/colors.dart';
-
-import 'package:you_yemen/files/utility/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return UText(title: "Profile screen");
+  }
+}
+/*
 class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController textEditingController = TextEditingController();
   @override
@@ -39,7 +25,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   ProfileController cont = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return 
+    Scaffold(
       appBar: AppBar(),
       body: Obx(() {
         return cont.isloading.value
@@ -367,3 +354,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
 //       print('Error fetching data: $error');
 //     }
 //   }
+*/

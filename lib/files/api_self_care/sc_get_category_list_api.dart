@@ -8,6 +8,7 @@ Future<CategoryListModel> scGetCategoryListApi() async {
   //"${scGetCategoryListUrl}languageCode=en&categoryValue=4";
 
   String url =
+  
       "${scGetCategoryListUrl}languageCode=${StoreManager().languageSort}&categoryValue=4";
   Map<String, String> header = {"transId": getTransactionId()};
   Map<String, dynamic> map = await NetworkManager().get(url, params: header);
