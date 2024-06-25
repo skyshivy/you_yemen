@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:you_yemen/files/api_calls/get_tune_price.dart';
-import 'package:you_yemen/files/api_calls/tell_friend_api.dart';
+
 import 'package:you_yemen/files/api_gokul/get_content_price_api.dart';
+
 import 'package:you_yemen/files/models/get_tune_price_model.dart';
 import 'package:you_yemen/files/models/tell_friend_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
@@ -47,8 +47,8 @@ class CustomPopupController extends GetxController {
       print("Packname ========0 $packName ");
       if (packName.isNotEmpty) {
         print("Packname ========3 $packName ");
-        TellFreindModel tellFreindModel =
-            await tellFriendApi(info, msisdn, packName);
+        TellFreindModel tellFreindModel = TellFreindModel();
+        //await tellFriendApi(info, msisdn, packName);
         if (tellFreindModel.statusCode == 'SC0000') {
           isLoading.value = false;
           successMessage = tellFreindModel.message ?? '';

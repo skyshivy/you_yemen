@@ -4,7 +4,8 @@ import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
-Future<SearchModel> searchArtistApi(List<String> keys, {int pageNo = 0}) async {
+Future<SearchModel> scSearchArtistApi(List<String> keys,
+    {int pageNo = 0}) async {
   Map<String, dynamic> jsonData = {
     "sortBy": "OrderBy",
     "pageNo": pageNo,

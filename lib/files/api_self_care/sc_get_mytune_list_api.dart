@@ -9,7 +9,7 @@ import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
-Future<MyTuneModel> getMyTuneListApi({int pageNo = 0}) async {
+Future<MyTuneModel> scGetMyTuneListApi({int pageNo = 0}) async {
   String langId = StoreManager().languageCode;
   String msisdn = StoreManager().msisdn;
   Map<String, dynamic> jsonData = {

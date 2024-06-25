@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:you_yemen/files/api_calls/get_mytune_list_api.dart';
-import 'package:you_yemen/files/api_calls/get_playing_list_api.dart';
-import 'package:you_yemen/files/api_calls/mytunes_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_get_mytune_list_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_get_playing_list_api.dart';
 
-import 'package:you_yemen/files/api_calls/suffle_playing_tune_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_suffle_playing_tune_api.dart';
+
 import 'package:you_yemen/files/common/warning_popup/warning_popup.dart';
 import 'package:you_yemen/files/models/my_tune_model.dart';
 import 'package:you_yemen/files/models/my_tune_shuffle_model.dart';
@@ -39,7 +39,7 @@ class MyTuneController extends GetxController {
     }
     playingError.value = '';
     isLoadingPlayingList.value = true;
-    PlayingTuneModel model = await getPlayingListApi();
+    PlayingTuneModel model = await scGetPlayingListApi();
     //await scMyTunesListApi();
     print("SKY1 newPlayingList = ${model.playingToneList}");
     if (model.respCode == '0') {
@@ -188,7 +188,7 @@ class MyTuneController extends GetxController {
 
   _suffleApiCall(bool enable) async {
     isChangeSuffleStatus.value = true;
-    TuneSettingModel model = await sufflePlayingTuneApi(enable);
+    TuneSettingModel model = await scSufflePlayingTuneApi(enable);
     isChangeSuffleStatus.value = false;
     if (model.statusCode == 'SC0000') {
       isShuffle.value = !isShuffle.value;
@@ -203,7 +203,7 @@ class MyTuneController extends GetxController {
     myTuneError.value = '';
     isLoadingMyTuneList.value = true;
     //scGetPlayingListApi();
-    MyTuneModel model = await getMyTuneListApi();
+    MyTuneModel model = await scGetMyTuneListApi();
     if (model.respCode == '0') {
       myTuneList.value = model.listtones ?? [];
       if (myTuneList.isEmpty) {

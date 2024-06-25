@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 
 import 'package:you_yemen/files/Screens/wishlist_screen/wishlist_screen.dart';
 import 'package:get/get.dart';
-import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
 
 import 'package:you_yemen/files/api_self_care/get_banner_list_api.dart';
 
 import 'package:you_yemen/files/Screens/wishlist_screen/wishlist_screen.dart';
 
 import 'package:get/get.dart';
-import 'package:you_yemen/files/api_calls/get_category_list_api.dart';
+
 import 'package:you_yemen/files/api_self_care/get_banner_list_api.dart';
 
 import 'package:you_yemen/files/api_self_care/tone_detail_api.dart';
@@ -71,11 +70,11 @@ class _HomeScreenState extends State<HomeScreen> {
               //giftApi();   //Status code 404
               //scGetBannerDetailsApi();
 
-              scGetCategoryListApi();
+              //scGetCategoryListApi();
 
               //getRecommendationSongApi();
               scGetBannerlistApi();
-              toneDetailApi();
+              // toneDetailApi();
               // suspendApi();
             },
             child: Text('api')),
