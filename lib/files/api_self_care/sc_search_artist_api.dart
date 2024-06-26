@@ -18,9 +18,10 @@ Future<SearchModel> scSearchArtistApi(List<String> keys,
     "searchKey": keys
   };
   Map<String, dynamic> jsonResp = {};
-  // jsonResp = await NetworkManager()
-  //     .post(atristNameSearchUrl, null, jsonData: jsonData);
-  jsonResp = json.decode(_json);
+  jsonResp = await NetworkManager()
+      .post(atristNameSearchUrl, null, jsonData: jsonData);
+  //jsonResp = json.decode(_json);
+  print("=========== $jsonResp");
   SearchModel model = SearchModel.fromJson(jsonResp);
   return model;
 }

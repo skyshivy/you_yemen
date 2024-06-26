@@ -73,22 +73,28 @@ class _SearchScreenState extends State<SearchScreen> {
     return ResponsiveBuilder(
       builder: (context, si) {
         return Obx(() {
-          return GridView.builder(
-            controller: _controller,
-            padding: gridPadding ?? const EdgeInsets.all(12),
-            shrinkWrap: true,
-            itemCount: cont.artistList.length,
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                mainAxisSpacing: si.isMobile ? 6 : 20,
-                crossAxisSpacing: si.isMobile ? 6 : 20,
-                maxCrossAxisExtent: 280,
-                childAspectRatio: 0.9),
-            itemBuilder: (context, index) {
-              return ArtistCard(
-                artistName: cont.artistList[index].val ?? '',
-              );
-            },
-          );
+          return cont.errorMessage.isNotEmpty
+              ? Center(
+                  child: UText(
+                  title: cont.errorMessage.value,
+                  fontName: FontName.helveticaBold,
+                ))
+              : GridView.builder(
+                  controller: _controller,
+                  padding: gridPadding ?? const EdgeInsets.all(12),
+                  shrinkWrap: true,
+                  itemCount: cont.artistList.length,
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      mainAxisSpacing: si.isMobile ? 6 : 20,
+                      crossAxisSpacing: si.isMobile ? 6 : 20,
+                      maxCrossAxisExtent: 280,
+                      childAspectRatio: 0.9),
+                  itemBuilder: (context, index) {
+                    return ArtistCard(
+                      artistName: cont.artistList[index].val ?? '',
+                    );
+                  },
+                );
         });
       },
     );

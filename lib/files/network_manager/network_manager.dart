@@ -147,8 +147,9 @@ class NetworkManager {
           print("SKY error 2");
           return valueMap;
         } else {
-          Map<String, dynamic> valueMap = json
-              .decode("""{"message":"status code ${response.statusCode}"}""");
+          Map<String, dynamic> valueMap = json.decode("""{
+    "message": "status code ${response.statusCode}"
+}""");
 
           print("SKY error 5 ======");
           return valueMap;

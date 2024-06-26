@@ -26,7 +26,7 @@ Future<SearchModel> advanceTuneSearchToneApi(
     "filterPref": "begin",
     "locale": StoreManager().isEnglish ? "en" : "my",
     "searchKey": lst,
-    "categoryId": idlst,
+    //"categoryId": idlst,
   };
 
   Map<String, dynamic>? map =

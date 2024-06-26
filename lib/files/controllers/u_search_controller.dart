@@ -121,14 +121,21 @@ class USearchController extends GetxController {
   Future<void> _searchArtist() async {
     print("Search Artist here");
     SearchModel model = await scSearchArtistApi([searchedText]);
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(milliseconds: 100));
+
     artistList.value = model.responseMap?.artistList ?? [];
-    if (artistList.isEmpty) {
-      errorMessage.value = emptyToneListStr;
+    if (model.statusCode == "SC0000") {
+      if (artistList.isEmpty) {
+        errorMessage.value = emptyToneListStr;
+      } else {
+        errorMessage.value = '';
+      }
+      return;
     } else {
-      errorMessage.value = '';
+      print("Error is ${model.message}");
+      errorMessage.value = model.message ?? someThingWentWrongStr;
+      return;
     }
-    return;
   }
 
   Future<void> _searchNameTone() async {
