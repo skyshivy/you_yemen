@@ -7,8 +7,10 @@ import 'package:you_yemen/files/api_self_care/sc_search_tone_api.dart';
 import 'package:you_yemen/files/api_self_care/sc_search_toneid_api.dart';
 
 import 'package:you_yemen/files/enums/enums.dart';
+import 'package:you_yemen/files/models/app_setting_model.dart';
 import 'package:you_yemen/files/models/search_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
+import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 
 class USearchController extends GetxController {
@@ -21,6 +23,7 @@ class USearchController extends GetxController {
   SearchType searchType = SearchType.tone;
   RxInt selectedIndex = 0.obs;
   int totalCount = 0;
+  RxList<ArtistList> artistList = <ArtistList>[].obs;
   RxList<String> searchTypeList = <String>[
     toneStr,
     toneCodeStr,
@@ -32,6 +35,7 @@ class USearchController extends GetxController {
     searchedText = value;
     print("searchedText ======= ${searchedText}");
     toneList.clear();
+    artistList.clear();
     if (value.isEmpty) {
       errorMessage.value = searchHintStr;
     }
@@ -40,6 +44,7 @@ class USearchController extends GetxController {
   updateSearchType(int index) {
     selectedIndex.value = index;
     toneList.clear();
+    artistList.clear();
     errorMessage.value = searchHintStr;
 
     if (index == 0) {
@@ -69,6 +74,7 @@ class USearchController extends GetxController {
     }
     searchedText = searchKey;
     toneList.clear();
+    artistList.clear();
     isloading.value = true;
     if (searchType == SearchType.tone) {
       await _searchTone();
@@ -115,8 +121,9 @@ class USearchController extends GetxController {
   Future<void> _searchArtist() async {
     print("Search Artist here");
     SearchModel model = await scSearchArtistApi([searchedText]);
-    toneList.value = model.responseMap?.toneList ?? [];
-    if (toneList.isEmpty) {
+    await Future.delayed(Duration(seconds: 2));
+    artistList.value = model.responseMap?.artistList ?? [];
+    if (artistList.isEmpty) {
       errorMessage.value = emptyToneListStr;
     } else {
       errorMessage.value = '';
@@ -126,8 +133,10 @@ class USearchController extends GetxController {
 
   Future<void> _searchNameTone() async {
     print("Search name tune here");
-    SearchModel model = await scSearchNameToneApi([searchedText], "168");
-    toneList.value = model.responseMap?.songList ?? [];
+    AppSettingModel? others = StoreManager().appSetting;
+    String catId = others?.nameTuneCategoryId?.attribute ?? '0';
+    SearchModel model = await scSearchNameToneApi([searchedText], catId);
+    toneList.value = model.responseMap?.toneList ?? [];
     if (toneList.isEmpty) {
       errorMessage.value = emptyToneListStr;
     } else {
@@ -147,12 +156,10 @@ class USearchController extends GetxController {
         await advanceTuneSearchToneApi([searchedText], toneList.length);
 
     if (model.statusCode == 'SC0000') {
-      if (((model.responseMap?.toneList ?? model.responseMap?.songList ?? [])
-          .isEmpty)) {
+      if (((model.responseMap?.toneList ?? []).isEmpty)) {
         return;
       }
-      toneList.value +=
-          model.responseMap?.toneList ?? model.responseMap?.songList ?? [];
+      toneList.value += model.responseMap?.toneList ?? [];
     }
     isLoadingMore.value = false;
   }

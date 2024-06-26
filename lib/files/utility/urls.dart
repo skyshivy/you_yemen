@@ -42,6 +42,7 @@ String getSubscriptionUrl =
     '${selfcareBaseUrl}selfcare/subscription-service/get-subscription';
 
 String advanceTuneSearchUrl = '${selfcareBaseUrl}selfcare/advanced-search';
+String atristNameSearchUrl = '${selfcareBaseUrl}selfcare/artist-search';
 
 String addToWishlistUrl =
     "${selfcareBaseUrl}selfcare/wishlist-service/get-wishlist";

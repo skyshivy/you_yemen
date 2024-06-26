@@ -14,7 +14,7 @@ Future<SearchModel> scSearchNameToneApi(List<String> keys, String catId,
     "filterPref": "begin",
     "locale": "en",
     "searchKey": keys,
-    "categoryId": [catId]
+    "categoryId": ["!$catId"]
   };
 
   Map<String, dynamic> jsonResp = await NetworkManager()

@@ -12,7 +12,7 @@ Future<SearchModel> advanceTuneSearchToneApi(
     await Future.delayed(const Duration(seconds: 2));
   }
   AppSettingModel? others = StoreManager().appSetting;
-  String catId = "47"; //others?.nameTuneCategoryid?.attribute ?? '0';
+  String catId = others?.nameTuneCategoryId?.attribute ?? '0';
 
   List<String> idlst = ["!$catId"];
   var myPost = {
