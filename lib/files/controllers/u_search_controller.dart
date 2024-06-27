@@ -1,13 +1,16 @@
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 
-import 'package:you_yemen/files/api_calls/search_artist_api.dart';
-import 'package:you_yemen/files/api_calls/search_name_tone_api.dart';
-import 'package:you_yemen/files/api_calls/search_tone_api.dart';
-import 'package:you_yemen/files/api_calls/search_toneid_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_search_artist_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_search_name_tone_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_search_tone_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_search_toneid_api.dart';
+
 import 'package:you_yemen/files/enums/enums.dart';
+import 'package:you_yemen/files/models/app_setting_model.dart';
 import 'package:you_yemen/files/models/search_model.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';
+import 'package:you_yemen/files/store_manager/store_manager.dart';
 import 'package:you_yemen/files/translation/strings.dart';
 
 class USearchController extends GetxController {
@@ -20,6 +23,7 @@ class USearchController extends GetxController {
   SearchType searchType = SearchType.tone;
   RxInt selectedIndex = 0.obs;
   int totalCount = 0;
+  RxList<ArtistList> artistList = <ArtistList>[].obs;
   RxList<String> searchTypeList = <String>[
     toneStr,
     toneCodeStr,
@@ -31,6 +35,7 @@ class USearchController extends GetxController {
     searchedText = value;
     print("searchedText ======= ${searchedText}");
     toneList.clear();
+    artistList.clear();
     if (value.isEmpty) {
       errorMessage.value = searchHintStr;
     }
@@ -39,6 +44,7 @@ class USearchController extends GetxController {
   updateSearchType(int index) {
     selectedIndex.value = index;
     toneList.clear();
+    artistList.clear();
     errorMessage.value = searchHintStr;
 
     if (index == 0) {
@@ -68,6 +74,7 @@ class USearchController extends GetxController {
     }
     searchedText = searchKey;
     toneList.clear();
+    artistList.clear();
     isloading.value = true;
     if (searchType == SearchType.tone) {
       await _searchTone();
@@ -113,20 +120,30 @@ class USearchController extends GetxController {
 
   Future<void> _searchArtist() async {
     print("Search Artist here");
-    SearchModel model = await searchArtistApi([searchedText]);
-    toneList.value = model.responseMap?.toneList ?? [];
-    if (toneList.isEmpty) {
-      errorMessage.value = emptyToneListStr;
+    SearchModel model = await scSearchArtistApi([searchedText]);
+    await Future.delayed(Duration(milliseconds: 100));
+
+    artistList.value = model.responseMap?.artistList ?? [];
+    if (model.statusCode == "SC0000") {
+      if (artistList.isEmpty) {
+        errorMessage.value = emptyToneListStr;
+      } else {
+        errorMessage.value = '';
+      }
+      return;
     } else {
-      errorMessage.value = '';
+      print("Error is ${model.message}");
+      errorMessage.value = model.message ?? someThingWentWrongStr;
+      return;
     }
-    return;
   }
 
   Future<void> _searchNameTone() async {
     print("Search name tune here");
-    SearchModel model = await searchNameToneApi([searchedText], "168");
-    toneList.value = model.responseMap?.songList ?? [];
+    AppSettingModel? others = StoreManager().appSetting;
+    String catId = others?.nameTuneCategoryId?.attribute ?? '0';
+    SearchModel model = await scSearchNameToneApi([searchedText], catId);
+    toneList.value = model.responseMap?.toneList ?? [];
     if (toneList.isEmpty) {
       errorMessage.value = emptyToneListStr;
     } else {
@@ -146,12 +163,10 @@ class USearchController extends GetxController {
         await advanceTuneSearchToneApi([searchedText], toneList.length);
 
     if (model.statusCode == 'SC0000') {
-      if (((model.responseMap?.toneList ?? model.responseMap?.songList ?? [])
-          .isEmpty)) {
+      if (((model.responseMap?.toneList ?? []).isEmpty)) {
         return;
       }
-      toneList.value +=
-          model.responseMap?.toneList ?? model.responseMap?.songList ?? [];
+      toneList.value += model.responseMap?.toneList ?? [];
     }
     isLoadingMore.value = false;
   }

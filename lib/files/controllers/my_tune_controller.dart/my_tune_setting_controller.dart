@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:intl/intl.dart';
-import 'package:you_yemen/files/api_calls/add_suffle_api.dart';
-import 'package:you_yemen/files/api_calls/get_pack_status_api.dart';
-import 'package:you_yemen/files/api_calls/set_default_tone_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_add_suffle_api.dart';
+
+import 'package:you_yemen/files/api_self_care/sc_set_default_tone_api.dart';
 import 'package:you_yemen/files/api_calls/tune_setting_dedicated_api.dart';
 import 'package:you_yemen/files/api_calls/tune_setting_fullday_api.dart';
+
 import 'package:you_yemen/files/common/warning_popup/warning_popup.dart';
 import 'package:you_yemen/files/controllers/my_tune_controller.dart/custom_calender_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
@@ -49,10 +50,11 @@ class MyTuneSettingController extends GetxController {
   }
 
   getPackDetail() async {
-    PackStatusModel model = await getPackStatusApi();
-    if (model.statusCode == "SC0000") {
-      _packName = model.responseMap?.packStatusDetails?.packName ?? '';
-    }
+    _packName = 'Need to set pack name here';
+    // PackStatusModel model = await getPackStatusApi();
+    // if (model.statusCode == "SC0000") {
+    //   _packName = model.responseMap?.packStatusDetails?.packName ?? '';
+    // }
   }
 
   resetData() {
@@ -400,7 +402,7 @@ class MyTuneSettingController extends GetxController {
   addToShuffle() async {
     isLoading.value = true;
     String toneId = info.toneId ?? '';
-    TuneSettingModel model = await addToShuffleApi(toneId);
+    TuneSettingModel model = await scAddToShuffleApi(toneId);
     onComplition(model);
   }
 

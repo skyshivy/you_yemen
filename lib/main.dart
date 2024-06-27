@@ -16,7 +16,7 @@ import 'package:you_yemen/files/controllers/my_tune_controller.dart/my_tune_cont
 import 'package:you_yemen/files/controllers/player_controller.dart';
 import 'package:you_yemen/files/controllers/u_search_controller.dart';
 
-import 'package:you_yemen/files/api_calls/setting_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_setting_api.dart';
 import 'package:you_yemen/files/controllers/recomended_controller.dart';
 import 'package:you_yemen/files/controllers/wishlist_controller.dart';
 import 'package:you_yemen/files/router/app_router.dart';

@@ -3,8 +3,9 @@ import 'dart:math';
 //import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-import 'package:you_yemen/files/api_calls/setting_api.dart';
+import 'package:you_yemen/files/api_self_care/sc_setting_api.dart';
 import 'package:you_yemen/files/api_self_care/get_recommendation_songs_api.dart';
+
 
 import 'package:you_yemen/files/models/home_feature_category.dart';
 import 'package:you_yemen/files/models/tune_info_model.dart';

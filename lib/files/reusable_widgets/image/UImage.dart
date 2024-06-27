@@ -22,7 +22,7 @@ Widget uImage({
           imageUrl: url,
           placeholder: (context, url) =>
               Center(child: const CircularProgressIndicator()),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
+          errorWidget: (context, url, error) => const Icon(Icons.image),
           fadeInDuration: const Duration(seconds: 1),
         ),
         Container(

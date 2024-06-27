@@ -42,6 +42,7 @@ String getSubscriptionUrl =
     '${selfcareBaseUrl}selfcare/subscription-service/get-subscription';
 
 String advanceTuneSearchUrl = '${selfcareBaseUrl}selfcare/advanced-search';
+String atristNameSearchUrl = '${selfcareBaseUrl}selfcare/artist-search';
 
 String addToWishlistUrl =
     "${selfcareBaseUrl}selfcare/wishlist-service/get-wishlist";
@@ -92,7 +93,8 @@ String scresumeUrl = "http://10.0.10.33:9089/selfcare/subscription/suspend";
 
 String scAdvanceSearchUrl = "${selfcareBaseUrl}selfcare/advanced-search";
 
-String scCategoryDetailUrl = "http://10.0.14.4:8090/advanced-search";
+String scCategoryDetailUrl = "http://10.0.14.4:8090/category-search";
+
 String scGetRecomndedUrl =
     "http://10.0.14.4:5892/selfcare/get-recommendations?";
 String scGetBannerDetailUrl =

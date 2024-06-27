@@ -4,7 +4,7 @@ import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
-Future<SearchModel> searchNameToneApi(List<String> keys, String catId,
+Future<SearchModel> scSearchNameToneApi(List<String> keys, String catId,
     {int pageNo = 0}) async {
   Map<String, dynamic> jsonData = {
     "sortBy": "OrderBy",
@@ -14,7 +14,7 @@ Future<SearchModel> searchNameToneApi(List<String> keys, String catId,
     "filterPref": "begin",
     "locale": "en",
     "searchKey": keys,
-    "categoryId": [catId]
+    "categoryId": ["!$catId"]
   };
 
   Map<String, dynamic> jsonResp = await NetworkManager()

@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
-import 'package:you_yemen/files/api_calls/generate_otp_api.dart';
-import 'package:you_yemen/files/api_calls/subscriber_validation_api.dart';
+import 'package:you_yemen/files/api_self_care/generate_otp_api.dart';
+
+
+
 import 'package:you_yemen/files/api_self_care/sc_generate_otp_api.dart';
 import 'package:you_yemen/files/common/encryptor/aes_en_de_cryptor.dart';
 import 'package:you_yemen/files/enums/enums.dart';
@@ -57,6 +59,7 @@ class LoginPopupController extends GetxController {
     }
     isVerifying.value = false;
     return;
+    /*
     SubscriberValidationModel model = await subscriberValidateApi(msisdn);
     if (model.statusCode == 'SC0000') {
       if (model.responseMap?.respCode == "SC0000") {
@@ -78,5 +81,6 @@ class LoginPopupController extends GetxController {
       errorMessage.value = model.message ?? someThingWentWrongStr;
     }
     isVerifying.value = false;
+    */
   }
 }
