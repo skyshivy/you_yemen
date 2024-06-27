@@ -19,7 +19,7 @@ String getCategoryDetailUrl = "${baseUrl}search-tone?";
 String searchToneUrl = "${baseUrl}specific-search-tones?";
 String editProfileUrl = '${baseUrlSecurity}edit-profile';
 String tellFriendUrl = "${baseUrlSecurity}referral";
-String transactionUrl = "${baseUrlSecurity}view-transactions-scm";
+//String transactionUrl = "${baseUrlSecurity}view-transactions-scm";
 //String mytunesUrl = "${baseUrlSecurity}list-tones";
 
 //String myTuneListUrl = '${baseUrl}list-tones?rbtMode=400';
@@ -117,6 +117,8 @@ String scAddToWishListUrl =
 String scGetWishListUrl =
     "http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist";
 String scGiftTonePriceUrl = '${selfcareBaseUrl}subscriber-management/gift-tone';
+
+String transactionUrl = "http://10.0.10.33:8088/selfcare/transaction-history-service/get-transactions";
 
 // String shuffleUrl =
 //     "http://10.0.10.33:9089/selfcare/setting-service/add-tone-to-shufflelist";
