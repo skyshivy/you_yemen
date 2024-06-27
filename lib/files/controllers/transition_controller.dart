@@ -2,9 +2,11 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:you_yemen/files/models/generic_model.dart';
 import 'package:you_yemen/files/models/transition_history_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
 import 'package:you_yemen/files/store_manager/store_manager.dart';
+import 'package:you_yemen/files/utility/urls.dart';
 
 class TransitionScreenController extends GetxController {
   List<Map<String, dynamic>> apiResponses = [];
@@ -42,21 +44,33 @@ class TransitionScreenController extends GetxController {
         '${oneYearAgo.year}-${oneYearAgo.month}-${oneYearAgo.day}';
     String toDateFormatted = '${now.year}-${now.month}-${now.day}';
 
-    final url =
-        'https://funtone.ooredoo.com.mm/security/Middleware/api/adapter/v1/crbt/view-transactions-scm?msisdn=$msisdn&fromDate=$fromdate&toDate=$toDate';
+    final url = transactionUrl ;
+    Map<String, dynamic> jsonData={
+      'msisdn' :StoreManager().msisdn,
+      'fromDate':'13-05-2023',
+      'toDate':'13-05-2024',
+    };
+       // 'https://funtone.ooredoo.com.mm/security/Middleware/api/adapter/v1/crbt/view-transactions-scm?msisdn=$msisdn&fromDate=$fromdate&toDate=$toDate';
+  
+       //<host-name>/selfcare/transaction-history-service/get-transactions
 
     try {
-      //Map<String, dynamic> response = await NetworkManager().get(url);
-      Map<String, dynamic> response = json.decode(_resp); //_resp
+     // Map<String, dynamic> response = await NetworkManager().post(url, null, jsonData: jsonData);
+      Map<String, dynamic> response = json.decode(_resp);
       HistoryModel model = HistoryModel.fromJson(response);
+     
+      // //_resp
+      // HistoryModel model = HistoryModel.fromJson(response);
       list.value = model.responseMap?.transactionDetailsList ?? [];
       apiResponses.add(response);
-      print('API Response: $response');
+      // print('API Response: $response');
     } catch (e) {
       print('Error making API call: $e');
     }
   }
 }
+
+
 
 String _resp = """{
     "responseMap": {
@@ -70,7 +84,7 @@ String _resp = """{
                 "channel": "NI_PUSH",
                 "toneType": "JINGLE",
                 "transactionType": "Activated",
-                "englishToneName": "Cherish you CHO",
+                "englishToneName": "1Cherish you CHO",
                 "validityDays": "1"
             },
             {
