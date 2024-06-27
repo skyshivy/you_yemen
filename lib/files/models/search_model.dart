@@ -42,91 +42,51 @@ class SearchModel {
 }
 
 class ResponseMap {
-  CountList? countList;
+  List<ArtistList>? artistList;
   List<TuneInfo>? toneList;
-  int? songTotalCount;
-  int? toneTotalCount;
-  List<TuneInfo>? songList;
-  int? albumTotalCount;
 
   ResponseMap({
-    this.countList,
+    this.artistList,
     this.toneList,
-    this.songTotalCount,
-    this.toneTotalCount,
-    this.songList,
-    this.albumTotalCount,
   });
 
   factory ResponseMap.fromJson(Map<String, dynamic> json) => ResponseMap(
-        countList: json["countList"] == null
-            ? null
-            : CountList.fromJson(json["countList"]),
+        artistList: json["artistList"] == null
+            ? []
+            : List<ArtistList>.from(
+                json["artistList"]!.map((x) => ArtistList.fromJson(x))),
         toneList: json["toneList"] == null
             ? []
             : List<TuneInfo>.from(
                 json["toneList"]!.map((x) => TuneInfo.fromJson(x))),
-        songTotalCount: json["songTotalCount"],
-        toneTotalCount: json["toneTotalCount"],
-        songList: json["songList"] == null
-            ? []
-            : List<TuneInfo>.from(
-                json["songList"]!.map((x) => TuneInfo.fromJson(x))),
-        albumTotalCount: json["albumTotalCount"],
       );
 
   Map<String, dynamic> toJson() => {
-        "countList": countList?.toJson(),
+        "artistList": artistList == null
+            ? []
+            : List<dynamic>.from(artistList!.map((x) => x.toJson())),
         "toneList": toneList == null
             ? []
             : List<dynamic>.from(toneList!.map((x) => x.toJson())),
-        "songTotalCount": songTotalCount,
-        "toneTotalCount": toneTotalCount,
-        "songList": songList == null
-            ? []
-            : List<dynamic>.from(songList!.map((x) => x.toJson())),
-        "albumTotalCount": albumTotalCount,
       };
 }
 
-class CountList {
-  List<ArtistDetailList>? artistDetailList;
+class ArtistList {
+  String? val;
+  int? count;
 
-  CountList({
-    this.artistDetailList,
-  });
-
-  factory CountList.fromJson(Map<String, dynamic> json) => CountList(
-        artistDetailList: json["artistDetailList"] == null
-            ? []
-            : List<ArtistDetailList>.from(json["artistDetailList"]!
-                .map((x) => ArtistDetailList.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "artistDetailList": artistDetailList == null
-            ? []
-            : List<dynamic>.from(artistDetailList!.map((x) => x.toJson())),
-      };
-}
-
-class ArtistDetailList {
-  String? matchedParam;
-  String? count;
-
-  ArtistDetailList({
-    this.matchedParam,
+  ArtistList({
+    this.val,
     this.count,
   });
 
-  factory ArtistDetailList.fromJson(Map<String, dynamic> json) =>
-      ArtistDetailList(
-        matchedParam: json["matchedParam"],
+  factory ArtistList.fromJson(Map<String, dynamic> json) => ArtistList(
+        val: json["val"],
         count: json["count"],
       );
 
   Map<String, dynamic> toJson() => {
-        "matchedParam": matchedParam,
+        "val": val,
         "count": count,
       };
 }

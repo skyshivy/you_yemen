@@ -9,6 +9,16 @@ Future<CategoryDetailModel> scGetCategoryDetailApi(String searchKey, String id,
     {int pageNo = 0}) async {
   String url = scCategoryDetailUrl;
   Map<String, dynamic> jsonData = {
+    "sortBy": "OrderBy",
+    "pageNo": pageNo,
+    "perPageCount": pagePerCount,
+    "filter": "Content",
+    "filterPref": "begin",
+    "locale": "en",
+    "categoryId": [id]
+  };
+/*
+  {
     'transactionId': getTransactionId(),
     'channelId': channelId,
     'msisdn': StoreManager().msisdn,
@@ -21,6 +31,7 @@ Future<CategoryDetailModel> scGetCategoryDetailApi(String searchKey, String id,
     'searchKey': [searchKey],
     'categoryId': [id],
   };
+  */
   Map<String, dynamic> jsonResp =
       await NetworkManager().post(url, null, jsonData: jsonData);
   CategoryDetailModel model = CategoryDetailModel.fromJson(jsonResp);

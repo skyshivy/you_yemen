@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:get/get.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:you_yemen/files/common/search_tune_text_field.dart';
 import 'package:you_yemen/files/controllers/u_search_controller.dart';
 import 'package:you_yemen/files/enums/enums.dart';
@@ -27,7 +28,30 @@ class _SearchScreenState extends State<SearchScreen> {
   TextEditingController textEditingController = TextEditingController();
   @override
   void initState() {
+    _controller.addListener(onScroll);
     super.initState();
+  }
+
+  void onScroll() {
+    if (cont.searchType != SearchType.artist) {
+      return;
+    }
+    if (_controller.position.pixels == _controller.position.maxScrollExtent) {
+      print("SKY reached bottom");
+    }
+    cont.hideSearchBar.value =
+        _controller.position.userScrollDirection == ScrollDirection.reverse;
+    if (_controller.position.userScrollDirection == ScrollDirection.forward) {
+      print("SKY Scroll down ${cont.searchType}");
+    } else {
+      print("SKY Scroll UP ${cont.searchType}");
+    }
+    // print(
+    //     " ========= ${widget.scrollController?.position.pixels} == \n ${widget.scrollController?.position.userScrollDirection} +++++++++\n ${widget.scrollController?.position.userScrollDirection} ");
+    if (((_controller.position.pixels ?? 0)) ==
+        _controller.position.minScrollExtent) {
+      print("reached to top");
+    }
   }
 
   @override
@@ -37,8 +61,43 @@ class _SearchScreenState extends State<SearchScreen> {
 
   Widget forWebWidget() {
     return Obx(() {
-      return cont.isloading.value ? loadingIndicator(radius: 18) : gridView();
+      return cont.isloading.value
+          ? loadingIndicator(radius: 18)
+          : cont.searchType == SearchType.artist
+              ? artistGrid()
+              : gridView();
     });
+  }
+
+  Widget artistGrid({EdgeInsetsGeometry? gridPadding}) {
+    return ResponsiveBuilder(
+      builder: (context, si) {
+        return Obx(() {
+          return cont.errorMessage.isNotEmpty
+              ? Center(
+                  child: UText(
+                  title: cont.errorMessage.value,
+                  fontName: FontName.helveticaBold,
+                ))
+              : GridView.builder(
+                  controller: _controller,
+                  padding: gridPadding ?? const EdgeInsets.all(12),
+                  shrinkWrap: true,
+                  itemCount: cont.artistList.length,
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      mainAxisSpacing: si.isMobile ? 6 : 20,
+                      crossAxisSpacing: si.isMobile ? 6 : 20,
+                      maxCrossAxisExtent: 280,
+                      childAspectRatio: 0.9),
+                  itemBuilder: (context, index) {
+                    return ArtistCard(
+                      artistName: cont.artistList[index].val ?? '',
+                    );
+                  },
+                );
+        });
+      },
+    );
   }
 
   Widget forMobileWidget() {
@@ -49,9 +108,13 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Obx(() {
               return cont.isloading.value
                   ? loadingIndicator(radius: 18)
-                  : gridView(
-                      gridPadding: EdgeInsets.only(
-                          top: 146, left: 6, right: 6, bottom: 20));
+                  : cont.searchType == SearchType.artist
+                      ? artistGrid(
+                          gridPadding: EdgeInsets.only(
+                              top: 146, left: 6, right: 6, bottom: 20))
+                      : gridView(
+                          gridPadding: EdgeInsets.only(
+                              top: 146, left: 6, right: 6, bottom: 20));
             }),
           ),
           Obx(() {
@@ -84,11 +147,6 @@ class _SearchScreenState extends State<SearchScreen> {
         list: cont.toneList,
         isLoadingMore: cont.isLoadingMore.value,
         totalCount: cont.totalCount,
-        cardBuilder: cont.searchType == SearchType.artist
-            ? (p0) {
-                return ArtistCard(info: p0);
-              }
-            : null,
         loadMore: () {
           cont.loadingMoreData();
         },

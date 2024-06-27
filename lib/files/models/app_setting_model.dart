@@ -1,6 +1,9 @@
 // To parse this JSON data, do
 //
 //     final appSettingModel = appSettingModelFromJson(jsonString);
+// To parse this JSON data, do
+//
+//     final appSettingModel = appSettingModelFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -21,6 +24,7 @@ class AppSettingModel {
   AppShareLink? languageListArabic;
   AppShareLink? privacyTermsArabic;
   AppShareLink? languageListEnglish;
+  AppShareLink? nameTuneCategoryId;
   AppShareLink? privacyTermsEnglish;
   AppShareLink? categoriesListArabic;
   AppShareLink? categoriesListEnglish;
@@ -38,6 +42,7 @@ class AppSettingModel {
     this.languageListArabic,
     this.privacyTermsArabic,
     this.languageListEnglish,
+    this.nameTuneCategoryId,
     this.privacyTermsEnglish,
     this.categoriesListArabic,
     this.categoriesListEnglish,
@@ -77,6 +82,9 @@ class AppSettingModel {
         languageListEnglish: json["LANGUAGE_LIST_ENGLISH"] == null
             ? null
             : AppShareLink.fromJson(json["LANGUAGE_LIST_ENGLISH"]),
+        nameTuneCategoryId: json["NAME_TUNE_CATEGORY_ID"] == null
+            ? null
+            : AppShareLink.fromJson(json["NAME_TUNE_CATEGORY_ID"]),
         privacyTermsEnglish: json["PRIVACY_TERMS_ENGLISH"] == null
             ? null
             : AppShareLink.fromJson(json["PRIVACY_TERMS_ENGLISH"]),
@@ -106,6 +114,7 @@ class AppSettingModel {
         "LANGUAGE_LIST_ARABIC": languageListArabic?.toJson(),
         "PRIVACY_TERMS_ARABIC": privacyTermsArabic?.toJson(),
         "LANGUAGE_LIST_ENGLISH": languageListEnglish?.toJson(),
+        "NAME_TUNE_CATEGORY_ID": nameTuneCategoryId?.toJson(),
         "PRIVACY_TERMS_ENGLISH": privacyTermsEnglish?.toJson(),
         "CATEGORIES_LIST_ARABIC": categoriesListArabic?.toJson(),
         "CATEGORIES_LIST_ENGLISH": categoriesListEnglish?.toJson(),

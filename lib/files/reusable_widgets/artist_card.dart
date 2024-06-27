@@ -19,8 +19,9 @@ import 'package:you_yemen/files/translation/strings.dart';
 import 'package:you_yemen/files/utility/colors.dart';
 
 class ArtistCard extends StatelessWidget {
-  ArtistCard({super.key, this.info});
-  final TuneInfo? info;
+  ArtistCard({super.key, required this.artistName});
+  //final TuneInfo? info;
+  final String artistName;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,7 +40,7 @@ class ArtistCard extends StatelessWidget {
 
   Widget imageBuilder() {
     return uImage(
-      url: info?.toneIdpreviewImageUrl ?? '',
+      url: '',
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(4),
         topRight: Radius.circular(4),
@@ -57,7 +58,7 @@ class ArtistCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               UText(
-                title: info?.artist ?? '',
+                title: artistName ?? '',
                 fontName: FontName.helveticaBold,
                 maxLine: 1,
               ),
@@ -70,13 +71,13 @@ class ArtistCard extends StatelessWidget {
                 title: viewStr,
                 onTap: () {
                   ArtistTunesController cont = Get.find();
-                  cont.getArtistTunes(info?.artist ?? '');
+                  cont.getArtistTunes(artistName);
                   if (GetPlatform.isWeb) {
                     context.goNamed(artistTunesRoute,
-                        queryParameters: {'artistKey': info?.artist ?? ''});
+                        queryParameters: {'artistKey': artistName});
                   } else {
-                    mobileNavigation(context,
-                        ArtistTunesScreen(artistKey: info?.artist ?? ''));
+                    mobileNavigation(
+                        context, ArtistTunesScreen(artistKey: artistName));
                   }
 
                   print("View tapped");

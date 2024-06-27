@@ -1,18 +1,22 @@
+import 'package:you_yemen/files/common/transaction_id.dart';
 import 'package:you_yemen/files/models/generic_model.dart';
+import 'package:you_yemen/files/models/tune_info_model.dart';
 import 'package:you_yemen/files/network_manager/network_manager.dart';
+import 'package:you_yemen/files/store_manager/store_manager.dart';
+import 'package:you_yemen/files/utility/constants.dart';
 import 'package:you_yemen/files/utility/urls.dart';
 
-addTonefromWishlistApi() async {
+addTonefromWishlistApi(TuneInfo info) async {
   String url = scaddTonetoShufflelistUrl;
   ;
   Map<String, dynamic> jsonMap = {
-    "transactionId": "3457297",
+    "transactionId": getTransactionId(),
     "featureId": 1,
-    "msisdn": "8182020000",
-    "channelId": 2,
+    "msisdn": StoreManager().msisdn,
+    "channelId": channelId,
     "contentIdlist": [
-      {"contentId": "98000105"},
-      {"contentId": "19"}
+      {"contentId": info.toneId ?? info.contentId},
+      {"contentId": info.categoryId}
     ]
   };
   Map<String, dynamic> respJson =

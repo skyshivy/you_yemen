@@ -19,7 +19,7 @@ String getCategoryDetailUrl = "${baseUrl}search-tone?";
 String searchToneUrl = "${baseUrl}specific-search-tones?";
 String editProfileUrl = '${baseUrlSecurity}edit-profile';
 String tellFriendUrl = "${baseUrlSecurity}referral";
-String transactionUrl = "${baseUrlSecurity}view-transactions-scm";
+//String transactionUrl = "${baseUrlSecurity}view-transactions-scm";
 //String mytunesUrl = "${baseUrlSecurity}list-tones";
 
 //String myTuneListUrl = '${baseUrl}list-tones?rbtMode=400';
@@ -42,6 +42,7 @@ String getSubscriptionUrl =
     '${selfcareBaseUrl}selfcare/subscription-service/get-subscription';
 
 String advanceTuneSearchUrl = '${selfcareBaseUrl}selfcare/advanced-search';
+String atristNameSearchUrl = '${selfcareBaseUrl}selfcare/artist-search';
 
 String addToWishlistUrl =
     "${selfcareBaseUrl}selfcare/wishlist-service/get-wishlist";
@@ -92,7 +93,8 @@ String scresumeUrl = "http://10.0.10.33:9089/selfcare/subscription/suspend";
 
 String scAdvanceSearchUrl = "${selfcareBaseUrl}selfcare/advanced-search";
 
-String scCategoryDetailUrl = "http://10.0.14.4:8090/advanced-search";
+String scCategoryDetailUrl = "http://10.0.14.4:8090/category-search";
+
 String scGetRecomndedUrl =
     "http://10.0.14.4:5892/selfcare/get-recommendations?";
 String scGetBannerDetailUrl =
@@ -117,6 +119,8 @@ String scAddToWishListUrl =
 String scGetWishListUrl =
     "http://10.0.10.33:8088/selfcare/wishlist-service/get-wishlist";
 String scGiftTonePriceUrl = '${selfcareBaseUrl}subscriber-management/gift-tone';
+
+String transactionUrl = "http://10.0.10.33:8088/selfcare/transaction-history-service/get-transactions";
 
 // String shuffleUrl =
 //     "http://10.0.10.33:9089/selfcare/setting-service/add-tone-to-shufflelist";
